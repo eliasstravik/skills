@@ -39,6 +39,7 @@ Use Markdown for short notes, simple changelogs, plain checklists, and content w
 - Make the page responsive and usable on desktop and phone.
 - Use semantic sections, accessible controls, keyboard states, and clear visual hierarchy.
 - Prefer real structure over decoration: tables for tabular data, SVG for diagrams, buttons for controls, sections for slides, forms for editing.
+- For flowcharts and diagrams, load `references/diagrams.md` and follow its strict layout contract. Never return a diagram with disconnected arrows, overlapping nodes, or hidden connector paths.
 - Avoid external CDNs, framework bundles, and build tools unless the user explicitly asks or the artifact truly needs them.
 - For two-way artifacts, include a copy/export action that turns user edits back into Markdown, JSON, prompt text, SVG, or a diff.
 
