@@ -1,7 +1,7 @@
 ---
 name: automake
 description: Use when the user wants automake, autoresearch-style product improvement, iterative agent improvement, git-backed candidate loops, LLM-as-judge evaluation, repeated candidate commits, or a program.md/headless scaffold for keeping better changes and reverting rejected ones.
-argument-hint: "Start interactive setup. Default to current-agent program.md unless the user explicitly asks for script/headless automake.sh. Ask only for missing user inputs: prompt, judge, max_iterations, max_consecutive_failures. In current-agent mode also ask judge_type."
+argument-hint: "Start interactive setup. Default to current-agent program.md unless the user explicitly asks for script/headless automake.sh. Ask only for missing user inputs: prompt and judge. Use max_iterations=5 and max_consecutive_failures=3 unless the user specifies otherwise. In current-agent mode also ask judge_type."
 ---
 
 # Automake
@@ -50,14 +50,19 @@ Ask only missing direct inputs, one at a time:
 ```text
 1. What is your goal for this loop? This becomes the automake prompt.
 2. What should the judge use to reject or accept candidates?
-3. What is max_iterations?
-4. What is max_consecutive_failures?
 ```
 
 For current-agent mode, also ask:
 
 ```text
-5. Should the judge be a subagent or a headless agent?
+3. Should the judge be a subagent or a headless agent?
+```
+
+Use defaults unless the user specifies otherwise:
+
+```text
+max_iterations=5
+max_consecutive_failures=3
 ```
 
 Infer `judge_strategy=panel` without asking when the judge criteria clearly name multiple judge roles, personas, or perspectives. Examples: "technical judge and user judge", "one judge for implementation, one for UX, one for research", or a bullet list of distinct judges. Otherwise use `judge_strategy=single`.

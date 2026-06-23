@@ -14,7 +14,7 @@ The generated `program.md` must include:
 
 - `RUN_DIR=~/.automake/<slug>`.
 - `REPO_DIR=<current working repo absolute path>`.
-- Constants for max iterations and max consecutive failures.
+- Constants for max iterations and max consecutive failures. Use `MAX_ITERATIONS=5` and `MAX_CONSECUTIVE_FAILURES=3` unless the user specifies otherwise.
 - The user's builder prompt.
 - The user's judge criteria.
 - `judge_type`: `subagent` or `headless`.
@@ -173,8 +173,8 @@ You are the MAIN AGENT running an automake loop.
 ```text
 RUN_DIR=[/Users/name/.automake/three-word-slug]
 REPO_DIR=[current working repo absolute path]
-MAX_ITERATIONS=[max_iterations]
-MAX_CONSECUTIVE_FAILURES=[max_consecutive_failures]
+MAX_ITERATIONS=[max_iterations, default 5]
+MAX_CONSECUTIVE_FAILURES=[max_consecutive_failures, default 3]
 JUDGE_TYPE=[subagent|headless]
 JUDGE_STRATEGY=[single|panel]
 PANEL_CONVERGENCE=unanimous_better_required

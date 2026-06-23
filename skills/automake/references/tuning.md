@@ -20,7 +20,16 @@ The consecutive failure cap is a stop-loss on spend and churn. Repeated rejects 
 
 ## Practical Defaults
 
-Use `3` as a cheap guardrail for unattended or headless runs.
+Use these defaults when the user does not specify otherwise:
+
+```text
+max_iterations=5
+max_consecutive_failures=3
+```
+
+`max_iterations=5` keeps the loop bounded while giving the builder enough attempts to learn from rejects.
+
+`max_consecutive_failures=3` is a cheap guardrail for unattended or headless runs.
 
 Prefer `5` to `8` when:
 
@@ -42,7 +51,7 @@ Example:
 Because this judge is subjective and visual, I recommend max_consecutive_failures=5 or 8 rather than 3. Which value do you want?
 ```
 
-Ask that only when `max_consecutive_failures` has not already been provided.
+Ask that only when `max_consecutive_failures` has not already been provided and the default `3` looks too punitive.
 
 ## Model Defaults
 

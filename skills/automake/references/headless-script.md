@@ -40,6 +40,8 @@ judge_agent=codex
 judge_effort=high
 judge_strategy=single|panel
 panel_convergence=unanimous_better_required
+max_iterations=5
+max_consecutive_failures=3
 permissions=full-access/no-sandbox/skip-approvals
 ```
 
