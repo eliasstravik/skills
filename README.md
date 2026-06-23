@@ -6,8 +6,6 @@ Personal agent skills by Elias Stravik.
 
 ```bash
 npx skills@latest add eliasstravik/skills
-npx skills@latest add eliasstravik/skills --skill html
-npx skills@latest add eliasstravik/skills --skill automake
 ```
 
 ## Skills
