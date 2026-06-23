@@ -17,6 +17,7 @@ Load only the relevant files:
 - Current-agent default: `references/current-agent-program.md`
 - Optional headless/script mode: `references/headless-script.md`
 - Judge wording or subagent/headless judge setup: `references/judge-contract.md`
+- Multiple judge roles, personas, or perspectives: `references/panel-judging.md`
 - Run folder files, logging, and storage layout: `references/run-folder-layout.md`
 - Iteration limits or subjective/adversarial judge tuning: `references/tuning.md`
 
@@ -59,6 +60,8 @@ For current-agent mode, also ask:
 5. Should the judge be a subagent or a headless agent?
 ```
 
+Infer `judge_strategy=panel` without asking when the judge criteria clearly name multiple judge roles, personas, or perspectives. Examples: "technical judge and user judge", "one judge for implementation, one for UX, one for research", or a bullet list of distinct judges. Otherwise use `judge_strategy=single`.
+
 Do not ask discovery, quality, or extra configuration questions. If the user provides multiple answers up front, parse and reuse them. Skip any question whose answer is already available from the request, previous turns, or the defaults above.
 
 Use `AskUserQuestion`, `Question`, `request_user_input`, or the closest available structured-question tool when available. If no structured-question tool is available, ask one concise question in chat and wait for the answer.
@@ -71,13 +74,16 @@ Use `AskUserQuestion`, `Question`, `request_user_input`, or the closest availabl
 - Append durable results. Do not overwrite previous run history inside the run folder.
 - The builder reads `$RUN_DIR/results.tsv`, `$RUN_DIR/learnings.md`, and recent `$RUN_DIR/runs/*/judgments/*.md` to avoid repeating failures.
 - The judge gets fresh context. Do not pass prior judgments or builder logs as persuasive evidence.
+- For panel judging, each panel judge gets independent fresh context and returns its own verdict before aggregation.
 - REQUIRED FREEZE: while the judge is running, the main agent or script must do no work except polling for judge completion.
 - The judge may inspect the repo and run checks, but must not mutate the candidate. If it does, reject and clean the mutation.
 - Judge output must include evidence, not just rationale.
+- Panel final verdict is `BETTER` only if every required panel judge returns `BETTER`; otherwise it is `NOT_BETTER`.
 - Keep every candidate judged `BETTER`; revert every candidate judged `NOT_BETTER`.
 - Stop when `iteration >= max_iterations` or `failures >= max_consecutive_failures`.
 
 For exact judge wording, load `references/judge-contract.md`.
+For panel judging, load `references/panel-judging.md`.
 
 ## Setup Workflow
 
@@ -114,6 +120,7 @@ Setup is complete only when:
 - `REPO_DIR` is absolute and points at the target git repo.
 - The target repo is clean and committed, or the user has been told exactly what must be committed/stashed before running.
 - The chosen mode matches the user's request: current-agent by default, headless-script only when explicit.
+- The chosen judge strategy matches the judge criteria: single by default, panel when multiple roles or perspectives are explicit.
 - The generated files contain the prompt, judge criteria, iteration limits, consecutive failure limit, and keep/revert rule.
 - The user has been asked whether to run now.
 

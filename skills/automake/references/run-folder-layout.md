@@ -26,6 +26,7 @@ $RUN_DIR/results.tsv
 $RUN_DIR/state.md
 $RUN_DIR/learnings.md
 $RUN_DIR/runs/<run>/judgments/   created when a run starts
+$RUN_DIR/runs/<run>/panel/       optional, created for panel judging
 ```
 
 Headless-script mode:
@@ -39,6 +40,7 @@ $RUN_DIR/state.md
 $RUN_DIR/learnings.md
 $RUN_DIR/runs/<run>/judgments/   created when a run starts
 $RUN_DIR/runs/<run>/builder-<iteration>.log   created during execution
+$RUN_DIR/runs/<run>/panel/       optional, created for panel judging
 ```
 
 ## Results File
@@ -90,6 +92,14 @@ Each artifact includes:
 - Verdict.
 - Summary.
 - Full raw judge output.
+
+For panel judging, this file is the aggregate panel judgment. Store role-specific raw outputs under:
+
+```text
+$RUN_DIR/runs/<run>/panel/<candidate>/<judge-slug>.md
+```
+
+The aggregate artifact links or includes each role output and records the final deterministic verdict.
 
 ## Storage Checks
 

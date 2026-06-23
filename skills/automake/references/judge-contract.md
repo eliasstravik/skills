@@ -1,6 +1,6 @@
 # Judge Contract
 
-Use this contract for every automake judge, whether the judge is a subagent or a headless CLI call.
+Use this contract for every automake judge, whether the judge is a single judge, a panel judge, a subagent, or a headless CLI call.
 
 ## Verdict Rule
 
@@ -19,7 +19,7 @@ There is no score. Reject marginal, noisy, risky, off-goal, unverified, or hard-
 
 ## Isolation
 
-Give the judge fresh context. Pass only:
+Give each judge fresh context. Pass only:
 
 - The automake prompt.
 - The judge criteria.
@@ -27,8 +27,11 @@ Give the judge fresh context. Pass only:
 - `REPO_DIR`.
 - Baseline and candidate refs.
 - Judge model, effort, tool, and permission configuration.
+- For panel judging only, that judge's role name and role-specific criteria.
 
 Do not pass prior judgments, builder logs, or builder explanations as persuasive evidence. The judge may inspect those only when the generated rules explicitly say so, and they must not count as proof that the candidate is better.
+
+For panel judging, do not pass other panel judges' outputs to a judge before it returns its own verdict.
 
 ## Required Freeze
 
@@ -55,7 +58,7 @@ The judge may inspect the repo and run checks, but must not mutate the candidate
 
 ## Output Format
 
-The judge returns exactly:
+Every judge returns exactly:
 
 ```text
 VERDICT: BETTER | NOT_BETTER
@@ -72,3 +75,18 @@ what the next builder attempt should try or avoid
 ```
 
 `EVIDENCE` is required. A rationale without inspected evidence is not enough to keep a candidate.
+
+## Panel Aggregation
+
+Panel judges do not decide the final aggregate verdict. The main agent aggregates after all panel judges return.
+
+Default aggregation:
+
+```text
+final verdict = BETTER only if every required panel judge returns BETTER
+otherwise final verdict = NOT_BETTER
+```
+
+Any panel judge crash, timeout, malformed output, or repo mutation counts as `NOT_BETTER`.
+
+Use the aggregate panel artifact format in `panel-judging.md`.

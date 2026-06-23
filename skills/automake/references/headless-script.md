@@ -23,6 +23,8 @@ opencode --help
 
 Preserve the contract even when flags differ: non-interactive builder and judge calls, full tools, no sandbox, skipped approvals, fresh judge context, and all automake files in `RUN_DIR`.
 
+Headless-script mode may support panel judging, but current-agent mode is preferred when the user wants multiple judge subagents. If generating a headless panel script, run judge calls sequentially unless the script safely implements parallel execution and deterministic aggregation.
+
 ## Defaults
 
 Use the current strongest generally available coding model for serious builder and judge work.
@@ -36,6 +38,8 @@ builder_agent=claude
 builder_effort=high
 judge_agent=codex
 judge_effort=high
+judge_strategy=single|panel
+panel_convergence=unanimous_better_required
 permissions=full-access/no-sandbox/skip-approvals
 ```
 
@@ -82,6 +86,8 @@ Use prior learnings to avoid repeating failed attempts. Make exactly one focused
 ## `judge.md`
 
 The file must start with `# Judge`, then the user's judge content, then `## Rules`.
+
+If the user's judge content names multiple judge roles, create role-specific judge prompts from the same base contract. Each panel judge gets the relevant role block and returns independently before aggregation.
 
 ````markdown
 # Judge
@@ -135,6 +141,17 @@ what the next builder attempt should try or avoid
 Do not include a numeric score.
 ````
 
+For panel judging, each role-specific judge file or prompt must also include:
+
+```text
+You are the <judge name> in an automake judging panel.
+
+Your role-specific criteria:
+<criteria inferred from the user's judge text>
+
+Return your independent verdict before any aggregation. Do not consider what other panel judges might say.
+```
+
 ## `automake.sh`
 
 Generate `automake.sh` from this contract. Keep the script in `RUN_DIR` and make it executable before asking to run.
@@ -154,13 +171,15 @@ Minimum behavior:
 11. Reject if the builder fails or produces no diff.
 12. Commit the candidate before judging.
 13. Block while the judge runs; do no other work.
-14. Parse `VERDICT` and `SUMMARY`.
-15. Reject invalid judge output.
-16. Reject judge mutations.
-17. Write the full judgment artifact under `RUN_DIR`.
-18. Append `results.tsv` and `learnings.md`.
-19. Keep `BETTER`; reset and clean `NOT_BETTER`.
-20. Report final commit, iteration count, failure count, and run folder paths.
+14. For panel strategy, run one independent judge call per role; use fresh context for each and prevent judges from seeing each other's output before verdict.
+15. Parse `VERDICT` and `SUMMARY` from every judge result.
+16. Reject invalid judge output.
+17. Reject judge mutations.
+18. For panel strategy, aggregate with unanimous `BETTER` required. Any `NOT_BETTER`, crash, timeout, invalid output, or mutation makes the final verdict `NOT_BETTER`.
+19. Write the full single or aggregate panel judgment artifact under `RUN_DIR`.
+20. Append one aggregate row to `results.tsv` and append combined learnings to `learnings.md`.
+21. Keep `BETTER`; reset and clean `NOT_BETTER`.
+22. Report final commit, iteration count, failure count, and run folder paths.
 
 After writing:
 
