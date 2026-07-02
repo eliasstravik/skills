@@ -67,18 +67,17 @@ Keep looping within the sitting while the client is engaged and context allows. 
 When the frontier is empty and the Fog holds nothing you can still sharpen, draft `plan.md` (template in formats.md), then run the gates per [references/exit-gates.md](references/exit-gates.md):
 
 1. **Plan review** — present the draft; an HTML report when the plan is dense or visual.
-2. **Quiz gate** — quiz the client on the plan's key decisions and trade-offs. The plan is only ready when the client can defend it; an answer that stumbles or contradicts the plan reopens the loop.
-3. **Cold read** — a fresh subagent reads only the workspace and lists everything it would have to guess at. Blocking guesses become tickets; accepted ones become the plan's "Open questions for the builder".
-4. **Handoff** — emit the copy-paste handoff block pointing a builder at the workspace.
+2. **Cold read** — a fresh subagent reads only the workspace and lists everything it would have to guess at. Blocking guesses become tickets; accepted ones become the plan's "Open questions for the builder".
+3. **Handoff** — emit the copy-paste handoff block, wrapped in clear `"""` delimiters, pointing a builder at the workspace.
 
-The gates exist because the failure mode is a plan that *reads* complete. The quiz tests that the client actually holds the plan; the cold read tests that the plan stands without you in the room. Do not soften either to finish sooner.
+The gates exist because the failure mode is a plan that *reads* complete but only stands with you in the room; the cold read tests that it stands without you. Do not soften it to finish sooner.
 
 ## Ending a session
 
 Every sitting ends the same way, whatever was accomplished:
 
 1. `engagement.md` is current: decisions gisted, fog tended, Status updated (phase, date, next step).
-2. Print a **Next steps** block the client can copy-paste:
+2. Print a **Next steps** block the client can copy-paste. Any block meant to be pasted into another agent must be wrapped in `"""` delimiters — one line directly above, one directly below, nothing else on those lines — so it is unambiguous what to copy:
    - Mid-engagement: `Invoke /consultant to resume ~/.consultant/<idea-slug>/` plus one line on what the next sitting will tackle.
    - Gates passed: the handoff block from exit-gates.md.
 
