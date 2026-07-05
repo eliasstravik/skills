@@ -18,4 +18,14 @@ Draft `plan.md` when no material unknown remains except client-accepted assumpti
 
 Before handoff, run an adversarial subagent on only `plan.md` + explicit references, never `consultation.md`; require APPROVED or BLOCKERS, resolve blockers, repeat unless the client exits anyway.
 
-End every sitting with `consultation.md` current and a copy-paste next step. After approval, print a quoted builder handoff pointing to `plan.md`.
+End every sitting with `consultation.md` current and a copy-paste next step. After approval, end with a literal copy-pasteable builder prompt delimited exactly:
+
+```text
+---HANDOFF AGENT PROMPT START---
+You are the implementation agent for the approved plan at `<absolute path to plan.md>`.
+
+Read `plan.md` and every explicit reference it names. Implement the plan while preserving its outcome, decisions, constraints, out-of-scope items, and risks/open assumptions. Inspect the target territory before changing it; ask only if the plan/references leave a true blocker. Verify the result with the relevant checks, then report what changed, what passed, and any remaining risks.
+---HANDOFF AGENT PROMPT END---
+```
+
+Replace the placeholder with the real absolute `plan.md` path before printing.
