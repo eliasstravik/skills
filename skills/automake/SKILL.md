@@ -1,145 +1,59 @@
 ---
 name: automake
-description: Use when the user wants automake, autoresearch-style product improvement, iterative agent improvement, git-backed candidate loops, LLM-as-judge evaluation, repeated candidate commits, or a program.md/headless scaffold for keeping better changes and reverting rejected ones.
-argument-hint: "Start interactive setup. Default to current-agent program.md unless the user explicitly asks for script/headless automake.sh. Ask only for missing user inputs: prompt and judge. Use max_iterations=5 and max_consecutive_failures=3 unless the user specifies otherwise. In current-agent mode also ask judge_type."
+description: Set up an automake ratchet that keeps better candidates and snaps back rejected ones.
+disable-model-invocation: true
 ---
 
-# Automake
+Run an automake ratchet.
 
-Automake creates a git-backed improvement loop: build one focused candidate, commit it, judge it against the previous kept version, keep `BETTER`, and revert `NOT_BETTER`.
+A ratchet builds one focused candidate, commits it, has a fresh adversarial judge compare it against the previous kept baseline, keeps `BETTER`, and snaps `NOT_BETTER` back to the baseline.
 
-The keep rule is invariant: `BETTER` means the candidate is closer than the baseline to the automake prompt and judge criteria. If any generated prompt or judge wording conflicts with that rule, this skill wins.
+Consult before writing `program.md`: inspect repo facts before asking; ask one question at a time with options and your recommendation; sharpen the builder prompt and judge criteria until both are executable. Use `MAX_ITERATIONS=5` and `MAX_CONSECUTIVE_FAILURES=3` unless the user already specified different limits.
 
-## Load References
+After the prompt and judge are sharp, generate a three-random-word lowercase slug and create `RUN_DIR=~/.automake/<slug>/`. Set `REPO_DIR` to the absolute current repo path. Stop if `REPO_DIR` is not a git repo or lacks a clean committed baseline; ask the user to commit, stash, clean, or choose another repo before any run approval. Do not reset or clean before approval.
 
-Load only the relevant files:
+Write only `RUN_DIR/program.md` before asking to run. The program must be compact and self-contained: configuration, prompt, judge, ratchet loop, and judge output format. Do not write automake files into `REPO_DIR`.
 
-- Current-agent default: `references/current-agent-program.md`
-- Optional headless/script mode: `references/headless-script.md`
-- Judge wording or subagent/headless judge setup: `references/judge-contract.md`
-- Multiple judge roles, personas, or perspectives: `references/panel-judging.md`
-- Run folder files, logging, and storage layout: `references/run-folder-layout.md`
-- Iteration limits or subjective/adversarial judge tuning: `references/tuning.md`
+`program.md` must contain this contract:
 
-## Default Mode
-
-Use current-agent mode unless the user explicitly asks for script, headless, shell, or `automake.sh`.
-
-Current-agent mode writes only:
-
-```text
-~/.automake/<slug>/program.md
-```
-
-Headless-script mode writes only:
+1. Work only in `REPO_DIR`; store all ratchet state under `RUN_DIR`.
+2. Create or append only these run files: `results.tsv`, `learnings.md`, `state.md`, and `runs/<run>/judgments/<candidate>.md`.
+3. Before each candidate, read prior results, learnings, recent judgments, and relevant repo files.
+4. Build one focused candidate, run cheap checks, and reject failed checks or no diff as `NOT_BETTER`.
+5. Commit the candidate, recording `baseline` and `candidate` refs.
+6. Freeze while one fresh adversarial subagent judge compares `baseline` to `candidate`.
+7. Pass the judge only the builder prompt, judge criteria, `RUN_DIR`, `REPO_DIR`, `baseline`, and `candidate`.
+8. Do not pass prior judgments, builder logs, or builder rationale as persuasive evidence.
+9. The judge must not mutate `REPO_DIR`; temporary artifacts go only under `RUN_DIR` or `/tmp`.
+10. The judge must return exactly:
 
 ```text
-~/.automake/<slug>/automake.sh
-~/.automake/<slug>/prompt.md
-~/.automake/<slug>/judge.md
+VERDICT: BETTER | NOT_BETTER
+SUMMARY: one-line reason
+
+RATIONALE:
+why the candidate does or does not beat the baseline
+
+EVIDENCE:
+commands run, files inspected, screenshots/endpoints checked, or why a check was skipped
+
+LEARNINGS:
+what the next candidate should try or avoid
 ```
 
-Never write those files into the target repo.
+11. Treat builder failure, failed checks, no diff, judge crash, timeout, malformed verdict, missing evidence, or judge-created repo changes as `NOT_BETTER`.
+12. After judging, check for uncommitted judge-created changes. If present, log the mutation, restore/clean safely, and do not keep the candidate.
+13. Append a result row, learnings, and a judgment artifact for every attempt, including conservative rejections.
+14. Keep `BETTER`. Reset/clean `NOT_BETTER` to `baseline`.
+15. Reset consecutive failures to `0` on `BETTER`; increment them on `NOT_BETTER`.
+16. Stop at the iteration or consecutive-failure limit and report final commit, counts, and run-folder paths.
 
-## Interview
-
-Begin by interviewing the user. Do not create files until all required answers are collected.
-
-Ask only missing direct inputs, one at a time:
+Ask for explicit approval after writing and verifying `program.md`:
 
 ```text
-1. What is your goal for this loop? This becomes the automake prompt.
-2. What should the judge use to reject or accept candidates?
+All done — ready to run?
+1. Yes, run the ratchet now
+2. No, change the program first
 ```
 
-For current-agent mode, also ask:
-
-```text
-3. Should the judge be a subagent or a headless agent?
-```
-
-Use defaults unless the user specifies otherwise:
-
-```text
-max_iterations=5
-max_consecutive_failures=3
-```
-
-Infer `judge_strategy=panel` without asking when the judge criteria clearly name multiple judge roles, personas, or perspectives. Examples: "technical judge and user judge", "one judge for implementation, one for UX, one for research", or a bullet list of distinct judges. Otherwise use `judge_strategy=single`.
-
-Do not ask discovery, quality, or extra configuration questions. If the user provides multiple answers up front, parse and reuse them. Skip any question whose answer is already available from the request, previous turns, or the defaults above.
-
-Use `AskUserQuestion`, `Question`, `request_user_input`, or the closest available structured-question tool when available. If no structured-question tool is available, ask one concise question in chat and wait for the answer.
-
-## Core Contract
-
-- Require a committed, clean target repo baseline before running. The loop may use `git reset --hard` and `git clean -fd` in the target repo after user approval.
-- Store every automake artifact under `RUN_DIR=~/.automake/<slug>/`.
-- Do not add `.automake/`, `program.md`, `automake.sh`, `prompt.md`, `judge.md`, results, judgments, logs, or run metadata to the target repo.
-- Append durable results. Do not overwrite previous run history inside the run folder.
-- The builder reads `$RUN_DIR/results.tsv`, `$RUN_DIR/learnings.md`, and recent `$RUN_DIR/runs/*/judgments/*.md` to avoid repeating failures.
-- The judge gets fresh context. Do not pass prior judgments or builder logs as persuasive evidence.
-- For panel judging, each panel judge gets independent fresh context and returns its own verdict before aggregation.
-- REQUIRED FREEZE: while the judge is running, the main agent or script must do no work except polling for judge completion.
-- The judge may inspect the repo and run checks, but must not mutate the candidate. If it does, reject and clean the mutation.
-- Judge output must include evidence, not just rationale.
-- Panel final verdict is `BETTER` only if every required panel judge returns `BETTER`; otherwise it is `NOT_BETTER`.
-- Keep every candidate judged `BETTER`; revert every candidate judged `NOT_BETTER`.
-- Stop when `iteration >= max_iterations` or `failures >= max_consecutive_failures`.
-
-For exact judge wording, load `references/judge-contract.md`.
-For panel judging, load `references/panel-judging.md`.
-
-## Setup Workflow
-
-After answers are complete:
-
-1. Generate a three-random-word lowercase slug.
-2. Create `~/.automake/<slug>/`.
-3. Set `RUN_DIR` to that absolute run folder path.
-4. Set `REPO_DIR` to the absolute path of the current working repo.
-5. Verify `REPO_DIR` is a git repo.
-6. Verify the target repo has a clean committed baseline, or ask the user to commit/stash before running.
-7. Load `references/run-folder-layout.md` and initialize the required run folder scaffolding.
-8. For current-agent mode, load `references/current-agent-program.md` and write `program.md`.
-9. For headless-script mode only, load `references/headless-script.md` and write `automake.sh`, `prompt.md`, and `judge.md`.
-10. Ask the user for explicit approval before running.
-
-When final CLI flags are uncertain, inspect local help before writing commands:
-
-```bash
-claude --help
-codex exec --help
-cursor --help
-opencode --help
-```
-
-Preserve the contract even when flags differ: non-interactive operation for headless calls, full tool access, no sandbox, skipped approvals, and fresh judge context.
-
-## Completion Checklist
-
-Setup is complete only when:
-
-- `RUN_DIR` exists under `~/.automake/<slug>/`.
-- All generated automake files exist in `RUN_DIR`, not `REPO_DIR`.
-- `REPO_DIR` is absolute and points at the target git repo.
-- The target repo is clean and committed, or the user has been told exactly what must be committed/stashed before running.
-- The chosen mode matches the user's request: current-agent by default, headless-script only when explicit.
-- The chosen judge strategy matches the judge criteria: single by default, panel when multiple roles or perspectives are explicit.
-- The generated files contain the prompt, judge criteria, iteration limits, consecutive failure limit, and keep/revert rule.
-- The user has been asked whether to run now.
-
-Ask for approval with this shape:
-
-```text
-All done - ready to run?
-1. Yes, run automake now
-2. No, I want to change something first
-```
-
-If the user says yes:
-
-- Current-agent mode: read and execute `~/.automake/<slug>/program.md`.
-- Headless-script mode: run `~/.automake/<slug>/automake.sh`.
-
-If the user says no, ask what they want changed, update the files in `RUN_DIR`, then ask again.
+If approved, read and execute `program.md`. If not, update `program.md` and ask again.
