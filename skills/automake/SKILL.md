@@ -19,9 +19,9 @@ Write only `RUN_DIR/program.md` before asking to run. The program must be compac
 1. Work only in `REPO_DIR`; store all ratchet state under `RUN_DIR`.
 2. Create or append only these run files: `results.tsv`, `learnings.md`, `state.md`, and `runs/<run>/judgments/<candidate>.md`.
 3. Before each candidate, read prior results, learnings, recent judgments, and relevant repo files.
-4. Build one focused candidate, run cheap checks, and reject failed checks or no diff as `NOT_BETTER`.
+4. Build one focused candidate, run cheap checks, and reject failed checks or no diff as `NOT_BETTER`; do not modify or weaken checks, tests, or configs that gate candidates or that judge criteria depend on.
 5. Commit the candidate, recording `baseline` and `candidate` refs.
-6. Freeze while one fresh adversarial subagent judge compares `baseline` to `candidate`.
+6. Freeze while one fresh adversarial subagent judge compares `baseline` to `candidate` from the diff, rejecting candidate-gate changes and weighing added size/complexity as a cost. A bigger or more elaborate candidate that is not clearly better net of that cost is `NOT_BETTER`.
 7. Pass the judge only the builder prompt, judge criteria, `RUN_DIR`, `REPO_DIR`, `baseline`, and `candidate`.
 8. Do not pass prior judgments, builder logs, or builder rationale as persuasive evidence.
 9. The judge must not mutate `REPO_DIR`; temporary artifacts go only under `RUN_DIR` or `/tmp`.
