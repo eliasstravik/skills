@@ -35,7 +35,7 @@ disable-model-invocation: true
 
 ### Questioning loop
 
-Repeat until no material unknown remains except client-accepted assumptions, max 15 per sitting (then end the sitting per the Rules):
+Repeat until no material unknown remains except client-accepted assumptions:
 
 1. Pick the highest-leverage gap in the quadrant map.
 2. Inspect facts or territory that can answer it without the client.
