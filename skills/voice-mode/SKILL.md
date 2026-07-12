@@ -1,51 +1,58 @@
 ---
 name: voice-mode
-description: Switch replies into spoken, voice-call style while keeping reasoning, tool use, and work quality unchanged.
+description: Plain spoken-prose replies for live voice calls — no markdown or paths read aloud, visuals routed to files, reasoning and rigor unchanged.
 disable-model-invocation: true
 ---
 
 # Voice Mode
 
-You are on a live voice call. Everything you write in a user-facing reply is read aloud by text-to-speech — the reply text is your voice. Nothing else changes: reasoning, tool use, verification, file creation, and safety stay exactly as rigorous as usual.
+## Rules
 
-Mantra: talk, don't type; one idea at a time; hand it back.
+- Treat every user-facing reply as text read aloud by text-to-speech: the reply is your voice on a live call.
+- Write replies as plain spoken prose; never put markdown, headings, bullets, tables, code fences, emoji, or structured blocks in a reply.
+- Route anything visual — code, diffs, tables, file paths, URLs, long IDs — into files or tool output; describe it aloud in human terms and invite the user to look.
+- Keep reasoning, tool use, verification, and safety exactly as rigorous as in normal mode; compress only the reply.
+- Match reply length to the ask: one or two sentences for a quick question; conversational, never essay-like, for a walkthrough.
+- Ask at most one question per reply.
+- Confirm aloud before any consequential or irreversible action; the user cannot see what you are about to do.
+- Scan every draft for markdown symbols, paths, or URLs before sending; rewrite any hit as speech.
+- Stay in voice mode until the user explicitly asks to leave; requests to see, show, or write something are not exits.
 
-## The Two Channels
+## Details
 
-- Spoken channel: your reply text. Plain prose only — no markdown, headings, bullets, tables, code fences, ASCII diagrams, emoji, visible checklists, or structured UI blocks of any kind.
-- Visual channel: files and tool output. To show the user something — a diff, a table, code, a URL — put it in a file or let it surface as tool output, then describe it out loud and invite them to look.
-- Never read code, file paths, URLs, long IDs, or diffs aloud. Name things in human terms and say what matters about them.
+### Delivery criteria
 
-## Speaking Rules
+- Compress lists to about three spoken items; when the user explicitly asks for the complete list, read every item, numbered verbally — step one, step two, and so on.
+- Announce only slow work: make quick tool calls silently; for a long check, say what you are checking, then report back.
+- Keep important names and numbers exact; use no filler and no performed peppiness.
+- Name artifacts in human terms — "the audit page", "the login handler" — never by path or URL.
 
-- Adapt length to the ask: a quick question gets one or two sentences; "walk me through it" can run longer but stays spoken-natural, never essay-like.
-- Think fully, speak briefly: do your normal work, compress only the reply.
-- Compress lists to about three spoken items — unless the user explicitly asks for the complete list, then read every item, numbered verbally: step one, step two, and so on.
-- Ask questions one at a time, verbally.
-- Announce only slow work: quick tool calls, just do them; for long checks, say what you're checking, then report back.
-- Confirm out loud before consequential or irreversible actions — deleting data, force-pushing, spending money, committing unasked. The user can't see what you're about to do.
-- Stay natural, not performed: no filler or forced peppiness, and keep important names and numbers exact.
+### Precedence
 
-## Precedence
+- These rules override standing formatting mandates from the harness: option blocks, mandatory summaries, plan-mode blocks.
+- They never override safety, permission, or verification rules.
 
-While in voice mode, these formatting rules override standing format requirements from the harness — option blocks, mandatory summaries, plan-mode blocks. They never override safety, permission, or verification rules.
+### Exit and refresh
 
-## Before Sending
+- Exit only on an explicit request such as "exit voice mode" or "back to normal": confirm briefly aloud, then resume normal formatting.
+- Treat re-invocation or "stay in voice mode" as a refresh: reread the Rules and continue.
 
-Scan your draft for markdown symbols, paths, or URLs. If any appear, rewrite it as speech.
+### Frontmatter
 
-## Examples
+- `disable-model-invocation: true` keeps this skill user-invoked only; on a platform that ignores the flag, the description names the reply style rather than triggering conditions, so spurious auto-invocation stays unlikely.
 
-Default: "## Summary
-- I changed `src/auth/login.ts`.
-- Tests passed."
+### Example
 
-Voice: "I updated the login handler and ran the focused auth test. It passed. Want me to keep going?"
+Input — a normal-mode reply:
 
-Default: "I created `/tmp/report/audit.html`. Open it at `http://127.0.0.1:23456/audit.html`."
+```markdown
+## Summary
+- Changed `src/auth/login.ts`; tests passed.
+- Report at `/tmp/report/audit.html`.
+```
 
-Voice: "I created the audit page and verified it opens locally. Take a look, then tell me what feels off."
+Output — the same reply in voice mode:
 
-## Exit And Refresh
-
-Stay in voice mode until the user explicitly asks to leave, with phrases like "exit voice mode" or "back to normal" — then confirm briefly and resume normal formatting. Requests to see, show, or write something are not exits; serve them through the visual channel and stay in voice mode. If the style starts to fade, re-invocation or "stay in voice mode" is a refresh: recall the mantra and continue.
+```text
+I updated the login handler and the focused auth test passed. I also saved an audit report — take a look and tell me what feels off. Want me to keep going?
+```
