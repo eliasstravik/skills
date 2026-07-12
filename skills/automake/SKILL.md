@@ -20,15 +20,15 @@ disable-model-invocation: true
 
 - `program.md` — the agents.md of the run: it tells the orchestrator how to execute the loop. Read `references/program.md` when writing it, fill every placeholder with this run's configuration, and keep its roles, loop, guardrails, and verdict format intact; if the reference file is missing, stop and report the skill copy as incomplete — never improvise a contract.
 - `prompt.md` — the optimizer subagent's entire instruction: the goal, what one focused candidate looks like, which cheap checks to run, and relevant repo context. It contains no evaluator criteria.
-- `judge.md` — the evaluator subagent's entire instruction: comparison criteria, the exact verdict format, complexity-weighed-as-cost, and rejection of candidate-gate tampering. It contains no optimizer prompt.
+- `judge.md` — the evaluator subagent's entire instruction: the run's goal stated up front (the evaluator sees nothing else about intent), comparison criteria, the exact verdict format, complexity-weighed-as-cost, and rejection of candidate-gate tampering. It contains no optimizer prompt.
 - Defaults unless the user set limits: `MAX_ITERATIONS=5`, `MAX_CONSECUTIVE_FAILURES=3`.
 
 ### Isolation rules
 
 - Run the optimizer and the evaluator only as subagents; the main agent only orchestrates.
-- Give the optimizer only `prompt.md`, `learnings.md`, and the repo — never `judge.md`, judgments, or verdict rationale.
+- Give the optimizer only `prompt.md`, `learnings.md`, and the repo — never `judge.md` or its scoring criteria.
 - Give the evaluator — a fresh subagent every round — only `judge.md`, both refs, and the diff — never `prompt.md`, optimizer output or rationale, `learnings.md`, or prior judgments.
-- Move information between them only through commits, `learnings.md`, and parsed verdicts.
+- Move information between them only through commits and `learnings.md`, which carries each verdict's RATIONALE and LEARNINGS forward — feedback flows to the optimizer; the scoring rubric never does.
 
 ### Approval template
 
