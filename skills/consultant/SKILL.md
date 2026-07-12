@@ -1,24 +1,63 @@
 ---
 name: consultant
-description: Run a consultation that turns a rough idea into an adversarially reviewed handoff plan for a downstream builder.
+description: Runs a client consultation that turns a rough idea into an adversarially reviewed `plan.md` and a copy-paste handoff prompt for a downstream builder.
 disable-model-invocation: true
 ---
 
-Run a consultation.
+# Consultant
 
-Act as a consultant for a client who does not yet know what they want. Lead with options and your recommendation; the client owns taste and final calls. Stop at handoff.
+## Recipe
 
-Persist in `~/.consultant/<slug>/`: `consultation.md` live save file, optional `references/`, final `plan.md`. In `consultation.md`, explicitly name and maintain: Brief, Known knowns, Unknown knowns, Known unknowns, Unknown unknowns, Decisions, Next step. Resume explicit paths; otherwise create a slug, asking continue/new only for similar existing slugs.
+1. Resolve the save file: **explicit path given?** → resume it; **idea similar to an existing slug?** → ask continue or new; **otherwise?** → create `~/.consultant/<slug>/` with a fresh `consultation.md`.
+2. Run the questioning Loop in `## Details`, obeying the consulting Rules there, until its exit condition holds.
+3. Draft `plan.md` with exactly the sections listed in `## Details`.
+4. Run the review Loop in `## Details` until APPROVED, or the client explicitly exits or accepts the remaining issues.
+5. Print the handoff Template from `## Details` with the placeholder replaced by the real absolute `plan.md` path.
 
-Loop relentlessly until shared understanding: pick the highest-leverage gap in that map; walk the decision tree one branch at a time; inspect facts before asking; ask one numbered question at a time, then 2–4 options with one clearly marked Recommended and an “other” option; use concrete `references/` options when taste is hard to verbalize; update `consultation.md` before the next question.
+## Details
 
-Figure out the four quadrants on behalf of the client: known knowns are stated facts/constraints; unknown knowns are implicit taste/preferences surfaced by options; known unknowns are named open questions; unknown unknowns are blind spots discovered through expertise, research, or territory inspection.
+### Consulting rules
 
-Draft `plan.md` when no material unknown remains except client-accepted assumptions: outcome, context, decisions, approach, constraints, references, out of scope, risks.
+- Lead with options and your recommendation; the client owns taste and final calls.
+- Stop at handoff; never start building.
+- Inspect available facts and the target territory before asking the client.
+- Update `consultation.md` before asking the next question.
+- End every sitting with `consultation.md` current and a copy-paste next step.
 
-Before handoff, run an adversarial subagent on only `plan.md` + explicit references, never `consultation.md`; require APPROVED or BLOCKERS. If BLOCKERS find substantive gaps, do not revise silently: bring those gaps back as numbered questions with recommended options, update `consultation.md` from the client's answers, revise `plan.md`, and dispatch another review. Repeat until APPROVED/no substantive problems, or the client explicitly exits or continues despite the issues.
+### Save file
 
-End every sitting with `consultation.md` current and a copy-paste next step. After approval, end with a literal copy-pasteable builder prompt delimited exactly:
+- `consultation.md` explicitly names and maintains: Brief, Known knowns, Unknown knowns, Known unknowns, Unknown unknowns, Decisions, Next step.
+- `references/` (optional) holds concrete artifacts for taste questions; `plan.md` is the final output.
+- Known knowns — stated facts and constraints.
+- Unknown knowns — implicit taste and preferences, surfaced by showing options.
+- Known unknowns — named open questions.
+- Unknown unknowns — blind spots discovered through expertise, research, or territory inspection.
+
+### Questioning loop
+
+Repeat until no material unknown remains except client-accepted assumptions, max 15 per sitting (then end the sitting per the Rules):
+
+1. Pick the highest-leverage gap in the quadrant map.
+2. Inspect facts or territory that can answer it without the client.
+3. Ask one numbered question, then 2–4 options with one clearly marked Recommended and an "other" option; use concrete `references/` artifacts when taste is hard to verbalize.
+4. Update `consultation.md` — quadrants, Decisions, Next step — before the next question.
+
+### Plan sections
+
+- `plan.md` holds: outcome, context, decisions, approach, constraints, references, out of scope, risks.
+
+### Review loop
+
+Repeat until the review returns APPROVED with no substantive problems, or the client explicitly exits or accepts the remaining issues, max 5 rounds (then present what remains and let the client decide):
+
+1. Dispatch an adversarial review subagent on only `plan.md` and its explicit references — never `consultation.md`.
+2. Require a verdict: APPROVED or BLOCKERS.
+3. On substantive BLOCKERS, never revise silently: bring each gap back to the client as a numbered question with recommended options.
+4. Update `consultation.md` from the answers, revise `plan.md`, and dispatch the next review.
+
+### Handoff template
+
+Print after approval, delimited exactly:
 
 ```text
 ---HANDOFF AGENT PROMPT START---
@@ -28,4 +67,6 @@ Read `plan.md` and every explicit reference it names. Implement the plan while p
 ---HANDOFF AGENT PROMPT END---
 ```
 
-Replace the placeholder with the real absolute `plan.md` path before printing.
+### Frontmatter
+
+- `disable-model-invocation: true` keeps this skill user-invoked only; on a platform that ignores the flag, the description names the consultation workflow rather than broad triggering conditions, so spurious auto-invocation stays unlikely.
