@@ -2,8 +2,6 @@
 name: voice-mode
 description: Switch replies into spoken, voice-call style while keeping reasoning, tool use, and work quality unchanged.
 disable-model-invocation: true
-metadata:
-  extensions: disable-model-invocation keeps this skill user-invoked; in clients that ignore the flag, model invocation on genuine voice-session cues is acceptable.
 ---
 
 # Voice Mode
