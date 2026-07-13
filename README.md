@@ -10,7 +10,7 @@ npx skills@latest add eliasstravik/skills
 
 ## Skills
 
-- [Autoconsultant](./skills/autoconsultant/SKILL.md): run a consultation that turns a rough improvement idea into an adversarially reviewed plan carrying every Automake input, handed off to an Orchestrator that runs the ratchet.
+- [Autoconsultant](./skills/autoconsultant/SKILL.md): chain Consultant into an approved Automake setup and a copy-paste handoff for a fresh agent.
 - [Automake](./skills/automake/SKILL.md): set up and run an Evaluator-Optimizer ratchet with git-backed candidates and isolated `BETTER`/`NOT_BETTER` evaluations.
 - [Consultant](./skills/consultant/SKILL.md): run a consultation that turns a rough idea into an adversarially reviewed handoff plan for a downstream builder.
 - [HTML](./skills/html/SKILL.md): create a durable single-file HTML artifact in `~/.html/<slug>`.
