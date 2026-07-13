@@ -16,7 +16,7 @@ disable-model-invocation: true
 6. Draft the complete `evaluator.md`, print it inline, and request approval with the Approval prompt; revise and reprint it until approved.
 7. Resolve `MAX_ITERATIONS`, `MAX_CONSECUTIVE_FAILURES`, and `SUCCESS_CONDITION` from supplied values and defaults without asking Orchestrator questions, then present them with the approved artifacts in the Final summary Template.
 8. Ask whether to run; when the user declines or gives feedback, revise the affected Optimizer, Evaluator, or Orchestrator value and re-present the necessary artifact approval and final summary until approved.
-9. On run approval, preflight the repository and baseline, create the run directory, write the three resolved run files, and read `orchestrator.md` to execute the ratchet exactly as instructed.
+9. On run approval, perform the Git preflight without questions, establish a clean committed baseline, create the run directory, write the three resolved run files, and read `orchestrator.md` to execute the ratchet exactly as instructed.
 
 ## Details
 
@@ -34,7 +34,7 @@ disable-model-invocation: true
 
 ```text
 1. Approved
-2. No — changes needed (or provide feedback directly)
+2. No — changes needed
 ```
 
 - When the user answers No without feedback, ask what should change and wait; after feedback, reprint the entire revised artifact, not only a diff.
@@ -43,8 +43,8 @@ disable-model-invocation: true
 
 | Input | Resolution when not supplied |
 |---|---|
-| `REPO_DIR` | Git root containing the current working directory. |
-| `BASELINE` | Current committed `HEAD`, only when the worktree is clean. |
+| `REPO_DIR` | Existing Git root containing the current working directory; otherwise the current working directory after Git initialization. |
+| `BASELINE` | Clean committed `HEAD` produced by the automatic Git preflight. |
 | `RUN_DIR` | `~/.automake/<three-random-word-lowercase-slug>/`. |
 | Candidate scope | Smallest coherent change that can improve the baseline toward the Goal. |
 | Irreducible constraints | `none`; never invent product or technical constraints. |
@@ -68,7 +68,9 @@ disable-model-invocation: true
 - `evaluator.md` is the Evaluator's entire instruction: Goal first, approved verdict rule, task-appropriate evidence plan, required evidence, exact evaluation format from `references/orchestrator.md`, complexity policy, and candidate-gate policy; never include `optimizer.md`.
 - `orchestrator.md` comes from `references/orchestrator.md` with every placeholder filled; preserve its roles, ratchet loop, guardrails, and evaluation format.
 - Run Optimizer and Evaluator only in their isolated roles. Give the Optimizer only `optimizer.md`, `learnings.md`, and the repository; give each fresh Evaluator only `evaluator.md`, both refs, and the diff.
-- If the repository is not git-backed with a clean committed baseline at run time, ask how to proceed and change nothing.
+- Never ask for Git setup or baseline approval during preflight. If the current directory is not inside a Git repository, run `git init` there and create an empty `chore: initialize Automake baseline` commit; use command-scoped Automake author identity when no Git identity is configured.
+- If the repository has no committed `HEAD`, create that same empty initialization commit. If tracked or non-ignored untracked work remains, stage it and commit `chore: capture Automake baseline` so the ratchet starts from the current contents without discarding them; preserve ignored files and exclude likely local secret files through `.git/info/exclude` rather than committing them.
+- Continue only after `git status --porcelain` is empty and set `BASELINE` to that `HEAD`; if automatic setup cannot reach this state, stop and report the concrete failure without requesting a setup decision.
 
 ### Final summary Template
 
