@@ -1,6 +1,6 @@
 ---
 name: automake
-description: Runs an evaluator-optimizer ratchet — isolated optimizer and evaluator subagents build and judge one candidate per round while the orchestrator keeps BETTER commits and snaps NOT_BETTER back to baseline.
+description: Runs an Evaluator-Optimizer ratchet — isolated Optimizer and Evaluator subagents improve and evaluate one candidate per round while the Orchestrator keeps BETTER commits and snaps NOT_BETTER back to baseline.
 disable-model-invocation: true
 ---
 
@@ -8,36 +8,69 @@ disable-model-invocation: true
 
 ## Recipe
 
-1. Consult until executable: inspect repo facts before asking; ask one question at a time with 2–4 options and a recommendation, until the optimizer prompt and evaluator criteria are both concrete enough to run unattended.
-2. Preflight: **is `REPO_DIR` a git repo with a clean committed baseline?** → continue; **otherwise?** → ask the user to commit, stash, clean, or choose another repo; never reset or clean anything before run approval.
-3. Create `RUN_DIR=~/.automake/<slug>/` with a three-random-word lowercase slug and write the three run files defined in `## Details` — `program.md`, `prompt.md`, `judge.md` — writing nothing into `REPO_DIR`.
-4. Ask for run approval with the Template in `## Details`; **not approved?** → revise the run files and ask again.
-5. Read `RUN_DIR/program.md` and orchestrate the ratchet exactly as it instructs, dispatching optimizer and evaluator subagents; never build or judge in the orchestrator context.
+1. Inspect the invocation and repository, then resolve every run input from the Defaults table without asking about values that safely default.
+2. Resolve Goal first: use it only when the invocation states a concrete outcome; otherwise ask the Goal question alone and wait for the answer.
+3. Resolve Evaluation criteria second: use them only when the invocation states a concrete `BETTER` versus `NOT_BETTER` rule an Evaluator can apply; otherwise ask the Evaluation criteria question alone and wait for the answer.
+4. Preflight the resolved repository and baseline; if it is not a git repo with a clean committed baseline, ask the user how to proceed and change nothing.
+5. Present every resolved input with the Final review Template and wait for explicit approval; on requested changes, revise the inputs and repeat this step.
+6. After approval, create the run directory and write `orchestrator.md`, `optimizer.md`, and `evaluator.md` as specified below, writing no run files into the repository.
+7. Read `orchestrator.md` and run the ratchet exactly as it instructs, dispatching Optimizer and Evaluator subagents; never optimize or evaluate in the Orchestrator context.
 
 ## Details
 
+### Defaults
+
+An explicit user value overrides its default. Inspect repository facts before resolving inferred values.
+
+| Input | Resolution when not explicitly supplied |
+|---|---|
+| `REPO_DIR` | Git root containing the current working directory. |
+| `BASELINE` | Current committed `HEAD`, only when the worktree is clean. |
+| Goal | No default; ask when the invocation does not provide a concrete outcome. |
+| Evaluation criteria | No default; ask when the invocation does not provide an applicable comparison rule. |
+| Candidate scope | One smallest coherent change that could improve the baseline toward the Goal. |
+| Irreducible constraints | `none`; never invent product, technical, aesthetic, compatibility, or scope constraints. |
+| Repository context | Relevant instructions, files, architecture, commands, and conventions found by inspection. |
+| Cheap checks | Cheapest relevant existing targeted checks; record `none found` when inspection finds none. |
+| Required evidence | Baseline-to-candidate diff plus applicable existing checks and any evidence the Evaluation criteria logically require. |
+| Complexity policy | Added code, dependencies, abstractions, maintenance, and operational cost count against the candidate. |
+| Candidate-gate policy | Reject removal, weakening, skipping, or manipulation of tests, checks, benchmarks, or configs used to establish improvement. |
+| `SUCCESS_CONDITION` | `none`; without an explicit observable early-stop condition, limits stop the run. |
+| `MAX_ITERATIONS` | `5`. |
+| `MAX_CONSECUTIVE_FAILURES` | `3`. |
+| `RUN_DIR` | `~/.automake/<three-random-word-lowercase-slug>/`. |
+
+### Question contract
+
+- Ask Goal and Evaluation criteria as separate questions in that order, one question per turn; never combine them or substitute questions about defaulted inputs.
+- Skip either question only when the user's own prompt already supplies everything needed to resolve that input; repository inspection may clarify wording but never supply user intent.
+- Give each question 2–4 numbered options with one recommendation; derive concrete options from the invocation and inspected repository rather than asking for free-form specification.
+- A Goal names the outcome to improve. Evaluation criteria state how an isolated Evaluator decides whether a candidate is clearly better than its baseline, including material priorities or tradeoffs.
+- Use the canonical terms Orchestrator, Optimizer, Evaluator, Goal, Evaluation criteria, evaluation, and verdict exactly; never substitute alternate names for these concepts.
+
 ### Run files
 
-- `program.md` — the agents.md of the run: it tells the orchestrator how to execute the loop. Read `references/program.md` when writing it, fill every placeholder with this run's configuration, and keep its roles, loop, guardrails, and verdict format intact; if the reference file is missing, stop and report the skill copy as incomplete — never improvise a contract.
-- `prompt.md` — the optimizer subagent's entire instruction: the goal, what one focused candidate looks like, which cheap checks to run, and relevant repo context. It contains no evaluator criteria.
-- `judge.md` — the evaluator subagent's entire instruction: the run's goal stated up front (the evaluator sees nothing else about intent), comparison criteria, the exact verdict format, complexity-weighed-as-cost, and rejection of candidate-gate tampering. It contains no optimizer prompt.
-- Defaults unless the user set limits: `MAX_ITERATIONS=5`, `MAX_CONSECUTIVE_FAILURES=3`.
+- `orchestrator.md` — read `references/orchestrator.md`, fill every placeholder with the approved configuration, and preserve its roles, loop, guardrails, and evaluation format; if missing, stop and report an incomplete skill copy.
+- `optimizer.md` — the Optimizer's entire instruction: approved Goal, candidate scope, irreducible constraints, cheap checks, and relevant repository context; never include Evaluation criteria.
+- `evaluator.md` — the Evaluator's entire instruction: Goal stated first, approved Evaluation criteria, required evidence, exact evaluation format, complexity policy, and candidate-gate policy; never include `optimizer.md`.
 
 ### Isolation rules
 
-- Run the optimizer and the evaluator only as subagents; the main agent only orchestrates.
-- Give the optimizer only `prompt.md`, `learnings.md`, and the repo — never `judge.md` or its scoring criteria.
-- Give the evaluator — a fresh subagent every round — only `judge.md`, both refs, and the diff — never `prompt.md`, optimizer output or rationale, `learnings.md`, or prior judgments.
-- Move information between them only through commits and `learnings.md`, which carries each verdict's RATIONALE and LEARNINGS forward — feedback flows to the optimizer; the scoring rubric never does.
+- Run Optimizer and Evaluator only as subagents; the Orchestrator only orchestrates.
+- Give the Optimizer only `optimizer.md`, `learnings.md`, and the repository — never `evaluator.md` or Evaluation criteria.
+- Give each fresh Evaluator only `evaluator.md`, both refs, and the diff — never `optimizer.md`, Optimizer rationale, `learnings.md`, or prior evaluations.
+- Move evaluation feedback through commits and `learnings.md`; Evaluator RATIONALE and LEARNINGS flow forward, but Evaluation criteria never do.
 
-### Approval template
+### Final review template
 
 ```text
-All done — ready to run?
-1. Yes, run the ratchet now
-2. No, change the program first
+Ready to run Automake. Review every input below:
+<Goal, Evaluation criteria, REPO_DIR, BASELINE, RUN_DIR, candidate scope, irreducible constraints, repository context, cheap checks, required evidence, complexity policy, candidate-gate policy, SUCCESS_CONDITION, MAX_ITERATIONS, and MAX_CONSECUTIVE_FAILURES>
+
+1. Yes, create the run files and start the ratchet
+2. No, change an input first
 ```
 
 ### Frontmatter
 
-- `disable-model-invocation: true` keeps this skill user-invoked only; on a platform that ignores the flag, the description names the ratchet workflow rather than broad triggering conditions, so spurious auto-invocation stays unlikely.
+- `disable-model-invocation: true` keeps this skill user-invoked only; where unsupported, the narrow description discourages spurious invocation.
