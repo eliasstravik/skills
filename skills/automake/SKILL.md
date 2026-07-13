@@ -34,7 +34,7 @@ disable-model-invocation: true
 
 ```text
 1. Approved
-2. No — tell me what to change (or write feedback directly)
+2. No — changes needed (or provide feedback directly)
 ```
 
 - When the user answers No without feedback, ask what should change and wait; after feedback, reprint the entire revised artifact, not only a diff.
@@ -81,7 +81,7 @@ Orchestrator: <max iterations, max consecutive failures, and success condition>
 Loop: Each Optimizer proposes one candidate; a fresh Evaluator tests it; BETTER advances the baseline and NOT_BETTER restores it.
 
 1. Run
-2. No — tell me what to change
+2. No — changes needed
 ```
 
 ### Frontmatter
