@@ -12,7 +12,7 @@ disable-model-invocation: true
 2. Run the questioning Loop in `## Details`, obeying the consulting Rules there, until its exit condition holds.
 3. Draft `plan.md` with exactly the sections listed in `## Details`.
 4. Run the review Loop in `## Details` until APPROVED, or the client explicitly exits or accepts the remaining issues.
-5. Print the handoff Template from `## Details` with the placeholder replaced by the real absolute `plan.md` path.
+5. Print the handoff Template from `## Details` as one copyable Markdown code block with the placeholder replaced by the real absolute `plan.md` path.
 
 ## Details
 
@@ -57,8 +57,11 @@ Repeat until the review returns APPROVED with no substantive problems, or the cl
 
 ### Handoff template
 
-Print after approval, delimited exactly:
+Print after approval as a single Markdown fenced code block. Put no required handoff content outside the block. Before printing, choose an outer fence that cannot be closed by anything inside the handoff body: use a run of backticks longer than any consecutive backtick run in the body, or another valid Markdown fence with the same safety property.
 
+For the current handoff body, this exact block is safe:
+
+````markdown
 ```text
 ---HANDOFF AGENT PROMPT START---
 You are the implementation agent for the approved plan at `<absolute path to plan.md>`.
@@ -66,6 +69,7 @@ You are the implementation agent for the approved plan at `<absolute path to pla
 Read `plan.md` and every explicit reference it names. Implement the plan while preserving its outcome, decisions, constraints, out-of-scope items, and risks/open assumptions. Inspect the target territory before changing it; ask only if the plan/references leave a true blocker. Verify the result with the relevant checks, then report what changed, what passed, and any remaining risks.
 ---HANDOFF AGENT PROMPT END---
 ```
+````
 
 ### Frontmatter
 
