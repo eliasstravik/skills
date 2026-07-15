@@ -47,13 +47,33 @@ Repeat until no material unknown remains except client-accepted assumptions:
 - `plan.md` holds: outcome, context, decisions, approach, constraints, references, out of scope, risks.
 
 ### Review loop
-
 Repeat until the review returns APPROVED with no substantive problems, or the client explicitly exits or accepts the remaining issues, max 5 rounds (then present what remains and let the client decide):
+1. Present the review approval gate below before each adversarial review dispatch.
+2. Apply the review gate decision below.
+3. Require a verdict: APPROVED or BLOCKERS.
+4. Apply the review verdict decision below.
 
-1. Dispatch an adversarial review subagent on only `plan.md` and its explicit references — never `consultation.md`.
-2. Require a verdict: APPROVED or BLOCKERS.
-3. On substantive BLOCKERS, never revise silently: bring each gap back to the client as a numbered question with recommended options.
-4. Update `consultation.md` from the answers, revise `plan.md`, and dispatch the next review.
+### Review gate rules
+- Ask one numbered question, `1. Ready to run the adversarial review?`, with exactly two options: `1. Approve and run the adversarial review now. (Recommended)` and `2. Add something first.`
+- Treat substantive additions as option 2, including answers after "what do you want to add?" and responses that also approve.
+
+### Review gate decision
+| Client response | Action |
+|-----------------|--------|
+| Contains substantive added information | Run the review-revision recipe below. |
+| Approves option 1 and contains no substantive added information | Dispatch an adversarial review subagent on only `plan.md` and its explicit references — never `consultation.md`. |
+| Chooses option 2 without substantive added information | Ask what they want to add. |
+
+### Review verdict decision
+**APPROVED with no substantive problems?** → Exit the Review loop.
+**BLOCKERS?** → Run the review-revision recipe below.
+
+### Review-revision recipe
+1. Ask numbered recommended-option questions for blocker gaps or missing additions.
+2. Incorporate supplied additions and client answers into `consultation.md`.
+3. Run the Questioning loop for any remaining material unknowns.
+4. Revise `plan.md`.
+5. Restart the Review loop before dispatching the next review.
 
 ### Handoff template
 
