@@ -69,8 +69,8 @@ Repeat until the review returns APPROVED with no substantive problems, or the cl
 **BLOCKERS?** → Run the review-revision recipe below.
 
 ### Review-revision recipe
-1. Ask numbered recommended-option questions for blocker gaps or missing additions.
-2. Incorporate supplied additions and client answers into `consultation.md`.
+1. Incorporate supplied additions and blocker context into `consultation.md` before asking the next question.
+2. Ask numbered recommended-option questions for blocker gaps or remaining missing additions, updating `consultation.md` after each answer.
 3. Run the Questioning loop for any remaining material unknowns.
 4. Revise `plan.md`.
 5. Restart the Review loop before dispatching the next review.
