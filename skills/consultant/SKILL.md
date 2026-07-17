@@ -24,6 +24,25 @@ disable-model-invocation: true
 - Update `consultation.md` before asking the next question.
 - End every sitting with `consultation.md` current and a copy-paste next step.
 
+### Question format
+
+Use this format for every user-facing question in the consultation, including save-file choices, discovery questions, approval gates, blocker questions, and follow-ups:
+
+```text
+---
+Question <Q>: <question>
+1. <option> (Recommended)
+2. <option>
+...
+N. Other — <invite the client to give a different answer>
+---
+```
+
+- Increment `<Q>` for each question and continue the sequence when resuming a consultation. Record the next question number in `consultation.md` under Next step.
+- Restart option numbering at `1` for each question, number options contiguously, and use as many options as the question needs.
+- Make the final numbered option an explicit form of `Other`, even for approvals and yes/no decisions. Keep the recommendation on a substantive option, not on `Other`.
+- Never ask a bare or inline follow-up question. If an answer needs clarification, ask the clarification as the next complete question block.
+
 ### Save file
 
 - `consultation.md` explicitly names and maintains: Brief, Known knowns, Unknown knowns, Known unknowns, Unknown unknowns, Decisions, Next step.
@@ -39,7 +58,7 @@ Repeat until no material unknown remains except client-accepted assumptions:
 
 1. Pick the highest-leverage gap in the quadrant map.
 2. Inspect facts or territory that can answer it without the client.
-3. Ask one numbered question, then 2–4 options with one clearly marked Recommended and an "other" option; use concrete `references/` artifacts when taste is hard to verbalize.
+3. Ask one question using the Question format, with one substantive option clearly marked Recommended; use concrete `references/` artifacts when taste is hard to verbalize.
 4. Update `consultation.md` — quadrants, Decisions, Next step — before the next question.
 
 ### Plan sections
@@ -54,15 +73,15 @@ Repeat until the review returns APPROVED with no substantive problems, or the cl
 4. Apply the review verdict decision below.
 
 ### Review gate rules
-- Ask one numbered question, `1. Ready to run the adversarial review?`, with exactly two options: `1. Approve and run the adversarial review now. (Recommended)` and `2. Add something first.`
-- Treat substantive additions as option 2, including answers after "what do you want to add?" and responses that also approve.
+- Ask `Ready to run the adversarial review?` using the next Question number and exactly these three options: `1. Approve and run the adversarial review now. (Recommended)`, `2. Add something first.`, and `3. Other — describe how you want to proceed.`
+- Treat substantive additions as option 2, including details supplied through Other, answers to a follow-up question, and responses that also approve.
 
 ### Review gate decision
 | Client response | Action |
 |-----------------|--------|
 | Contains substantive added information | Run the review-revision recipe below. |
 | Approves option 1 and contains no substantive added information | Dispatch an adversarial review subagent on only `plan.md` and its explicit references — never `consultation.md`. |
-| Chooses option 2 without substantive added information | Ask what they want to add. |
+| Chooses option 2 or Other without substantive added information | Ask what they want to add using the next complete Question block. |
 
 ### Review verdict decision
 **APPROVED with no substantive problems?** → Exit the Review loop.

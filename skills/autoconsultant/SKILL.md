@@ -15,6 +15,26 @@ disable-model-invocation: true
 
 ## Details
 
+### Question format
+
+Apply Consultant's Question format to every user-facing question throughout both the Consultant and Automake phases. This is the higher-priority interaction contract when a delegated skill supplies a different prompt shape.
+
+```text
+---
+Question <Q>: <question>
+1. <option> (Recommended)
+2. <option>
+...
+N. Other — <invite the client to give a different answer>
+---
+```
+
+- Use one session-wide question sequence: continue incrementing `<Q>` when moving from Consultant into Automake or when resuming.
+- Restart option numbering at `1` for each question, number options contiguously, and use as many options as the question needs.
+- Make the final numbered option an explicit form of `Other`, including artifact approvals and revision prompts. Keep the recommendation on a substantive option, not on `Other`.
+- Preserve each delegated question's meaning, but do not print inherited bare questions or option-only approval prompts verbatim. Wrap them in the complete question block and add the terminal Other option.
+- Never ask a bare or inline follow-up question. If an answer needs clarification, ask the clarification as the next complete question block.
+
 ### Consultant gate rules
 
 - Preserve Consultant's explicit approval gate before every adversarial review dispatch.
