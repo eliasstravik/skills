@@ -29,7 +29,7 @@ Every skill opens with **exactly one primitive**; the core's H2 heading is the p
 | **Checklist** | conjunction | conditions must all hold; order is free | `- [ ]` per condition, phrased as its passing state; every box gets checked or marked not applicable with a reason |
 | **Recipe** | sequence | order changes the outcome | Ordered list; one imperative action per number; no sub-bullets |
 | **Loop** | iteration | a recipe repeats toward an exit | `Repeat until <observable condition>, max N:` then an ordered body; prefer a validator check as the exit condition; invariants restated inside the body |
-| **Decision** | branch | the situation selects the action | For 2-3 branches, bolded `**Question?** →` action lines inside a Recipe step; for many flat cases, a `Condition \| Action` table — conditions observable and mutually exclusive, earlier rows win; a multi-step action becomes a Call |
+| **Switch** | branch | the situation selects the action | For 2-3 branches, bolded `**Question?** →` action lines inside a Recipe step; for many flat cases, a `Condition \| Action` table — conditions observable and mutually exclusive, earlier rows win; a multi-step action becomes a Call |
 | **Router** | dispatch | classifying a request transfers ownership to one specialized skill | `Request \| Skill` table — requests observable and mutually exclusive, earlier rows win; one skill per matched row plus overlap/uncertain/no-match fallbacks; invoke a reachable skill or recommend a user-invoked one, then stop without doing its work |
 | **Handler** | exception | a step can fail in anticipated ways | `Failure \| Recovery` table; recovery verbs only retry, abort, compensate, or escalate to the user; fires only off the normal path |
 | **Call** | function call | the work lives outside this file | A link with a disposition: `read <file> when <trigger>` or `run <script> to <outcome>`; one level deep; expected output and no-runtime fallback stated |
@@ -39,7 +39,7 @@ Every skill opens with **exactly one primitive**; the core's H2 heading is the p
 | **Example** | test case | style or detail only a concrete instance conveys | Paired fenced input and output blocks, one filled instance; complements a Template, never replaces it |
 | **Rubric** | evaluator | quality must be judged | `Criterion \| Standard` table; every standard checkable; one absolute floor |
 
-**Router vs Decision:** a Router owns classification, including clarification and tie-breaking, then transfers ownership; a Decision keeps ownership and performs the selected action.
+**Router vs Switch:** a Router owns classification, including clarification and tie-breaking, then transfers ownership; a Switch keeps ownership and performs the selected action.
 
 **Grammar follows the primitive:** boxes state conditions as *already true*, numbers *command* actions, Rules bullets *command*, Reference bullets *declare*, standards *measure*, Examples *demonstrate*, Calls *defer*, Handlers *recover*.
 
