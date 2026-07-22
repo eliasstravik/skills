@@ -39,6 +39,7 @@ N. Other — <invite the client to give a different answer>
 
 - Preserve Consultant's explicit approval gate before every adversarial review dispatch.
 - Never treat the user's `/autoconsultant` request as approval to skip or pre-authorize those gates.
+- Start a new consultation without checking for or asking about existing ones, unless the user explicitly asked to continue an existing consultation.
 
 ### Handoff template
 
