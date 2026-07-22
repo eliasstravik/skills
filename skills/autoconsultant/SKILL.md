@@ -35,8 +35,9 @@ N. Other — <invite the client to give a different answer>
 - Preserve each delegated question's meaning, but do not print inherited bare questions or option-only approval prompts verbatim. Wrap them in the complete question block and add the terminal Other option.
 - Never ask a bare or inline follow-up question. If an answer needs clarification, ask the clarification as the next complete question block.
 
-### Consultant gate rules
+### Consultant rules
 
+- Start a new consultation unless the user explicitly asked to continue an existing one; never check for or ask about existing consultations.
 - Preserve Consultant's explicit approval gate before every adversarial review dispatch.
 - Never treat the user's `/autoconsultant` request as approval to skip or pre-authorize those gates.
 

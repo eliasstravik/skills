@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 ## Recipe
 
-1. Resolve the save file: **explicit path given?** → resume it; **idea similar to an existing slug?** → ask continue or new; **otherwise?** → create `~/.consultant/<slug>/` with a fresh `consultation.md`.
+1. Resolve the save file: **client explicitly asked to continue an existing consultation?** → resume it at the named path or slug; **otherwise?** → create `~/.consultant/<slug>/` with a fresh `consultation.md`, without checking for or asking about existing consultations.
 2. Run the questioning Loop in `## Details`, obeying the consulting Rules there, until its exit condition holds.
 3. Draft `plan.md` with exactly the sections listed in `## Details`.
 4. Run the review Loop in `## Details` until APPROVED, or the client explicitly exits or accepts the remaining issues.
@@ -26,7 +26,7 @@ disable-model-invocation: true
 
 ### Question format
 
-Use this format for every user-facing question in the consultation, including save-file choices, discovery questions, approval gates, blocker questions, and follow-ups:
+Use this format for every user-facing question in the consultation, including discovery questions, approval gates, blocker questions, and follow-ups:
 
 ```text
 ---
