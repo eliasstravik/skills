@@ -1,0 +1,22 @@
+[
+  {"query":"Use /automake in this repo to improve the README onboarding path. Consult me on the Optimizer and independent Evaluator instructions before you run anything.","should_trigger":true},
+  {"query":"Invoke the Automake skill for src/slugify.py: one Sol Optimizer, one Terra Evaluator, two iterations max, and keep only evidence-backed improvements.","should_trigger":true},
+  {"query":"/automake start the ratchet now with the current repo context; stop as soon as python3 -m unittest -q passes.","should_trigger":true},
+  {"query":"Please use Automake as the named workflow to design and approve a Git-backed evaluator-optimizer loop for this CLI reliability goal.","should_trigger":true},
+  {"query":"Run /automake now in this new folder even though it has no HEAD yet; protect .env.local, establish the baseline, and fix the failing readiness test.","should_trigger":true},
+  {"query":"Activate the automake skill for a one-attempt experiment on this status file, and roll back exactly if the independent judge says NOT_BETTER.","should_trigger":true},
+  {"query":"/automake improve this dashboard's load time with five iterations, three consecutive failures, and a real browser journey as evaluation evidence.","should_trigger":true},
+  {"query":"I explicitly want the Automake skill here: draft separate optimizer.md and evaluator.md artifacts, show me both approval gates, then ask whether to run.","should_trigger":true},
+  {"query":"Start the Automake ratchet immediately on the current committed baseline and record every child launch, verdict, learning, and kept commit.","should_trigger":true},
+  {"query":"Call automake for this documentation cleanup; the Evaluator should judge the complete artifact for accuracy and audience usefulness, not simulate E2E.","should_trigger":true},
+  {"query":"This old C project uses GNU Automake. Update configure.ac and Makefile.am so make distcheck includes the new parser sources.","should_trigger":false},
+  {"query":"Add an automake target to our Makefile that regenerates fixtures before the integration tests run.","should_trigger":false},
+  {"query":"Fix normalize_slug so repeated underscores collapse, run the unit tests, and commit the change once they pass.","should_trigger":false},
+  {"query":"Review this pull request's optimizer and evaluator classes for bugs and explain whether the separation of concerns is sound; do not edit it.","should_trigger":false},
+  {"query":"Explain the evaluator-optimizer pattern and give me a small pseudocode example of a ratchet loop for a blog post.","should_trigger":false},
+  {"query":"Reset this branch to the last green commit and restore the two tracked files I accidentally deleted.","should_trigger":false},
+  {"query":"Set up an overnight autoresearch loop that repeatedly edits this benchmark and keeps the best score; use the autoloop workflow.","should_trigger":false},
+  {"query":"Diagnose why our CI retry job keeps launching the same failed child process, but don't implement a fix yet.","should_trigger":false},
+  {"query":"Help me write independent Optimizer and Evaluator prompts for an experiment, but do not invoke Automake or run any agents.","should_trigger":false},
+  {"query":"Run the existing test suite, make the smallest fix for the one failure, and stop when everything is green.","should_trigger":false}
+]

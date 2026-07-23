@@ -8,64 +8,15 @@ disable-model-invocation: true
 
 ## Recipe
 
-1. Run [`/consultant`](../consultant/SKILL.md) to completion on the user's request, retaining its approved `plan.md` and explicit references.
-2. Run [`/automake`](../automake/SKILL.md) with that approved output as its original brief and source of truth through approval of both artifacts and resolution of every Orchestrator value, ending before Automake asks to run or starts Git preflight.
-3. Print the handoff Template from `## Details` as one copyable Markdown code block for a fresh agent, containing the absolute repo and plan paths, the full approved `optimizer.md` and `evaluator.md`, every resolved Orchestrator value, and an instruction to read the plan and references, invoke `/automake` in run-now mode, treat the setup as already approved, execute without repeating consultation, and preserve the plan's decisions, constraints, scope, and risks.
-4. Stop after the handoff prompt; do not run the ratchet in the current conversation.
+1. Run [Consultant](../consultant/SKILL.md) to an approved or explicitly accepted `plan.md`, preserving its explicit references and implementation boundary.
+2. Keep one session-wide Consultant `Question <Q>` sequence across both phases, wrapping every inherited discovery, review, blocker, artifact approval, and revision prompt in the complete recommended-option format with final `Other`.
+3. Use the approved plan and inspected repository as [Automake](../automake/SKILL.md)'s source of truth, then print and obtain client approval for the complete Optimizer instruction without evaluation criteria.
+4. Print and obtain separate client approval for the complete independent Evaluator instruction without Optimizer rationale or prior evaluation material.
+5. Resolve maximum iterations, consecutive-failure limit, and observable success condition from supplied values or Automake defaults.
+6. Emit one dynamically safe fenced handoff containing absolute repository and plan paths, complete approved role instructions, every resolved value, the plan-preservation contract, and directions for a fresh agent to invoke Automake run-now as already approved without repeating setup.
+7. Stop after the handoff without showing Automake's Run gate, performing Git preflight, mutating the repository, creating Automake state, launching a child, running the ratchet, or implementing.
 
 ## Details
 
-### Question format
-
-Apply Consultant's Question format to every user-facing question throughout both the Consultant and Automake phases. This is the higher-priority interaction contract when a delegated skill supplies a different prompt shape.
-
-```text
----
-Question <Q>: <question>
-1. <option> (Recommended)
-2. <option>
-...
-N. Other — <invite the client to give a different answer>
----
-```
-
-- Use one session-wide question sequence: continue incrementing `<Q>` when moving from Consultant into Automake or when resuming.
-- Restart option numbering at `1` for each question, number options contiguously, and use as many options as the question needs.
-- Make the final numbered option an explicit form of `Other`, including artifact approvals and revision prompts. Keep the recommendation on a substantive option, not on `Other`.
-- Preserve each delegated question's meaning, but do not print inherited bare questions or option-only approval prompts verbatim. Wrap them in the complete question block and add the terminal Other option.
-- Never ask a bare or inline follow-up question. If an answer needs clarification, ask the clarification as the next complete question block.
-
-### Consultant rules
-
-- Start a new consultation unless the user explicitly asked to continue an existing one; never check for or ask about existing consultations.
-- Preserve Consultant's explicit approval gate before every adversarial review dispatch.
-- Never treat the user's `/autoconsultant` request as approval to skip or pre-authorize those gates.
-
-### Handoff template
-
-Print exactly one Markdown fenced code block. Put no required handoff content outside the block. Before printing, inspect the complete handoff body, including the full approved `optimizer.md` and `evaluator.md`; choose an outer fence that is longer than any consecutive backtick run in that body, or another valid Markdown fence with the same safety property. If the approved artifacts contain triple-backtick Markdown fences, use at least four backticks for the outer fence; if they contain four-backtick fences, use at least five, and so on.
-
-The final output must have this shape, with the fence length adjusted as needed:
-
-````markdown
-```text
-You are the implementation agent for the approved Consultant and Automake setup.
-
-Repository: `<absolute repo path>`
-Plan: `<absolute path to plan.md>`
-
-Read `plan.md` and every explicit reference it names. Invoke `/automake` in run-now mode from the repository above. Treat the Automake setup below as already approved: do not repeat consultation, do not re-approve the artifacts, and do not start a new setup. Execute the ratchet while preserving the plan's decisions, constraints, scope, and risks.
-
----APPROVED OPTIMIZER.MD START---
-<full approved optimizer.md>
----APPROVED OPTIMIZER.MD END---
-
----APPROVED EVALUATOR.MD START---
-<full approved evaluator.md>
----APPROVED EVALUATOR.MD END---
-
----RESOLVED ORCHESTRATOR VALUES START---
-<every resolved Orchestrator value, including MAX_ITERATIONS, MAX_CONSECUTIVE_FAILURES, and SUCCESS_CONDITION>
----RESOLVED ORCHESTRATOR VALUES END---
-```
-````
+- Keep every scratch artifact and fence check inside the declared run directory or in memory; never use an external temporary directory.
+- Direct the fresh agent to read `plan.md` and every explicit reference it names before invoking Automake.

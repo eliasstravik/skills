@@ -1,0 +1,22 @@
+[
+  {"query":"Use /autoconsultant to turn this rough queue-aging idea into an approved plan, prepare both Automake roles, and stop at a copy-paste run-now handoff.","should_trigger":true},
+  {"query":"Invoke the Autoconsultant skill for this repository. Carry one question sequence through Consultant and Automake setup without executing the ratchet here.","should_trigger":true},
+  {"query":"/autoconsultant resume ~/.consultant/parcel-latency, finish the review, use maximum two iterations and one consecutive failure, then hand the approved setup to a fresh agent.","should_trigger":true},
+  {"query":"Please use Autoconsultant as the named workflow: consult on this notification change, separately approve the Optimizer and Evaluator, and produce the safe handoff.","should_trigger":true},
+  {"query":"Activate /autoconsultant for the current repo and preserve every reference named by the reviewed plan when you transfer control to Automake run-now.","should_trigger":true},
+  {"query":"I explicitly want the Autoconsultant skill for a fresh consultation about this import repair. Use Automake defaults and stop before Git preflight or implementation.","should_trigger":true},
+  {"query":"/autoconsultant continue the beacon-reminder plan, let me revise the proposed Optimizer before approval, approve the Evaluator separately, and emit only the final handoff.","should_trigger":true},
+  {"query":"Call autoconsultant for this ambiguous cache-cleanup request so the idea becomes a reviewed plan and an already-approved evaluator-optimizer setup for another agent.","should_trigger":true},
+  {"query":"Run the Autoconsultant skill, keep all Consultant questions continuously numbered across both phases, and make the final payload safe around nested Markdown fences.","should_trigger":true},
+  {"query":"Use /autoconsultant here. Resolve a test-pass success condition with me, embed the complete approved roles and absolute paths, then do not run Automake in this conversation.","should_trigger":true},
+  {"query":"Use /consultant to turn this rough permissions idea into an adversarially reviewed implementation plan and builder handoff.","should_trigger":false},
+  {"query":"Use /automake to run an approved evaluator-optimizer ratchet on the current repository for up to three iterations.","should_trigger":false},
+  {"query":"First help me plan this export feature, then implement it with a test-driven loop once I approve the plan.","should_trigger":false},
+  {"query":"Draft separate Optimizer and Evaluator prompts from this existing plan, but do not invoke a skill or launch an agent.","should_trigger":false},
+  {"query":"Review ~/.consultant/parcel-latency/plan.md for blockers and suggest revisions without starting Automake setup.","should_trigger":false},
+  {"query":"Implement the approved plan with the existing optimizer.md and evaluator.md, run the tests, and keep the change if it passes.","should_trigger":false},
+  {"query":"Explain how Consultant and Automake could be composed into one workflow, including where their approval boundary should sit.","should_trigger":false},
+  {"query":"Do not invoke Autoconsultant. Just tell me whether the final handoff should embed role prompts or link to them.","should_trigger":false},
+  {"query":"Our consulting firm wants an automated consultant intake form that assigns new clients to an advisor.","should_trigger":false},
+  {"query":"Use autoconsultation to generate a medical follow-up summary from these appointment notes.","should_trigger":false}
+]

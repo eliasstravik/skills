@@ -1,0 +1,33 @@
+{
+  "skill_name": "autoconsultant",
+  "evals": [
+    {
+      "id": 1,
+      "name": "fresh-full-chain-with-blocker",
+      "fixture": "fixtures/fresh-chain",
+      "prompt": "Use /autoconsultant to turn the rough Mica Queue aging-summary request in workspace/repo into an approved Consultant plan and a fully approved Automake setup. Use outputs/consultant-home and outputs/automake-home instead of live state. Stop at the fresh-agent handoff without running Automake or changing the repository.",
+      "expected_output": "One direct fresh consultation, a separately gated blocker/revision/approval loop, complete independently approved Optimizer and Evaluator instructions, default Orchestrator values, and one safe handoff; repository and Automake home remain unchanged."
+    },
+    {
+      "id": 2,
+      "name": "named-resume-custom-run-values",
+      "fixture": "fixtures/named-resume",
+      "prompt": "Use /autoconsultant to continue outputs/consultant-home/parcel-latency from its saved Question 9. Preserve its decisions/reference, finish review, then prepare Automake for workspace/repo with MAX_ITERATIONS=2, MAX_CONSECUTIVE_FAILURES=1, and SUCCESS_CONDITION='python3 -m unittest -q passes'. Stop at handoff.",
+      "expected_output": "The named state resumes without a sibling, question numbering continues through both phases, custom run values are preserved, full artifacts are approved, and no run/preflight/repository mutation occurs."
+    },
+    {
+      "id": 3,
+      "name": "artifact-revision-not-preauthorized",
+      "fixture": "fixtures/artifact-revision",
+      "prompt": "Use /autoconsultant to continue outputs/consultant-home/beacon-reminder from its saved Consultant review gate, then prepare Automake for workspace/repo. The invocation does not pre-authorize any gate. Stop after the final handoff.",
+      "expected_output": "Consultant review is explicitly approved, the first complete Optimizer instruction is rejected and fully revised before approval, the Evaluator is separately approved, numbering is continuous, and Automake never runs."
+    },
+    {
+      "id": 4,
+      "name": "fence-safety-no-run-boundary",
+      "fixture": "fixtures/fence-safety",
+      "prompt": "Use /autoconsultant to continue outputs/consultant-home/fenced-checks, preserve its explicit verification-fences reference in the Automake instructions, finish the approved setup for workspace/repo, and return the handoff. Do not execute anything.",
+      "expected_output": "The handoff contains full role artifacts and resolved values inside one dynamically safe outer fence longer than all internal backtick runs, with no Run gate, Git action, Automake state, child launch, or implementation."
+    }
+  ]
+}

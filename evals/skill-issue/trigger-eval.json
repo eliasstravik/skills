@@ -1,0 +1,22 @@
+[
+  {"query":"Use /skill-issue to turn these preserved failures and assertions into the smallest valid release-note skill.","should_trigger":true},
+  {"query":"Invoke the Skill Issue skill to audit this bloated SKILL.md and rewrite it around one action-shaped primitive.","should_trigger":true},
+  {"query":"/skill-issue choose the correct core primitive for this support dispatcher and keep the bare core under twenty body lines.","should_trigger":true},
+  {"query":"Please use Skill Issue as the named form workflow for this new user-invoked deployment skill.","should_trigger":true},
+  {"query":"Activate /skill-issue and externalize the branch-only source policy without shipping eval evidence inside the skill.","should_trigger":true},
+  {"query":"I explicitly want the Skill Issue skill to check whether every Details line was earned by a bare-core failure.","should_trigger":true},
+  {"query":"Run /skill-issue on skills/archive-note/SKILL.md and record the manual frontmatter check when the validator is unavailable.","should_trigger":true},
+  {"query":"Call skill-issue to decide whether this classifier needs a Router or a Switch, then write the exact mandated form.","should_trigger":true},
+  {"query":"/skill-issue repair this Recipe so every numbered item contains one imperative and no nested bullets.","should_trigger":true},
+  {"query":"Use the Skill Issue skill to produce a compact model-invoked skill description with trigger conditions and exclusions only.","should_trigger":true},
+  {"query":"Use /skill-creator to evaluate and optimize this existing skill across paired benchmark runs.","should_trigger":false},
+  {"query":"Open a GitHub issue describing why the authentication skill fails on expired tokens.","should_trigger":false},
+  {"query":"This is a skill issue, not a tooling issue—the engineer needs more practice with the debugger.","should_trigger":false},
+  {"query":"Review this SKILL.md for spelling and broken Markdown links without changing its structure.","should_trigger":false},
+  {"query":"Use the release-note skill to draft notes for commits v2.1.0..HEAD.","should_trigger":false},
+  {"query":"Explain the difference between a checklist and a recipe in ordinary prose with two examples.","should_trigger":false},
+  {"query":"Rewrite this GitHub issue so it has clearer reproduction steps and acceptance criteria.","should_trigger":false},
+  {"query":"Create a new agent skill for invoice categorization; choose whatever format seems clearest.","should_trigger":false},
+  {"query":"Do not invoke Skill Issue. Just tell me whether 120 lines is too long for this file.","should_trigger":false},
+  {"query":"Fix the Python TypeError in skill_issue.py and add a regression test.","should_trigger":false}
+]

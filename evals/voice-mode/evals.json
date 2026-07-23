@@ -1,0 +1,52 @@
+{
+  "skill_name": "voice-mode",
+  "conventions": "Runs follow CLAUDE.md: headless one-shot Codex executors, exact GPT-5.6 model recorded, no-skill arms forbid every installed skill, fixture copies stay inside the run directory, and transcript.md is required. Assertions are added only after prove-need baselines preserve failures.",
+  "evals": [
+    {
+      "id": 1,
+      "eval_name": "artifact-heavy-update",
+      "prompt": "I'm walking between meetings and using live voice. Enter voice mode, read the engineering verification note in <run-dir>/workspace/verification-report.md, and tell me what changed and whether it is safe to continue. I can't look at my screen right now.",
+      "fixture": "fixtures/artifact-heavy-update",
+      "prep": "Copy the fixture contents to <run-dir>/workspace/ before the task.",
+      "user_replies": [],
+      "expected_output": "A one- or two-sentence spoken update that preserves every substantive verification fact without invented attribution and does not read Markdown, code syntax, file paths, the URL, or the long deployment identifier aloud; visual details are referred to by human-friendly artifact names.",
+      "expectations": ["A1 (critical)", "A2 (critical)", "A3 (critical)", "A4", "A6", "A7"]
+    },
+    {
+      "id": 2,
+      "eval_name": "complete-verbal-list",
+      "prompt": "Switch to voice mode. Read the launch checklist in <run-dir>/workspace/launch-checklist.md and give me the complete list, with every item in the original order. I'm listening, not looking.",
+      "fixture": "fixtures/complete-list",
+      "prep": "Copy the fixture contents to <run-dir>/workspace/ before the task.",
+      "user_replies": [],
+      "expected_output": "All five checklist items delivered in order as concise spoken prose using verbal numbering, without Markdown bullets, headings, or omitted items.",
+      "expectations": ["A1 (critical)", "A3 (critical)", "A4", "A7", "L1"]
+    },
+    {
+      "id": 3,
+      "eval_name": "consequential-cleanup",
+      "prompt": "I'm on a live voice call. Enter voice mode and clean up the obsolete deployment cache in <run-dir>/workspace/obsolete-cache. I can't see the terminal, so tell me what you need from me as you go.",
+      "fixture": "fixtures/consequential-cleanup",
+      "prep": "Copy the fixture contents to <run-dir>/workspace/ before the task; the copy may be changed, but nothing outside the run directory may be touched.",
+      "user_replies": [
+        "Yes, remove that cache now."
+      ],
+      "expected_output": "The first spoken reply explains the exact consequence in human terms and asks one confirmation question before deletion; only after the scripted approval is consumed is the copied cache removed and a concise spoken completion reported.",
+      "expectations": ["A1 (critical)", "A2 (critical)", "A3 (critical)", "A4", "A5 (critical)", "A10 (critical)", "A11 (critical)"]
+    },
+    {
+      "id": 4,
+      "eval_name": "persistence-and-exit",
+      "prompt": "We're already in voice mode. Stay in voice mode, run the release verification program at <run-dir>/workspace/verify-release.sh, and use the release note at <run-dir>/workspace/release-note.md to give me a quick spoken summary when it finishes. Then consume my scripted replies in order as follow-up turns. Save visual material inside <run-dir>/outputs/.",
+      "fixture": "fixtures/persistence-and-exit",
+      "prep": "Copy the fixture contents to <run-dir>/workspace/, preserve the verification program's executable bit, and create <run-dir>/outputs/ empty before the task.",
+      "user_replies": [
+        "Stay in voice mode and show me the exact technical details.",
+        "Write that down for me too.",
+        "Exit voice mode and give me the normal formatted summary."
+      ],
+      "expected_output": "The assistant announces the genuinely slow verification, reports its exact result, then keeps the first three assistant turns in plain spoken prose while routing visual details to an artifact; refresh, show, and write requests do not exit. Only the final explicit exit restores ordinary formatting.",
+      "expectations": ["A1 (critical)", "A2 (critical)", "A3 (critical)", "A4", "A5 (critical)", "A6", "A7", "A9 (critical)", "A11 (critical)", "A12"]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+[
+  {"query":"Use /consultant to turn the approval-inbox notes in this repo into an implementation-ready plan. Ask one recommended-option question at a time and stop at handoff.","should_trigger":true},
+  {"query":"Invoke the Consultant skill for this rough shift-handoff feature, keep persistent state, and run the adversarial review only after I approve the plan.","should_trigger":true},
+  {"query":"/consultant continue the existing harbor-kiosk consultation at ~/.consultant/harbor-kiosk from its saved next question.","should_trigger":true},
+  {"query":"Please use Consultant as the named workflow to map the knowns and unknowns for this offline export idea, resolve them with me, and produce plan.md.","should_trigger":true},
+  {"query":"Activate /consultant for this dashboard redesign. Preserve my taste decisions, get a fresh reviewer to challenge the plan, and give me the builder handoff.","should_trigger":true},
+  {"query":"Run the Consultant skill on the current territory, but do not resume any old consultation and do not implement anything.","should_trigger":true},
+  {"query":"/consultant resume the named access-review slug, incorporate the new audit constraint, re-gate the adversarial review, and stop when the plan is approved.","should_trigger":true},
+  {"query":"I explicitly want the Consultant skill here: inspect the repository facts first, ask me the highest-leverage product questions, and hand off the reviewed plan.","should_trigger":true},
+  {"query":"Call consultant for this ambiguous permissions workflow and use a taste reference if the interaction choice is hard to describe in words.","should_trigger":true},
+  {"query":"Use /consultant to finish this client consultation, including a maximum of five blocker-review rounds and a safe copy-paste prompt for the implementation agent.","should_trigger":true},
+  {"query":"Help me plan an approval inbox. Ask a few useful questions, write a concise plan, and then implement it in this repository.","should_trigger":false},
+  {"query":"Review the existing plan.md for technical blockers and leave inline feedback, but do not start a consultation.","should_trigger":false},
+  {"query":"Act like a product consultant and brainstorm three positioning options for our fictional analytics launch.","should_trigger":false},
+  {"query":"Continue editing the project plan at docs/migration-plan.md from the TODO section; no separate consultation state is needed.","should_trigger":false},
+  {"query":"Implement the approved plan in ~/.consultant/offline-export/plan.md and run the relevant tests.","should_trigger":false},
+  {"query":"Turn these meeting notes into a PRD with goals, user stories, acceptance criteria, and open questions.","should_trigger":false},
+  {"query":"Use /automake to improve this onboarding flow with an independent evaluator and a three-iteration ratchet.","should_trigger":false},
+  {"query":"Explain the four known/unknown quadrants and give me a filled example for a product discovery workshop.","should_trigger":false},
+  {"query":"Do not invoke the Consultant skill. Just answer whether this plan should include pagination in one paragraph.","should_trigger":false},
+  {"query":"Our consulting firm needs a cleaner invoice template for external consultants and subcontractors.","should_trigger":false}
+]

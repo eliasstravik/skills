@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Harbor briefing demo</title>
+  <style>
+    :root { --custom-accent: #d97757; --ink: #17212b; --paper: #fffaf3; }
+    body { margin: 0; font: 16px/1.5 system-ui, sans-serif; color: var(--ink); background: #e8eef2; }
+    main { max-width: 720px; margin: 4rem auto; padding: 2rem; background: var(--paper); border-top: 8px solid var(--custom-accent); }
+    button { padding: .75rem 1rem; }
+    .simulation-badge { position: fixed; right: 1rem; bottom: 1rem; background: #17212b; color: white; padding: .4rem .7rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="simulation-badge">Simulated demo</p>
+    <h1>Harbor maintenance briefing</h1>
+    <p id="window">Window: 10:00–10:30 UTC</p>
+    <p id="owner">Owner: Rowan Vale</p>
+    <button id="acknowledge" type="button">Acknowledge briefing</button>
+    <p id="status" aria-live="polite">Awaiting acknowledgement</p>
+    <aside id="field-note">Field note: Keep the east gate radio on channel six.</aside>
+  </main>
+  <script>
+    document.querySelector('#acknowledge').addEventListener('click', () => {
+      document.querySelector('#status').textContent = 'Acknowledged for the 10:00 UTC window';
+    });
+  </script>
+</body>
+</html>

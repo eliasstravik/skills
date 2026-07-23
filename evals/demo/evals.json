@@ -1,0 +1,44 @@
+{
+  "skill_name": "demo",
+  "conventions": "Each executor is a fresh GPT-5.6 Sol one-shot context. Replace __RUN_DIR__, __DEMO_STATE_ROOT__, and __OCCUPIED_PORT__ before execution. __DEMO_STATE_ROOT__ is the run-local replacement for ~/.demo; real ~/.demo is off-limits. Servers bind only to 127.0.0.1, record their PID and exact restart command, and are terminated by the harness after verification. Interactive prompts include ordered scripted user replies; assertions verify that the assistant asked and gated correctly. Every complete user-facing message is saved verbatim in transcript.md. No-skill arms forbid every installed skill.",
+  "evals": [
+    {
+      "id": 1,
+      "name": "agent-skill-try-it-demo",
+      "prompt": "Use /demo to create a realistic local try-it demo for __RUN_DIR__/inputs/queue-triage/SKILL.md. For this isolated run, use __DEMO_STATE_ROOT__ instead of ~/.demo. Make the focal experience a chat-shaped interaction that visibly shows the skill steps and deterministic staged assistant response, with a persistent boundary that no model backend is running. Serve only on 127.0.0.1, verify the exact demo and main interaction, and give me the result.",
+      "expected_output": "A run-local chat simulator that faithfully represents the fictional skill, makes one sample triage flow tryable, persistently labels simulated behavior, verifies its focal interaction, and returns a truthful five-line demo handoff.",
+      "files": [
+        "fixtures/agent-skill/queue-triage/SKILL.md"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "named-in-place-revision",
+      "prompt": "Use /demo to revise the existing harbor-briefing demo according to __RUN_DIR__/inputs/revision-request.md. For this isolated run, __DEMO_STATE_ROOT__ replaces ~/.demo and already contains the demo. Update it in place, preserve unrelated hand-authored content, serve only on 127.0.0.1, verify the revised interaction, and give me the result.",
+      "expected_output": "The existing run-local demo is revised in place with exact requested facts and state behavior, custom content survives, no sibling demo appears, and the verified handoff includes restart and QA evidence.",
+      "files": [
+        "fixtures/existing-demo/demo-home/harbor-briefing/index.html",
+        "fixtures/existing-demo/revision-request.md"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "browser-extension-concept",
+      "prompt": "Use /demo to turn __RUN_DIR__/inputs/concept.md into a safe local demo. For this isolated run, use __DEMO_STATE_ROOT__ instead of ~/.demo. Stage the host page and extension surface needed for the focal pin action, but do not create an extension manifest, request real permissions, call browser APIs, collect credentials, or imply that any external system is live. Serve only on 127.0.0.1, verify the focal interaction, and give me the result.",
+      "expected_output": "A local simulated host page and extension surface with deterministic pin-state feedback, no extension implementation or live integration, persistent simulation labeling, and a verified truthful handoff.",
+      "files": [
+        "fixtures/extension-concept/concept.md"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "material-target-ambiguity",
+      "prompt": "Use /demo to make a local demo from the artifacts in __RUN_DIR__/inputs/targets/. For this isolated run, use __DEMO_STATE_ROOT__ instead of ~/.demo. Ask one focused question if the plausible targets would materially change the demo, then use my answer. Serve only on 127.0.0.1, verify the selected focal interaction, and give me the result.\n\nScripted user replies:\n1. Use the customer onboarding checklist, not the incident summary.",
+      "expected_output": "The assistant first asks exactly one target-selection question, then builds only a customer-onboarding demo with no incident facts, verifies its interaction, and returns the standard truthful handoff.",
+      "files": [
+        "fixtures/ambiguous-targets/targets/customer-onboarding.md",
+        "fixtures/ambiguous-targets/targets/incident-summary.md"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "skill_name": "html",
+  "conventions": "Each executor is a fresh GPT-5.6 Sol one-shot context. Replace __RUN_DIR__, __HTML_STATE_ROOT__, and __OCCUPIED_PORT__ before execution. __HTML_STATE_ROOT__ is the run-local replacement for ~/.html; real ~/.html is off-limits. Servers bind only to 127.0.0.1, record their PID, and are terminated by the harness after verification. Every complete user-facing message is saved verbatim in transcript.md. No-skill arms forbid every installed skill.",
+  "evals": [
+    {
+      "id": 1,
+      "name": "new-decision-dashboard",
+      "prompt": "Use /html to turn __RUN_DIR__/inputs/operations-brief.md into a durable decision dashboard. For this isolated run, use __HTML_STATE_ROOT__ instead of ~/.html. Create a new three-random-word lowercase slug, build one self-contained index.html, serve it only on 127.0.0.1 using a free non-common port, verify the exact page, and give me the result.",
+      "expected_output": "A source-faithful, accessible, responsive single-file dashboard in one new run-local slug directory, served and verified on loopback, followed by only its absolute file path and local URL.",
+      "files": [
+        "fixtures/new-dashboard/operations-brief.md"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "named-in-place-revision",
+      "prompt": "Use /html to revise the existing quiet-canyon-lantern artifact according to __RUN_DIR__/inputs/revision-request.md. For this isolated run, __HTML_STATE_ROOT__ replaces ~/.html and already contains the artifact. Update it in place, preserve unrelated user-authored content, serve it only on 127.0.0.1 using a free non-common port, verify the revised page, and give me the result.",
+      "expected_output": "The existing run-local artifact is revised in place with exact new facts and preserved custom content, no second slug is created, and the verified path and loopback URL are returned concisely.",
+      "files": [
+        "fixtures/existing-artifact/html-home/quiet-canyon-lantern/index.html",
+        "fixtures/existing-artifact/revision-request.md"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "interactive-source-grounded-artifact",
+      "prompt": "Use /html to build an interface from __RUN_DIR__/inputs/service-requests.json. For this isolated run, use __HTML_STATE_ROOT__ instead of ~/.html. Create a new three-random-word lowercase slug. The single page must show all supplied records, useful summary counts, and keyboard-accessible controls for filtering by team and status without external dependencies. Serve it only on 127.0.0.1 using a free non-common port, verify the exact page, and give me the result.",
+      "expected_output": "A complete self-contained interactive artifact that preserves all eight fictional records and supports accessible client-side filtering, with a verified loopback URL and concise final response.",
+      "files": [
+        "fixtures/interactive-records/service-requests.json"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "occupied-port-recovery",
+      "prompt": "Use /html to turn __RUN_DIR__/inputs/contact-card.md into a compact incident contact artifact. For this isolated run, use __HTML_STATE_ROOT__ instead of ~/.html and create a new three-random-word lowercase slug. Candidate port __OCCUPIED_PORT__ is already occupied by a run-local listener: recover by choosing another free non-common port, bind only to 127.0.0.1, verify the exact page, and give me the result.",
+      "expected_output": "A source-faithful single-file contact artifact served on a different free loopback port after the collision, with the exact page verified and no lingering eval server.",
+      "files": [
+        "fixtures/port-recovery/contact-card.md"
+      ]
+    }
+  ]
+}

@@ -1,2 +1,11 @@
+# macOS
 .DS_Store
+
+# Agent/runtime scratch
 .paperclip/
+
+# skill-creator writes eval workspaces as siblings of the skill dir
+skills/*-workspace/
+
+# generated eval run output (transcripts, gradings, benchmarks, viewer HTML)
+evals/*/runs/

@@ -1,19 +1,19 @@
 # skills
 
-Personal agent skills by Elias Stravik.
+Seven personal agent skills rebuilt from scratch on eval-first foundations
+(skill-creator process, skill-issue form).
+
+Skills, in build order: `voice-mode`, `html`, `demo`, `automake`, `consultant`,
+`autoconsultant`, `skill-issue`.
 
 ## Install
 
 ```bash
-npx skills@latest add eliasstravik/skills
+npx skills add /Users/eliasstravik/dev/skills --skill <name> -g
 ```
 
-## Skills
+## Repo layout
 
-- [Autoconsultant](./skills/autoconsultant/SKILL.md): chain Consultant into an approved Automake setup and a copy-paste handoff for a fresh agent.
-- [Automake](./skills/automake/SKILL.md): set up and run an Evaluator-Optimizer ratchet with git-backed candidates and isolated `BETTER`/`NOT_BETTER` evaluations.
-- [Consultant](./skills/consultant/SKILL.md): run a consultation that turns a rough idea into an adversarially reviewed handoff plan for a downstream builder.
-- [Demo](./skills/demo/SKILL.md): create a realistic local demo for an artifact and return a verified localhost preview.
-- [HTML](./skills/html/SKILL.md): create a durable single-file HTML artifact in `~/.html/<slug>`.
-- [Skill Issue](./skills/skill-issue/SKILL.md): design and test predictable agent skills from observed behavior.
-- [Voice Mode](./skills/voice-mode/SKILL.md): switch replies into plain spoken conversation for voice calls while keeping normal reasoning and tool use unchanged.
+- `skills/<name>/` — the shipping skill (installers receive exactly this).
+- `evals/<name>/` — committed eval sources: prompts, assertions, fixtures.
+- Generated run output is gitignored. See `CLAUDE.md` for the full conventions.

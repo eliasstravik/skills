@@ -1,0 +1,74 @@
+[
+  {
+    "id": "SR-1041",
+    "team": "Harbor",
+    "priority": "high",
+    "status": "open",
+    "age_hours": 31,
+    "summary": "Scanner retries after sleep",
+    "url": "https://support.example.com/requests/SR-1041"
+  },
+  {
+    "id": "SR-1042",
+    "team": "Orchard",
+    "priority": "medium",
+    "status": "waiting",
+    "age_hours": 18,
+    "summary": "Export omits regional label",
+    "url": "https://support.example.com/requests/SR-1042"
+  },
+  {
+    "id": "SR-1043",
+    "team": "Harbor",
+    "priority": "low",
+    "status": "resolved",
+    "age_hours": 7,
+    "summary": "Tooltip overlaps compact view",
+    "url": "https://support.example.com/requests/SR-1043"
+  },
+  {
+    "id": "SR-1044",
+    "team": "Meadow",
+    "priority": "high",
+    "status": "open",
+    "age_hours": 52,
+    "summary": "Webhook delivery delayed",
+    "url": "https://support.example.com/requests/SR-1044"
+  },
+  {
+    "id": "SR-1045",
+    "team": "Orchard",
+    "priority": "high",
+    "status": "waiting",
+    "age_hours": 44,
+    "summary": "Approval link expires early",
+    "url": "https://support.example.com/requests/SR-1045"
+  },
+  {
+    "id": "SR-1046",
+    "team": "Meadow",
+    "priority": "medium",
+    "status": "resolved",
+    "age_hours": 12,
+    "summary": "Locale fallback is incorrect",
+    "url": "https://support.example.com/requests/SR-1046"
+  },
+  {
+    "id": "SR-1047",
+    "team": "Harbor",
+    "priority": "medium",
+    "status": "open",
+    "age_hours": 26,
+    "summary": "Batch retry count is unclear",
+    "url": "https://support.example.com/requests/SR-1047"
+  },
+  {
+    "id": "SR-1048",
+    "team": "Orchard",
+    "priority": "low",
+    "status": "resolved",
+    "age_hours": 5,
+    "summary": "Avatar alt text is duplicated",
+    "url": "https://support.example.com/requests/SR-1048"
+  }
+]

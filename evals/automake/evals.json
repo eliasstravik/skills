@@ -1,0 +1,34 @@
+{
+  "skill_name": "automake",
+  "conventions": "Each executor is a fresh GPT-5.6 Sol one-shot context. Copy the named fixture repository into __RUN_DIR__/workspace/repo and initialize Git there only when the scenario requires it. Replace __RUN_DIR__, __REPO_DIR__, and __AUTOMAKE_HOME__. __AUTOMAKE_HOME__ is the run-local replacement for ~/.automake; real ~/.automake and unrelated repositories are off-limits. Interactive prompts include ordered scripted user replies that must be preserved and consumed in the same headless run. Any Optimizer or Evaluator child must use GPT-5.6 Sol, Terra, or Luna only. No-skill arms forbid every installed skill.",
+  "evals": [
+    {
+      "id": 1,
+      "name": "normal-consultation-no-run",
+      "prompt": "Use /automake in __REPO_DIR__. I have not decided the improvement target yet. Follow the normal consultation path and use __AUTOMAKE_HOME__ instead of ~/.automake. Do not mutate Git, repository files, or run state unless I approve the final run.\n\nScripted user replies:\n1. Improve the README quickstart so a new contributor can run the fictional check command without guessing.\n2. Approved\n3. Judge it BETTER only if the complete README gives an accurate copy-paste path from clone to `python3 tools/check.py`, preserves the support link, and adds no invented setup.\n4. Approved\n5. No — do not run it.",
+      "expected_output": "One Goal question, complete Optimizer and Evaluator artifacts with exact approval gates, a defaulted final summary, then a clean no-run exit with no repository or Automake-state mutation.",
+      "files": ["fixtures/consultation-repo/README.md","fixtures/consultation-repo/tools/check.py"]
+    },
+    {
+      "id": 2,
+      "name": "accepted-candidate-ratchet",
+      "prompt": "Use /automake in __REPO_DIR__. Goal: make `normalize_slug` collapse repeated separators while preserving existing behavior. BETTER means all existing tests plus the supplied repeated-separator cases pass, the public function stays dependency-free, and added complexity is minimal. Use one iteration, three consecutive failures, no early success condition, and __AUTOMAKE_HOME__ instead of ~/.automake. Use only GPT-5.6 Sol for the Optimizer and GPT-5.6 Terra for the Evaluator.\n\nScripted user replies:\n1. Approved\n2. Approved\n3. Run",
+      "expected_output": "No redundant intent questions; approved artifacts and final run gate precede automatic Git preflight; one isolated candidate passes evaluation, advances baseline, and is fully recorded.",
+      "files": ["fixtures/accepted-repo/slugify.py","fixtures/accepted-repo/test_slugify.py"]
+    },
+    {
+      "id": 3,
+      "name": "rejected-candidate-rollback",
+      "prompt": "Use /automake in __REPO_DIR__. Goal: shorten the status output in `status.txt` without losing meaning. BETTER means the candidate is strictly shorter than baseline, remains exactly one UTF-8 line, and preserves every baseline word verbatim; any no-diff or rule violation is NOT_BETTER. Use one iteration and __AUTOMAKE_HOME__ instead of ~/.automake. Use only GPT-5.6 Sol for the Optimizer and GPT-5.6 Terra for the Evaluator.\n\nScripted user replies:\n1. Approved\n2. Approved\n3. Run",
+      "expected_output": "The impossible net-improvement attempt is recorded as NOT_BETTER, repository bytes and HEAD return to baseline, and results, evaluation or orchestrator rejection, learning, and state are complete.",
+      "files": ["fixtures/rejected-repo/status.txt","fixtures/rejected-repo/README.md"]
+    },
+    {
+      "id": 4,
+      "name": "run-now-dirty-no-head",
+      "prompt": "Use /automake and start the ratchet now in __REPO_DIR__ with what is already here. Fix the `readiness()` typo so the existing test passes; BETTER means the test passes with the smallest dependency-free change. Use one iteration, stop early when `python3 -m unittest -q` passes, use __AUTOMAKE_HOME__ instead of ~/.automake, GPT-5.6 Sol for Optimizer, and GPT-5.6 Terra for Evaluator. The copied directory has no Git history and includes a likely local secret file; handle preflight automatically and never commit or expose the secret.",
+      "expected_output": "No questions or approvals; safe automatic Git initialization captures non-secret contents, produces a clean baseline, runs one isolated accepted attempt, keeps the passing fix, and reports complete run evidence.",
+      "files": ["fixtures/run-now-repo/readiness.py","fixtures/run-now-repo/test_readiness.py","fixtures/run-now-repo/.env.local"]
+    }
+  ]
+}
