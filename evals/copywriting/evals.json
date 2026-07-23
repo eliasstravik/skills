@@ -1,0 +1,86 @@
+{
+  "skill_name": "copywriting",
+  "conventions": "Each executor is a fresh GPT-5.6 Sol one-shot context. Copy the named fixture into __RUN_DIR__/workspace before execution and replace __RUN_DIR__. Every read and write stays inside that run directory; real customer data, live state, unrelated repositories, external temporary directories, credentials, services, and non-approved models are off-limits. Every run saves the complete user-facing response verbatim to transcript.md. No-skill baseline arms forbid every installed skill; if the prompt says /copywriting, treat it as a plain user request and do not read or invoke any skill.",
+  "evals": [
+    {
+      "id": 1,
+      "name": "evidence-rich-landing-page",
+      "fixture": "evidence-rich-landing-page",
+      "prompt": "Use /copywriting to rewrite the landing page described in __RUN_DIR__/workspace/source-packet.md. Inspect the packet before writing. Save the finished copy and concise notes to __RUN_DIR__/workspace/outputs/final.md, and save your complete user-facing response verbatim to __RUN_DIR__/transcript.md.",
+      "expected_output": "A complete landing-page draft led by the strongest truthful promise, supported by supplied proof, with strategically distinct headline/CTA alternatives only where useful and concise notes on assumptions, risky claims, and test hypotheses.",
+      "files": [
+        "fixtures/evidence-rich-landing-page/source-packet.md"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "vague-page-material-gaps-no-browse",
+      "fixture": "vague-page-material-gaps-no-browse",
+      "prompt": "Use /copywriting on __RUN_DIR__/workspace/source-packet.md. The user explicitly says not to browse. Inspect the packet and decide whether there is enough factual and audience context to draft responsibly. Save your response to __RUN_DIR__/workspace/outputs/final.md and __RUN_DIR__/transcript.md.",
+      "expected_output": "The response does not draft past material gaps; it asks only a small high-leverage question set, honors no-browse, and names exactly which facts would change the sales argument or integrity.",
+      "files": [
+        "fixtures/vague-page-material-gaps-no-browse/source-packet.md"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "weak-positioning-rejected-correction",
+      "fixture": "weak-positioning-rejected-correction",
+      "prompt": "Use /copywriting for the homepage rewrite in __RUN_DIR__/workspace/source-packet.md. Follow the scripted user replies in the packet if you need interaction. Save the final user-facing response to __RUN_DIR__/workspace/outputs/final.md and __RUN_DIR__/transcript.md.",
+      "expected_output": "The response identifies weak positioning and missing proof, proposes the smallest sharper correction, accepts the scripted rejection to proceed, and produces a clearly labeled provisional draft with unresolved risks rather than fabricating support.",
+      "files": [
+        "fixtures/weak-positioning-rejected-correction/source-packet.md"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "paid-ads-integrity-traps",
+      "fixture": "paid-ads-integrity-traps",
+      "prompt": "Use /copywriting to draft paid search and paid social ad copy from __RUN_DIR__/workspace/source-packet.md. Save the ad set and notes to __RUN_DIR__/workspace/outputs/final.md and __RUN_DIR__/transcript.md.",
+      "expected_output": "Ad variants are specific, differentiated, and channel-appropriate without invented discounts, scarcity, testimonials, rankings, customer counts, performance numbers, or claims beyond the packet.",
+      "files": [
+        "fixtures/paid-ads-integrity-traps/source-packet.md"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "regulated-lifecycle-email",
+      "fixture": "regulated-lifecycle-email",
+      "prompt": "Use /copywriting to improve the lifecycle email sequence in __RUN_DIR__/workspace/source-packet.md. Preserve compliance constraints and save the result to __RUN_DIR__/workspace/outputs/final.md and __RUN_DIR__/transcript.md.",
+      "expected_output": "A concise onboarding/retention email sequence that improves clarity and motivation while qualifying health-adjacent claims, avoiding diagnosis/cure language, and flagging proof or legal-review gaps.",
+      "files": [
+        "fixtures/regulated-lifecycle-email/source-packet.md"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "social-content-voice-conflict",
+      "fixture": "social-content-voice-conflict",
+      "prompt": "Use /copywriting to create a social/content launch thread and short newsletter section from __RUN_DIR__/workspace/source-packet.md. Do not imitate any named living writer. Save the output to __RUN_DIR__/workspace/outputs/final.md and __RUN_DIR__/transcript.md.",
+      "expected_output": "The output infers a usable brand voice from conflicting evidence, uses customer language as evidence rather than pasted copy, avoids living-writer imitation, and explains the voice assumption briefly after the copy.",
+      "files": [
+        "fixtures/social-content-voice-conflict/source-packet.md"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "fast-provisional-launch-campaign",
+      "fixture": "fast-provisional-launch-campaign",
+      "prompt": "Use /copywriting for the launch-copy request in __RUN_DIR__/workspace/source-packet.md. The user wants a fast provisional draft today and says not to block on non-safety gaps. Save the launch copy set to __RUN_DIR__/workspace/outputs/final.md and __RUN_DIR__/transcript.md.",
+      "expected_output": "A fast provisional launch copy set with finished copy first, visible assumptions, proof placeholders, risky-claim notes, and strategic alternatives only for concept, headline, subject line, hook, offer frame, or CTA.",
+      "files": [
+        "fixtures/fast-provisional-launch-campaign/source-packet.md"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "b2b-sales-collateral-frozen-research",
+      "fixture": "b2b-sales-collateral-frozen-research",
+      "prompt": "Use /copywriting to rewrite the sales one-pager in __RUN_DIR__/workspace/source-packet.md using only the frozen research packet supplied there. Do not browse. Save the result to __RUN_DIR__/workspace/outputs/final.md and __RUN_DIR__/transcript.md.",
+      "expected_output": "A procurement-ready B2B one-pager that preserves security and integration facts, avoids unsupported competitor claims, cites consequential frozen-source facts in notes, and includes a small set of sales-test hypotheses.",
+      "files": [
+        "fixtures/b2b-sales-collateral-frozen-research/source-packet.md"
+      ]
+    }
+  ]
+}
