@@ -1,5 +1,8 @@
 # Fixture: vague page with material gaps and no-browse
 
+All names, companies, people, products, claims, and examples in this fixture
+are fictional and invented for local evaluation.
+
 ## User request
 
 Use /copywriting to rewrite this landing page. Do not browse. We need better

@@ -1,11 +1,14 @@
 # copywriting - intent
 
+Date: 2026-07-24. Source plan:
+`~/.consultant/marketing-copywriting-skill/plan.md`.
+
 ## Real job
 
 `copywriting` is a user-invoked commercial copy skill for audience-facing
-writing whose job is to turn supplied evidence into truthful, brand-appropriate
-copy that can create awareness, consideration, conversion, activation,
-retention, referral, or sales enablement.
+writing whose job is to turn supplied evidence into truthful,
+brand-appropriate copy that can create awareness, consideration, conversion,
+activation, retention, referral, or sales enablement.
 
 The approved discovery scope is broad: websites and landing pages, ads, email
 and lifecycle, social and content marketing, launches and campaigns, and sales
@@ -22,6 +25,23 @@ challenge weak positioning or offers when that would change the argument, honor
 no-browse instructions, and never fabricate proof, customer language,
 capabilities, urgency, scarcity, guarantees, citations, or results.
 
+This is not a general writing, proofreading, journalism, product-docs,
+internal-memo, market-research, brand-strategy, page-design, campaign
+deployment, media-buying, or publishing skill.
+
+## Candidate formats
+
+- Websites and landing pages, with extra landing-page depth in the first eval
+  corpus.
+- Vague page or page-rewrite requests.
+- Weak positioning, weak offer, and missing-proof cases.
+- Paid search, paid social, organic ads, and short-form campaign variants.
+- Email, lifecycle, onboarding, retention, and reactivation messages.
+- Social and content marketing with supplied voice evidence.
+- Product launch and multi-surface campaign copy.
+- B2B sales collateral, one-pagers, follow-up messages, and objection handling.
+- No-browse, fast/provisional, rejected-correction, and integrity cases.
+
 ## Live-state and research surfaces
 
 - Supplied files, links, conversation context, workspace facts, and source
@@ -34,10 +54,25 @@ capabilities, urgency, scarcity, guarantees, citations, or results.
   data, unrelated repositories, external temporary directories, or live service
   mutation.
 
-Every eval executor is launched as GPT-5.6 Sol. Terra grades assertions and
-independent checks. Luna performs blind comparison, analysis, and repeated
-trigger decisions. Baseline arms forbid every installed skill. Every run saves
-`transcript.md` and remains inside its run directory.
+Every eval executor is launched as GPT-5.6 Sol. Baseline arms forbid every
+installed skill. Every run saves `transcript.md` and remains inside its run
+directory.
+
+## Model policy
+
+- Use only GPT-5.6 Sol, GPT-5.6 Terra, or GPT-5.6 Luna for every model-backed
+  action.
+- Default to Sol for executor arms, no-skill baselines, treatment arms, and
+  candidate rewrites.
+- Default to Terra for assertion grading and independent checks.
+- Default to Luna for blind comparison, analysis, repeated trigger decisions,
+  and description-eval judgment.
+- Never use Claude Code, any Claude model, Fable, `claude`, `claude -p`, or a
+  helper that invokes them transitively.
+- If a stock skill-creator helper is Claude-only, adapt the launch to Codex CLI
+  before use and record the exact model plus launch path.
+- If the approved GPT models are unavailable, stop and escalate instead of
+  substituting a prohibited model.
 
 ## Branch contract
 
@@ -53,6 +88,27 @@ trigger decisions. Baseline arms forbid every installed skill. Every run saves
 If the user rejects a strategic correction or says to proceed anyway, produce a
 clearly labeled provisional draft with the unresolved risk in the notes unless
 that would violate integrity, legal, or safety constraints.
+
+## Gates
+
+1. Prompt approval: the broad eval prompts, scripted replies, and frozen
+   fixtures must be approved before any baseline execution.
+2. Saturated no-skill baseline: run fresh Sol no-skill baselines until one
+   additional full round reveals no new root-cause failure class. Stop without
+   building if no recurring failure proves need.
+3. Assertion derivation: write checkable assertions from required behavior and
+   preserved failures, with contractual assertions marked critical.
+4. Bare-core gate: choose one action-shaped primitive and test only the bare H1
+   plus primitive H2 before adding Details.
+5. Iteration and viewer gate: run paired with/without evaluations, Terra
+   grading, Luna blind comparisons, and skill-creator viewer review; revise
+   only from evidence.
+6. Description optimization: run the trigger ratchet after behavior is approved
+   and apply `best_description` verbatim.
+7. Shipping approval: obtain final approval of representative outputs and the
+   shipping artifact before global install.
+8. Final review: compare the complete branch against the approved spec and
+   repository conventions before reporting done.
 
 ## Proposed eval flows
 
@@ -78,7 +134,6 @@ that would violate integrity, legal, or safety constraints.
    research packet and battlecard, preserving procurement/security facts and
    avoiding unsupported competitor claims.
 
-These flows cover landing-page depth, candidate format breadth, material-gap
-branching, weak-offer branching, no-browse behavior, rejected-correction
-behavior, explicit fast drafting, technical and regulated claims, adversarial
-integrity cases, voice inference, and final output ordering.
+These flows cover landing-page depth, vague inputs, weak positioning and proof,
+ads, email/lifecycle, social/content voice, launch/campaign, sales collateral,
+no-browse, fast/provisional, rejected-correction, and integrity cases.

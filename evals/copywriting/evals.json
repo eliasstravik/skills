@@ -1,6 +1,6 @@
 {
   "skill_name": "copywriting",
-  "conventions": "Each executor is a fresh GPT-5.6 Sol one-shot context. Copy the named fixture into __RUN_DIR__/workspace before execution and replace __RUN_DIR__. Every read and write stays inside that run directory; real customer data, live state, unrelated repositories, external temporary directories, credentials, services, and non-approved models are off-limits. Every run saves the complete user-facing response verbatim to transcript.md. No-skill baseline arms forbid every installed skill; if the prompt says /copywriting, treat it as a plain user request and do not read or invoke any skill.",
+  "conventions": "Each executor is a fresh GPT-5.6 Sol one-shot context. Copy the named fixture into __RUN_DIR__/workspace before execution and replace __RUN_DIR__. Every read and write stays inside that run directory; real customer data, live state, unrelated repositories, external temporary directories, credentials, services, and non-approved models are off-limits. Every run saves the complete user-facing response verbatim to transcript.md. No-skill baseline arms forbid every installed skill; if the prompt says /copywriting, treat it as a plain user request and do not read or invoke any skill. No executor, grader, comparator, analyzer, optimizer, helper, or wrapper may invoke Claude Code, any Claude model, Fable, claude, or claude -p.",
   "evals": [
     {
       "id": 1,
