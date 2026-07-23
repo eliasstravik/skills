@@ -1,0 +1,50 @@
+{
+  "skill_name": "consultant",
+  "conventions": "Each executor is a fresh GPT-5.6 Sol one-shot context. Copy the named territory and Consultant-state fixtures into __RUN_DIR__. Replace __RUN_DIR__, __CONSULTANT_HOME__, and __TERRITORY__. __CONSULTANT_HOME__ is the complete run-local replacement for ~/.consultant; real ~/.consultant, unrelated repositories, external temporary directories, credentials, and live services are off-limits. Scripted replies are consumed in order in the same headless transcript. Fresh reviewers use GPT-5.6 Terra and receive only plan.md plus its explicit references. No-skill arms forbid every installed skill.",
+  "evals": [
+    {
+      "id": 1,
+      "name": "new-consultation-blocker-approval-handoff",
+      "prompt": "Use /consultant to turn the rough Lantern Desk shift-handoff idea in __TERRITORY__ into an implementation-ready plan. Create fresh state under __CONSULTANT_HOME__; this is not a resume request. Inspect the territory before asking. Stop at the handoff and do not build anything.\n\nScripted user replies:\n1. The outgoing on-call engineer is primary; they need a useful handoff in under two minutes.\n2. Use a 12-hour window with unresolved incidents, current owner, last meaningful update, and next checkpoint; generated Markdown preview with one copy action.\n3. 1\n4. The stale-owner blocker should be resolved by flagging any incident whose owner has not acknowledged it during the 12-hour window; no paging or reassignment in v1.\n5. 1\n\nControlled reviewer verdicts after valid review dispatches:\n1. BLOCKERS — The plan does not define how a stale incident owner is detected without creating a paging or reassignment workflow.\n2. APPROVED — No substantive problems remain.",
+      "expected_output": "Fresh state; exact numbered questions and saves; complete plan; first approved review produces the blocker; revision questioning and plan update precede a second gate; second review approves; one safely fenced absolute-path handoff; no implementation.",
+      "files": [
+        "fixtures/new-review/territory/README.md",
+        "fixtures/new-review/territory/constraints.md",
+        "fixtures/new-review/territory/users.md"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "named-resume-preserves-state",
+      "prompt": "Use /consultant and explicitly continue the existing consultation at __CONSULTANT_HOME__/harbor-kiosk. Resume from its saved Next step, preserve its decisions and taste reference, finish the plan, run the approved review, and stop at handoff.\n\nScripted user replies:\n1. Use the calm-and-direct option: name the empty state, say no kiosks match, and offer one clear reset action.\n2. 1\n\nControlled reviewer verdict after a valid review dispatch:\nAPPROVED — No substantive problems remain.",
+      "expected_output": "No new sibling; Question 7 continues numbering and follows the saved next step; prior state/reference survives; plan has all required sections; review receives only plan and explicit references; exact handoff uses the existing absolute plan path.",
+      "files": [
+        "fixtures/resume/consultant-home/harbor-kiosk/consultation.md",
+        "fixtures/resume/consultant-home/harbor-kiosk/references/tone-cards.md",
+        "fixtures/resume/territory/README.md"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "substantive-addition-at-review-gate",
+      "prompt": "Use /consultant and explicitly continue __CONSULTANT_HOME__/offline-export from its saved review gate. A draft plan already exists. Keep state under __CONSULTANT_HOME__, and do not dispatch a reviewer until the gate rules permit it.\n\nScripted user replies:\n1. 1 — approve and run it. Also, export must work fully offline.\n2. Offline covers reading and exporting already-synced records; syncing new records remains online-only.\n3. 1\n\nControlled reviewer verdict after the first valid review dispatch:\nAPPROVED — No substantive problems remain.",
+      "expected_output": "The mixed approval/addition response does not dispatch review; state is updated first, one complete clarification question is asked, plan is revised, a new numbered review gate appears, then one plan/reference-only review approves and handoff follows.",
+      "files": [
+        "fixtures/review-addition/consultant-home/offline-export/consultation.md",
+        "fixtures/review-addition/consultant-home/offline-export/plan.md",
+        "fixtures/review-addition/consultant-home/offline-export/references/export-contract.md"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "fresh-state-despite-existing-consultation",
+      "prompt": "Use /consultant to help plan the new approval-inbox idea described in __TERRITORY__. Use __CONSULTANT_HOME__ instead of ~/.consultant. I am not asking to resume or continue any existing consultation. Inspect the territory, create fresh state, ask the first highest-leverage question, and end this sitting there without building.\n\nScripted user replies:\nNone — end after the first complete question block.",
+      "expected_output": "Exactly one fresh lowercase-hyphen consultation directory is created without a resume question; the unrelated archive-migration state remains byte-identical; consultation.md is complete and saved before Question 1; no plan, review, or implementation occurs.",
+      "files": [
+        "fixtures/fresh-with-existing/consultant-home/archive-migration/consultation.md",
+        "fixtures/fresh-with-existing/consultant-home/archive-migration/references/source-map.md",
+        "fixtures/fresh-with-existing/territory/approval-inbox.md"
+      ]
+    }
+  ]
+}

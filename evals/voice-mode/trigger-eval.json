@@ -1,0 +1,82 @@
+[
+  {
+    "query": "Use /voice-mode for this. I’m walking to the station and cannot look at the screen; check the release note, then tell me whether staging is safe.",
+    "should_trigger": true
+  },
+  {
+    "query": "Switch to voice mode and keep it on for the rest of this call. Start by reading every item in the launch checklist back to me in order.",
+    "should_trigger": true
+  },
+  {
+    "query": "voice mode please — I’m driving. Inspect the incident summary and give me the decision, the owner, and the deadline without making me look at anything.",
+    "should_trigger": true
+  },
+  {
+    "query": "Enter voice-mode, run the verification program, and give me a short spoken result when it finishes. Put any paths or exact command output somewhere I can review later.",
+    "should_trigger": true
+  },
+  {
+    "query": "Turn voice mode on. I need to clean up an obsolete cache, so explain the consequence aloud and ask before you change anything.",
+    "should_trigger": true
+  },
+  {
+    "query": "Activate /voice-mode and summarize the deployment report for listening. Stay in that mode when I ask follow-up questions.",
+    "should_trigger": true
+  },
+  {
+    "query": "Go into voice mode now; I’m wearing headphones but away from my laptop. Tell me all six migration blockers with verbal numbering.",
+    "should_trigger": true
+  },
+  {
+    "query": "Start voice-mode for our live troubleshooting call. Check the logs normally, but speak only the useful conclusion and keep technical details in an artifact.",
+    "should_trigger": true
+  },
+  {
+    "query": "/voice-mode I can’t use the screen right now. Verify the handoff document and tell me in two sentences whether anything still blocks production.",
+    "should_trigger": true
+  },
+  {
+    "query": "I want voice mode on until I explicitly exit it. First, refresh the status and tell me what changed since the previous run.",
+    "should_trigger": true
+  },
+  {
+    "query": "Read this paragraph aloud in a warm, natural tone and give me an audio file I can add to the product tour.",
+    "should_trigger": false
+  },
+  {
+    "query": "Rewrite this update so it sounds conversational when I say it during tomorrow’s all-hands, but keep the response as normal formatted text.",
+    "should_trigger": false
+  },
+  {
+    "query": "Make the dashboard work well with VoiceOver and keyboard navigation; fix the missing labels in the settings panel.",
+    "should_trigger": false
+  },
+  {
+    "query": "Help me turn on macOS dictation and choose the right microphone for calls. I need device setup instructions.",
+    "should_trigger": false
+  },
+  {
+    "query": "Write a sixty-second voice-over script for the Cedar API launch video, with pauses marked for the narrator.",
+    "should_trigger": false
+  },
+  {
+    "query": "Exit voice mode and give me the ordinary Markdown summary with the changed paths and review link.",
+    "should_trigger": false
+  },
+  {
+    "query": "Summarize this customer-call transcript, list the objections, and draft a follow-up email for Mina.",
+    "should_trigger": false
+  },
+  {
+    "query": "Show me how to add text-to-speech to this React app using the browser speech synthesis API.",
+    "should_trigger": false
+  },
+  {
+    "query": "I’m on a live call with the incident team. Draft three questions I should ask the database owner and format them as a checklist I can see.",
+    "should_trigger": false
+  },
+  {
+    "query": "Keep normal response formatting. Inspect the release note and show me the exact paths, command output, and review URL in a table.",
+    "should_trigger": false
+  }
+]

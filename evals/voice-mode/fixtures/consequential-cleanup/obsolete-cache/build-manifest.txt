@@ -1,0 +1,2 @@
+Fixture cache only. Safe to delete after explicit approval.
+Build: harbor-console-preview-17

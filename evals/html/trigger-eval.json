@@ -1,0 +1,82 @@
+[
+  {
+    "query": "Use /html to turn this incident brief into a durable single-file contact card, serve it locally, and give me the artifact link.",
+    "should_trigger": true
+  },
+  {
+    "query": "/html revise my existing quiet-canyon-lantern artifact in place with the new launch date and preserve my handwritten note.",
+    "should_trigger": true
+  },
+  {
+    "query": "Invoke the html skill and build a self-contained decision dashboard from operations-brief.md under my HTML artifact home.",
+    "should_trigger": true
+  },
+  {
+    "query": "Use html for this artifact: create one index.html with accessible filters for every record in service-requests.json, then serve and verify it.",
+    "should_trigger": true
+  },
+  {
+    "query": "Run /html on this workshop agenda. I want a durable local page in a new three-word slug and the exact loopback URL.",
+    "should_trigger": true
+  },
+  {
+    "query": "Please use the html skill to update the named amber-field-signal artifact without creating a sibling directory.",
+    "should_trigger": true
+  },
+  {
+    "query": "/html make a compact, self-contained status artifact from the attached Markdown and recover safely if the first port is occupied.",
+    "should_trigger": true
+  },
+  {
+    "query": "Activate html and turn this source packet into a polished one-file interface I can keep under ~/.html and open locally.",
+    "should_trigger": true
+  },
+  {
+    "query": "Use /html to rebuild this saved artifact with responsive layout and keyboard controls, then verify the exact /index.html page.",
+    "should_trigger": true
+  },
+  {
+    "query": "I explicitly want the html skill: create a durable artifact from these release notes and return only the file path and local link.",
+    "should_trigger": true
+  },
+  {
+    "query": "Add a responsive HTML settings page to this React repository and wire it into the existing router.",
+    "should_trigger": false
+  },
+  {
+    "query": "Review index.html for accessibility problems and suggest the smallest fixes, but do not change any files.",
+    "should_trigger": false
+  },
+  {
+    "query": "Explain the difference between semantic HTML and ARIA roles with a few short code examples.",
+    "should_trigger": false
+  },
+  {
+    "query": "Open the local dashboard in a browser, click every filter, and report any visual or interaction bugs.",
+    "should_trigger": false
+  },
+  {
+    "query": "Convert this Figma design into reusable Next.js components that match our design system.",
+    "should_trigger": false
+  },
+  {
+    "query": "Serve the current dist directory on localhost so I can test the app that is already built.",
+    "should_trigger": false
+  },
+  {
+    "query": "Write an HTML email template for our July product announcement with Outlook-compatible tables.",
+    "should_trigger": false
+  },
+  {
+    "query": "Create a Markdown report comparing these four landing pages and include screenshots from each site.",
+    "should_trigger": false
+  },
+  {
+    "query": "Fix the CSS overflow bug in src/components/Timeline.tsx and add a regression test.",
+    "should_trigger": false
+  },
+  {
+    "query": "Show me the current OpenAI API documentation for returning HTML safely from a tool call.",
+    "should_trigger": false
+  }
+]

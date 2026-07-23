@@ -1,0 +1,22 @@
+[
+  {"query":"Use /demo to turn this fictional agent skill into a realistic local try-it experience and give me the verified preview.","should_trigger":true},
+  {"query":"/demo revise my existing harbor-briefing demo in place and preserve its hand-authored field note.","should_trigger":true},
+  {"query":"Invoke the demo skill for this browser-helper concept; stage the host page and focal action without implementing an extension.","should_trigger":true},
+  {"query":"Please use demo as the named workflow to make this artifact tryable under ~/.demo and verify it on loopback.","should_trigger":true},
+  {"query":"Run /demo on the attached onboarding checklist and make completion plus reset the focal interaction.","should_trigger":true},
+  {"query":"Activate the demo skill and build the smallest convincing local experience for this release artifact.","should_trigger":true},
+  {"query":"/demo update the named amber-signal demo, test its main control path, and return restart and QA evidence.","should_trigger":true},
+  {"query":"I explicitly want the demo skill: create a staged chat simulator for this agent workflow with no live model backend.","should_trigger":true},
+  {"query":"Use /demo to mock the missing product context around this artifact, label simulated behavior, and keep everything local.","should_trigger":true},
+  {"query":"Start the demo workflow for these two candidate artifacts; ask one question if choosing between them changes the experience.","should_trigger":true},
+  {"query":"Build a demo page inside this existing Next.js app and add it to the product router.","should_trigger":false},
+  {"query":"Open our current localhost demo in a browser and test the checkout button at mobile width.","should_trigger":false},
+  {"query":"Create a throwaway prototype to compare these two state models before we implement either one.","should_trigger":false},
+  {"query":"Turn this Markdown into a durable single-file HTML artifact and serve it locally.","should_trigger":false},
+  {"query":"Write a five-minute sales demo script with speaker notes and likely prospect questions.","should_trigger":false},
+  {"query":"Review this demo repository for bugs and explain why the reset control is broken; do not edit anything.","should_trigger":false},
+  {"query":"Serve the existing dist folder on 127.0.0.1 so I can inspect the app that is already built.","should_trigger":false},
+  {"query":"Design three radically different UI directions for the onboarding flow and compare their tradeoffs.","should_trigger":false},
+  {"query":"Make an animated product-demo video from these screenshots and add captions.","should_trigger":false},
+  {"query":"Explain how to create safe deterministic mocks for a live API during frontend development.","should_trigger":false}
+]

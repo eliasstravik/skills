@@ -1,6 +1,6 @@
 ---
 name: automake
-description: Sets up and runs an Evaluator-Optimizer ratchet.
+description: User-invoked workflow for a Git-backed Evaluator-Optimizer ratchet.
 disable-model-invocation: true
 ---
 
@@ -8,84 +8,20 @@ disable-model-invocation: true
 
 ## Recipe
 
-1. Inspect the original invocation, every later user message, and the repository before asking anything; mark each Optimizer, Evaluator, and Orchestrator input as supplied, safely inferable, or missing.
-2. When the user's meaning clearly directs Automake to start its ratchet now using the information already available, infer and default every unresolved input and start without further questions or approvals; determine this from intent, never from matching particular words.
-3. Start with the Optimizer: gather only missing user-intent inputs, one question per turn, then draft the complete `optimizer.md` from supplied, inferred, and defaulted facts.
-4. Print the full `optimizer.md` inline and request approval with the Approval prompt; revise and reprint it until approved.
-5. Continue with the Evaluator: use any evaluation intent already supplied; otherwise ask how improvement should be judged, one question in that turn, while recommending the strongest task-appropriate evaluation and end-to-end testing only when the task has an executable user journey.
-6. Draft the complete `evaluator.md`, print it inline, and request approval with the Approval prompt; revise and reprint it until approved.
-7. Resolve `MAX_ITERATIONS`, `MAX_CONSECUTIVE_FAILURES`, and `SUCCESS_CONDITION` from supplied values and defaults without asking Orchestrator questions, then present them with the approved artifacts in the Final summary Template.
-8. Ask whether to run; when the user declines or gives feedback, revise the affected Optimizer, Evaluator, or Orchestrator value and re-present the necessary artifact approval and final summary until approved.
-9. On run approval, perform the Git preflight without questions, establish a clean committed baseline, create the run directory, write the three resolved run files, and read `orchestrator.md` to execute the ratchet exactly as instructed.
+1. Inspect the full conversation and repository, resolving every Optimizer, Evaluator, and run input as supplied, safely inferable, defaultable, or missing.
+2. Treat only a clear request to start the Automake ratchet now as run-now intent, resolving every missing input safely and skipping all questions and approvals.
+3. Otherwise ask one missing Optimizer input per turn until its Goal is concrete, without repeating known facts or asking about run limits.
+4. Print the complete Optimizer instruction—Goal, smallest candidate scope, constraints, cheap checks, and repository context without evaluation criteria—and obtain approval with exactly `1. Approved` and `2. No — changes needed`.
+5. Ask one missing Evaluator input when needed, then print its complete independent Goal, BETTER rule, task-shaped evidence, exact verdict format, complexity cost, and candidate-gate policy and obtain approval with the same two choices.
+6. Resolve iterations, consecutive-failure limit, and observable success condition from supplied values or defaults, then present the complete run summary with exactly `1. Run` and `2. No — changes needed`.
+7. On run approval, establish a clean committed Git baseline automatically, excluding likely local secrets without reading or committing them, and create one run-local Automake state directory.
+8. Run one fresh write-bounded Optimizer and one fresh read-only Evaluator per candidate without crossing their instructions, accepting only a parseable evidence-backed BETTER verdict.
+9. Ratchet accepted commits forward, restore every rejection exactly, and record every launch, attempt, result, evaluation or rejection, learning, state transition, final kept commit, and stop reason.
 
 ## Details
 
-### Consultation contract
-
-- Open the first phase with: `First, I’ll get what I need to write the Optimizer.`
-- Skip a question when the original invocation or a later answer already provides enough information to draft that phase; never ask the user to repeat supplied facts.
-- During information gathering, ask only Optimizer and Evaluator questions, one missing input per turn, with 2–4 numbered concrete choices and one recommendation; never ask for an Orchestrator input separately, and accept a free-form answer even when it is not one of the choices.
-- Treat an Optimizer as draftable when its Goal is concrete; infer the smallest coherent candidate scope from that Goal and the repository, default irreducible constraints to `none`, and discover repository context and cheap checks by inspection.
-- If a bare invocation supplies no Goal, ask what outcome the Optimizer should improve. Under the run-now override, infer the highest-confidence, smallest measurable repository improvement instead.
-- Treat an Evaluator as draftable when it has a concrete `BETTER` versus `NOT_BETTER` rule and a feasible evidence plan. If either is missing, ask `How should the Evaluator judge improvement?` and offer a repository- and task-specific recommendation.
-- Before drafting the Evaluator, inspect the real evaluation path and ask only for execution facts it genuinely requires but cannot infer: target environment, startup path, test data or account, configured credentials, and permitted side effects. Never ask the user to paste secrets; ask them to configure credentials in the environment.
-- Interpret a request to start immediately semantically: it must clearly refer to running the Automake ratchet now with the current information. Mentions of running tests, commands, future steps, or the words commonly used to express motion are not sufficient.
-- For each Optimizer or Evaluator draft, print the artifact followed by exactly:
-
-```text
-1. Approved
-2. No — changes needed
-```
-
-- When the user answers No without feedback, ask what should change and wait; after feedback, reprint the entire revised artifact, not only a diff.
-
-### Defaults and evidence
-
-| Input | Resolution when not supplied |
-|---|---|
-| `REPO_DIR` | Existing Git root containing the current working directory; otherwise the current working directory after Git initialization. |
-| `BASELINE` | Clean committed `HEAD` produced by the automatic Git preflight. |
-| `RUN_DIR` | `~/.automake/<three-random-word-lowercase-slug>/`. |
-| Candidate scope | Smallest coherent change that can improve the baseline toward the Goal. |
-| Irreducible constraints | `none`; never invent product or technical constraints. |
-| Cheap checks | Cheapest relevant existing targeted checks; `none found` when inspection finds none. |
-| `MAX_ITERATIONS` | Explicit value, otherwise `5`; never ask separately. |
-| `MAX_CONSECUTIVE_FAILURES` | Explicit value, otherwise `3`; never ask separately. |
-| `SUCCESS_CONDITION` | Explicit observable early-stop condition from the user's messages that the Evaluator's evidence can determine; otherwise `none`; never ask separately. |
-
-- Match evidence to the task's shape. For an app, service, CLI, or multi-step tool with an executable user journey, require end-to-end use through the real UI or public interface whenever feasible.
-- For writing, content, documentation, prompts, plans, analyses, and other artifact tasks without an executable journey, evaluate the complete artifact in its intended use context against its audience, purpose, constraints, factual accuracy, coherence, and approved quality criteria; never force or simulate end-to-end testing merely to label it E2E.
-- For code without a complete user journey, use the highest-level consumer-facing integration, contract, or system checks the repository supports.
-- Require screenshots of important states and transitions only when the result is visual or interactive and screenshots add evidence; require video only when recording an executable flow is both available and useful.
-- Never target production or allow destructive external side effects without explicit user authorization; prefer an isolated local or test environment and reversible test data.
-- If a task is end-to-end-compatible but its real journey cannot be exercised, require the Evaluator to state the concrete blocker and use the closest task-appropriate evidence; task shapes that have no executable journey are not blocked and need no E2E justification.
-- Always require the baseline-to-candidate diff, applicable existing checks, and evidence needed by the approved verdict rule.
-- Reject candidates that weaken or manipulate evaluation gates, and count added code, dependencies, abstractions, maintenance, and operational cost against the candidate.
-
-### Run files and isolation
-
-- `optimizer.md` is the Optimizer's entire instruction: approved Goal, candidate scope, irreducible constraints, cheap checks, and relevant repository context; never include Evaluation criteria.
-- `evaluator.md` is the Evaluator's entire instruction: Goal first, approved verdict rule, task-appropriate evidence plan, required evidence, exact evaluation format from `references/orchestrator.md`, complexity policy, and candidate-gate policy; never include `optimizer.md`.
-- `orchestrator.md` comes from `references/orchestrator.md` with every placeholder filled; preserve its roles, ratchet loop, guardrails, and evaluation format.
-- Run Optimizer and Evaluator only in their isolated roles. Give the Optimizer only `optimizer.md`, `learnings.md`, and the repository; give each fresh Evaluator only `evaluator.md`, both refs, and the diff.
-- Never ask for Git setup or baseline approval during preflight. If the current directory is not inside a Git repository, run `git init` there and create an empty `chore: initialize Automake baseline` commit; use command-scoped Automake author identity when no Git identity is configured.
-- If the repository has no committed `HEAD`, create that same empty initialization commit. If tracked or non-ignored untracked work remains, stage it and commit `chore: capture Automake baseline` so the ratchet starts from the current contents without discarding them; preserve ignored files and exclude likely local secret files through `.git/info/exclude` rather than committing them.
-- Continue only after `git status --porcelain` is empty and set `BASELINE` to that `HEAD`; if automatic setup cannot reach this state, stop and report the concrete failure without requesting a setup decision.
-
-### Final summary Template
-
-```text
-Ready to run Automake.
-
-Optimizer: <Goal, candidate scope, and constraints in plain language>
-Evaluator: <BETTER rule and task-appropriate evidence in plain language>
-Orchestrator: <max iterations, max consecutive failures, and success condition>
-Loop: Each Optimizer proposes one candidate; a fresh Evaluator tests it; BETTER advances the baseline and NOT_BETTER restores it.
-
-1. Run
-2. No — changes needed
-```
-
-### Frontmatter
-
-- `disable-model-invocation: true` keeps this skill user-invoked only; where unsupported, the narrow description discourages spurious invocation.
+- Ask a missing-input question with 2–4 numbered concrete choices, mark one recommendation, accept free-form replies, and ask nothing else in that turn.
+- Default to 5 iterations, 3 consecutive failures, and no success condition; use an early stop only when the user supplied an observable condition distinct from BETTER.
+- Begin the final normal-path gate with `Ready to run Automake.`, summarize Optimizer, Evaluator, Orchestrator, and the accept-or-restore loop, then print the two Recipe choices.
+- Treat the Automake directory only as ratchet data: never export it as `AUTOMAKE_HOME`, `CODEX_HOME`, or another tool home, never inspect unrelated processes, and delete run-local launch scratch before reporting.
+- Before any approved or run-now execution, read and follow [the execution protocol](references/orchestrator.md); it defines the only state files, role ownership, conservative transitions, exact verdict, and terminal report.

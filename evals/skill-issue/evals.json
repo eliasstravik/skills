@@ -1,0 +1,30 @@
+{
+  "skill_name": "skill-issue",
+  "conventions": "Each executor is a fresh GPT-5.6 Sol one-shot context. Copy the named fixture into __RUN_DIR__/workspace and replace __RUN_DIR__. Every read and write stays inside that run directory; source skills, installed skills, unrelated repositories, external temporary directories, credentials, and services are off-limits. No-skill arms forbid every installed skill. Save the complete user-facing response to transcript.md.",
+  "evals": [
+    {
+      "id": 1,
+      "name": "new-sequential-skill-from-evidence",
+      "fixture": "new-sequential",
+      "prompt": "Create the requested `release-note` skill from the evidence packet in `workspace/`. Write the finished artifact to `workspace/skills/release-note/SKILL.md`. Make it compact and executable, preserve the explicit invocation contract, and do not invent evidence that is not in the packet."
+    },
+    {
+      "id": 2,
+      "name": "bloated-existing-skill-audit",
+      "fixture": "bloated-audit",
+      "prompt": "Audit and revise the existing `deploy-note` skill in `workspace/skills/deploy-note/SKILL.md` against the supplied requirements, assertions, and bare-core result. Produce the smallest complete shipping artifact. Do not change any other fixture file."
+    },
+    {
+      "id": 3,
+      "name": "router-versus-switch-boundary",
+      "fixture": "router-boundary",
+      "prompt": "Create the requested `support-router` skill at `workspace/skills/support-router/SKILL.md` from the supplied specialist catalog, requirements, and evidence. It must resolve ownership safely without performing specialist work."
+    },
+    {
+      "id": 4,
+      "name": "overflow-and-frontmatter-discipline",
+      "fixture": "overflow-frontmatter",
+      "prompt": "Repair the model-invoked `source-research` skill in `workspace/skills/source-research/` using the supplied evidence. Keep the shipping surface compact, preserve necessary branch-only source policy, and make the result usable even when an auxiliary file cannot be read."
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "skill_name": "voice-mode",
+  "purpose": "Baseline saturation probes for contract edges not surfaced in round 1; these are prove-need sources, not the final four-flow eval suite.",
+  "probes": [
+    {
+      "id": 5,
+      "eval_name": "refresh-and-short-answer",
+      "prompt": "We're already in voice mode. Stay in voice mode and use <run-dir>/workspace/status-note.md to answer this: is the customer migration finished, and what remains?",
+      "fixture": "fixtures/refresh-and-short-answer",
+      "user_replies": [],
+      "expected_output": "A one- or two-sentence spoken answer that treats the invocation as a refresh, preserves the exact remaining count and deadline, and emits no formatting or path."
+    },
+    {
+      "id": 6,
+      "eval_name": "one-question-at-a-time",
+      "prompt": "I'm driving and using voice mode. Help me decide whether to ship the Atlas alerting change tonight. The context note is in <run-dir>/workspace/decision-context.md, but important decision details are missing. Ask what you need before recommending.",
+      "fixture": "fixtures/one-question-at-a-time",
+      "user_replies": [
+        "The production on-call engineering team will hear the alerts first.",
+        "A rollback takes about five minutes.",
+        "The main customer impact would be duplicate alerts."
+      ],
+      "expected_output": "Each spoken assistant turn asks at most one question, consumes replies in order, then gives a concise recommendation without visual formatting."
+    },
+    {
+      "id": 7,
+      "eval_name": "exact-facts-without-filler",
+      "prompt": "Switch to voice mode. Give me a concise spoken status update from <run-dir>/workspace/metrics.md. Keep every important name, date, and number exact; I'm about to repeat this to the board.",
+      "fixture": "fixtures/exact-facts-without-filler",
+      "user_replies": [],
+      "expected_output": "A concise natural spoken update preserving every material name, date, and metric without Markdown, paths, filler, or performed enthusiasm."
+    },
+    {
+      "id": 8,
+      "eval_name": "slow-verification",
+      "prompt": "I'm on voice mode. Run the verification program in <run-dir>/workspace/verify-release.sh. It takes several seconds. Keep me oriented and tell me the result when it finishes, but don't read technical paths or shell syntax aloud.",
+      "fixture": "fixtures/slow-verification",
+      "user_replies": [],
+      "expected_output": "A brief spoken announcement before genuinely slow work, followed by the exact result in spoken prose; no path, command syntax, Markdown, or extra chatter."
+    }
+  ]
+}

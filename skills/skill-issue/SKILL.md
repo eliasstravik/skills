@@ -1,61 +1,43 @@
 ---
 name: skill-issue
-description: Workflow for designing, formatting, and testing agent skills around a strict-format core section and hard line budgets.
+description: Governs the form of compact, evidence-earned agent skills.
 disable-model-invocation: true
 ---
 
-# skill-issue
+# Skill Issue
 
 ## Checklist
 
-- [ ] **Baseline captured:** the task ran in fresh no-skill contexts until one more run surfaced nothing new; every distinct failure preserved verbatim. An existing skill baselined against its current version.
-- [ ] **Need proven:** at least one preserved failure demands the skill; with zero failures, nothing built.
-- [ ] **Assertion suite written:** one checkable assertion per required behavior and preserved failure; severe or contractual assertions marked **critical**.
-- [ ] **Core primitive chosen:** exactly one row from the primitives table, picked by what the agent must *do*, not by topic.
-- [ ] **Core written:** an H1 title plus one H2 bearing the primitive's name, holding only its mandated form, within **20 body lines**.
-- [ ] **Core tested bare:** the same task run with and without it, in fresh contexts, judged pairwise — before any Details line existed.
-- [ ] **Details earned:** every line in `## Details` traceable to an assertion the bare core failed; one section, **80 lines** maximum, **100 body lines** total.
-- [ ] **Overflow externalized:** depth still needed past 100 body lines moved to linked reference files or bundled scripts, each with its read-or-run trigger named in Details.
-- [ ] **Shipped clean:** all critical assertions passing; `agentskills validate` clean, or a manual frontmatter check recorded.
+- [ ] Every box is checked or marked not applicable with a reason.
+- [ ] Requirements, assertions, preserved failures, and existing skill text were read; at least one preserved baseline failure proves need.
+- [ ] One checkable assertion covers every required behavior and preserved failure; contractual ones are critical.
+- [ ] Exactly one core primitive was chosen by what the agent must do.
+- [ ] The bare core is an H1 plus that primitive's H2 in its mandated form, with at most 20 body lines.
+- [ ] Fresh controlled with/without runs and a blind forced comparison tested the bare core before any Details line existed.
+- [ ] One Details section contains only lines traceable to assertions the bare core failed, within 80 Details lines and 100 total body lines.
+- [ ] Necessary overflow is externalized through one-level Calls whose triggers, outputs, and fallbacks are explicit.
+- [ ] Frontmatter name and description fit the invocation mode; extensions and validator or manual-check results are recorded.
+- [ ] Full treatment passes every critical assertion, applies the optimized description verbatim, and keeps eval evidence outside the shipping skill.
 
 ## Details
 
-### Core primitives
+| Primitive | Choose it for | Required shape |
+| --- | --- | --- |
+| Checklist | Independent conditions must all pass | `- [ ]` passing-state conditions; check each or mark it inapplicable with a reason |
+| Recipe | Outcome depends on action order | Flat ordered list with one imperative per item and no nested bullets |
+| Loop | A sequence repeats toward a bound | `Repeat until <observable exit>, max N:` followed by an ordered body that carries its invariants |
+| Switch | This skill retains ownership after choosing a branch | Two or three branches as bold question-and-arrow lines in one Recipe item; otherwise `Condition | Action`, with observable exclusive rows and first match winning |
+| Router | Classification transfers ownership | `Request | Skill`; link one reachable specialist per match, include overlap, uncertainty, and no-match rows, invoke or recommend it, then stop |
+| Handler | An expected failure interrupts the normal path | `Failure | Recovery`; recover only by retrying, aborting, compensating, or asking the user |
+| Call | Execution or depth belongs in one auxiliary file | `read [file](path) when <trigger>` or `run [script](path) to <outcome>`; state the expected output and what to do when reading or running is unavailable |
+| Rules | The same constraints govern every action | Unordered imperatives, one rule per bullet; prohibit only a rationalization observed in evidence |
+| Reference | The agent looks up facts | Unordered facts or `Term | Meaning`; no commands |
+| Template | Output must conform to a type | One fenced skeleton with placeholders; keep literal text only where exactness changes behavior |
+| Example | One concrete pair is necessary to convey style or detail | One filled input/output pair; use only alongside a Template |
+| Rubric | The agent must judge quality | `Criterion | Standard`, with checkable standards and one non-negotiable floor |
 
-Every skill opens with **exactly one primitive**; the core's H2 heading is the primitive's name. They map control flow and contracts onto markdown the way keywords map onto a language:
-
-| Primitive | Analogue | Use when | Mandated form |
-|-----------|----------|----------|---------------|
-| **Checklist** | conjunction | conditions must all hold; order is free | `- [ ]` per condition, phrased as its passing state; every box gets checked or marked not applicable with a reason |
-| **Recipe** | sequence | order changes the outcome | Ordered list; one imperative action per number; no sub-bullets |
-| **Loop** | iteration | a recipe repeats toward an exit | `Repeat until <observable condition>, max N:` then an ordered body; prefer a validator check as the exit condition; invariants restated inside the body |
-| **Switch** | branch | the situation selects the action | For 2-3 branches, bolded `**Question?** →` action lines inside a Recipe step; for many flat cases, a `Condition \| Action` table — conditions observable and mutually exclusive, earlier rows win; a multi-step action becomes a Call |
-| **Router** | dispatch | classifying a request transfers ownership to one specialized skill | `Request \| Skill` table — requests observable and mutually exclusive, earlier rows win; one skill per matched row plus overlap/uncertain/no-match fallbacks; invoke a reachable skill or recommend a user-invoked one, then stop without doing its work |
-| **Handler** | exception | a step can fail in anticipated ways | `Failure \| Recovery` table; recovery verbs only retry, abort, compensate, or escalate to the user; fires only off the normal path |
-| **Call** | function call | the work lives outside this file | A link with a disposition: `read <file> when <trigger>` or `run <script> to <outcome>`; one level deep; expected output and no-runtime fallback stated |
-| **Rules** | invariant | constraints bind every action | Unordered list; one imperative rule per bullet; a prohibition only against an observed rationalization; a GFM alert only to raise one rule's salience |
-| **Reference** | data | facts get looked up, not executed | Unordered fact list or `Term \| Meaning` table; no instructions |
-| **Template** | type | output must have a shape | One fenced skeleton with `<placeholder>` fields; exact text only where exactness changes behavior |
-| **Example** | test case | style or detail only a concrete instance conveys | Paired fenced input and output blocks, one filled instance; complements a Template, never replaces it |
-| **Rubric** | evaluator | quality must be judged | `Criterion \| Standard` table; every standard checkable; one absolute floor |
-
-**Router vs Switch:** a Router owns classification, including clarification and tie-breaking, then transfers ownership; a Switch keeps ownership and performs the selected action.
-
-**Grammar follows the primitive:** boxes state conditions as *already true*, numbers *command* actions, Rules bullets *command*, Reference bullets *declare*, standards *measure*, Examples *demonstrate*, Calls *defer*, Handlers *recover*.
-
-### Line budgets
-
-- **Body** is every line after the frontmatter's closing `---`; headings and blank lines count.
-- **Ceilings, never targets:** the platform maximum is 500 body lines — the core's 20 is 4% of it, the 100 total is 20%. Do not pad toward them.
-- **One primitive per core.** A second structure the core genuinely needs (a Template a Recipe fills, a Rubric a Loop checks) lives in Details, rendered in its own primitive's mandated form.
-
-### Writing Details
-
-- **Every line earns its place:** a line that changes no behavior gets deleted, not kept as context.
-- **Never restate the core:** Details adds only the definitions, criteria, conditions, and at most one Example the core needs to execute perfectly.
-
-### Overflow, frontmatter, shipping
-
-- **Overflow:** past 100 body lines, externalize through Calls — reference files for branch-only depth, scripts for deterministic work. Assets are output ingredients; selection logic stays in SKILL.md.
-- **Frontmatter:** required `name` (matches directory; 1-64 lowercase letters, numbers, single hyphens) and `description` (third person; for model-invoked skills, triggering conditions only, never a workflow summary; for user-invoked skills, a short index line). Treat `disable-model-invocation`, `context: fork`, and `$ARGUMENTS` as extensions: document effect and fallback.
-- **Testing:** fresh contexts that have never seen the skill, controllable variables held constant, treatment versus control judged with a forced, reasoned winner from a third context. Rerun the no-skill baseline as models improve; **retire** the skill when its delta disappears.
+- Router ends after handoff; Switch performs the chosen action itself.
+- In a Recipe, count coordinated verbs, `then`, and conditional commands separately: split `write and save`, `write, then report`, and `if <condition>, stop and ask` into distinct numbered actions.
+- Prefer one observable outcome verb for recovery: `Escalate missing or conflicting facts to the user`; never keep `stop and ask` as one Recipe item.
+- Descriptions are third person. A user-invoked skill gets a short index line; a model-invoked skill states only observable triggering conditions and exclusions.
+- Start model-invoked descriptions with `Triggers when`; never lead with capability verbs such as `Routes`, `Classifies`, `Researches`, or `Creates`.
