@@ -4,38 +4,43 @@
   "date": "2026-07-24",
   "saturation": {
     "passed": true,
-    "rounds": 2,
-    "criterion": "one additional full fresh GPT-5.6 Sol no-skill round revealed no new root-cause failure class"
+    "counted_rounds": 2,
+    "criterion": "a second clean counted GPT-5.6 Sol no-skill round added no new root-cause failure class beyond the preserved F1 class"
   },
   "model_policy": {
     "executors": {
       "model": "gpt-5.6-sol",
-      "launch_path": "codex --ask-for-approval never exec --ephemeral --skip-git-repo-check -m gpt-5.6-sol -c model_reasoning_effort=\"medium\" --sandbox workspace-write -C <eval-run-dir> --output-last-message <eval-run-dir>/last-message.md --json -"
+      "launch_path": "codex exec --skip-git-repo-check --ignore-user-config --ignore-rules -m gpt-5.6-sol -c model_reasoning_effort=\"medium\" -c approval_policy=\"never\" --sandbox workspace-write -C <eval-run-dir> -o <eval-run-dir>/transcript.md -"
     },
     "checker": {
       "model": "gpt-5.6-terra",
-      "launch_path": "codex --ask-for-approval never exec --ephemeral --skip-git-repo-check -m gpt-5.6-terra -c model_reasoning_effort=\"medium\" --sandbox workspace-write -C <round-root> --output-last-message <round-root>/terra-check-last-message.md --json -"
+      "launch_path": "codex exec --skip-git-repo-check --ignore-user-config --ignore-rules -m gpt-5.6-terra -c model_reasoning_effort=\"medium\" -c approval_policy=\"never\" --sandbox workspace-write -C <round-root> -o <round-root>/<check>.md -"
     },
-    "no_prohibited_model_evidence": "Terra found no Claude Code, Claude model, Fable, claude, or claude -p evidence in launch metadata, Codex event streams, transcripts, or final outputs."
+    "final_check": "evals/copywriting/runs/baseline/round-2/terra-final-check.md",
+    "no_prohibited_model_evidence": "Terra found no Claude Code, Claude model, Fable, claude, or claude -p evidence in counted launch metadata, execution logs, transcripts, or final outputs."
   },
   "failure_classes": [
     {
       "id": "F1",
-      "label": "Customer-language evidence is reused as public-ready copy without enough transformation",
+      "label": "Customer-language evidence is pasted into public-facing copy",
       "eval_ids": [6],
       "eval_name": "social-content-voice-conflict",
       "rounds_observed": [1, 2],
       "evidence": [
         "Round 1 reused supplied customer phrases including \"Every project update turns into vibes\" and \"tiny Jira sheriff\" in public-facing launch/newsletter copy.",
-        "Round 2 again placed the same distinctive supplied phrases in public-facing copy."
+        "Round 2 reused supplied customer phrases including \"You can spot a flaky test faster than a flaky handoff\", \"every project update turns into vibes\", and \"tiny Jira sheriff\" in public-facing copy."
       ],
-      "why_it_matters": "Customer wording can inform voice and problem framing, but direct reuse can publish unapproved customer language as brand copy and make the work feel copied rather than brand-authored.",
-      "assertion_seed": "The output may synthesize themes from supplied customer language, but it must not place distinctive supplied customer phrases into public-facing copy unless the packet explicitly authorizes quotation or direct reuse."
+      "why_it_matters": "Customer wording can inform voice and problem framing, but direct reuse can publish unapproved customer language as brand copy and makes the result feel copied rather than brand-authored.",
+      "assertion_seed": "The output may synthesize themes from supplied customer language, but must not place distinctive supplied customer phrases into public-facing copy unless the packet explicitly authorizes quotation or direct reuse."
     }
   ],
   "run_evidence_paths": [
-    "evals/copywriting/runs/no-skill-baseline/round-1/",
-    "evals/copywriting/runs/no-skill-baseline/round-2/"
+    "evals/copywriting/runs/baseline/round-1/",
+    "evals/copywriting/runs/baseline/round-2/"
   ],
-  "generated_evidence_tracked": false
+  "generated_evidence_tracked": false,
+  "notes": [
+    "One earlier round-2 eval-1 attempt was discarded after Terra found an external /tmp validation write.",
+    "Eval 1 was rerun in place with an explicit no-external-temp wrapper before the final Terra check; the counted round-2 evidence is the clean replacement."
+  ]
 }

@@ -1,22 +1,24 @@
 # copywriting no-skill baseline failures
 
-Date: 2026-07-24. Ticket: ELI-252.
+Date: 2026-07-24. Ticket: [ELI-252](/ELI/issues/ELI-252).
 
-## Gate result
+## Gate Result
 
 Saturated no-skill baseline: PASS.
 
-Two fresh GPT-5.6 Sol no-skill rounds ran across the eight approved evals. Round
-1 found one root-cause failure class. Round 2 repeated that class and revealed
-no new class, so saturation is reached and the next ticket may derive
-assertions and test a bare core.
+Two fresh GPT-5.6 Sol no-skill rounds ran across the eight approved evals.
+Every counted baseline prompt used the approved `evals/copywriting/evals.json`
+corpus with only `__RUN_DIR__` replaced, copied the fixture into the run-local
+`workspace/`, forbade every installed skill, and saved `transcript.md`.
 
-`skills/copywriting/` is still absent. This record proves need for a narrow
-skill behavior; it does not approve shipping.
+GPT-5.6 Terra's final check found no skill contamination, no prohibited
+model/tool use, no browsing, no live-state access, and no counted run-directory
+isolation failure. The final counted second round added no failure class beyond
+F1, so saturation is reached.
 
-## Preserved failure class
+## Preserved Failure Class
 
-### F1 - Customer-language evidence reused as public copy
+### F1 - Customer-language evidence pasted into public copy
 
 Eval: `6-social-content-voice-conflict`.
 
@@ -24,75 +26,70 @@ Expected behavior: infer a usable brand voice from conflicting evidence, use
 customer language as evidence rather than pasted copy, avoid living-writer
 imitation, and explain the voice assumption briefly after the copy.
 
-Round 1 and round 2 both reused supplied customer phrases directly in
-public-facing launch copy. The repeated phrases include:
+Round 1 reused distinctive supplied customer phrases in public-facing launch
+copy, including:
 
 - `Every project update turns into vibes`
 - `tiny Jira sheriff`
 
+The clean counted round 2 repeated the class and also opened the thread with
+the supplied phrase:
+
+- `You can spot a flaky test faster than a flaky handoff`
+
 Why this matters: customer wording can inform voice and problem framing, but
-direct reuse can publish unapproved customer language as brand copy and make
-the work feel copied rather than brand-authored.
+direct reuse can publish unapproved customer language as brand copy and makes
+the result feel copied rather than brand-authored. The recurrence across two
+independent no-skill rounds proves a stable failure class.
 
-Assertion seed for ELI-253: copy may synthesize customer-language themes, but
-must not place distinctive supplied customer phrases into public-facing copy
-unless the packet explicitly authorizes quotation or direct reuse.
+Assertion seed for [ELI-253](/ELI/issues/ELI-253): copy may synthesize themes
+from supplied customer language, but must not place distinctive supplied
+customer phrases into public-facing copy unless the packet explicitly
+authorizes quotation or direct reuse.
 
-## Run evidence
+## Compliance Evidence
 
-Generated evidence is intentionally untracked under:
+Counted raw evidence is intentionally untracked under:
 
-- `evals/copywriting/runs/no-skill-baseline/round-1/`
-- `evals/copywriting/runs/no-skill-baseline/round-2/`
+- `evals/copywriting/runs/baseline/round-1/`
+- `evals/copywriting/runs/baseline/round-2/`
 
-Each of the 16 executor runs wrote:
+Each counted executor run wrote:
 
 - `prompt.md`
-- `eval_metadata.json`
-- `codex-events.jsonl`
-- `codex-stderr.log`
+- `metadata.json`
 - `timing.json`
 - `transcript.md`
+- `codex.stdout.log`
+- `codex.stderr.log`
+- `workspace/source-packet.md`
 - `workspace/outputs/final.md`
 
-Round 1 had eight executor exit code `0` runs. The wrapper failed after the
-first four completed because zsh reserves `status`; those four timing files
-preserve token usage but not wall time. Required transcripts and final outputs
-were present for all eight runs.
+Final Terra check:
 
-Round 2 had eight executor exit code `0` runs with wall-time metadata.
+- `evals/copywriting/runs/baseline/round-2/terra-final-check.md`
 
-Token evidence:
+One earlier round-2 eval-1 attempt was discarded after Terra found an external
+`/tmp` validation write. Eval 1 was rerun in place with an explicit
+no-external-temp wrapper before the final Terra check. The counted round-2
+evidence is the clean replacement.
 
-| Round | Executor runs | Input tokens | Output tokens |
-| --- | ---: | ---: | ---: |
-| 1 | 8 | 852184 | 19761 |
-| 2 | 8 | 875381 | 19824 |
-
-## Model and launch evidence
+## Model and Launch Evidence
 
 No-skill executors:
 
 ```text
-codex --ask-for-approval never exec --ephemeral --skip-git-repo-check -m gpt-5.6-sol -c model_reasoning_effort="medium" --sandbox workspace-write -C <eval-run-dir> --output-last-message <eval-run-dir>/last-message.md --json -
+codex exec --skip-git-repo-check --ignore-user-config --ignore-rules -m gpt-5.6-sol -c model_reasoning_effort="medium" -c approval_policy="never" --sandbox workspace-write -C <eval-run-dir> -o <eval-run-dir>/transcript.md -
 ```
 
-Independent checks:
+Independent Terra checks:
 
 ```text
-codex --ask-for-approval never exec --ephemeral --skip-git-repo-check -m gpt-5.6-terra -c model_reasoning_effort="medium" --sandbox workspace-write -C <round-root> --output-last-message <round-root>/terra-check-last-message.md --json -
+codex exec --skip-git-repo-check --ignore-user-config --ignore-rules -m gpt-5.6-terra -c model_reasoning_effort="medium" -c approval_policy="never" --sandbox workspace-write -C <round-root> -o <round-root>/<check>.md -
 ```
-
-Terra passed model-policy and baseline-purity checks for every executor run in
-both rounds. Evidence reviewed: `eval_metadata.json`, `prompt.md`,
-`codex-events.jsonl`, `timing.json`, `transcript.md`, and
-`workspace/outputs/final.md`.
-
-No Claude Code, Claude model, Fable, `claude`, or `claude -p` evidence appears
-in launch metadata, event streams, transcripts, or final outputs.
 
 ## Decision
 
-Proceed to ELI-253. The preserved failure is narrow: source-language
-transformation for social/content voice work. Later skill scope must still be
-earned by paired treatment/control runs and viewer feedback.
+Proceed to [ELI-253](/ELI/issues/ELI-253). The preserved failure is narrow:
+source-language transformation for social/content voice work. Later skill scope
+must still be earned by paired treatment/control runs and viewer feedback.
