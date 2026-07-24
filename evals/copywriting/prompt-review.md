@@ -62,7 +62,15 @@ preserved baseline failures and treatment benefit.
 
 ## Approval checklist
 
-- [ ] Prompt categories match the approved plan and [ELI-251](/ELI/issues/ELI-251) acceptance criteria.
-- [ ] Scripted replies and prompt constraints are acceptable evaluation truth.
-- [ ] Fictional fixtures are safe to use in run-local no-skill baselines.
-- [ ] The next ticket may start saturated no-skill baseline execution.
+- [x] Prompt categories match the approved plan and [ELI-251](/ELI/issues/ELI-251) acceptance criteria.
+- [x] Scripted replies and prompt constraints are acceptable evaluation truth.
+- [x] Fictional fixtures are safe to use in run-local no-skill baselines.
+- [x] The next ticket may start saturated no-skill baseline execution.
+
+## Approval record
+
+The Paperclip prompt-review confirmation on [ELI-250](/ELI/issues/ELI-250)
+was accepted on 2026-07-24 before [ELI-252](/ELI/issues/ELI-252) baseline
+execution began. The approval authorizes only saturated no-skill baseline
+execution; it does not approve building, installing, or shipping
+`skills/copywriting/`.

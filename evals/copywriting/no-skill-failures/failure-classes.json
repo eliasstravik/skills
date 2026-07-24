@@ -1,0 +1,41 @@
+{
+  "skill_name": "copywriting",
+  "ticket": "ELI-252",
+  "date": "2026-07-24",
+  "saturation": {
+    "passed": true,
+    "rounds": 2,
+    "criterion": "one additional full fresh GPT-5.6 Sol no-skill round revealed no new root-cause failure class"
+  },
+  "model_policy": {
+    "executors": {
+      "model": "gpt-5.6-sol",
+      "launch_path": "codex --ask-for-approval never exec --ephemeral --skip-git-repo-check -m gpt-5.6-sol -c model_reasoning_effort=\"medium\" --sandbox workspace-write -C <eval-run-dir> --output-last-message <eval-run-dir>/last-message.md --json -"
+    },
+    "checker": {
+      "model": "gpt-5.6-terra",
+      "launch_path": "codex --ask-for-approval never exec --ephemeral --skip-git-repo-check -m gpt-5.6-terra -c model_reasoning_effort=\"medium\" --sandbox workspace-write -C <round-root> --output-last-message <round-root>/terra-check-last-message.md --json -"
+    },
+    "no_prohibited_model_evidence": "Terra found no Claude Code, Claude model, Fable, claude, or claude -p evidence in launch metadata, Codex event streams, transcripts, or final outputs."
+  },
+  "failure_classes": [
+    {
+      "id": "F1",
+      "label": "Customer-language evidence is reused as public-ready copy without enough transformation",
+      "eval_ids": [6],
+      "eval_name": "social-content-voice-conflict",
+      "rounds_observed": [1, 2],
+      "evidence": [
+        "Round 1 reused supplied customer phrases including \"Every project update turns into vibes\" and \"tiny Jira sheriff\" in public-facing launch/newsletter copy.",
+        "Round 2 again placed the same distinctive supplied phrases in public-facing copy."
+      ],
+      "why_it_matters": "Customer wording can inform voice and problem framing, but direct reuse can publish unapproved customer language as brand copy and make the work feel copied rather than brand-authored.",
+      "assertion_seed": "The output may synthesize themes from supplied customer language, but it must not place distinctive supplied customer phrases into public-facing copy unless the packet explicitly authorizes quotation or direct reuse."
+    }
+  ],
+  "run_evidence_paths": [
+    "evals/copywriting/runs/no-skill-baseline/round-1/",
+    "evals/copywriting/runs/no-skill-baseline/round-2/"
+  ],
+  "generated_evidence_tracked": false
+}
