@@ -53,10 +53,11 @@ baseline failure. **(critical)** marks severe or contractual behavior.
 - **C12 (critical) - Regulated or sensitive claims are qualified.** Health,
   compliance, security, procurement, implementation, and legal-adjacent claims
   stay within supplied evidence and flag review gaps where appropriate.
-- **C13 (critical) - Permitted public research is bounded and sourced.** When
-  browsing is allowed and public facts are used to close a material gap, only
-  consequential sourced facts enter the copy or notes; provenance is stated in
-  final notes, and unsupported external facts are not treated as proof.
+- **C13 (deferred) - Permitted public research is bounded and sourced.** When
+  browsing is allowed in a future approved scope and public facts are used to
+  close a material gap, only consequential sourced facts enter the copy or
+  notes; provenance is stated in final notes, and unsupported external facts are
+  not treated as proof.
 
 ## Traceability - preserved failures to assertions
 
@@ -76,4 +77,5 @@ baseline failure. **(critical)** marks severe or contractual behavior.
 | 6 - social content voice conflict | C1-C3, C9-C11 |
 | 7 - fast provisional launch campaign | C1-C3, C8, C9 |
 | 8 - B2B sales collateral frozen research | C1-C3, C5, C9, C12 |
-| Bare core, viewer, permitted-research, and follow-on shipping gates | C1-C13 |
+| Bare core, viewer, and follow-on shipping gates | C1-C12 |
+| Future permitted-research fixture before adding browse-enabled scope | C13 |

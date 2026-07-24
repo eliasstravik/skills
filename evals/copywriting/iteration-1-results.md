@@ -18,9 +18,9 @@ Added Details scope:
 - Prefer brand evidence for public tone when brand samples and customer
   language conflict.
 
-No `## Calls` were added. C13 allowed-public-research provenance remains in the
-assertion suite but did not earn a Details line because the approved bare-core
-run did not contain an allowed-browse treatment failure.
+No `## Calls` were added. C13 allowed-public-research provenance is deferred
+outside the active shipping assertion set because the approved corpus has no
+allowed-browse fixture and the skill body does not add browse-enabled behavior.
 
 ## Full paired benchmark
 
@@ -63,8 +63,8 @@ Terra summary:
 | Overall | 84 | 2 | 97.7% |
 
 All 16 C1 checks passed. Every with-skill run read only its run-local
-`skill/SKILL.md`; every without-skill run read no skill. Every with-skill
-critical assertion passed across the eight approved evals.
+`skill/SKILL.md`; every without-skill run read no skill. Every active
+with-skill critical assertion passed across the eight approved evals.
 
 The remaining failures were both in the no-skill eval 6 control:
 
@@ -79,16 +79,43 @@ The stock benchmark aggregation over iteration 2 reported:
 - Without skill: 96% pass rate.
 - Delta: +0.04 pass rate.
 
+### Iteration 3 final review-fix result
+
+Raw root: `evals/copywriting/runs/full/iteration-3/`.
+
+After code review, the Switch rows were reordered and narrowed so weak
+positioning, unsupported scope, and offer-logic failures are exclusive from
+missing-information gaps. The full paired benchmark was rerun against that
+final skill.
+
+Terra summary:
+
+| Configuration | Passed | Failed | Pass rate |
+| --- | ---: | ---: | ---: |
+| With skill | 43 | 0 | 100% |
+| Without skill | 41 | 2 | 95.3% |
+| Overall | 84 | 2 | 97.7% |
+
+All 16 C1 checks passed. Every active with-skill assertion passed. The only
+remaining failures were the no-skill social/content C10/C11 failures.
+
+The stock benchmark aggregation over iteration 3 reported:
+
+- With skill: 100% pass rate.
+- Without skill: 96% pass rate.
+- Delta: +0.04 pass rate.
+
 ## Static viewer and feedback
 
 The standard skill-creator static viewer was generated at
-`evals/copywriting/runs/full/iteration-2/review.html`.
+`evals/copywriting/runs/full/iteration-3/review.html` and uploaded to
+[ELI-254](/ELI/issues/ELI-254) as an attachment-backed work product for final
+review.
 
 The blocking bare-core viewer feedback captured in [ELI-253](/ELI/issues/ELI-253)
 identified the same C10/C11 customer-language failure. The full iteration
-addressed that feedback through the earned Details section. Terra's iteration 2
-with-skill `eval_feedback` fields contain no remaining suggestions or review
-needs.
+addressed that feedback through the earned Details section. Final human or
+board feedback is requested in [ELI-254](/ELI/issues/ELI-254) before install.
 
 ## Form and scope check
 
@@ -98,6 +125,8 @@ needs.
 - One primitive remains: `## Switch`.
 - One `## Details` section exists.
 - Details are 4 lines, within the 80-line Details budget.
-- Shipping scope stays limited to evidence-backed commercial copy surfaces in
-  the approved eval corpus: landing/page rewrite, ads, lifecycle email,
-  social/content voice, launch campaign, and B2B sales collateral.
+- Evidence-earned behavioral scope is the customer-language/voice failure in
+  social, content, newsletter, and voice-led public copy. Landing/page rewrite,
+  ads, lifecycle email, launch campaign, and B2B sales collateral remain
+  passing regression surfaces from the approved corpus, not additional
+  Details-earned expansion.
