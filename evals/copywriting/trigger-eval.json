@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "split": "train",
+    "query": "Use /copywriting on docs/launch/solace-desk-packet.md. I need a fast provisional homepage hero, Product Hunt tagline, LinkedIn launch post, and announcement email, but do not invent proof or block on non-safety gaps.",
+    "should_trigger": true
+  },
+  {
+    "id": 2,
+    "split": "train",
+    "query": "/copywriting please rewrite the landing page in research/north-pier.md. The CEO loves the broad platform headline, but the proof only supports renewal-prep briefs, so challenge anything misleading before drafting.",
+    "should_trigger": true
+  },
+  {
+    "id": 3,
+    "split": "train",
+    "query": "Use the copywriting skill for paid search and paid social variants from ads/brief.md. Keep character limits, avoid fake scarcity, and do not add discounts or customer results.",
+    "should_trigger": true
+  },
+  {
+    "id": 4,
+    "split": "train",
+    "query": "Run /copywriting for this lifecycle email sequence about a sleep journaling app. The source packet has health-adjacent claims, so qualify anything risky and flag legal review gaps.",
+    "should_trigger": true
+  },
+  {
+    "id": 5,
+    "split": "train",
+    "query": "/copywriting: create a six-post launch thread and short newsletter section from voice-evidence.md. Customer quotes are evidence only; do not imitate the named writer in the brief.",
+    "should_trigger": true
+  },
+  {
+    "id": 6,
+    "split": "train",
+    "query": "Please use /copywriting to rewrite a B2B sales one-pager from the frozen procurement packet. No browsing; keep integration and security claims tied to the supplied notes.",
+    "should_trigger": true
+  },
+  {
+    "id": 7,
+    "split": "train",
+    "query": "Can you proofread this internal engineering RFC for grammar and remove passive voice? It is not customer-facing copy and I do not want a strategy pass.",
+    "should_trigger": false
+  },
+  {
+    "id": 8,
+    "split": "train",
+    "query": "Research competitor landing pages for payroll software and summarize their positioning. Browse the web and give me a market map before we write anything.",
+    "should_trigger": false
+  },
+  {
+    "id": 9,
+    "split": "train",
+    "query": "Turn these product requirements into release notes for engineers and support. Keep it factual, but this is internal enablement, not audience-facing marketing.",
+    "should_trigger": false
+  },
+  {
+    "id": 10,
+    "split": "train",
+    "query": "Write a journalist pitch email about our funding announcement and find three reporters who might cover it.",
+    "should_trigger": false
+  },
+  {
+    "id": 11,
+    "split": "train",
+    "query": "Make a brand strategy doc for a new AI accounting startup: audience, enemy, archetype, visual identity, and a slogan.",
+    "should_trigger": false
+  },
+  {
+    "id": 12,
+    "split": "train",
+    "query": "Use /html to build an interactive landing-page mockup from this marketing copy. I need the actual browser artifact, not copywriting help.",
+    "should_trigger": false
+  },
+  {
+    "id": 13,
+    "split": "test",
+    "query": "Use /copywriting on the attached source packet to draft a procurement-ready one-pager for enterprise buyers. Preserve the frozen research and cite the proof notes at the end.",
+    "should_trigger": true
+  },
+  {
+    "id": 14,
+    "split": "test",
+    "query": "/copywriting for a vague homepage rewrite: the founder says 'make it convert' but the packet has no audience, offer, or proof. Ask the minimum questions before drafting.",
+    "should_trigger": true
+  },
+  {
+    "id": 15,
+    "split": "test",
+    "query": "Use the copywriting skill to make launch campaign copy across homepage, social, and email from this packet. We need finished copy first plus visible assumptions.",
+    "should_trigger": true
+  },
+  {
+    "id": 16,
+    "split": "test",
+    "query": "Use /copywriting for a paid social campaign, but the brief asks for a customer quote and time-saved stat that are not approved. Draft safe variants and call out the risks.",
+    "should_trigger": true
+  },
+  {
+    "id": 17,
+    "split": "test",
+    "query": "Can you edit this academic abstract for clarity and concision? It is for a conference submission, not commercial copy.",
+    "should_trigger": false
+  },
+  {
+    "id": 18,
+    "split": "test",
+    "query": "I need a content calendar with topics for the next quarter. Do not write the posts yet; just plan themes, owners, and dates.",
+    "should_trigger": false
+  },
+  {
+    "id": 19,
+    "split": "test",
+    "query": "Write onboarding docs for our API SDK and include code examples in TypeScript.",
+    "should_trigger": false
+  },
+  {
+    "id": 20,
+    "split": "test",
+    "query": "Draft a personal apology note to a friend. Make it sincere and not too polished.",
+    "should_trigger": false
+  }
+]

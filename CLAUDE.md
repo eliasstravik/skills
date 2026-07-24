@@ -1,7 +1,7 @@
 # skills — repo conventions
 
-The seven personal skills (autoconsultant, automake, consultant, demo, html,
-skill-issue, voice-mode), rebuilt from scratch (originally in
+The eight personal skills (autoconsultant, automake, consultant, copywriting,
+demo, html, skill-issue, voice-mode), rebuilt from scratch (originally in
 `~/dev/skills-new`, ported here wholesale) on skill-creator (process authority:
 evals, baselines, viewer review, iteration, description optimization) and
 skill-issue (form authority: one primitive, ≤20-line core, earned Details,
