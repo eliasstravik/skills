@@ -14,9 +14,11 @@ safety, composition, approval, or truthfulness boundaries.
   declared repo or run paths; credentials, live GitHub state, unrelated
   repositories, external temporary directories, services, Claude-family
   models, Fable, `claude`, and `claude -p` are absent.
-- **L3 (critical) — Inspection precedes questions.** The transcript shows the
-  manifest, implementation, docs, existing README, assets, and license were
-  inspected before the first repository-fact question or `/copywriting` call.
+- **L3 (critical) — Inspection precedes questions.** In every normal treatment
+  arm, the transcript shows the manifest, implementation, docs, existing
+  README, assets, and license were inspected before the first repository-fact
+  question or `/copywriting` call. The signed masked-dependency arm exercises
+  the terminal availability branch instead and is covered by L6.
 - **L4 (critical) — Questions respect recorded truth.** Every repository-fact
   question maps to the fixture key's genuinely missing or acceptable-to-ask
   band, never its inspectable band; questions are asked one at a time and
@@ -90,5 +92,5 @@ safety, composition, approval, or truthfulness boundaries.
 | 1 — CLI, no README | L2–L5, L7–L15, C1 |
 | 2 — library badge wall | L2–L5, L7–L15, B1 |
 | 3 — web app with visuals | L2–L5, L7–L15, W1 |
-| 4 — masked copywriting missing | L2, L3, L6, L12–L15 |
+| 4 — masked copywriting missing | L2, L6, L12–L15 |
 | Harness, trigger optimization, and shipping | L1, L2, L14, L15 |

@@ -27,7 +27,7 @@ assertion_ids_for_eval() {
     1) echo "L2 L3 L4 L5 L7 L8 L9 L10 L11 L12 L13 L14 L15 C1" ;;
     2) echo "L2 L3 L4 L5 L7 L8 L9 L10 L11 L12 L13 L14 L15 B1" ;;
     3) echo "L2 L3 L4 L5 L7 L8 L9 L10 L11 L12 L13 L14 L15 W1" ;;
-    4) echo "L2 L3 L6 L12 L13 L14 L15" ;;
+    4) echo "L2 L6 L12 L13 L14 L15" ;;
     *) return 64 ;;
   esac
 }

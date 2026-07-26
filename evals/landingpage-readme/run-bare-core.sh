@@ -9,14 +9,23 @@ fi
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(git -C "$SCRIPT_DIR" rev-parse --show-toplevel)"
 ITERATION_DIR="$1"
+RUN_KIND="${LANDINGPAGE_RUN_KIND:-bare-core}"
 EXECUTOR_MODEL="gpt-5.6-sol"
 SKILL_PATH="$REPO_ROOT/skills/landingpage-readme/SKILL.md"
 COPYWRITING_PATH="$REPO_ROOT/skills/copywriting/SKILL.md"
 
-case "$ITERATION_DIR" in
-  "$REPO_ROOT"/evals/landingpage-readme/runs/bare-core/*) ;;
+case "$RUN_KIND" in
+  bare-core|full) ;;
   *)
-    echo "iteration directory must be a new evals/landingpage-readme/runs/bare-core/* path" >&2
+    echo "LANDINGPAGE_RUN_KIND must be bare-core or full" >&2
+    exit 64
+    ;;
+esac
+
+case "$ITERATION_DIR" in
+  "$REPO_ROOT"/evals/landingpage-readme/runs/"$RUN_KIND"/*) ;;
+  *)
+    echo "iteration directory must be a new evals/landingpage-readme/runs/$RUN_KIND/* path" >&2
     exit 64
     ;;
 esac
@@ -30,13 +39,19 @@ test -s "$SKILL_PATH"
 test -s "$COPYWRITING_PATH"
 test "$(rg -c '^# Landingpage README$' "$SKILL_PATH")" -eq 1
 test "$(rg -c '^## Recipe$' "$SKILL_PATH")" -eq 1
-test "$(rg '^## Details$' "$SKILL_PATH" | wc -l | tr -d ' ')" -eq 0
-test "$(awk 'BEGIN { fences=0; body=0 } /^---$/ { fences++; next } fences >= 2 { body++ } END { print body }' "$SKILL_PATH")" -le 20
+if [[ "$RUN_KIND" == "bare-core" ]]; then
+  test "$(rg '^## Details$' "$SKILL_PATH" | wc -l | tr -d ' ')" -eq 0
+  test "$(awk 'BEGIN { fences=0; body=0 } /^---$/ { fences++; next } fences >= 2 { body++ } END { print body }' "$SKILL_PATH")" -le 20
+else
+  test "$(rg -c '^## Details$' "$SKILL_PATH")" -eq 1
+  test "$(awk 'BEGIN { fences=0; body=0 } /^---$/ { fences++; next } fences >= 2 { body++ } END { print body }' "$SKILL_PATH")" -le 100
+  test "$(awk '/^## Details$/ { details=1; next } details && /^## / { details=0 } details { lines++ } END { print lines + 0 }' "$SKILL_PATH")" -le 80
+fi
 
 mkdir -p "$ITERATION_DIR"
 cp "$SCRIPT_DIR/evals.json" "$ITERATION_DIR/evals.json"
 cp "$SCRIPT_DIR/assertions.md" "$ITERATION_DIR/assertions.md"
-cp "$SKILL_PATH" "$ITERATION_DIR/bare-core-SKILL.md"
+cp "$SKILL_PATH" "$ITERATION_DIR/$RUN_KIND-SKILL.md"
 
 SOURCE_HASHES="$ITERATION_DIR/source-hashes-before.txt"
 write_source_hashes() {

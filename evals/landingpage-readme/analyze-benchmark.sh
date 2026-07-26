@@ -11,8 +11,14 @@ ITERATION_DIR="$1"
 ANALYZER_MODEL="gpt-5.6-luna"
 SKILL_CREATOR_ROOT="${SKILL_CREATOR_ROOT:-$HOME/.agents/skills/skill-creator}"
 ANALYSIS_DIR="$ITERATION_DIR/benchmark-analysis"
+if [[ -s "$ITERATION_DIR/full-SKILL.md" ]]; then
+  SKILL_SNAPSHOT="$ITERATION_DIR/full-SKILL.md"
+else
+  SKILL_SNAPSHOT="$ITERATION_DIR/bare-core-SKILL.md"
+fi
 
 test -s "$ITERATION_DIR/benchmark.json"
+test -s "$SKILL_SNAPSHOT"
 test -s "$SKILL_CREATOR_ROOT/agents/analyzer.md"
 test -s "$SCRIPT_DIR/analysis-schema.json"
 
@@ -22,9 +28,9 @@ cp "$SKILL_CREATOR_ROOT/agents/analyzer.md" "$ANALYSIS_DIR/analyzer.md"
 {
   echo "# Benchmark analyst pass"
   echo
-  echo "Use only the staged analyzer instructions, benchmark, grades, and bare skill inside $ITERATION_DIR. Do not invoke another model, skill, helper agent, web search, browser, service, credential, or external temporary directory."
+  echo "Use only the staged analyzer instructions, benchmark, grades, and candidate skill inside $ITERATION_DIR. Do not invoke another model, skill, helper agent, web search, browser, service, credential, or external temporary directory."
   echo "Read $ANALYSIS_DIR/analyzer.md completely, especially Analyzing Benchmark Results, and follow it."
-  echo "Read $ITERATION_DIR/benchmark.json, per-run grading.json files, and $ITERATION_DIR/bare-core-SKILL.md."
+  echo "Read $ITERATION_DIR/benchmark.json, per-run grading.json files, and $SKILL_SNAPSHOT."
   echo "Surface specific per-assertion, cross-eval, timing, and token patterns hidden by the aggregates."
   echo "Do not suggest changes to the skill in this benchmark pass."
   echo "Return only JSON matching the provided schema."

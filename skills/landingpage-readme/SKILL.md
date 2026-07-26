@@ -23,3 +23,9 @@ disable-model-invocation: true
 13. Await explicit approval.
 14. Write the approved README and social-preview specification.
 15. Honor the approved metadata mode: live `gh` mutation only when authorized, exact saved commands otherwise.
+
+## Details
+
+- In normal flow, do not read or invoke `/copywriting` until repository inspection and gap resolution are complete; pass it the inspected evidence and approved replies.
+- Ask about repository facts only when inspection leaves them consequentially unresolved; do not ask users to repeat an absent asset or unavailable proof already established by evidence.
+- State the evidence-derived actor in the one-liner or opening paragraph near the project title.
