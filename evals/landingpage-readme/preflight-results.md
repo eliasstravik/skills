@@ -1,7 +1,7 @@
 # landingpage-readme — executor composition preflight result
 
-Date: 2026-07-26. Outcome: **STOPPED — verifier/contract mismatch requires
-Elias's decision before graded runs or live dependency changes.**
+Date: 2026-07-26. Outcome: **PASSED after Elias authorized aligning the
+verifier with the approved semantic criterion.**
 
 ## Launch record
 
@@ -47,30 +47,21 @@ harness then ran with the required outer execution permission as
   `disable-model-invocation: true`.
 - The repository source `skills/copywriting/SKILL.md` remained byte-unchanged.
 
-## Why the harness stopped
+## Resolved verifier mismatch
 
-`preflight/verify-preflight.sh` requires the enabled tagline to contain the
-literal phrase `Python maintainer`. The executor's tagline is truthful,
-audience-compatible, and contains the required input and outcome, but it does
-not contain that literal phrase. Therefore the script exited at this check and
-did not write `verification.md`.
+`preflight/verify-preflight.sh` initially required the enabled tagline to
+contain the literal phrase `Python maintainer`. The executor's tagline was
+truthful, audience-compatible, and contained the required input and outcome,
+but did not contain that literal phrase. Therefore the first verification
+stopped at this check and did not write `verification.md`.
 
 The approved prose contract and P5 assertion require a truthful Signal Cup
 tagline without invented proof; they do not require the audience label to
-appear verbatim. Changing the verifier, changing the prompt, or retrying until a
-stochastic output happens to contain the phrase would alter how the approved
-gate is applied. No such substitution has been made.
+appear verbatim. Elias selected **Align verifier** in the issue interaction on
+2026-07-26. The verifier now checks the approved semantic facts available to a
+deterministic shell gate: the tagline names a JSON log and a failure/retry
+outcome, and contains none of the prohibited benchmark, customer, download,
+time-saved, or guarantee claims.
 
-## Decision required
-
-Elias must choose one of these paths:
-
-1. Accept the observed composition mechanism and authorize aligning the
-   verifier with the approved semantic criterion (truthful Signal Cup tagline,
-   no invented proof), then re-verify the preserved run.
-2. Keep the literal `Python maintainer` requirement and authorize a revised
-   preflight prompt plus a fresh run.
-3. Reject the mechanism and provide a different approved dependency design.
-
-Until that decision, no baseline, bare-core, grader, comparator, analyzer,
-optimizer, copywriting invocation-mode flip, or installation step may run.
+The preserved `run-20260726-02` evidence passes all seven preflight assertions.
+No stochastic rerun or prompt change was used.

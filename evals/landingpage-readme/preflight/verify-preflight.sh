@@ -36,8 +36,10 @@ rg -q '^copywriting_visible: yes$' "$ENABLED_RESULT"
 rg -q '^copywriting_invoked: yes$' "$ENABLED_RESULT"
 rg -q '\.agents/skills/copywriting/SKILL\.md' \
   "$RUN_DIR/enabled/transcript.jsonl"
-rg -qi 'Python maintainer' "$COPY_OUTPUT"
-rg -qi 'JSON|failure summary|fail' "$COPY_OUTPUT"
+rg -qi 'JSON' "$COPY_OUTPUT"
+rg -qi 'log' "$COPY_OUTPUT"
+rg -qi 'failure[[:space:]-]+summary|what to retry|decid(e|ing)[^[:cntrl:]]*retry' \
+  "$COPY_OUTPUT"
 if rg -qi 'benchmark|customer|download|time.saved|guarantee' "$COPY_OUTPUT"; then
   echo "copywriting probe invented prohibited proof" >&2
   exit 1
