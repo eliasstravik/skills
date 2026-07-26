@@ -23,6 +23,13 @@ the masked branch is graded by L6 instead.
 Raw ignored evidence root:
 `evals/landingpage-readme/runs/full/iteration-1-20260726/`.
 
+The shared harness selects this phase explicitly:
+
+```bash
+LANDINGPAGE_RUN_KIND=full evals/landingpage-readme/run-bare-core.sh \
+  "$PWD/evals/landingpage-readme/runs/full/<new-iteration>"
+```
+
 - Eight fresh GPT-5.6 Sol arms ran as one paired batch: four with the full
   treatment and four pure no-skill controls.
 - The deterministic contamination scan passed executor count, model, baseline

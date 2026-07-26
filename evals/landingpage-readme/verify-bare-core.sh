@@ -2,7 +2,7 @@
 set -euo pipefail
 
 if [[ $# -ne 1 ]]; then
-  echo "usage: $0 <iteration-directory>" >&2
+  echo "usage: LANDINGPAGE_RUN_KIND=bare-core|full $0 <iteration-directory>" >&2
   exit 64
 fi
 
