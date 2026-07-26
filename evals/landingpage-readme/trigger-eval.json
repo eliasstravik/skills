@@ -8,7 +8,7 @@
   {
     "id": 2,
     "split": "train",
-    "query": "/landingpage-readme for ~/dev/tideline — there is no README yet. Make the first useful CLI command obvious, reuse any truthful repo evidence, and do not invent adoption proof.",
+    "query": "/landingpage-readme for ~/dev/tracefold — there is no README yet. Make the first useful CLI command obvious, reuse any truthful repo evidence, and do not invent adoption proof.",
     "should_trigger": true
   },
   {
@@ -80,7 +80,7 @@
   {
     "id": 14,
     "split": "test",
-    "query": "Activate the landingpage-readme skill for packages/retry-kit. Replace the badge-only README with the smallest truthful TypeScript first success and omit any proof we cannot verify.",
+    "query": "Activate the landingpage-readme skill for packages/redact-config. Replace the badge-only README with the smallest truthful Node first success and omit any proof we cannot verify.",
     "should_trigger": true
   },
   {

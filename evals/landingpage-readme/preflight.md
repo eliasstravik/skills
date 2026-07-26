@@ -11,21 +11,24 @@ Nothing in this preflight may mutate the repository skill sources, installed
 skills, global config, credentials, live GitHub state, or any path outside the
 run directory.
 
-1. Stage the current repository `skills/landingpage-readme/` byte-for-byte as
-   the run-local user-invoked skill.
+1. Stage
+   `evals/landingpage-readme/preflight/skills/landingpage-readme/`
+   byte-for-byte as the run-local user-invoked probe. This eval-local probe
+   occupies the final skill name without implementing the bare shipping core
+   owned by the next ticket.
 2. Stage the current repository `skills/copywriting/` byte-for-byte as the
    run-local sibling for the disabled case.
 3. For the enabled case, create a second run-local copy differing only by
    removal of `disable-model-invocation: true`; do not touch the live source or
    installed copy.
-4. Run each case in a fresh GPT-5.6 Sol one-shot Codex context with user config
-   and rules ignored, approvals disabled, the run directory as the only
-   writable workspace, no browser/network/`gh`, and complete JSONL plus final
-   transcript capture.
+4. Run each case through `preflight/run-preflight.sh` in a fresh GPT-5.6 Sol
+   one-shot Codex context with user config and rules ignored, approvals
+   disabled, the run directory as the only writable workspace, no
+   browser/network/`gh`, and complete JSONL plus final transcript capture.
 
 ## Fixed repository evidence
 
-The preflight repository contains only:
+The preflight repository at `preflight/probe-repo/` contains only:
 
 ```text
 Project: Signal Cup
@@ -68,8 +71,8 @@ skill after the disable extension is absent.
 The preflight passes only when transcripts prove all of the following:
 
 - both executors ran on GPT-5.6 Sol;
-- the landingpage-readme instructions came from the staged current repository
-  version;
+- the landingpage-readme instructions came from the staged eval-local
+  repository probe;
 - copywriting was visible in both cases;
 - the disabled case was blocked specifically by invocation mode;
 - the enabled case used copywriting rather than local fallback prose;

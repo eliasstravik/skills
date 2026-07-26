@@ -70,18 +70,18 @@ safety, composition, approval, or truthfulness boundaries.
 
 ## Fixture-specific behavior
 
-- **C1 — CLI first success is concrete.** The README leads backend and
-  data-platform developers from local install to
-  `tideline check examples/orders.csv`, states beta status, avoids public proof
-  from internal use, and supplies a missing-visual specification.
-- **B1 — Badge-wall positioning is corrected.** The unsupported universal
-  networking/platform framing and decorative badge wall are replaced by the
-  approved Node 20+ typed-fetch scope, one `retryFetch` example, experimental
-  status, and no invented benchmarks or browser support.
-- **W1 — Existing visual evidence is reused.** The web-app README asks no
+- **C1 — Tracefold first success is concrete.** The README leads Python
+  maintainers through `python3 -m pip install -e .` and
+  `tracefold examples/failing-run.jsonl`, states experimental status, avoids
+  public proof, and supplies a missing terminal-visual specification.
+- **B1 — Redact Config positioning is corrected.** The vague safer-logs badge
+  wall is replaced by the approved nested-configuration redaction frame, one
+  manifest-consistent Node 20+ example, best-effort support, and no invented
+  benchmarks, downloads, customers, or compatibility promise.
+- **W1 — Driftboard visual evidence is reused.** The web-app README asks no
   unnecessary discovery question, uses both committed light/dark screenshots
-  in a `<picture>` element, keeps the `pnpm install` → `pnpm seed` →
-  `pnpm dev` chain, and does not claim a hosted demo.
+  in a `<picture>` element, keeps the `npm install` → `npm run dev` chain, and
+  does not invent hosted, production-adoption, or outcome proof.
 
 ## Eval coverage
 
