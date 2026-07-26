@@ -1,10 +1,10 @@
 # skills
 
-Eight personal agent skills rebuilt from scratch on eval-first foundations
+Nine personal agent skills rebuilt from scratch on eval-first foundations
 (skill-creator process, skill-issue form).
 
 Skills, in build order: `voice-mode`, `html`, `demo`, `automake`, `consultant`,
-`autoconsultant`, `skill-issue`, `copywriting`.
+`autoconsultant`, `skill-issue`, `copywriting`, `landingpage-readme`.
 
 ## Install
 

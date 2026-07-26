@@ -1,11 +1,11 @@
 # skills — repo conventions
 
-The eight personal skills (autoconsultant, automake, consultant, copywriting,
-demo, html, skill-issue, voice-mode), rebuilt from scratch (originally in
-`~/dev/skills-new`, ported here wholesale) on skill-creator (process authority:
-evals, baselines, viewer review, iteration, description optimization) and
-skill-issue (form authority: one primitive, ≤20-line core, earned Details,
-≤100 body lines).
+The personal library contains nine skills (autoconsultant, automake, consultant,
+copywriting, demo, html, landingpage-readme, skill-issue, voice-mode), built on
+skill-creator (process authority: evals, baselines, viewer review, iteration,
+description optimization) and skill-issue (form authority: one primitive,
+≤20-line core, earned Details, ≤100 body lines). The original eight were rebuilt
+in `~/dev/skills-new` and ported here wholesale.
 
 ## Layout
 

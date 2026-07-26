@@ -1,6 +1,6 @@
 ---
 name: landingpage-readme
-description: User-invoked workflow for truthful GitHub repository landing surfaces.
+description: User-invoked workflow for truthful README-led GitHub repository landing surfaces.
 disable-model-invocation: true
 ---
 
