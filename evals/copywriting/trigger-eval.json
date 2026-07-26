@@ -2,37 +2,37 @@
   {
     "id": 1,
     "split": "train",
-    "query": "Use /copywriting on docs/launch/solace-desk-packet.md. I need a fast provisional homepage hero, Product Hunt tagline, LinkedIn launch post, and announcement email, but do not invent proof or block on non-safety gaps.",
+    "query": "From docs/launch/solace-desk-packet.md, write a fast provisional homepage hero, Product Hunt tagline, LinkedIn launch post, and announcement email, but do not invent proof or block on non-safety gaps.",
     "should_trigger": true
   },
   {
     "id": 2,
     "split": "train",
-    "query": "/copywriting please rewrite the landing page in research/north-pier.md. The CEO loves the broad platform headline, but the proof only supports renewal-prep briefs, so challenge anything misleading before drafting.",
+    "query": "Please rewrite the customer-facing landing page in research/north-pier.md. The CEO loves the broad platform headline, but the proof only supports renewal-prep briefs, so challenge anything misleading before drafting.",
     "should_trigger": true
   },
   {
     "id": 3,
     "split": "train",
-    "query": "Use the copywriting skill for paid search and paid social variants from ads/brief.md. Keep character limits, avoid fake scarcity, and do not add discounts or customer results.",
+    "query": "Draft paid search and paid social variants from ads/brief.md. Keep character limits, avoid fake scarcity, and do not add discounts or customer results.",
     "should_trigger": true
   },
   {
     "id": 4,
     "split": "train",
-    "query": "Run /copywriting for this lifecycle email sequence about a sleep journaling app. The source packet has health-adjacent claims, so qualify anything risky and flag legal review gaps.",
+    "query": "Rewrite this customer lifecycle email sequence about a sleep journaling app. The source packet has health-adjacent claims, so qualify anything risky and flag legal review gaps.",
     "should_trigger": true
   },
   {
     "id": 5,
     "split": "train",
-    "query": "/copywriting: create a six-post launch thread and short newsletter section from voice-evidence.md. Customer quotes are evidence only; do not imitate the named writer in the brief.",
+    "query": "Create a six-post customer launch thread and short newsletter section from voice-evidence.md. Customer quotes are evidence only; do not imitate the named writer in the brief.",
     "should_trigger": true
   },
   {
     "id": 6,
     "split": "train",
-    "query": "Please use /copywriting to rewrite a B2B sales one-pager from the frozen procurement packet. No browsing; keep integration and security claims tied to the supplied notes.",
+    "query": "Rewrite a customer-facing B2B sales one-pager from the frozen procurement packet. No browsing; keep integration and security claims tied to the supplied notes.",
     "should_trigger": true
   },
   {
@@ -74,25 +74,25 @@
   {
     "id": 13,
     "split": "test",
-    "query": "Use /copywriting on the attached source packet to draft a procurement-ready one-pager for enterprise buyers. Preserve the frozen research and cite the proof notes at the end.",
+    "query": "From the attached source packet, draft a procurement-ready sales one-pager for enterprise buyers. Preserve the frozen research and cite the proof notes at the end.",
     "should_trigger": true
   },
   {
     "id": 14,
     "split": "test",
-    "query": "/copywriting for a vague homepage rewrite: the founder says 'make it convert' but the packet has no audience, offer, or proof. Ask the minimum questions before drafting.",
+    "query": "Rewrite our customer-facing homepage: the founder says 'make it convert' but the packet has no audience, offer, or proof. Ask the minimum questions before drafting.",
     "should_trigger": true
   },
   {
     "id": 15,
     "split": "test",
-    "query": "Use the copywriting skill to make launch campaign copy across homepage, social, and email from this packet. We need finished copy first plus visible assumptions.",
+    "query": "Make customer launch campaign copy across homepage, social, and email from this packet. We need finished copy first plus visible assumptions.",
     "should_trigger": true
   },
   {
     "id": 16,
     "split": "test",
-    "query": "Use /copywriting for a paid social campaign, but the brief asks for a customer quote and time-saved stat that are not approved. Draft safe variants and call out the risks.",
+    "query": "Draft a paid social campaign, but the brief asks for a customer quote and time-saved stat that are not approved. Write safe variants and call out the risks.",
     "should_trigger": true
   },
   {

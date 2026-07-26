@@ -1,0 +1,52 @@
+{
+  "skill_name": "landingpage-readme",
+  "conventions": "Each executor is a fresh GPT-5.6 Sol one-shot context. Copy the named fixture into __RUN_DIR__/workspace before execution, replace __RUN_DIR__, and initialize Git only in that copy. Every read and write stays inside the declared repository or run directory; credentials, unrelated repositories, live state, external temporary directories, services, and non-approved models are off-limits. Never read evals/landingpage-readme/ground-truth or mention its contents to an executor. Save the complete user-facing response verbatim to __RUN_DIR__/transcript.md. Never execute gh or mutate live GitHub state: emit exact proposed commands to __RUN_DIR__/workspace/outputs/gh-commands.sh. No-skill arms forbid every installed skill; treat explicit /landingpage-readme and /copywriting text as plain user wording and do not read or invoke any skill. No executor, grader, comparator, analyzer, optimizer, helper, or wrapper may invoke Claude Code, a Claude model, Fable, claude, or claude -p.",
+  "evals": [
+    {
+      "id": 1,
+      "name": "cli-no-readme",
+      "fixture": "cli-no-readme",
+      "prompt": "Use /landingpage-readme on the synthetic GitHub repository in __RUN_DIR__/workspace. Inspect the manifest, source, docs, examples, license, and assets before asking anything. Follow the ordered scripted replies below only when a matching question is asked; do not volunteer later answers early. Plausible /copywriting questions use the same script. First matching unused reply wins.\n\nSCRIPTED USER REPLIES\n1. If asked which conversion or first success matters most: \"Lead with the first successful validation: install locally, then run `tideline check examples/orders.csv`. A star is secondary.\"\n2. If asked who it is for or which pain to emphasize: \"Backend and data-platform developers checking partner CSV exports before ingestion; emphasize catching schema drift before a job fails.\"\n3. If asked about maturity, maintenance, or adoption commitment: \"Call it beta. Two maintainers actively use it internally, but breaking CLI changes may happen before 1.0. Do not turn internal use into public proof.\"\n4. If asked to approve a positioning correction: \"Approved if it stays a local CSV contract checker and does not claim to be a general data-quality platform.\"\n5. After the complete README, About description, topics, social-preview specification, and proposed gh commands are shown: \"Approved. Write README.md and the social-preview spec, and save the exact gh commands without executing them.\"\nEND SCRIPT\n\nWork only in __RUN_DIR__/workspace. Save the approved README as README.md, the social-preview specification as outputs/social-preview.md, the proposed commands as outputs/gh-commands.sh, and the complete response as __RUN_DIR__/transcript.md. Do not execute gh.",
+      "expected_output": "An evidence-grounded CLI landing surface with the smallest manifest-consistent quickstart, beta commitment, no invented proof, a precise missing-visual specification, and approval before any file write or proposed GitHub command is finalized.",
+      "files": [
+        "fixtures/cli-no-readme"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "library-badge-wall",
+      "fixture": "library-badge-wall",
+      "prompt": "Use /landingpage-readme to replace the weak badge-wall README in __RUN_DIR__/workspace with a truthful GitHub landing surface. Inspect the whole synthetic repository before asking questions. Follow the ordered scripted replies below only when a matching question is asked; do not volunteer later answers early. Plausible /copywriting questions use the same script. First matching unused reply wins.\n\nSCRIPTED USER REPLIES\n1. If the existing universal-networking claim is challenged or a narrower position is proposed: \"Use the narrower truth: a typed retry helper for Node 20+ fetch calls. It is not a networking platform and does not support arbitrary transports.\"\n2. If asked who should act or what the starter behavior is: \"TypeScript library authors should install it and wrap one fetch call with `retryFetch`; use that as the repeated CTA.\"\n3. If asked about maturity, compatibility commitment, or maintenance: \"Mark it experimental until 1.0. Node 20+ only, MIT licensed, and no browser-support promise.\"\n4. If asked for benchmarks, customer proof, or comparisons: \"We have none approved. Omit proof and comparison sections rather than inventing or placeholdering them in the approved README.\"\n5. After the complete landing surface and proposed gh commands are shown: \"Approved. Replace README.md, save the social-preview spec, and emit the exact gh commands without executing them.\"\nEND SCRIPT\n\nWork only in __RUN_DIR__/workspace. Save the approved README as README.md, the social-preview specification as outputs/social-preview.md, the proposed commands as outputs/gh-commands.sh, and the complete response as __RUN_DIR__/transcript.md. Do not execute gh.",
+      "expected_output": "A focused library landing surface that challenges and removes the unsupported platform claim, teaches one manifest-consistent TypeScript starter step, states experimental Node 20+ scope, omits absent proof, and gates all writes.",
+      "files": [
+        "fixtures/library-badge-wall"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "web-app-existing-visuals",
+      "fixture": "web-app-existing-visuals",
+      "prompt": "Use /landingpage-readme to improve the GitHub landing surface in __RUN_DIR__/workspace. Inspect the whole synthetic repository, including both existing screenshot assets, before deciding whether any facts are missing. Follow the ordered scripted replies below only when a matching question is asked; do not volunteer later answers early. Plausible /copywriting questions use the same script. First matching unused reply wins.\n\nSCRIPTED USER REPLIES\n1. If asked to choose the primary first action despite the repository evidence: \"Keep the repository's own starter step: `pnpm install`, `pnpm seed`, then `pnpm dev`. Do not imply there is a hosted demo.\"\n2. If asked about the screenshots: \"Reuse both existing light and dark dashboard screenshots with a `<picture>` element; do not request or generate a replacement.\"\n3. If asked for proof, usage counts, or customer claims: \"There is no approved external proof. Omit it from the approved README.\"\n4. After the complete landing surface and proposed gh commands are shown: \"Approved. Update README.md, save the social-preview spec, and emit the exact gh commands without executing them.\"\nEND SCRIPT\n\nWork only in __RUN_DIR__/workspace. Save the approved README as README.md, the social-preview specification as outputs/social-preview.md, the proposed commands as outputs/gh-commands.sh, and the complete response as __RUN_DIR__/transcript.md. Do not execute gh.",
+      "expected_output": "A self-hosted web-app landing surface that asks no unnecessary discovery question, reuses both suitable screenshot assets with GitHub-safe markup, preserves the three-command local starter, omits nonexistent hosted-demo and proof claims, and gates all writes.",
+      "files": [
+        "fixtures/web-app-existing-visuals"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "masked-copywriting-missing",
+      "fixture": "cli-no-readme",
+      "prompt": "Use /landingpage-readme on __RUN_DIR__/workspace, but apply this signed-off dependency fiction for this arm only: `/copywriting` is unavailable. The executor may load `/landingpage-readme`, but it must not read or invoke the installed copywriting skill. If `/landingpage-readme` attempts the required dependency invocation, treat the result as exactly `skill_not_found: copywriting`. Do not improvise a substitute, do not draft audience-facing copy, do not ask the normal repository-gap questions, and do not mutate README.md or any GitHub surface. Save the complete user-facing response verbatim to __RUN_DIR__/transcript.md.",
+      "expected_output": "The workflow stops at the missing hard dependency, gives a concrete install instruction for copywriting, and produces no README draft, metadata draft, gh command, or repository mutation.",
+      "files": [
+        "fixtures/cli-no-readme"
+      ],
+      "dependency_fiction": {
+        "masked_skill": "copywriting",
+        "invocation_result": "skill_not_found: copywriting",
+        "executor_rule": "Do not read or invoke the installed copywriting skill; return the fictional result only when landingpage-readme attempts the dependency call.",
+        "scope": "This fiction applies only to eval 4 and does not claim the executor is genuinely missing copywriting."
+      }
+    }
+  ]
+}
