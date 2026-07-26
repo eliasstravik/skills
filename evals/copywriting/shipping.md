@@ -42,9 +42,9 @@ user-invoked `/copywriting` core with only that narrow earned Details section.
 ## Composition install
 
 After the executor-composition preflight passed in
-[ELI-259](/ELI/issues/ELI-259), the shipping frontmatter removed only
-`disable-model-invocation: true`. The optimizer-owned description stayed
-verbatim and the behavioral body stayed byte-unchanged.
+[ELI-259](/ELI/issues/ELI-259), the shipping frontmatter removed
+`disable-model-invocation: true` and applied the optimizer-owned
+model-invoked description verbatim. The behavioral body stayed byte-unchanged.
 
 The skill was reinstalled from the Paperclip execution-workspace repository
 root with:
@@ -59,5 +59,5 @@ Codex installation succeeded. The repository and installed `SKILL.md` files
 were byte-identical with SHA-256:
 
 ```text
-bea3f65a562e32c6ff77286eebdcbe2489c15ef056315d75903d723f41236bb0
+5aade79832ae09cf5d96d0aaf5f95c490341a7ae80f130091e8dfd07b8b818fb
 ```

@@ -1,6 +1,6 @@
 ---
 name: copywriting
-description: User-invoked workflow for truthful audience-facing commercial copy.
+description: Triggers when a request asks for customer- or audience-facing commercial copy for a product, service, or organization, including homepage, landing-page, sales, advertising, launch, social, newsletter, or marketing email copy; excludes internal, personal, editorial, research, strategy, planning, journalist-pitch, and implementation requests.
 ---
 
 # Copywriting
