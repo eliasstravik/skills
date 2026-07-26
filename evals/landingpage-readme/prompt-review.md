@@ -72,15 +72,18 @@ transcripts and launch configuration.
 
 ## Approval checklist
 
-- [ ] The four exact executor prompts are acceptable.
-- [ ] The ordered and conditional reply scripts are acceptable evaluation truth.
-- [ ] The three ground-truth classifications are acceptable.
-- [ ] The masked-dependency fiction is acceptable.
-- [ ] The two-case preflight prompt and pass criteria are acceptable.
-- [ ] The landingpage-readme and revised copywriting trigger queries are acceptable.
-- [ ] On acceptance, ELI-259 may run the ungraded preflight and stop for Elias if it fails.
+- [x] The four exact executor prompts are acceptable.
+- [x] The ordered and conditional reply scripts are acceptable evaluation truth.
+- [x] The three ground-truth classifications are acceptable.
+- [x] The masked-dependency fiction is acceptable.
+- [x] The two-case preflight prompt and pass criteria are acceptable.
+- [x] The landingpage-readme and revised copywriting trigger queries are acceptable.
+- [x] On acceptance, [ELI-259](/ELI/issues/ELI-259) may run the ungraded preflight and stop for Elias if it fails.
 
 ## Approval record
 
-Pending a Paperclip `request_confirmation` bound to the commit containing this
-packet. No model-backed run has started.
+Accepted by Elias on 2026-07-26 through Paperclip `request_confirmation`
+`29449277-ad86-4793-8ea9-d0707b04136f` on
+[ELI-259](/ELI/issues/ELI-259). The confirmation covered the exact eval
+prompts, ordered reply scripts, ground-truth classifications,
+masked-dependency fiction, preflight prompts, and trigger queries.
