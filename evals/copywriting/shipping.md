@@ -39,5 +39,25 @@ transformation in social/content/newsletter/voice-led public copy. The approval
 decision should explicitly accept or reject shipping the current broad
 user-invoked `/copywriting` core with only that narrow earned Details section.
 
-No global install has been run. Install remains deferred to
-[ELI-255](/ELI/issues/ELI-255) after approval.
+## Composition install
+
+After the executor-composition preflight passed in
+[ELI-259](/ELI/issues/ELI-259), the shipping frontmatter removed only
+`disable-model-invocation: true`. The optimizer-owned description stayed
+verbatim and the behavioral body stayed byte-unchanged.
+
+The skill was reinstalled from the Paperclip execution-workspace repository
+root with:
+
+```text
+npx skills add <execution-workspace-root> --skill copywriting -g
+```
+
+The installer copied `copywriting` to `~/.agents/skills/copywriting`.
+PromptScript reported that it does not support global skill installation; the
+Codex installation succeeded. The repository and installed `SKILL.md` files
+were byte-identical with SHA-256:
+
+```text
+bea3f65a562e32c6ff77286eebdcbe2489c15ef056315d75903d723f41236bb0
+```

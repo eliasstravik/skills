@@ -53,9 +53,14 @@ The frontmatter in `skills/copywriting/SKILL.md` already contains
 
 - `name: copywriting` matches the directory and naming grammar. PASS.
 - `description` is present and equals `best_description` verbatim. PASS.
-- `disable-model-invocation: true` is a Boolean extension and preserves the
-  user-invoked contract. PASS.
 - Frontmatter has paired delimiters and unique required keys. PASS.
 
 No Claude Code, Claude model, Fable, `claude`, `claude -p`, browsing, network,
 or non-Codex optimizer path was used.
+
+## Composition update
+
+After the accepted executor-composition gate in
+[ELI-259](/ELI/issues/ELI-259), `disable-model-invocation: true` was removed.
+The optimizer-owned `best_description` remains applied verbatim; no
+description re-optimization or behavioral-body change was made.

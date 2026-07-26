@@ -1,7 +1,6 @@
 ---
 name: copywriting
 description: User-invoked workflow for truthful audience-facing commercial copy.
-disable-model-invocation: true
 ---
 
 # Copywriting
