@@ -9,6 +9,14 @@ fi
 ITERATION_DIR="$1"
 RUN_KIND="${LANDINGPAGE_RUN_KIND:-bare-core}"
 
+case "$RUN_KIND" in
+  bare-core|full) ;;
+  *)
+    echo "LANDINGPAGE_RUN_KIND must be bare-core or full" >&2
+    exit 64
+    ;;
+esac
+
 test -s "$ITERATION_DIR/contamination-scan.md"
 test -s "$ITERATION_DIR/benchmark.json"
 test -s "$ITERATION_DIR/benchmark.md"
@@ -48,14 +56,25 @@ if [[ "$RUN_KIND" == "bare-core" ]]; then
   test "$(jq '[.[] | select(.winner == "without_skill")] | length' "$ITERATION_DIR/blind-comparisons/summary.json")" -eq 1
 else
   for grade in "$ITERATION_DIR"/eval-*/with_skill/run-1/grading.json; do
-    jq -e '
-      ["L2", "L3", "L4", "L5", "L6", "L8", "L9", "L11", "L12", "L13", "L14", "L15"] as $critical
+    eval_id="$(basename "$(dirname "$(dirname "$(dirname "$grade")")")")"
+    eval_id="${eval_id#eval-}"
+    eval_id="${eval_id%%-*}"
+    case "$eval_id" in
+      1|2|3) expected_critical_ids="L2 L3 L4 L5 L8 L9 L11 L12 L13 L14 L15" ;;
+      4) expected_critical_ids="L2 L6 L12 L13 L14 L15" ;;
+      *) echo "unexpected eval id in grade path: $grade" >&2; exit 1 ;;
+    esac
+    jq -e --arg expected "$expected_critical_ids" '
+      ($expected | split(" ")) as $expected_ids
       | [
           .expectations[]
-          | select(.text | split(" ")[0] as $id | $critical | index($id))
-          | .passed
-        ]
-      | all
+          | . as $expectation
+          | ($expectation.text | split(" ")[0]) as $id
+          | select($expected_ids | index($id))
+          | {id: $id, passed: $expectation.passed}
+        ] as $critical_results
+      | ($critical_results | map(.id)) == $expected_ids
+        and ($critical_results | map(.passed) | all)
     ' "$grade" > /dev/null
   done
 fi

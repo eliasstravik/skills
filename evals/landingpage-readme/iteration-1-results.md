@@ -92,7 +92,9 @@ treated as a stable performance claim.
 - One `## Details` section contains three guidance lines, within the 80-line
   Details limit.
 - No reference or Call was added.
+- Final review hardened the result verifier to require every applicable
+  critical assertion exactly once and to reject unknown run kinds; the
+  preserved full and bare-core iterations both pass the tightened gate.
 - No further skill revision is evidence-earned from this iteration.
-- Final disposition depends only on Elias's static-viewer feedback: empty or
-  accepted feedback completes this ticket; actionable feedback can change the
-  skill only when it traces to preserved bare-core failure evidence.
+- Elias accepted the static-viewer review on 2026-07-26, completing the
+  human-feedback gate without further skill changes.

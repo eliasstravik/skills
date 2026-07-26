@@ -11,6 +11,14 @@ RUN_KIND="${LANDINGPAGE_RUN_KIND:-bare-core}"
 EXPECTED_MODEL="gpt-5.6-sol"
 SKILL_SNAPSHOT="$ITERATION_DIR/$RUN_KIND-SKILL.md"
 
+case "$RUN_KIND" in
+  bare-core|full) ;;
+  *)
+    echo "LANDINGPAGE_RUN_KIND must be bare-core or full" >&2
+    exit 64
+    ;;
+esac
+
 test -s "$SKILL_SNAPSHOT"
 test "$(rg -c '^# Landingpage README$' "$SKILL_SNAPSHOT")" -eq 1
 test "$(rg -c '^## Recipe$' "$SKILL_SNAPSHOT")" -eq 1
