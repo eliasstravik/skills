@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Driftboard showing two stalled work items</title>
+  <desc id="desc">A light interface ranks stalled work and shows the next action for each item.</desc>
+  <rect width="1200" height="720" fill="#f8fafc"/>
+  <text x="90" y="110" font-family="sans-serif" font-size="44" fill="#0f172a">Work waiting for a restart</text>
+  <rect x="90" y="165" width="1020" height="185" rx="18" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="130" y="225" font-family="sans-serif" font-size="30" fill="#0f172a">Confirm launch owner</text>
+  <text x="130" y="275" font-family="sans-serif" font-size="22" fill="#475569">Waiting 9 days · Ask Mina for a decision</text>
+  <rect x="815" y="225" width="240" height="58" rx="12" fill="#2563eb"/>
+  <text x="850" y="263" font-family="sans-serif" font-size="21" fill="#ffffff">Mark restarted</text>
+  <rect x="90" y="385" width="1020" height="185" rx="18" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="130" y="445" font-family="sans-serif" font-size="30" fill="#0f172a">Publish migration guide</text>
+  <text x="130" y="495" font-family="sans-serif" font-size="22" fill="#475569">Waiting 6 days · Review the final code sample</text>
+</svg>
