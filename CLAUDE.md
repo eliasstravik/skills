@@ -32,14 +32,19 @@ in `~/dev/skills-new` and ported here wholesale.
   description field is owned by the trigger-eval optimizer and is never
   rewritten by hand).
 
-## Declared deviation from skill-creator's default
+## Declared deviations from skill-creator's default
 
 `evals.json`, assertions, and fixtures live in `evals/<name>/`, never inside
 `skills/<name>/`. skill-creator's default puts `evals/` inside the skill
 folder, but this repo's installer ships everything committed under
 `skills/<name>/` verbatim, so eval material there would ship to all agents.
-This is the only process deviation; everything else follows skill-creator as
-written.
+
+Description optimization may replace skill-creator's stock `run_loop.py` when
+that runner requires a prohibited model family. The substitute keeps the same
+frozen-query, train/held-out, repeated-evaluation, `best_description`-verbatim
+contract, records the exact allowed models, and never shells out to the
+prohibited runner. These are the only process deviations; everything else
+follows skill-creator as written.
 
 ## Baseline purity
 

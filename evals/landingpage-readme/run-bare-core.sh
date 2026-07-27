@@ -86,6 +86,7 @@ prepare_arm() {
     cp "$SKILL_PATH" "$arm_dir/.agents/skills/landingpage-readme/SKILL.md"
     cp "$COPYWRITING_PATH" "$arm_dir/.agents/skills/copywriting/SKILL.md"
   fi
+  git -C "$arm_dir" init --quiet
 
   prompt="$(jq -r --argjson id "$eval_id" '.evals[] | select(.id == $id) | .prompt' "$SCRIPT_DIR/evals.json")"
   prompt="${prompt//__RUN_DIR__/$arm_dir}"
@@ -95,6 +96,7 @@ prepare_arm() {
     echo
     echo "Use only the GPT-5.6 Sol executor already running this prompt. Do not invoke another model, helper agent, skill outside this arm, web search, browser, service, credential, live GitHub state, or external temporary directory."
     echo "Read and write only inside: $arm_dir"
+    echo "Do not use /tmp or any other absolute path outside this arm, even for discarded verification output."
     echo "Treat $workspace_dir as the synthetic repository. Do not read or discover evaluator ground truth."
     if [[ "$configuration" == "with_skill" ]]; then
       echo "The user explicitly invoked /landingpage-readme. Read and follow $arm_dir/.agents/skills/landingpage-readme/SKILL.md. When its Recipe invokes /copywriting, read and follow the staged copywriting skill in this arm, except where the signed eval-4 fiction forbids that read."

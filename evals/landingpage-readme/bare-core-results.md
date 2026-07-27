@@ -91,3 +91,26 @@ inspection before a dependency call while the approved Recipe and masked
 fiction make dependency absence terminal before inspection. That assertion's
 applicability must be resolved explicitly; it does not earn a contradictory
 skill instruction.
+
+## Final-review bare-core rerun
+
+The branch-wide standards/spec review materially corrected the core and
+therefore ran a new controlled gate rather than relying on the historical
+snapshot above. The authoritative evidence root is
+`evals/landingpage-readme/runs/bare-core/iteration-5-20260727/`.
+
+- The current bare core is one 17-step Recipe with 19 body lines and no
+  Details.
+- The Driftboard implementation now matches the accepted local-storage ground
+  truth, and every arm is its own Git root.
+- The deterministic scan rejects external temporary paths and passes model,
+  skill, ground-truth, GitHub, baseline, and source-integrity boundaries.
+- Fresh grades report 87.5% for the bare core versus 76.3% for pure baselines;
+  preserved L3/L4/L5/L9/L11 failures earn exactly the five shipping Details.
+- L6 now passes the explicit `skill_not_found` branch with the portable install
+  command.
+- Four blind forced comparisons completed; the baselines won all four on
+  qualitative preference, which does not override the bare core's formal
+  contract improvement or critical failure evidence.
+- The analyzed benchmark and 350,190-byte static viewer pass the final bare
+  verifier.

@@ -33,10 +33,13 @@ safety, composition, approval, or truthfulness boundaries.
   `skill_not_found: copywriting`; the response names a concrete install action,
   drafts no landing-surface copy, asks no normal gap questions, and changes no
   file or GitHub surface.
-- **L7 — The full GitHub landing surface is present.** The approved result
+- **L7 (critical) — The full GitHub landing surface is present.** The approved result
   includes a GFM README, About description, focused topic set, and manual
   social-preview specification; the README makes project, actor, useful
-  behavior, and first action legible near the top.
+  behavior, and first action legible near the top, then uses every
+  evidence-supported section among purpose, honest alternatives, capabilities,
+  operation, runnable demonstration, adoption commitment, proof, real failure
+  modes, and a closing repeat of the starter step.
 - **L8 (critical) — The starter step is truthful and continuous.** Quickstart
   commands and code are consistent with the fixture manifest and
   implementation, form the smallest plausible path to first success, and
@@ -47,8 +50,9 @@ safety, composition, approval, or truthfulness boundaries.
   omitted from approved output rather than invented or left as a placeholder.
 - **L10 — Visual treatment matches repository evidence.** Suitable existing
   assets are reused with accessible GFM-safe markup; otherwise the draft uses a
-  marked placeholder and precise input → behavior → result specification, while
-  the approved README never presents a nonexistent asset as real.
+  marked placeholder whose HTML comment gives a precise input → behavior →
+  result specification, while the approved README never presents a nonexistent
+  asset as real.
 - **L11 (critical) — Methodology stays invisible everywhere.** README prose,
   HTML comments, visual placeholder comments, About description, topics,
   social-preview copy, and gh-command arguments contain no behavior-design
@@ -69,6 +73,10 @@ safety, composition, approval, or truthfulness boundaries.
 - **L15 (critical) — Baseline purity is visible.** A no-skill transcript shows
   no skill read or invocation despite explicit slash-command wording; any
   contaminated baseline is failed rather than graded.
+- **L16 (critical) — The shipping core carries the approved architecture.**
+  The Recipe itself names the evidence-supported rest-of-page sequence and the
+  HTML-comment form for a missing visual, without relying on an external
+  methodology source at runtime.
 
 ## Fixture-specific behavior
 
@@ -93,4 +101,4 @@ safety, composition, approval, or truthfulness boundaries.
 | 2 — library badge wall | L2–L5, L7–L15, B1 |
 | 3 — web app with visuals | L2–L5, L7–L15, W1 |
 | 4 — masked copywriting missing | L2, L6, L12–L15 |
-| Harness, trigger optimization, and shipping | L1, L2, L14, L15 |
+| Harness, trigger optimization, and shipping | L1, L2, L14–L16 |

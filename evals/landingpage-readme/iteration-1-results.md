@@ -87,8 +87,8 @@ treated as a stable performance claim.
 
 ## Form and disposition
 
-- One primitive remains: the 15-step `## Recipe`.
-- The full body is 26 physical lines, within the 100-line limit.
+- The evaluated treatment used one 15-step `## Recipe` with 26 physical body
+  lines.
 - One `## Details` section contains three guidance lines, within the 80-line
   Details limit.
 - No reference or Call was added.
@@ -98,3 +98,22 @@ treated as a stable performance claim.
 - No further skill revision is evidence-earned from this iteration.
 - Elias accepted the static-viewer review on 2026-07-26, completing the
   human-feedback gate without further skill changes.
+
+## Final-review full-treatment rerun
+
+The branch-wide standards/spec review materially changed the core, corrected a
+fixture/harness inconsistency, and therefore produced fresh authoritative
+evidence at
+`evals/landingpage-readme/runs/full/iteration-4-20260727/`.
+
+- The shipping form is one 17-step Recipe plus five bare-failure-earned
+  Details, 27 body lines total.
+- Every arm is its own Git root, and the deterministic gate rejects external
+  temporary paths in addition to the original model, baseline, dependency,
+  ground-truth, GitHub, and source-integrity checks.
+- The current treatment passes 48/48 assertions; pure baselines pass 41/48.
+  Per-eval treatment grades are 14/14, 14/14, 14/14, and 6/6.
+- The analyzed aggregate is 100.0% versus 85.1%, a +0.15 pass-rate delta.
+- Four blind comparisons split 2–2 between treatment and baseline; formal
+  critical results remain the contractual gate.
+- The 331,743-byte static viewer and strict final verifier both pass.

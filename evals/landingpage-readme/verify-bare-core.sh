@@ -51,6 +51,14 @@ for events in "$ITERATION_DIR"/eval-*/without_skill/run-1/codex-events.jsonl; do
   fi
 done
 
+for events in "$ITERATION_DIR"/eval-*/{with_skill,without_skill}/run-1/codex-events.jsonl; do
+  if jq -r 'select(.item.type == "command_execution") | .item.command' "$events" \
+    | rg -q '(^|[[:space:]"'\''])/(private/)?(var/)?tmp(/|[[:space:]"'\''])'; then
+    echo "executor used an external temporary path: $events" >&2
+    exit 1
+  fi
+done
+
 for events in "$ITERATION_DIR"/eval-*/with_skill/run-1/codex-events.jsonl; do
   rg -q '\.agents/skills/landingpage-readme/SKILL\.md' "$events"
 done
