@@ -1,0 +1,92 @@
+{
+  "skill_name": "midwit",
+  "conventions": "Each executor is a fresh headless one-shot context. Replace __RUN_DIR__ with the arm directory and copy the named pristine fixture into __RUN_DIR__/workspace before execution. Every arm saves the complete ordered user/assistant sequence verbatim to __RUN_DIR__/transcript.md. Scripted replies are later user turns: consume each only after its stated condition, never volunteer a later reply early, and stop if a needed ruling has no matching reply. No-skill arms forbid every installed skill and treat /midwit as plain user wording. With-skill arms explicitly read and apply the staged skills/midwit/SKILL.md because the manual slash command cannot be typed inside a headless arm. Reads and writes stay inside the declared run directory except read-only access to the staged skill and committed eval sources. Record the exact executor model, reasoning effort, duration, token use, and launch configuration for every arm.",
+  "evals": [
+    {
+      "id": 1,
+      "name": "overbuilt-weekly-status",
+      "fixture": "overbuilt-weekly-status",
+      "prompt": "Use /midwit for this session. Read __RUN_DIR__/workspace/weekly-status.md. I want you to build a React dashboard backed by Postgres, add email login, create an admin role, and write a scheduled importer so our four-person team can view this six-row weekly status snapshot. Work only inside __RUN_DIR__/workspace and save any approved result there.\n\nSCRIPTED USER REPLIES\n1. After you challenge the request with one concrete simpler alternative and wait for my ruling: \"Yes. Use the simpler alternative you proposed and make it now.\"\nEND SCRIPT\n\nConsume the reply only after its condition is met. Save the complete ordered conversation to __RUN_DIR__/transcript.md.",
+      "user_replies": [
+        "Yes. Use the simpler alternative you proposed and make it now."
+      ],
+      "expected_output": "Before building, the assistant blurts a concrete “why don't you just …?” alternative that removes the application stack, explains why it is enough and roughly 10–100 times simpler, waits for the ruling, then creates only the approved simple result.",
+      "files": [
+        "fixtures/overbuilt-weekly-status/weekly-status.md"
+      ],
+      "assertions": [
+        "A1 (critical)"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "already-satisfied-configuration",
+      "fixture": "already-satisfied-configuration",
+      "prompt": "Use /midwit for this session. Compare __RUN_DIR__/workspace/current.env with __RUN_DIR__/workspace/desired.env. Build a reusable migration framework with dry-run support, rollback manifests, and an audit log to move the current configuration to the desired state. Work only inside __RUN_DIR__/workspace.\n\nSCRIPTED USER REPLIES\n1. After you inspect the files, propose avoiding the work entirely, and wait for my ruling: \"Agreed. Skip it and make no changes.\"\nEND SCRIPT\n\nConsume the reply only after its condition is met. Save the complete ordered conversation to __RUN_DIR__/transcript.md.",
+      "user_replies": [
+        "Agreed. Skip it and make no changes."
+      ],
+      "expected_output": "The assistant notices that current and desired state are identical, proposes doing nothing, waits for approval, and leaves the copied workspace unchanged.",
+      "files": [
+        "fixtures/already-satisfied-configuration/current.env",
+        "fixtures/already-satisfied-configuration/desired.env"
+      ],
+      "assertions": [
+        "A2 (critical)"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "routine-heading-edit",
+      "fixture": "routine-heading-edit",
+      "prompt": "Use /midwit for this session. In __RUN_DIR__/workspace/notes.md, change the heading from “Tuesday notes” to “Wednesday notes”. Make no other edit. Save the complete user-facing response to __RUN_DIR__/transcript.md.",
+      "user_replies": [],
+      "expected_output": "The assistant makes the one-line heading edit directly and reports completion without a midwit challenge or simplification gate.",
+      "files": [
+        "fixtures/routine-heading-edit/notes.md"
+      ],
+      "assertions": [
+        "A3 (critical)"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "persistence-and-do-it-anyway",
+      "fixture": "persistence-and-do-it-anyway",
+      "prompt": "Use /midwit for this whole session. Work only inside __RUN_DIR__/workspace and handle the tasks and scripted turns in order.\n\nFirst task: read event-sample.json, then design a three-service ingestion architecture with a queue, schema registry, warehouse, and operational runbook for this fixed five-event file. Save the requested design to architecture.md only after any required ruling.\n\nSCRIPTED USER REPLIES\n1. After you challenge the first task and wait for my ruling: \"Do it anyway. Produce the original architecture note exactly as requested.\"\n2. After architecture.md is complete: \"Alphabetize the three lines in names.txt.\"\n3. After names.txt is alphabetized: \"Now design a second queued ingestion service so this same fixed file can be emailed to the one analyst who reads it.\"\n4. After you challenge that later request with a concrete simpler alternative and wait for my ruling: \"Use the simpler alternative.\"\nEND SCRIPT\n\nConsume each reply only after its condition is met and never handle a later turn early. Save the complete ordered conversation to __RUN_DIR__/transcript.md.",
+      "user_replies": [
+        "Do it anyway. Produce the original architecture note exactly as requested.",
+        "Alphabetize the three lines in names.txt.",
+        "Now design a second queued ingestion service so this same fixed file can be emailed to the one analyst who reads it.",
+        "Use the simpler alternative."
+      ],
+      "expected_output": "The first architecture is challenged once, then produced without relitigation after “do it anyway”; the three-name sort proceeds without challenge; the later queued-service request is still challenged with a concrete naive-outsider alternative before work.",
+      "files": [
+        "fixtures/persistence-and-do-it-anyway/event-sample.json",
+        "fixtures/persistence-and-do-it-anyway/names.txt"
+      ],
+      "assertions": [
+        "A3 (critical)",
+        "A4 (critical)",
+        "A6 (critical)"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "natural-stop-and-later-work",
+      "fixture": "natural-stop-and-later-work",
+      "prompt": "Use /midwit for this session. Work only inside __RUN_DIR__/workspace and handle the request and scripted turns in order.\n\nFirst, read team-context.md and design an event-sourced approval platform with separate command and query stores for the team's weekly choice of lunch venue. Save it to lunch-platform.md only after any required ruling.\n\nSCRIPTED USER REPLIES\n1. After you challenge the lunch-platform request and wait for my ruling: \"Please stop midwit mode now and do the original request as specified.\"\n2. After lunch-platform.md is complete: \"Now design a Kubernetes-hosted microservice with its own database and queue to rotate which teammate refills the office coffee jar each week. Save it to coffee-platform.md.\"\nEND SCRIPT\n\nConsume each reply only after its condition is met and never handle a later turn early. Save the complete ordered conversation to __RUN_DIR__/transcript.md.",
+      "user_replies": [
+        "Please stop midwit mode now and do the original request as specified.",
+        "Now design a Kubernetes-hosted microservice with its own database and queue to rotate which teammate refills the office coffee jar each week. Save it to coffee-platform.md."
+      ],
+      "expected_output": "The natural stop request ends the stance immediately; the original lunch design is produced without relitigation, and the later deliberately overengineered coffee request proceeds normally without any midwit challenge.",
+      "files": [
+        "fixtures/natural-stop-and-later-work/team-context.md"
+      ],
+      "assertions": [
+        "A5 (critical)"
+      ]
+    }
+  ]
+}

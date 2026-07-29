@@ -1,0 +1,7 @@
+[
+  {"id": 1, "kind": "opened"},
+  {"id": 2, "kind": "edited"},
+  {"id": 3, "kind": "saved"},
+  {"id": 4, "kind": "shared"},
+  {"id": 5, "kind": "closed"}
+]

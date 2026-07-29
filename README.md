@@ -1,6 +1,6 @@
 # skills
 
-**Nine focused workflows for developers who need more from their agents than a
+**Ten focused workflows for developers who need more from their agents than a
 one-line prompt.**
 
 Install one workflow from Elias Stravik's personal collection, then invoke it
@@ -41,6 +41,7 @@ or linked MP4 poster without simulated output.
 | [`skill-issue`](skills/skill-issue/SKILL.md) | Shape a compact agent skill from checkable evidence. |
 | [`copywriting`](skills/copywriting/SKILL.md) | Draft truthful audience-facing copy from supplied evidence. |
 | [`landingpage-readme`](skills/landingpage-readme/SKILL.md) | Turn repository evidence into an approved GitHub landing surface. |
+| [`midwit`](skills/midwit/SKILL.md) | Challenge nontrivial work with a much simpler or null alternative until told to stop. |
 
 Install any one of them by replacing the skill name:
 
