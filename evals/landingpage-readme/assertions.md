@@ -77,6 +77,29 @@ safety, composition, approval, or truthfulness boundaries.
   The Recipe itself names the evidence-supported rest-of-page sequence and the
   HTML-comment form for a missing visual, without relying on an external
   methodology source at runtime.
+- **L17 (critical) — The exact page anatomy survives adaptation.** Every
+  variant preserves the approved hero, aspiration, alternatives, behavior,
+  three-step start, adoption paths, FAQ, close, and repeated CTA order, while
+  unsupported optional demo or proof sections are omitted rather than filled.
+- **L18 — Ten variants are reviewable as one system.** Unless the user requests
+  another count, the workflow produces ten complete, strategically distinct
+  variants in one paginated preview with numbered navigation, a visible count,
+  stable variant URLs, and user corrections propagated across every variant.
+- **L19 (critical) — The copy remains formula-equivalent and outcome-led.** The
+  eyebrow, hero, intro, comparison, behavior blocks, first-success cards,
+  adoption paths, FAQ, close, and CTA perform their required semantic jobs in
+  ordinary product-specific language; user outcomes lead implementation detail,
+  and behavior headings do not use “Say yes to” or “Say no to.”
+- **L20 (critical) — The primary CTA completes the first-success path.** The
+  approved result includes a repository-grounded `docs/getting-started.md`, the
+  primary hero, pricing, and closing CTAs all link to it, and the guide provides
+  exact prerequisites, setup, first action, inspection point, safe next steps,
+  and an issue link.
+- **L21 — Preview and production artifacts stay separate.** Paginator code and
+  rejected variants remain outside the target repository; only the approved
+  README, guide, accessible production assets, and social-preview specification
+  enter the mutation set. The approved About description matches the eyebrow
+  pitch without the project name or trailing period.
 
 ## Fixture-specific behavior
 
@@ -101,4 +124,5 @@ safety, composition, approval, or truthfulness boundaries.
 | 2 — library badge wall | L2–L5, L7–L15, B1 |
 | 3 — web app with visuals | L2–L5, L7–L15, W1 |
 | 4 — masked copywriting missing | L2, L6, L12–L15 |
-| Harness, trigger optimization, and shipping | L1, L2, L14–L16 |
+| Future exact-structure dogfood and preview fixture | L2-L5, L7-L14, L17-L21 |
+| Harness, trigger optimization, and shipping | L1, L2, L14–L21 |

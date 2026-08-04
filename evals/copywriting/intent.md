@@ -25,6 +25,14 @@ challenge weak positioning or offers when that would change the argument, honor
 no-browse instructions, and never fabricate proof, customer language,
 capabilities, urgency, scarcity, guarantees, citations, or results.
 
+When the user supplies a structure or formula, the skill keeps its semantic
+jobs and relationships while improving the language inside it. Finished copy
+uses ordinary speech, the strongest accurate claim, observable product-specific
+outcomes, the reader's downstream workflow before implementation detail, and a
+specific next-result CTA. The revision pass rereads as a skeptical stranger,
+reads aloud for performed or tangled language, and cuts lines that merely
+repeat a heading or decorate the argument.
+
 This is not a general writing, proofreading, journalism, product-docs,
 internal-memo, market-research, brand-strategy, page-design, campaign
 deployment, media-buying, or publishing skill.
