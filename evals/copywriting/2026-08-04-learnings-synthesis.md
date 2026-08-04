@@ -25,6 +25,15 @@ The shipping reference includes approved transformations from implementation-fir
 - C14 covers semantic formula equivalence.
 - C15 covers ordinary, specific, strong, outcome-led finished prose.
 
-The historical benchmark predates C14-C15 and does not prove them. A focused
-formula-preservation fixture and paired old-skill/new-skill run remain pending
-user approval before any new shipping claim or description optimization.
+The historical benchmark predates C14-C15, so this revision added a focused
+formula-preservation fixture and paired old-skill/new-skill run. Both arms met
+all eight formal expectations, while the blind comparison selected the updated
+skill because its hero, behavior language, and CTA were more outcome-led and
+reader-facing without changing the locked semantic jobs. That evidence supports
+retaining the new Details and reference; it does not justify broader copy rules.
+
+The core trigger scope did not change, so the previously saturated description
+set was not re-optimized. The focused harness used GPT-5.6 Sol for execution and
+GPT-5.6 Terra for grading, comparison, and analysis because the preferred Luna
+comparator was unavailable. Wall-clock duration was captured, but the runner did
+not expose reliable token telemetry.

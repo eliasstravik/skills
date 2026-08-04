@@ -87,6 +87,6 @@ baseline failure. **(critical)** marks severe or contractual behavior.
 | 6 - social content voice conflict | C1-C3, C9-C11 |
 | 7 - fast provisional launch campaign | C1-C3, C8, C9 |
 | 8 - B2B sales collateral frozen research | C1-C3, C5, C9, C12 |
-| Future formula-preservation fixture | C14-C15 |
+| 9 - locked formula, outcome first | C1-C3, C5, C9, C14-C15 |
 | Bare core, viewer, and follow-on shipping gates | C1-C12, C14-C15 |
 | Future permitted-research fixture before adding browse-enabled scope | C13 |

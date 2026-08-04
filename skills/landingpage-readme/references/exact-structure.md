@@ -184,7 +184,10 @@ Create `docs/getting-started.md` from repository evidence. It should include:
 4. The smallest runnable setup sequence.
 5. The real command, click, or input that produces the first result.
 6. Where to inspect the result.
-7. Safe next steps and an issue link.
+7. Safe next steps and an issue link. Use the repository's absolute
+   `https://github.com/OWNER/REPO/issues/new` URL; a relative `../issues/new`
+   link from a file in `docs/` resolves inside GitHub's blob path instead of
+   the Issues UI.
 
 Do not send the CTA to a generic README anchor when a focused guide can finish the job.
 
@@ -193,6 +196,7 @@ Do not send the CTA to a generic README anchor when a focused guide can finish t
 - Keep the structure, evidence, pricing facts, and CTA destinations identical across variants.
 - Give each variant a genuinely different strategic angle, not synonym swaps.
 - Use one page with previous/next controls, numbered pagination, a visible `N / 10` counter, arrow-key navigation, and a stable URL fragment for each variant.
+- Verify an initial deep link opens the requested variant and browser back/forward restores the prior variant.
 - Apply approved literal copy and global user corrections across all variants before generating further alternatives.
 - Keep preview code and rejected variants outside the repository.
 - After selection, copy only the approved README, guide, and production assets into the target branch.

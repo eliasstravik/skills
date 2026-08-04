@@ -94,12 +94,14 @@ safety, composition, approval, or truthfulness boundaries.
   approved result includes a repository-grounded `docs/getting-started.md`, the
   primary hero, pricing, and closing CTAs all link to it, and the guide provides
   exact prerequisites, setup, first action, inspection point, safe next steps,
-  and an issue link.
+  and an issue link whose target resolves from `docs/` to the repository Issues
+  UI rather than a GitHub blob path.
 - **L21 — Preview and production artifacts stay separate.** Paginator code and
   rejected variants remain outside the target repository; only the approved
-  README, guide, accessible production assets, and social-preview specification
-  enter the mutation set. The approved About description matches the eyebrow
-  pitch without the project name or trailing period.
+  README, `docs/getting-started.md`, accessible production assets,
+  `outputs/social-preview.md`, and `outputs/gh-commands.sh` enter the mutation
+  set. The approved About description matches the eyebrow pitch without the
+  project name or trailing period.
 
 ## Fixture-specific behavior
 
@@ -124,5 +126,5 @@ safety, composition, approval, or truthfulness boundaries.
 | 2 — library badge wall | L2–L5, L7–L15, B1 |
 | 3 — web app with visuals | L2–L5, L7–L15, W1 |
 | 4 — masked copywriting missing | L2, L6, L12–L15 |
-| Future exact-structure dogfood and preview fixture | L2-L5, L7-L14, L17-L21 |
+| 5 — exact structure, preview, and docs | L2-L5, L7-L14, L17-L21 |
 | Harness, trigger optimization, and shipping | L1, L2, L14–L21 |

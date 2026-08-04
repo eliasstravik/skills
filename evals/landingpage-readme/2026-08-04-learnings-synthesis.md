@@ -36,6 +36,24 @@ corrections:
 - L20 covers the CTA-to-docs first-success path.
 - L21 covers preview/production separation and About-description equivalence.
 
-The historical benchmark predates L17-L21 and does not prove them. A focused
-preview fixture plus real-repository dogfood remain pending user approval before
-the revision receives a new shipping record or global reinstall.
+The historical benchmark predates L17-L21, so this revision added a focused
+preview-and-docs fixture and paired old-skill/new-skill run. The old skill met
+7 of 12 expectations; the updated skill met 11 of 12. A blind comparison chose
+the updated result with 0.97 confidence because it preserved the exact page
+anatomy, produced the required numbered fragment paginator, and delivered the
+approved repository artifacts in the right places.
+
+The sole updated-run failure exposed a broken relative issue link from the
+getting-started guide. The shipping reference now requires an absolute
+repository Issues URL, and the fixture now supplies repository metadata from
+which that URL can be derived. The focused corrective rerun met all 12
+expectations. Grader feedback also earned a runtime check for initial deep links
+and browser back/forward behavior. No other skill changes were made from this
+single focused evaluation. A full historical-suite rerun and real-repository
+dogfood remain separate shipping gates.
+
+The skill remains explicitly invoked and its trigger scope did not change, so
+description optimization was not rerun. The focused harness used GPT-5.6 Sol
+for execution and GPT-5.6 Terra for grading, comparison, and analysis because
+the preferred Luna comparator was unavailable. Wall-clock duration was
+captured, but the runner did not expose reliable token telemetry.

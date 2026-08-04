@@ -47,6 +47,16 @@
         "executor_rule": "Do not read or invoke the installed copywriting skill; return the fictional result only when landingpage-readme attempts the dependency call.",
         "scope": "This fiction applies only to eval 4 and does not claim the executor is genuinely missing copywriting."
       }
+    },
+    {
+      "id": 5,
+      "name": "exact-structure-preview-docs",
+      "fixture": "signalrelay-preview",
+      "prompt": "Use /landingpage-readme on the synthetic GitHub repository in __RUN_DIR__/workspace. For the /copywriting dependency, use the explicitly supplied paired copywriting skill path from the executor instructions. Inspect the whole repository before drafting. Create all preview scaffolding under __RUN_DIR__/preview, never inside the repository. Follow the ordered scripted replies below only when the matching stage is reached.\n\nSCRIPTED USER REPLIES\n1. After the first ten-variant paginated preview is complete: \"Use variant 1. Apply these corrections across all ten variants before finalizing: use the exact hero headline 'Route product-qualified signups before they go cold'; do not use 'Say yes to' or 'Say no to' in behavior headings; make the primary CTA 'Route my first signup'; frame the middle behavior around getting the routing service configured and verified; keep the copy focused on enrichment and routing into HubSpot or Slack rather than webhook payloads.\"\n2. After the corrected preview, complete README, getting-started guide, About description, topics, social-preview specification, and proposed gh commands are shown: \"Approved. Write only the selected README, docs/getting-started.md, production assets, and social-preview specification into the repository. Save the exact gh commands without executing them.\"\nEND SCRIPT\n\nSave the paginated preview under __RUN_DIR__/preview, the selected approved README as README.md, the guide as docs/getting-started.md, the social-preview specification as outputs/social-preview.md, the proposed commands as outputs/gh-commands.sh, and the complete response as __RUN_DIR__/transcript.md. Do not execute gh or contact live services.",
+      "expected_output": "Ten complete, structurally identical but strategically distinct variants in one functional paginator; feedback propagated across all ten; a selected evidence-grounded README with the approved short headline and direct behavior headings; a working docs/getting-started.md CTA destination; an About description matching the eyebrow pitch; and no preview scaffolding or rejected variants in the repository.",
+      "files": [
+        "fixtures/signalrelay-preview"
+      ]
     }
   ]
 }
