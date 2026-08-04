@@ -1,10 +1,9 @@
 # copywriting — 2026-08-04 learnings synthesis
 
-## Sources
+## Inputs synthesized
 
-- `Dropbox/paulgraham/writing-principles-and-examples.md`
-- `Dropbox/landing-page-readme-formulas.md`
-- `Dropbox/landing-page-readme-rules.md`
+- Paul Graham-derived principles for simple, useful, accurate writing
+- The locked landing-page README formulas and section rules
 - Approved Rowbound, Wedge, Stockpile, Mold, and Codebound README iterations
 - The current shipping skill, intent, assertions, fixtures, and historical eval records
 

@@ -1,10 +1,9 @@
 # landingpage-readme — 2026-08-04 learnings synthesis
 
-## Sources
+## Inputs synthesized
 
-- `Dropbox/landing-page-readme-formulas.md`
-- `Dropbox/landing-page-readme-rules.md`
-- `Dropbox/paulgraham/writing-principles-and-examples.md`
+- The locked landing-page README formulas and section rules
+- Paul Graham-derived principles for simple, useful, accurate writing
 - Approved Rowbound, Wedge, Stockpile, Mold, Greenware, and Codebound iterations and user corrections
 - The current shipping skill, intent, assertions, fixtures, and historical eval records
 
