@@ -30,14 +30,14 @@ One checkable assertion covers every required behavior and preserved failure.
   Router uses a `Request | Skill` table with reachable ownership transfer and
   overlap/uncertain/no-match fallbacks, and grammar matches the selected
   control-flow contract.
-- **A6 (critical) — The bare core stays bare and bounded.** Before Details,
-  every body line after frontmatter counts, the H1-plus-one-H2 core is at most
+- **A6 (critical) — The bare-core snapshot stays bare and bounded.** Every body
+  line after frontmatter counts, the saved H1-plus-one-H2 snapshot is at most
   20 lines, and no second section, preamble, motivation, example, or other
-  structure is present.
-- **A7 (critical) — The bare core is tested before depth.** Fresh with-skill
-  and no-skill contexts run the same task with controlled variables, a third
-  context makes a forced reasoned comparison, and no Details line exists
-  during that test.
+  structure is present in that snapshot.
+- **A7 (critical) — The bare-core snapshot is tested before depth is retained.**
+  Fresh with-skill and no-skill contexts run the same task with controlled
+  variables, a third context makes a forced reasoned comparison, and the
+  treatment loads the saved snapshot without Details.
 
 ## Earned depth and shipping
 
@@ -62,6 +62,10 @@ One checkable assertion covers every required behavior and preserved failure.
   cover required behavior and preserved failures, every critical assertion
   passes in the full treatment, description optimization is applied verbatim,
   and committed eval sources remain outside the shipping skill directory.
+- **A13 (critical) — Evidence creates no interaction gate.** Skill Issue never
+  becomes the stated reason to request test-prompt approval, wait for human
+  review, or block revision; the surrounding process owns interaction and any
+  standing user authorization remains effective.
 
 ## Flow-specific behavior
 
@@ -94,6 +98,7 @@ One checkable assertion covers every required behavior and preserved failure.
 | F3.2 frontmatter verification unrecorded | A10 |
 | F4.1 unearned Details rule | A8, A11, N1 |
 | F4.2 Recipe item bundles imperatives | A5, N1, O1 |
+| F5.1 bare-core evidence miscast as an approval/review gate | A7, A12, A13 |
 
 ## Eval coverage
 
@@ -103,4 +108,5 @@ One checkable assertion covers every required behavior and preserved failure.
 | 2 — bloated existing skill audit | A2–A6, A8–A11, B1 |
 | 3 — Router versus Switch boundary | A2–A6, A8–A11, R1 |
 | 4 — overflow and frontmatter discipline | A2–A6, A8–A11, O1 |
-| Harness, pairwise core test, shipping, and triggers | A1, A2, A7, A10, A12 |
+| 5 — interaction-authority regression | A2, A3, A7, A12, A13 |
+| Harness, pairwise core test, shipping, and triggers | A1, A2, A7, A10, A12–A13 |

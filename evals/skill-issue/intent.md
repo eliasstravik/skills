@@ -29,11 +29,15 @@ inside it.
   skill text before choosing form.
 - Choose exactly one core primitive by control flow and agent action, not by
   subject matter or visual preference.
-- Write or audit an H1 plus one primitive H2 whose mandated form fits within 20
-  body lines before Details.
-- Add a single Details section only for bare-core assertion failures, keeping
-  the entire body within 100 lines; externalize necessary overflow through
-  triggered Calls.
+- Save an H1 plus one primitive H2 whose mandated form fits within 20 body
+  lines as the bare-core snapshot, then test that snapshot without Details.
+- Retain a single Details section only for bare-core assertion failures,
+  keeping the entire body within 100 lines; externalize necessary overflow
+  through triggered Calls.
+- Treat evidence as an artifact-content gate, never as authority to request
+  approval, wait for human review, or pause work; interaction remains owned by
+  skill-creator or another process authority, and standing user authorization
+  remains effective.
 - Treat line budgets as ceilings, preserve the distinction between
   user-invoked and model-invoked descriptions, and record manual frontmatter
   verification when the standard validator is unavailable.
@@ -63,9 +67,12 @@ off-limits as declared by the harness.
    skill with branch-only depth so its description contains triggering
    conditions, its compact core stays within budget, and its external
    reference is reached through a one-level read trigger with a fallback.
+5. **Interaction-authority regression** — when the surrounding process and
+   user already authorize autonomous completion, preserve the bare-core proof
+   without attributing a new approval, review, or pause gate to Skill Issue.
 
 ## Intent gate
 
 The client authorized step-by-step autopilot for all remaining skills. This
-scope and the four flows are approved under that standing authorization. No
+scope and the five flows are approved under that standing authorization. No
 change to the seven-skill build order is warranted.
