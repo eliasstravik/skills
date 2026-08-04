@@ -41,3 +41,15 @@ Repeated after the assertion-earned Details line was added:
 - [x] The core remains one H1 plus one ten-imperative Rules primitive.
 - [x] `## Details` has one nonblank instruction, traceable only to failed A1.
 - [x] No description optimizer ran; the manual-only N/A above remains binding.
+
+## 2026-08-04 revision repeat
+
+Repeated after the meme/shared-truth revision:
+
+- [x] `name`, description, boolean extension, and YAML delimiters remain valid.
+- [x] The shipping surface still contains only `SKILL.md`.
+- [x] The body has 19 physical lines after frontmatter, within 100.
+- [x] The core remains one H1 plus one ten-imperative Rules primitive.
+- [x] `## Details` has two nonblank instructions, traceable only to failed A7
+  and the preserved A1 bare-core failure.
+- [x] No description optimizer ran; the manual-only N/A above remains binding.

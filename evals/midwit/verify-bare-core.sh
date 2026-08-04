@@ -26,7 +26,8 @@ fi
 cmp "$ITERATION_DIR/source-hashes-before.txt" "$ITERATION_DIR/source-hashes-after-baseline.txt"
 cmp "$ITERATION_DIR/source-hashes-before-treatment.txt" "$ITERATION_DIR/source-hashes-after.txt"
 
-test "$(find "$ITERATION_DIR" -mindepth 3 -maxdepth 3 -type d -name run-1 | wc -l | tr -d ' ')" -eq 10
+expected_arms="$(( $(jq '.evals | length' "$ITERATION_DIR/evals.json") * 2 ))"
+test "$(find "$ITERATION_DIR" -mindepth 3 -maxdepth 3 -type d -name run-1 | wc -l | tr -d ' ')" -eq "$expected_arms"
 
 while IFS= read -r arm; do
   test -s "$arm/command.txt"
@@ -38,13 +39,20 @@ while IFS= read -r arm; do
   test "$(jq -s '[.[] | select(.type == "turn.completed")] | length' "$arm/codex-events.jsonl")" -eq 1
 done < <(find "$ITERATION_DIR" -mindepth 3 -maxdepth 3 -type d -name run-1 | sort)
 
-for events in "$ITERATION_DIR"/eval-*/without_skill/run-1/codex-events.jsonl; do
-  if jq -r 'select(.item.type == "command_execution") | [.item.command, .item.aggregated_output] | @tsv' "$events" \
-    | rg -q '\.agents/skills|SKILL\.md'; then
-    echo "baseline skill contamination: $events" >&2
-    exit 1
-  fi
-done
+baseline_kind="$(< "$ITERATION_DIR/baseline-kind.txt")"
+if [[ "$baseline_kind" == "no_skill" ]]; then
+  for events in "$ITERATION_DIR"/eval-*/without_skill/run-1/codex-events.jsonl; do
+    if jq -r 'select(.item.type == "command_execution") | [.item.command, .item.aggregated_output] | @tsv' "$events" \
+      | rg -q '\.agents/skills|SKILL\.md'; then
+      echo "baseline skill contamination: $events" >&2
+      exit 1
+    fi
+  done
+else
+  for events in "$ITERATION_DIR"/eval-*/without_skill/run-1/codex-events.jsonl; do
+    rg -q '\.agents/skills/midwit/SKILL\.md' "$events"
+  done
+fi
 
 for events in "$ITERATION_DIR"/eval-*/{with_skill,without_skill}/run-1/codex-events.jsonl; do
   if jq -r 'select(.item.type == "command_execution") | .item.command' "$events" \
@@ -61,18 +69,18 @@ done
 if [[ "$RUN_KIND" == "bare-core" ]]; then
   FORM_RESULT="one H1, one flat Rules primitive, ten imperatives, no Details, at most 20 body lines"
 else
-  FORM_RESULT="one H1, one flat Rules primitive, ten core imperatives, one assertion-earned Details line, at most 100 body lines"
+  FORM_RESULT="one H1, one flat Rules primitive, ten core imperatives, two assertion-earned Details lines, at most 100 body lines"
 fi
 
 cat > "$ITERATION_DIR/contamination-scan.md" <<REPORT
 # $RUN_KIND contamination scan
 
 - Skill form: PASS ($FORM_RESULT)
-- Executor count: PASS (five fresh pairs; ten isolated arms)
+- Executor count: PASS ($(jq '.evals | length' "$ITERATION_DIR/evals.json") fresh pairs; $expected_arms isolated arms)
 - Executor model: PASS (gpt-5.6-sol in every command record)
-- Baseline purity: PASS (no baseline skill read or invocation)
+- Baseline purity: PASS ($baseline_kind control loaded as declared)
 - Treatment loading: PASS (the run-local midwit skill was read in every treatment)
-- Transcript contract: PASS (all ten arms saved a transcript and review output)
+- Transcript contract: PASS (all $expected_arms arms saved a transcript and review output)
 - External-path isolation: PASS
 - Source integrity: PASS (each batch preserved its candidate, eval sources, and fixtures)
 REPORT

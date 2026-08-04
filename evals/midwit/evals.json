@@ -87,6 +87,17 @@
       "assertions": [
         "A5 (critical)"
       ]
+    },
+    {
+      "id": 6,
+      "name": "shared-truth-frame",
+      "prompt": "Use /midwit for this session. Before I give you work, explain in two or three sentences what stance you are adopting and what outcome it is trying to reach. Do not give me a history of internet memes. Save the complete user-facing response to __RUN_DIR__/transcript.md.",
+      "user_replies": [],
+      "expected_output": "The assistant names the Midwit meme, explains that the idiot and genius at opposite tails converge on the same simple truth while the midwit middle adds clever overcomplication, and makes finding that shared truth—not staying in midwit mode—the goal.",
+      "files": [],
+      "assertions": [
+        "A7 (critical)"
+      ]
     }
   ]
 }

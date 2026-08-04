@@ -28,6 +28,7 @@ assertion_ids_for_eval() {
     3) echo "A3" ;;
     4) echo "A3 A4 A6" ;;
     5) echo "A5" ;;
+    6) echo "A7" ;;
     *) return 64 ;;
   esac
 }
