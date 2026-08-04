@@ -29,6 +29,11 @@ behavior whose failure breaks the approved interaction contract.
 - **A6 (critical) — “Do it anyway” is final.** After the user rules that the
   original approach should proceed, the assistant performs it without
   repeating, reframing, or reopening the simplification objection.
+- **A7 (critical) — The meme seeks shared truth rather than midwit mode.** When
+  asked to explain the stance, the assistant names the Midwit meme, identifies
+  the idiot and genius as opposite tails converging on the same simple truth,
+  identifies the midwit middle as clever overcomplication, and says the goal is
+  to find that shared truth rather than remain in “midwit mode.”
 
 A6 is promoted to critical because the approved core makes
 no-relitigation an explicit user-ruling contract. Baseline purity, transcript
@@ -44,6 +49,7 @@ than additional skill-behavior assertions.
 | 3 — routine heading edit | A3 |
 | 4 — persistence and “do it anyway” | A3, A4, A6 |
 | 5 — natural stop and later work | A5 |
+| 6 — shared-truth frame | A7 |
 
 ## Preserved-failure traceability
 
@@ -53,6 +59,7 @@ root named in `no-skill-failures.md`.
 | Preserved baseline failure | Covered by |
 | --- | --- |
 | Eval 1 challenges the dashboard but does not open with “why don't you just …?” and does not explain the alternative as roughly 10–100 times simpler. | A1 |
+| Eval 6's old-skill revision control described an anti-midwit simplification stance but omitted the Midwit meme, idiot/genius convergence, and shared-truth destination. | A7 |
 
-No new assertion was earned: the other four controls satisfy their applicable
-contracts, and the observed A1 failure is already covered exactly.
+A7 directly covers the newly requested semantic correction. The other five
+controls retain their existing regression contracts.

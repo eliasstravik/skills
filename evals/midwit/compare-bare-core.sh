@@ -93,14 +93,14 @@ for eval_id in 1 3 5; do
   stage_side "$eval_dir/with_skill/run-1" "$INPUT_ROOT/eval-$eval_id/B"
 done
 
-for eval_id in 2 4; do
+for eval_id in 2 4 6; do
   eval_dir="$(find "$ITERATION_DIR" -mindepth 1 -maxdepth 1 -type d -name "eval-${eval_id}-*" -print -quit)"
   stage_side "$eval_dir/with_skill/run-1" "$INPUT_ROOT/eval-$eval_id/A"
   stage_side "$eval_dir/without_skill/run-1" "$INPUT_ROOT/eval-$eval_id/B"
 done
 
 pids=()
-for eval_id in 1 2 3 4 5; do
+for eval_id in 1 2 3 4 5 6; do
   run_comparison "$eval_id" &
   pids+=("$!")
 done
@@ -122,7 +122,8 @@ jq -n '{
   "2": {"A": "with_skill", "B": "without_skill"},
   "3": {"A": "without_skill", "B": "with_skill"},
   "4": {"A": "with_skill", "B": "without_skill"},
-  "5": {"A": "without_skill", "B": "with_skill"}
+  "5": {"A": "without_skill", "B": "with_skill"},
+  "6": {"A": "with_skill", "B": "without_skill"}
 }' > "$COMPARISON_ROOT/blind-mapping.json"
 
 jq -s \
