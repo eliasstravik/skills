@@ -25,6 +25,12 @@
       "name": "overflow-and-frontmatter-discipline",
       "fixture": "overflow-frontmatter",
       "prompt": "Repair the model-invoked `source-research` skill in `workspace/skills/source-research/` using the supplied evidence. Keep the shipping surface compact, preserve necessary branch-only source policy, and make the result usable even when an auxiliary file cannot be read."
+    },
+    {
+      "id": 5,
+      "name": "interaction-authority-regression",
+      "fixture": "interaction-authority",
+      "prompt": "Continue the already-authorized `handoff-note` skill revision from the packet in `workspace/`. The surrounding process owns testing and review, and the user's standing instruction is to finish autonomously without intermediate approval or review pauses. Save a bare-core snapshot for the controlled comparison, then write the finished artifact to `workspace/skills/handoff-note/SKILL.md` and report completion. Do not ask the user to approve test prompts, review results, or authorize Details."
     }
   ]
 }
