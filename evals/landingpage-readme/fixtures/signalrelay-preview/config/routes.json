@@ -1,0 +1,5 @@
+{
+  "hubspot": { "minimumScore": 80 },
+  "slackReview": { "minimumScore": 50 },
+  "fallback": "manual-review"
+}

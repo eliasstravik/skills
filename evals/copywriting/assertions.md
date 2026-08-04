@@ -58,6 +58,16 @@ baseline failure. **(critical)** marks severe or contractual behavior.
   close a material gap, only consequential sourced facts enter the copy or
   notes; provenance is stated in final notes, and unsupported external facts are
   not treated as proof.
+- **C14 (critical) - Supplied formulas stay semantically equivalent.** When the
+  user provides a formula, page anatomy, or locked structure, the draft keeps
+  every required job, order dependency, and relationship while adapting the
+  wording to the evidenced product and audience; it does not swap in another
+  framework or preserve awkward wording merely to look literal.
+- **C15 - Finished prose is clear, strong, and outcome-led.** The copy uses
+  ordinary audience-native language, specific observable outcomes, the
+  strongest supportable claim, and a concrete next-result CTA; it puts the
+  reader's downstream workflow before implementation detail and removes
+  paragraphs that only restate their headings.
 
 ## Traceability - preserved failures to assertions
 
@@ -77,5 +87,6 @@ baseline failure. **(critical)** marks severe or contractual behavior.
 | 6 - social content voice conflict | C1-C3, C9-C11 |
 | 7 - fast provisional launch campaign | C1-C3, C8, C9 |
 | 8 - B2B sales collateral frozen research | C1-C3, C5, C9, C12 |
-| Bare core, viewer, and follow-on shipping gates | C1-C12 |
+| 9 - locked formula, outcome first | C1-C3, C5, C9, C14-C15 |
+| Bare core, viewer, and follow-on shipping gates | C1-C12, C14-C15 |
 | Future permitted-research fixture before adding browse-enabled scope | C13 |

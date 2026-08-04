@@ -25,6 +25,14 @@ developer README and contain no behavior-design framework vocabulary.
 - Invoke `/copywriting` for every audience-facing tagline, intro, heading, and
   call to action.
 - Stop with an install instruction if `/copywriting` is unavailable.
+- Keep the approved landing-page README anatomy fixed while producing ten
+  strategically distinct, evidence-equivalent copy variants in one paginated
+  preview.
+- Propagate literal selections and general copy corrections across every
+  variant before the user chooses one.
+- Use the selected variant to create the README, production visual/button
+  assets, and a repository-grounded `docs/getting-started.md` linked from the
+  primary CTA.
 - Present the complete README, metadata, exact `gh` commands, and social handoff
   before mutation.
 - After approval, write the README and apply or emit approved GitHub metadata
@@ -32,6 +40,8 @@ developer README and contain no behavior-design framework vocabulary.
 - Reuse suitable repository visuals; otherwise leave a marked placeholder with
   an actionable hidden production specification.
 - Omit unverified proof from approved output.
+- Make the About description equal the eyebrow pitch without the project name
+  or a trailing period when the user approves metadata mutation.
 
 ## Evaluation seam
 

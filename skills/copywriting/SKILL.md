@@ -18,6 +18,11 @@ First matching condition wins.
 
 ## Details
 
+- Before drafting or revising finished copy, read [clear commercial prose](references/clear-commercial-prose.md); use its revision loop and formula-equivalence check. If it is unavailable, preserve any supplied formula and revise toward ordinary, specific, testable language.
+- Treat a supplied structure or formula as a semantic contract: keep its jobs, order, and relationships while changing the words for the product and audience.
+- Put the reader's workflow and downstream result before implementation detail; name internals only when they help the buyer judge the product.
+- Prefer the shortest headline that makes the outcome clear. Add pains, mechanisms, or qualifications only when they sharpen rather than bury the promise.
+- Make calls to action name the specific next result or real product action, not a generic “learn more,” “get started,” or “install” when a clearer action exists.
 - Treat distinctive customer phrases as evidence for pains, stakes, vocabulary, and objections, not as reusable public copy.
 - Before drafting social, content, newsletter, or voice-led copy, translate customer language into brand-owned phrasing by changing exact wording, syntax, and metaphor while preserving the underlying meaning.
 - Avoid close variants or swapped-noun jokes that preserve an unapproved customer metaphor; choose a fresh image from brand, product, or audience evidence instead.

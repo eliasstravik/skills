@@ -81,6 +81,16 @@
       "files": [
         "fixtures/b2b-sales-collateral-frozen-research/source-packet.md"
       ]
+    },
+    {
+      "id": 9,
+      "name": "locked-formula-outcome-first",
+      "fixture": "locked-formula-outcome-first",
+      "prompt": "Use /copywriting to rewrite the locked landing-page elements in __RUN_DIR__/workspace/source-packet.md. Preserve every semantic job in the supplied formulas, but improve the words for clarity and strength. Use only the packet; do not browse. Save the finished copy and a compact formula-equivalence check to __RUN_DIR__/workspace/outputs/final.md, and save your complete user-facing response verbatim to __RUN_DIR__/transcript.md.",
+      "expected_output": "A formula-equivalent rewrite with a short outcome-led hero, a downstream sales-workflow introduction, three direct behavior blocks, and a specific first-result CTA, without implementation jargon, salesy adjectives, invented proof, or paragraphs that merely repeat headings.",
+      "files": [
+        "fixtures/locked-formula-outcome-first/source-packet.md"
+      ]
     }
   ]
 }
