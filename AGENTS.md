@@ -1,7 +1,7 @@
 # skills — repo conventions
 
-The personal library contains ten skills (autoconsultant, automake, consultant,
-copywriting, demo, html, landingpage-readme, midwit, skill-issue, voice-mode),
+The personal library contains nine skills (autoconsultant, automake, consultant,
+copywriting, demo, html, midwit, skill-issue, voice-mode),
 built on skill-creator (process authority: evals, baselines, viewer review,
 iteration, description optimization) and skill-issue (form authority: one
 primitive, ≤20-line core, earned Details, ≤100 body lines). The original eight
