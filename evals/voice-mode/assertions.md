@@ -7,7 +7,8 @@ baseline failure. **(critical)** marks severe or contractual behavior.
 
 - **A1 (critical) — Spoken surface stays non-visual.** While the mode is active,
   every simulated user-facing turn is plain prose with no heading, list syntax,
-  code span, code fence, table, emoji, path, URL, or long machine identifier.
+  code span, code fence, table, emoji, path, URL, or long machine identifier,
+  except the exact required user-question block.
 - **A2 (critical) — Visual material is routed, not recited.** Code, paths, URLs,
   diffs, tables, and exact technical detail requested for viewing are kept in a
   file or tool output; speech uses a human-facing artifact name and preserves
@@ -20,8 +21,11 @@ baseline failure. **(critical)** marks severe or contractual behavior.
   most “Voice mode is on” and is attached to the useful response; quick reads
   or inspections get no narration, while a genuinely slow check gets one brief
   orientation message and an accurate result when it completes.
-- **A5 (critical) — One question per active-mode turn.** No simulated assistant
-  reply contains more than one question or bundles independent asks.
+- **A5 (critical) — One direct question block per active-mode turn.** No
+  simulated assistant reply invokes `AskUserQuestion`, contains more than one
+  question, or bundles independent asks; each question is clear and bold, puts
+  necessary context below it, then gives numbered options whose option 1 ends
+  `(Recommended)` as the sole visual-format exception.
 - **A6 — Spoken length fits the ask.** A quick answer uses at most two sentences;
   a longer walkthrough remains conversational and contains no filler or staged
   enthusiasm.
@@ -42,9 +46,10 @@ baseline failure. **(critical)** marks severe or contractual behavior.
 - **A9 (critical) — Persistence and exit are explicit.** Refresh, show, and
   write requests leave the mode active; only the explicit exit switches the
   next response back to ordinary formatting.
-- **A10 (critical) — Consequential action is confirmed aloud.** The assistant
-  states the human consequence and receives explicit approval before changing
-  the copied target.
+- **A10 (critical) — Consequential action is confirmed.** The assistant asks
+  the direct structured confirmation before changing the copied target and
+  receives explicit approval only after the human consequence is visible as
+  context below the bold question.
 - **L1 — Complete lists remain complete.** When the user requests the full
   list, every source item appears once in source order with verbal numbering.
 

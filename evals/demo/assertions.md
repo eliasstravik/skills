@@ -12,8 +12,10 @@ baseline failure. **(critical)** marks severe or contractual behavior.
   directories, unrelated processes, and live services remain untouched.
 - **D2 (critical) — Target resolution is disciplined.** A clear named target is
   used without interviewing; materially different plausible targets produce
-  exactly one focused question before any target-specific build action, and the
-  scripted answer controls the result.
+  exactly one focused direct-Markdown question before any target-specific build
+  action, with no `AskUserQuestion` invocation, a clear bold question,
+  necessary context below it, then numbered options whose option 1 ends
+  `(Recommended)`; the scripted answer controls the result.
 - **D3 (critical) — Demo identity is stable.** New work creates exactly one
   descriptive lowercase-hyphen demo directory inside the supplied demo state
   root; a named existing demo is revised in place with no sibling demo.

@@ -17,19 +17,22 @@ baseline failure. **(critical)** marks severe or contractual behavior.
   conversation and repository, marks needed facts as supplied, inferable, or
   missing, and never asks the user to repeat a supplied fact.
 - **A4 (critical) — Normal consultation asks only necessary role inputs.** It
-  asks at most one missing Optimizer or Evaluator input per turn, offers 2–4
-  concrete numbered choices with one recommendation, accepts free-form
-  answers, and never asks a separate Orchestrator question.
+  never invokes `AskUserQuestion`; it asks at most one missing Optimizer or
+  Evaluator input per turn as a clear bold question, necessary context below
+  it, then 2–4 concrete numbered options with option 1 ending `(Recommended)`;
+  it accepts free-form answers and never asks a separate Orchestrator question.
 - **A5 (critical) — The complete Optimizer instruction is approved.** Before
   continuing, the full proposed `optimizer.md` is printed inline with Goal,
   smallest candidate scope, irreducible constraints, cheap checks, and relevant
-  repository context, followed by exactly `1. Approved` and
+  repository context below `**Approve this Optimizer instruction?**`, followed
+  by exactly `1. Approved (Recommended)` and
   `2. No — changes needed`; any revision reprints the whole artifact.
 - **A6 (critical) — The complete Evaluator instruction is approved.** Before
   continuing, the full proposed `evaluator.md` is printed inline with Goal,
   verdict rule, task-shaped evidence, required baseline/candidate evidence,
-  exact verdict format, complexity policy, and candidate-gate policy, followed
-  by exactly the two approval choices; any revision reprints it in full.
+  exact verdict format, complexity policy, and candidate-gate policy below
+  `**Approve this Evaluator instruction?**`, followed by exactly the two
+  approval choices; any revision reprints it in full.
 - **A7 (critical) — Role instructions remain independent.** `optimizer.md`
   contains no Evaluator acceptance rule, `evaluator.md`, or evaluation output;
   `evaluator.md` contains no Optimizer instruction, rationale, learnings, or
@@ -39,8 +42,8 @@ baseline failure. **(critical)** marks severe or contractual behavior.
   3, and success condition to `none` unless an observable user-supplied
   condition can be evaluated.
 - **A9 (critical) — The final run gate is exact.** Normal consultation presents
-  the resolved artifacts in the prescribed `Ready to run Automake.` summary,
-  describes the loop, and ends with exactly `1. Run` and
+  `**Ready to run Automake?**` first, puts the resolved artifact and loop
+  summary below it, and ends with exactly `1. Run (Recommended)` and
   `2. No — changes needed`; decline causes no repository or run-state mutation.
 - **A10 (critical) — Run-now is semantic and immediate.** A clear request to
   start the Automake ratchet now infers or defaults unresolved inputs and begins

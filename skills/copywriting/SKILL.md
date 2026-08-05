@@ -7,6 +7,8 @@ description: Triggers when a request asks for customer- or audience-facing comme
 
 ## Switch
 
+Whenever any branch asks the user a question, never invoke `AskUserQuestion`; render each clear question directly in bold, put necessary context below it, then give numbered options whose first option is the recommendation and ends with `(Recommended)`.
+
 First matching condition wins.
 
 | Condition | Action |

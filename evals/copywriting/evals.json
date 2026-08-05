@@ -17,7 +17,7 @@
       "name": "vague-page-material-gaps-no-browse",
       "fixture": "vague-page-material-gaps-no-browse",
       "prompt": "Use /copywriting on __RUN_DIR__/workspace/source-packet.md. The user explicitly says not to browse. Inspect the packet and decide whether there is enough factual and audience context to draft responsibly. Save your response to __RUN_DIR__/workspace/outputs/final.md and __RUN_DIR__/transcript.md.",
-      "expected_output": "The response does not draft past material gaps; it asks only a small high-leverage question set, honors no-browse, and names exactly which facts would change the sales argument or integrity.",
+      "expected_output": "The response does not draft past material gaps; it asks only a small high-leverage set of clear bold questions with necessary context and recommended-first numbered options, never invokes AskUserQuestion, honors no-browse, and names exactly which facts would change the sales argument or integrity.",
       "files": [
         "fixtures/vague-page-material-gaps-no-browse/source-packet.md"
       ]

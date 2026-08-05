@@ -16,9 +16,10 @@ prompt carries the absolute repository and plan paths, both complete approved
 role instructions, all resolved run values, and an instruction to invoke
 Automake in run-now mode without repeating consultation or approvals.
 
-Autoconsultant owns the cross-skill interaction contract: every client question
-from first Consultant discovery through Automake artifact approval uses
-Consultant's complete question block and one session-wide sequence. The
+Autoconsultant owns the cross-skill interaction contract: it never invokes
+`AskUserQuestion`, and every client question from first Consultant discovery
+through Automake artifact approval uses Consultant's complete direct-Markdown
+question block and one session-wide sequence. The
 Autoconsultant invocation never pre-authorizes Consultant review or Automake
 artifact approvals.
 
@@ -46,8 +47,8 @@ unchanged.
 - Complete Consultant first, including explicit review gates, approved plan,
   references, durable saves, and no implementation.
 - Continue one incrementing `Question <Q>` sequence across both phases; every
-  question has contiguous options, one substantive recommendation, and final
-  `Other`.
+  question is clear and bold, puts necessary context below it, and has
+  contiguous options with option 1 ending `(Recommended)` and final `Other`.
 - Preserve each Automake question or approval's meaning while wrapping it in
   the Consultant question shape; never print inherited bare or option-only
   prompts.

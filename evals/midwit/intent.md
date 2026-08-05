@@ -20,8 +20,9 @@ complexity. The goal is to find that shared truth, not to remain in “midwit
 mode.” Before
 nontrivial work, the agent silently checks for work that can disappear or
 become 10–100 times simpler. It interrupts only with a concrete naive-outsider
-alternative, opens with “why don't you just …?”, explains why that is enough,
-and waits for the user's ruling. It does routine work without a ritual
+alternative, never invokes `AskUserQuestion`, opens with a bold “why don't you
+just …?”, explains why that is enough below it, and offers numbered ruling
+options with the recommended alternative first. It does routine work without a ritual
 challenge, honors “do it anyway” without relitigating, persists across later
 tasks, and ends on any natural stop request.
 

@@ -21,15 +21,18 @@ baseline failure. **(critical)** marks severe or contractual behavior.
   scope, pricing, onboarding, or performance numbers.
 - **C4 (critical) - Material gaps gate drafting.** When a factual, audience,
   offer, proof, capability, compliance, or post-click gap could change the
-  argument, the response asks only the smallest high-leverage question set
-  before drafting.
+  argument, the response never invokes `AskUserQuestion` and asks only the
+  smallest high-leverage question set before drafting; every clear question is
+  bold, necessary context follows it, and numbered options follow with option
+  1 ending `(Recommended)`.
 - **C5 (critical) - No-browse and frozen-source limits are honored.** The output
   does not browse, imply browsing, cite external facts, or fill gaps from
   outside sources when the prompt forbids browsing or requires frozen research.
 - **C6 (critical) - Weak positioning is challenged before polish.** If the
   requested positioning or offer overstates the product, the response names the
-  concrete weakness, proposes the smallest truthful correction, and waits for
-  approval or scripted rejection before drafting.
+  concrete weakness, proposes the smallest truthful correction, and uses C4's
+  direct recommended-first format when asking for approval or scripted rejection
+  before drafting.
 - **C7 (critical) - Rejected corrections stay provisional.** When the user
   rejects a strategic correction and asks to proceed, the response produces copy
   only as a clearly labeled provisional draft and keeps the unresolved risk

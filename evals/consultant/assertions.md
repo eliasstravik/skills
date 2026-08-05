@@ -29,9 +29,11 @@ baseline failure. **(critical)** marks severe or contractual behavior.
   the next question number when questioning continues.
 - **A6 (critical) — Every question uses the exact block grammar.** Each
   user-facing discovery, taste, approval, blocker, or follow-up turn contains
-  exactly one `Question <Q>` block; question numbers increment across resumes,
-  options restart at 1 and remain contiguous, one substantive option is marked
-  `(Recommended)`, and the final numbered option is explicit `Other`.
+  exactly one direct-Markdown `Question <Q>` block and never invokes
+  `AskUserQuestion`; the question is clear and bold, necessary context sits
+  below it, question numbers increment across resumes, options restart at 1
+  and remain contiguous, option 1 ends `(Recommended)`, and the final numbered
+  option is explicit `Other`.
 - **A7 — Questions resolve the highest-leverage gap.** The agent chooses the
   most material unresolved quadrant, offers concrete choices rather than a
   bare inline follow-up, uses reference artifacts when taste is hard to

@@ -31,8 +31,10 @@ are off-limits.
 ## Interaction contract
 
 - Invocation remains explicit.
-- Resolve a clear target without interviewing; ask exactly one focused question
-  only when target ambiguity would materially change the result.
+- Resolve a clear target without interviewing; only when target ambiguity would
+  materially change the result, never invoke `AskUserQuestion` and ask exactly
+  one focused direct-Markdown question with a clear bold prompt, necessary
+  context below it, then numbered options whose option 1 ends `(Recommended)`.
 - Build one representative interaction in the nearest truthful context.
 - Label staged behavior persistently and never imply a real model, backend,
   extension, authentication flow, integration, or destructive action.

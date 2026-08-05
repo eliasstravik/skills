@@ -6,14 +6,14 @@
       "id": 1,
       "name": "normal-consultation-no-run",
       "prompt": "Use /automake in __REPO_DIR__. I have not decided the improvement target yet. Follow the normal consultation path and use __AUTOMAKE_HOME__ instead of ~/.automake. Do not mutate Git, repository files, or run state unless I approve the final run.\n\nScripted user replies:\n1. Improve the README quickstart so a new contributor can run the fictional check command without guessing.\n2. Approved\n3. Judge it BETTER only if the complete README gives an accurate copy-paste path from clone to `python3 tools/check.py`, preserves the support link, and adds no invented setup.\n4. Approved\n5. No — do not run it.",
-      "expected_output": "One Goal question, complete Optimizer and Evaluator artifacts with exact approval gates, a defaulted final summary, then a clean no-run exit with no repository or Automake-state mutation.",
+      "expected_output": "One bold direct-Markdown Goal question with context and recommended-first numbered options, complete Optimizer and Evaluator artifacts under exact bold-question approval gates, a defaulted final bold-question summary gate, no AskUserQuestion invocation, then a clean no-run exit with no repository or Automake-state mutation.",
       "files": ["fixtures/consultation-repo/README.md","fixtures/consultation-repo/tools/check.py"]
     },
     {
       "id": 2,
       "name": "accepted-candidate-ratchet",
       "prompt": "Use /automake in __REPO_DIR__. Goal: make `normalize_slug` collapse repeated separators while preserving existing behavior. BETTER means all existing tests plus the supplied repeated-separator cases pass, the public function stays dependency-free, and added complexity is minimal. Use one iteration, three consecutive failures, no early success condition, and __AUTOMAKE_HOME__ instead of ~/.automake. Use only GPT-5.6 Sol for the Optimizer and GPT-5.6 Terra for the Evaluator.\n\nScripted user replies:\n1. Approved\n2. Approved\n3. Run",
-      "expected_output": "No redundant intent questions; approved artifacts and final run gate precede automatic Git preflight; one isolated candidate passes evaluation, advances baseline, and is fully recorded.",
+      "expected_output": "No redundant intent questions; bold approval questions precede the artifact context and recommended-first options, the final bold run gate precedes automatic Git preflight, AskUserQuestion is never invoked, and one isolated candidate passes evaluation, advances baseline, and is fully recorded.",
       "files": ["fixtures/accepted-repo/slugify.py","fixtures/accepted-repo/test_slugify.py"]
     },
     {

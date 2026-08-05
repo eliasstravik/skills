@@ -40,8 +40,9 @@ directories, credentials, live services, and production systems are off-limits.
 
 - Inspect supplied facts and territory before asking the client.
 - Ask exactly one complete question block per turn, with an incrementing
-  `Question <Q>`, contiguous numbered options, one substantive recommendation,
-  and a final `Other` option.
+  bold `Question <Q>`, necessary context below it, contiguous numbered options,
+  option 1 ending `(Recommended)`, and a final `Other` option; never invoke
+  `AskUserQuestion`.
 - Update `consultation.md` before every next question and leave Brief, all four
   quadrants, Decisions, and Next step current at the end of each sitting.
 - Lead with concrete choices while leaving taste and final decisions to the
