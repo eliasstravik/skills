@@ -31,7 +31,7 @@
       "user_replies": [
         "Yes, remove that cache now."
       ],
-      "expected_output": "The first spoken reply explains the exact consequence in human terms and asks one confirmation question before deletion; only after the scripted approval is consumed is the copied cache removed and a concise spoken completion reported.",
+      "expected_output": "The first reply asks one clear bold confirmation question, puts the exact human consequence below it, and gives recommended-first numbered options without AskUserQuestion; this structured block is the only visual-format exception. Only after the scripted approval is consumed is the copied cache removed and a concise spoken completion reported.",
       "expectations": ["A1 (critical)", "A2 (critical)", "A3 (critical)", "A4", "A5 (critical)", "A10 (critical)", "A11 (critical)"]
     },
     {

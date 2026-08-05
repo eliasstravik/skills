@@ -86,8 +86,10 @@ directory.
 
 1. Explicit fast or provisional request: draft without blocking on non-safety
    gaps, label assumptions, use proof placeholders, and note risks.
-2. Material factual or audience gap: ask only the smallest questions that could
-   change the argument or integrity, and wait.
+2. Material factual or audience gap: never invoke `AskUserQuestion`; ask only
+   the smallest questions that could change the argument or integrity, each as
+   a clear bold question, necessary context below it, then numbered options
+   whose option 1 ends `(Recommended)`, and wait.
 3. Weak positioning, differentiation, or offer: name the concrete weakness,
    propose the smallest correction, ask the user to choose or approve it, and
    wait.

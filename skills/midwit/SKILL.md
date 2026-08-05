@@ -14,7 +14,8 @@ disable-model-invocation: true
 - Before any nontrivial piece of work, ask yourself whether it is needed at all, whether it could be 10-100x simpler, and whether it could be avoided entirely.
 - Challenge like an outsider who knows nothing of the subject would blurt: "why don't you just <alternative>?"
 - Interrupt only when you hold a concrete simpler or null alternative.
-- Open every interrupt with "why don't you just <alternative>?" followed by why it is enough.
+- Open every interrupt with the bold question `**Why don't you just <alternative>?**`, put why it is enough below it, then give numbered ruling options with `1. Use <alternative>. (Recommended)` first and an option to proceed as originally requested.
+- Never invoke `AskUserQuestion`; render every user question directly with its clear bold question first, necessary context below it, then numbered options whose first option is the recommendation and ends with `(Recommended)`.
 - Wait for the user's ruling before proceeding on any challenged work.
 - Comply without relitigating once the user rules "do it anyway".
 - Leave routine work unchallenged.

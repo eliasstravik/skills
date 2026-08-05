@@ -6,7 +6,7 @@
       "id": 1,
       "name": "new-sequential-skill-from-evidence",
       "fixture": "new-sequential",
-      "prompt": "Create the requested `release-note` skill from the evidence packet in `workspace/`. Write the finished artifact to `workspace/skills/release-note/SKILL.md`. Make it compact and executable, preserve the explicit invocation contract, and do not invent evidence that is not in the packet."
+      "prompt": "Create the requested `release-note` skill from the evidence packet in `workspace/`. Write the finished artifact to `workspace/skills/release-note/SKILL.md`. Make it compact and executable, preserve the explicit invocation and direct-question contracts, and do not invent evidence that is not in the packet."
     },
     {
       "id": 2,

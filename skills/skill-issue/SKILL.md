@@ -16,6 +16,7 @@ disable-model-invocation: true
 - [ ] Fresh controlled with/without runs and a blind forced comparison tested a saved bare-core snapshot.
 - [ ] One Details section retains only lines traceable to assertions that snapshot failed, within 80 Details lines and 100 total body lines.
 - [ ] Skill Issue introduced no approval, review, or pause; existing user authorization and the process authority governed interaction.
+- [ ] Every user-question contract forbids `AskUserQuestion` and renders a clear bold question directly, necessary context below it, then numbered options whose first option is the recommendation and ends with `(Recommended)`.
 - [ ] Necessary overflow is externalized through one-level Calls whose triggers, outputs, and fallbacks are explicit.
 - [ ] Frontmatter name and description fit the invocation mode; extensions and validator or manual-check results are recorded.
 - [ ] Full treatment passes every critical assertion, applies the optimized description verbatim, and keeps eval evidence outside the shipping skill.

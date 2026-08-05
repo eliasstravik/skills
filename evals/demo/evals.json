@@ -34,7 +34,7 @@
       "id": 4,
       "name": "material-target-ambiguity",
       "prompt": "Use /demo to make a local demo from the artifacts in __RUN_DIR__/inputs/targets/. For this isolated run, use __DEMO_STATE_ROOT__ instead of ~/.demo. Ask one focused question if the plausible targets would materially change the demo, then use my answer. Serve only on 127.0.0.1, verify the selected focal interaction, and give me the result.\n\nScripted user replies:\n1. Use the customer onboarding checklist, not the incident summary.",
-      "expected_output": "The assistant first asks exactly one target-selection question, then builds only a customer-onboarding demo with no incident facts, verifies its interaction, and returns the standard truthful handoff.",
+      "expected_output": "The assistant first asks exactly one clear bold target-selection question with necessary context and recommended-first numbered options, without AskUserQuestion, then builds only a customer-onboarding demo with no incident facts, verifies its interaction, and returns the standard truthful handoff.",
       "files": [
         "fixtures/ambiguous-targets/targets/customer-onboarding.md",
         "fixtures/ambiguous-targets/targets/incident-summary.md"

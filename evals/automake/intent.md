@@ -44,9 +44,13 @@ credentials, production systems, and unrelated processes are off-limits.
 
 - Inspect the full conversation and repository before asking anything.
 - In normal consultation, ask one missing Optimizer or Evaluator input per
-  turn; never ask a separate Orchestrator question or repeat supplied facts.
-- Print each complete `optimizer.md` and `evaluator.md` before its exact
-  two-choice approval gate; revisions reprint the whole artifact.
+  turn; never invoke `AskUserQuestion`, ask a separate Orchestrator question,
+  or repeat supplied facts. Render each question directly as a clear bold
+  question, necessary context below it, then numbered options whose option 1
+  ends `(Recommended)`.
+- Present each bold approval question before the complete `optimizer.md` or
+  `evaluator.md` context and its exact two-choice approval options; revisions
+  reprint the whole artifact.
 - Resolve iteration limits and success condition from supplied values or
   defaults without asking.
 - Present a concrete final summary and ask whether to run.

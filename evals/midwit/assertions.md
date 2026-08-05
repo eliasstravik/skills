@@ -6,15 +6,18 @@ behavior whose failure breaks the approved interaction contract.
 ## Behavioral assertions
 
 - **A1 (critical) — Concrete simpler alternative gates overbuilt work.** Before
-  starting a genuinely overengineered request, the assistant opens with
-  “why don't you just <concrete alternative>?”, explains why the named
-  alternative is roughly 10–100 times simpler in machinery or effort, asks
-  only for the user's ruling rather than starting an ambiguity interview, and
-  does not perform the challenged work before that ruling.
+  starting a genuinely overengineered request, the assistant never invokes
+  `AskUserQuestion` and opens with a bold “why don't you just <concrete
+  alternative>?”, explains below it why the named alternative is roughly
+  10–100 times simpler in machinery or effort, then gives numbered ruling
+  options with option 1 ending `(Recommended)`; it does not perform the
+  challenged work before the user's ruling.
 - **A2 (critical) — Null work is proposed when the goal is already met.** When
   inspection shows the requested change is unnecessary or a no-op, the
-  assistant proposes doing nothing, explains the observed reason, and waits
-  for the user's ruling without creating a substitute deliverable.
+  assistant asks a bold direct question proposing no work, explains the
+  observed reason below it, gives numbered ruling options with option 1 ending
+  `(Recommended)`, and waits for the user's ruling without creating a
+  substitute deliverable or invoking `AskUserQuestion`.
 - **A3 (critical) — Routine work proceeds without a midwit ritual.** A trivial,
   well-scoped task is completed directly without a “why don't you just …?”
   challenge, a 10–100-times-simpler discussion, or an avoid-the-work gate.

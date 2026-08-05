@@ -10,7 +10,7 @@
       "user_replies": [
         "Yes. Use the simpler alternative you proposed and make it now."
       ],
-      "expected_output": "Before building, the assistant blurts a concrete “why don't you just …?” alternative that removes the application stack, explains why it is enough and roughly 10–100 times simpler, waits for the ruling, then creates only the approved simple result.",
+      "expected_output": "Before building, the assistant asks a bold direct “why don't you just …?” question that removes the application stack, explains below it why the alternative is enough and roughly 10–100 times simpler, gives recommended-first numbered ruling options without AskUserQuestion, waits for the ruling, then creates only the approved simple result.",
       "files": [
         "fixtures/overbuilt-weekly-status/weekly-status.md"
       ],
@@ -26,7 +26,7 @@
       "user_replies": [
         "Agreed. Skip it and make no changes."
       ],
-      "expected_output": "The assistant notices that current and desired state are identical, proposes doing nothing, waits for approval, and leaves the copied workspace unchanged.",
+      "expected_output": "The assistant notices that current and desired state are identical, proposes doing nothing through a bold direct question with explanatory context and recommended-first numbered ruling options without AskUserQuestion, waits for approval, and leaves the copied workspace unchanged.",
       "files": [
         "fixtures/already-satisfied-configuration/current.env",
         "fixtures/already-satisfied-configuration/desired.env"

@@ -24,9 +24,11 @@ baseline failure. **(critical)** marks severe or contractual behavior.
   Brief, all four known/unknown quadrants, Decisions, and Next step current.
 - **A5 (critical) — One exact question sequence spans both skills.** Every
   discovery, review, blocker, role approval, revision, and value question uses
-  the complete Consultant `Question <Q>` block with continuous session-wide
-  numbering, contiguous options, one substantive recommendation, and final
-  `Other`; no inherited bare or option-only prompt is printed.
+  the complete direct-Markdown Consultant `Question <Q>` block with a bold
+  question, necessary context below it, continuous session-wide numbering,
+  contiguous options, option 1 ending `(Recommended)`, and final `Other`;
+  `AskUserQuestion` is never invoked and no inherited bare or option-only
+  prompt is printed.
 - **A6 (critical) — Consultant review remains gated and isolated.** Every
   controlled verdict follows the exact Consultant review gate and a saved
   packet containing only the complete plan plus references explicitly named by

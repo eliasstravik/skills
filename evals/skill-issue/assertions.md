@@ -28,8 +28,10 @@ One checkable assertion covers every required behavior and preserved failure.
 - **A5 (critical) — Primitive grammar is exact.** Every primitive uses its
   mandated form; Recipe items contain one imperative each with no sub-bullets,
   Router uses a `Request | Skill` table with reachable ownership transfer and
-  overlap/uncertain/no-match fallbacks, and grammar matches the selected
-  control-flow contract.
+  overlap/uncertain/no-match fallbacks, every user-question contract forbids
+  `AskUserQuestion` and renders the bold question, necessary context, and
+  numbered recommended-first options in order, and grammar matches the
+  selected control-flow contract.
 - **A6 (critical) — The bare-core snapshot stays bare and bounded.** Every body
   line after frontmatter counts, the saved H1-plus-one-H2 snapshot is at most
   20 lines, and no second section, preamble, motivation, example, or other
@@ -71,7 +73,9 @@ One checkable assertion covers every required behavior and preserved failure.
 
 - **N1 (critical) — Sequential skill uses earned depth correctly.** Release
   Note becomes a user-invoked Recipe core with the five ordered phases, and
-  only issue-link preservation plus the no-publish boundary appear in Details.
+  its range-resolution and approval questions have the direct
+  recommended-first format; only
+  issue-link preservation plus the no-publish boundary appear in Details.
 - **B1 (critical) — Bloated skill becomes the smallest complete form.** Deploy
   Note becomes a flat Recipe with one action per step; only the four required
   note fields are added in Details, with no retained motivation or example.
