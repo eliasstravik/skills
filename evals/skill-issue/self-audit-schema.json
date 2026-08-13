@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["passed", "body_lines_checked", "issues", "checks"],
+  "properties": {
+    "passed": {"type": "boolean"},
+    "body_lines_checked": {"type": "integer", "minimum": 1},
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["line", "text", "reason"],
+        "properties": {
+          "line": {"type": "integer"},
+          "text": {"type": "string"},
+          "reason": {"type": "string"}
+        }
+      }
+    },
+    "checks": {"type": "array", "items": {"type": "string"}}
+  }
+}

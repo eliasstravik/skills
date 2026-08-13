@@ -1,0 +1,12 @@
+{
+  "case_id": "CS-123456",
+  "account_id": "acct_42",
+  "queue": "billing",
+  "severity": 2,
+  "opened_at": "2026-08-12T14:00:00Z",
+  "owner": "oncall-liv",
+  "region": "eu",
+  "customer_visible": true,
+  "summary": "Invoice total differs from signed order form",
+  "contract_tier": "plus"
+}

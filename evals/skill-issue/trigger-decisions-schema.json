@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decisions"],
+  "properties": {
+    "decisions": {
+      "type": "array",
+      "minItems": 80,
+      "maxItems": 80,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["candidate_id", "query_id", "invoke"],
+        "properties": {
+          "candidate_id": {"type": "string", "enum": ["CURRENT", "A", "B", "C"]},
+          "query_id": {"type": "integer", "minimum": 1, "maximum": 20},
+          "invoke": {"type": "boolean"}
+        }
+      }
+    }
+  }
+}

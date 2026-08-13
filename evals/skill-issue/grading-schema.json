@@ -1,0 +1,62 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["expectations", "summary", "claims", "eval_feedback"],
+  "properties": {
+    "expectations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["text", "passed", "evidence"],
+        "properties": {
+          "text": {"type": "string"},
+          "passed": {"type": "boolean"},
+          "evidence": {"type": "string"}
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["passed", "failed", "total", "pass_rate"],
+      "properties": {
+        "passed": {"type": "integer"},
+        "failed": {"type": "integer"},
+        "total": {"type": "integer"},
+        "pass_rate": {"type": "number"}
+      }
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["claim", "type", "verified", "evidence"],
+        "properties": {
+          "claim": {"type": "string"},
+          "type": {"type": "string", "enum": ["factual", "process", "quality"]},
+          "verified": {"type": "boolean"},
+          "evidence": {"type": "string"}
+        }
+      }
+    },
+    "eval_feedback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["suggestions", "overall"],
+      "properties": {
+        "suggestions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["reason"],
+            "properties": {"reason": {"type": "string"}}
+          }
+        },
+        "overall": {"type": "string"}
+      }
+    }
+  }
+}

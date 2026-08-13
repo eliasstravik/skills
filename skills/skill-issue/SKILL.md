@@ -1,47 +1,55 @@
 ---
 name: skill-issue
-description: Governs the form of compact, evidence-earned agent skills.
-disable-model-invocation: true
+description: Triggers when an agent authors, reviews, names, or decides whether to create an agent skill, including requests to write SKILL.md, choose a skill type, evaluate skill-worthy content, or split material into references/scripts. Not for running skill evaluations or description optimization, which belong to skill-creator.
 ---
 
 # Skill Issue
 
-## Checklist
+## Trigger
 
-- [ ] Every box is checked or marked not applicable with a reason.
-- [ ] Requirements, assertions, preserved failures, and existing skill text were read; at least one preserved baseline failure proves need.
-- [ ] One checkable assertion covers every required behavior and preserved failure; contractual ones are critical.
-- [ ] Exactly one core primitive was chosen by what the agent must do.
-- [ ] The bare core is an H1 plus that primitive's H2 in its mandated form, with at most 20 body lines.
-- [ ] Fresh controlled with/without runs and a blind forced comparison tested a saved bare-core snapshot.
-- [ ] One Details section retains only lines traceable to assertions that snapshot failed, within 80 Details lines and 100 total body lines.
-- [ ] Skill Issue introduced no approval, review, or pause; existing user authorization and the process authority governed interaction.
-- [ ] Every user-question contract forbids `AskUserQuestion` and renders a clear bold question directly, necessary context below it, then numbered options whose first option is the recommendation and ends with `(Recommended)`.
-- [ ] Necessary overflow is externalized through one-level Calls whose triggers, outputs, and fallbacks are explicit.
-- [ ] Frontmatter name and description fit the invocation mode; extensions and validator or manual-check results are recorded.
-- [ ] Full treatment passes every critical assertion, applies the optimized description verbatim, and keeps eval evidence outside the shipping skill.
+Apply this library standard when authoring, reviewing, naming, or deciding admission for an agent skill.
 
-## Details
+## Scope
 
-| Primitive | Choose it for | Required shape |
-| --- | --- | --- |
-| Checklist | Independent conditions must all pass | `- [ ]` passing-state conditions; check each or mark it inapplicable with a reason |
-| Recipe | Outcome depends on action order | Flat ordered list with one imperative per item and no nested bullets |
-| Loop | A sequence repeats toward a bound | `Repeat until <observable exit>, max N:` followed by an ordered body that carries its invariants |
-| Switch | This skill retains ownership after choosing a branch | Two or three branches as bold question-and-arrow lines in one Recipe item; otherwise `Condition | Action`, with observable exclusive rows and first match winning |
-| Router | Classification transfers ownership | `Request | Skill`; link one reachable specialist per match, include overlap, uncertainty, and no-match rows, invoke or recommend it, then stop |
-| Handler | An expected failure interrupts the normal path | `Failure | Recovery`; recover only by retrying, aborting, compensating, or asking the user |
-| Call | Execution or depth belongs in one auxiliary file | `read [file](path) when <trigger>` or `run [script](path) to <outcome>`; state the expected output and what to do when reading or running is unavailable |
-| Rules | The same constraints govern every action | Unordered imperatives, one rule per bullet; prohibit only a rationalization observed in evidence |
-| Reference | The agent looks up facts | Unordered facts or `Term | Meaning`; no commands |
-| Template | Output must conform to a type | One fenced skeleton with placeholders; keep literal text only where exactness changes behavior |
-| Example | One concrete pair is necessary to convey style or detail | One filled input/output pair; use only alongside a Template |
-| Rubric | The agent must judge quality | `Criterion | Standard`, with checkable standards and one non-negotiable floor |
+This SOP governs skill form in this library; `skill-creator` owns evaluation, iteration, and description optimization.
+Existing skills predate this standard and stay unchanged unless the client explicitly places them in scope.
 
-- Router ends after handoff; Switch performs the chosen action itself.
-- In a Recipe, count coordinated verbs, `then`, and conditional commands separately: split `write and save`, `write, then report`, and `if <condition>, stop and ask` into distinct numbered actions.
-- Prefer one observable outcome verb for recovery: `Escalate missing or conflicting facts to the user`; never keep `stop and ask` as one Recipe item.
-- Evidence gates the finished artifact, not drafting order: save and test a bare-core snapshot without Details, but do not pause merely because provisional depth or analysis exists elsewhere.
-- Skill Issue creates no user-interaction gate. Never cite it to request test-prompt approval, wait for human review, or block revision; follow the process authority while honoring standing user authorization.
-- Descriptions are third person. A user-invoked skill gets a short index line; a model-invoked skill states only observable triggering conditions and exclusions.
-- Start model-invoked descriptions with `Triggers when`; never lead with capability verbs such as `Routes`, `Classifies`, `Researches`, or `Creates`.
+## Inputs
+
+The form decision accepts the proposed skill's purpose and candidate content; evaluation evidence belongs to `skill-creator`.
+
+## Roles
+
+The authoring agent applies this standard; the client decides admission disputes and taste calls.
+
+## Procedure
+
+1. Reject the skill unless its candidate content contains at least one survivor category in [the litmus](references/litmus.md).
+2. Classify the admitted skill as exactly one of the five types in [the typology](references/sop-types.md).
+3. Name the skill by its type's rule.
+4. Write all nine sections in this order: Trigger, Scope, Inputs, Roles, Procedure, Outputs, Exceptions, QC, References; write `None.` in an inapplicable section.
+5. Reduce the skill to: “When [trigger] occurs, [role] performs [procedure] using [inputs] to produce [output], while satisfying [controls].”
+6. Delete every body line an agent with perfect reasoning and perfect public-world knowledge could derive.
+7. Move bulky non-derivable material to `references/`, deterministic operations to `scripts/`, and write the frontmatter description by [the description canon](references/description-canon.md).
+
+## Outputs
+
+Record compliance as one conforming skill directory containing `SKILL.md` and only required attachments; this Policy SOP produces no domain work product.
+
+## Exceptions
+
+A failed admission gate yields a rejection, not a thinner skill.
+Escalate admission disputes to the client; never waive the gate silently.
+
+## QC
+
+- Confirm a survivor category earned admission and every retained body line passes the litmus.
+- Confirm the type is singular, the name follows its type, and all nine ordered sections are present.
+- Confirm the name matches its directory, uses lowercase hyphens, and is at most 64 characters.
+- Confirm the body is under 500 lines and 5,000 tokens; each reference over 100 lines has a table of contents.
+- Confirm the non-empty third-person description is at most 1,024 characters, contains no XML, and states positive and negative triggers.
+- Confirm the trigger-eval optimizer's final description is applied verbatim.
+
+## References
+
+Read [SOP types](references/sop-types.md) for classification or naming, [the litmus](references/litmus.md) for admission or line review, and [the description canon](references/description-canon.md) when writing frontmatter.
