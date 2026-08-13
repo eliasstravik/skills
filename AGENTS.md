@@ -3,8 +3,9 @@
 The personal library contains nine skills (autoconsultant, automake, consultant,
 copywriting, demo, html, midwit, skill-issue, voice-mode),
 built on skill-creator (process authority: evals, baselines, viewer review,
-iteration, description optimization) and skill-issue (form authority: one
-primitive, ≤20-line core, earned Details, ≤100 body lines). The original eight
+iteration, description optimization) and skill-issue (form authority: skills
+as SOPs—five types, nine sections, an admission gate, the bitter-lesson
+litmus, and vendor ceilings). The original eight
 were rebuilt in `~/dev/skills-new` and ported here wholesale.
 
 ## Layout
@@ -24,9 +25,10 @@ were rebuilt in `~/dev/skills-new` and ported here wholesale.
   client is happy / feedback is empty / progress stalls; then description
   optimization (trigger evals, `run_loop.py`), whose `best_description` is
   applied **verbatim**.
-- skill-issue governs form: exactly one core primitive (≤20 body lines),
-  bare-core test before any Details, Details earned only by assertions the
-  bare core failed, overflow to references/scripts, ≤100 body lines.
+- skill-issue governs form: every skill is one of five SOP types and carries
+  nine ordered sections; admission and every body line pass the bitter-lesson
+  gate, with overflow to references/scripts and vendor ceilings. Existing
+  skills predate this standard and are not retrofitted unless explicitly scoped.
 - `agentskills validate` is not available on npm → the shipping gate is a
   recorded manual frontmatter check per skill (name/format only; the
   description field is owned by the trigger-eval optimizer and is never

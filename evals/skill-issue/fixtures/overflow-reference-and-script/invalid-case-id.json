@@ -1,0 +1,12 @@
+{
+  "case_id": "CASE-ABC",
+  "account_id": "acct_66",
+  "queue": "delivery",
+  "severity": 1,
+  "opened_at": "2026-08-12T17:00:00Z",
+  "owner": "oncall-otto",
+  "region": "apac",
+  "customer_visible": false,
+  "summary": "Delivery tracking event is delayed",
+  "contract_tier": "premier"
+}

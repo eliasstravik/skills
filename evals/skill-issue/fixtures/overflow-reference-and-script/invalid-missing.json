@@ -1,0 +1,11 @@
+{
+  "case_id": "CS-333333",
+  "account_id": "acct_55",
+  "queue": "access",
+  "severity": 3,
+  "opened_at": "2026-08-12T16:00:00Z",
+  "owner": "oncall-maja",
+  "region": "eu",
+  "customer_visible": true,
+  "contract_tier": "standard"
+}

@@ -1,47 +1,17 @@
 # skill-issue — description optimization
 
-Date: 2026-07-23. Process: skill-creator's seeded 60/40 trigger ratchet,
-adapted from its Claude-only runner to Codex CLI to honor the client model
-restriction. The autopilot-approved 20-query set used three runs per query.
+Process: Codex-only substitute for skill-creator's stock Claude runner, using a frozen 20-query corpus, fixed 12/8 train/held-out split, three fresh label-blind evaluator passes, and held-out-first selection. The exact allowed optimizer and evaluator model was GPT-5.6 Luna.
 
-## Outcome
+## Corpus
 
-`best_description` = **the existing description, unchanged**:
+Ten positives cover agent-skill authoring, review, admission, five-type naming, nine-section conformance, bitter-lesson line review, description conformance, and references/scripts overflow. Ten near-miss negatives cover skill-creator evaluation and optimization, skill installation, ordinary agent work, AGENTS.md editing, GitHub issues, use of an existing skill, public documentation, and SOPs for human operators.
 
-> Governs the form of compact, evidence-earned agent skills.
+## Result
 
-The text is already present verbatim in `SKILL.md`. All three GPT-5.6 Luna
-passes scored 20/20: every explicit Skill Issue activation selected the skill,
-while skill-creator evaluation, GitHub issues, ordinary Markdown editing,
-finished-skill use, explanations, generic skill creation, source-code
-identifiers, explicit do-not-invoke language, and the colloquial phrase
-`skill issue` avoided it, for 60/60 correct decisions.
+The optimizer proposed three candidates and recommended A. The existing description plus candidates A, B, and C each scored train 36/36 and held-out 24/24 across three passes; every description scored 12/12 train and 8/8 held out in every pass.
 
-The ratchet stopped at iteration 1 because the first candidate had no failures,
-so GPT-5.6 Sol was not called for a rewrite. GPT-5.6 Terra independently scored
-20/20.
+The run-loop-compatible first-best tie rule therefore selected the existing description:
 
-No Claude Code, Claude model, or Fable 5 was used.
+> Triggers when an agent authors, reviews, names, or decides whether to create an agent skill, including requests to write SKILL.md, choose a skill type, evaluate skill-worthy content, or split material into references/scripts. Not for running skill evaluations or description optimization, which belong to skill-creator.
 
-## Manual frontmatter check
-
-`agentskills validate` is unavailable on this machine, so the recorded
-frontmatter check is limited to name and format:
-
-- `name: skill-issue` matches the directory and naming grammar. PASS
-- `description` is present, third person, a short user-invoked index line, and
-  matches `best_description` verbatim. PASS
-- `disable-model-invocation: true` makes invocation explicit. If a host ignores
-  that extension, the short description still provides no implicit trigger and
-  the skill requires a named `/skill-issue` request. PASS
-- Frontmatter has paired delimiters and unique required keys. PASS
-
-## Manual skill-issue form check
-
-- The bare core snapshot has 15 body lines; the final body has 38. PASS
-- The body has one H1, one primitive H2 (`## Checklist`), and one earned
-  `## Details` section of 22 lines including its heading. PASS
-- Every Details line traces to A4, A5, A9, or A10 from the bare-core grade.
-  PASS
-- Details is within 80 lines, the body is within 100, and no overflow reference
-  or script is needed. PASS
+This exact `best_description` remains in `skills/skill-issue/SKILL.md` verbatim. No Claude Code, Claude model, browser, or non-Codex model was used.

@@ -1,36 +1,51 @@
 {
   "skill_name": "skill-issue",
-  "conventions": "Each executor is a fresh GPT-5.6 Sol one-shot context. Copy the named fixture into __RUN_DIR__/workspace and replace __RUN_DIR__. Every read and write stays inside that run directory; source skills, installed skills, unrelated repositories, external temporary directories, credentials, and services are off-limits. No-skill arms forbid every installed skill. Save the complete user-facing response to transcript.md.",
+  "conventions": "Each executor is a fresh headless one-shot context. The harness replaces __RUN_DIR__ with the arm directory and copies the named pristine fixture into __RUN_DIR__/workspace. Every arm saves transcript.md. No-skill arms forbid every installed skill. With-skill arms read only the staged skill copy. Reads and writes stay inside the run directory.",
   "evals": [
     {
       "id": 1,
-      "name": "new-sequential-skill-from-evidence",
-      "fixture": "new-sequential",
-      "prompt": "Create the requested `release-note` skill from the evidence packet in `workspace/`. Write the finished artifact to `workspace/skills/release-note/SKILL.md`. Make it compact and executable, preserve the explicit invocation and direct-question contracts, and do not invent evidence that is not in the packet."
+      "name": "reject-derivable-git-skill",
+      "fixture": "reject-derivable-git-skill",
+      "prompt": "Review __RUN_DIR__/workspace/proposal.md and decide whether this should become an agent skill. If admitted, create it under __RUN_DIR__/workspace/output/. If rejected, write __RUN_DIR__/workspace/output/rejection.md explaining the gate result. Do not invent facts or requirements beyond the proposal. Save the complete user-facing response to __RUN_DIR__/transcript.md.",
+      "expected_output": "The proposal is rejected because every candidate instruction is derivable public competence; rejection.md identifies the failed admission gate and no SKILL.md is created.",
+      "files": ["fixtures/reject-derivable-git-skill/proposal.md"],
+      "assertions": ["A1 (critical)", "A2 (critical)"]
     },
     {
       "id": 2,
-      "name": "bloated-existing-skill-audit",
-      "fixture": "bloated-audit",
-      "prompt": "Audit and revise the existing `deploy-note` skill in `workspace/skills/deploy-note/SKILL.md` against the supplied requirements, assertions, and bare-core result. Produce the smallest complete shipping artifact. Do not change any other fixture file."
+      "name": "artifact-vs-process-naming",
+      "fixture": "artifact-vs-process-naming",
+      "prompt": "Read __RUN_DIR__/workspace/proposals.md. Classify both admitted proposals, choose their canonical skill names, and write __RUN_DIR__/workspace/decision.md. Explain the distinction briefly. Save the complete user-facing response to __RUN_DIR__/transcript.md.",
+      "expected_output": "The output classifies the report specification as an Artifact SOP named incident-report and the recurring workflow as a Process SOP named incident-reporting.",
+      "files": ["fixtures/artifact-vs-process-naming/proposals.md"],
+      "assertions": ["A3 (critical)"]
     },
     {
       "id": 3,
-      "name": "router-versus-switch-boundary",
-      "fixture": "router-boundary",
-      "prompt": "Create the requested `support-router` skill at `workspace/skills/support-router/SKILL.md` from the supplied specialist catalog, requirements, and evidence. It must resolve ownership safely without performing specialist work."
+      "name": "lifecycle-drops-management",
+      "fixture": "lifecycle-drops-management",
+      "prompt": "Read __RUN_DIR__/workspace/proposal.md. Decide the SOP type and canonical skill name, then write __RUN_DIR__/workspace/decision.md. The stakeholder suggested customer-context-management; correct it if the standard requires another form. Save the complete user-facing response to __RUN_DIR__/transcript.md.",
+      "expected_output": "The output classifies the proposal as a Lifecycle SOP, names it customer-context, and explicitly drops the -management suffix.",
+      "files": ["fixtures/lifecycle-drops-management/proposal.md"],
+      "assertions": ["A4 (critical)"]
     },
     {
       "id": 4,
-      "name": "overflow-and-frontmatter-discipline",
-      "fixture": "overflow-frontmatter",
-      "prompt": "Repair the model-invoked `source-research` skill in `workspace/skills/source-research/` using the supplied evidence. Keep the shipping surface compact, preserve necessary branch-only source policy, and make the result usable even when an auxiliary file cannot be read."
+      "name": "author-nine-section-policy",
+      "fixture": "author-nine-section-policy",
+      "prompt": "Turn __RUN_DIR__/workspace/brief.md into the smallest conforming skill under __RUN_DIR__/workspace/output/client-update-policy/. Preserve the private policy and authority rules, but do not preserve generic writing advice merely because it appears in the brief. Save the complete user-facing response to __RUN_DIR__/transcript.md.",
+      "expected_output": "A Policy/standards skill named client-update-policy has all nine ordered sections, preserves the local policy and authority rules, and omits derivable advice such as write clearly, check spelling, and use active voice.",
+      "files": ["fixtures/author-nine-section-policy/brief.md"],
+      "assertions": ["A5 (critical)", "A6 (critical)", "A7 (critical)"]
     },
     {
       "id": 5,
-      "name": "interaction-authority-regression",
-      "fixture": "interaction-authority",
-      "prompt": "Continue the already-authorized `handoff-note` skill revision from the packet in `workspace/`. The surrounding process owns testing and review, and the user's standing instruction is to finish autonomously without intermediate approval or review pauses. Save a bare-core snapshot for the controlled comparison, then write the finished artifact to `workspace/skills/handoff-note/SKILL.md` and report completion. Do not ask the user to approve test prompts, review results, or authorize Details."
+      "name": "overflow-reference-and-script",
+      "fixture": "overflow-reference-and-script",
+      "prompt": "Create a conforming skill from __RUN_DIR__/workspace/brief.md under __RUN_DIR__/workspace/output/case-intake/. Keep the main SOP thin: allocate the internal field registry to references and implement the exact deterministic validation rules as a reusable script. Run the script against valid.json, invalid.json, invalid-missing.json, and invalid-case-id.json, then once with no file argument; retain every result. Save the complete user-facing response to __RUN_DIR__/transcript.md.",
+      "expected_output": "The main nine-section SOP points to a reference containing the full internal registry and a runnable validation script that accepts valid.json; rejects invalid.json for queue and severity; rejects missing and malformed-ID fixtures; and rejects a missing path argument.",
+      "files": ["fixtures/overflow-reference-and-script/brief.md", "fixtures/overflow-reference-and-script/valid.json", "fixtures/overflow-reference-and-script/invalid.json", "fixtures/overflow-reference-and-script/invalid-missing.json", "fixtures/overflow-reference-and-script/invalid-case-id.json"],
+      "assertions": ["A8 (critical)", "A9 (critical)", "A10 (critical)"]
     }
   ]
 }

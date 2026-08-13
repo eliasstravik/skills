@@ -1,0 +1,12 @@
+{
+  "case_id": "CS-654321",
+  "account_id": "acct_91",
+  "queue": "renewals",
+  "severity": 7,
+  "opened_at": "2026-08-12T15:00:00Z",
+  "owner": "oncall-noah",
+  "region": "us",
+  "customer_visible": false,
+  "summary": "Renewal record cannot be opened",
+  "contract_tier": "premier"
+}

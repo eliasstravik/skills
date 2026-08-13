@@ -1,40 +1,23 @@
 # skill-issue — shipping record
 
-Date: 2026-07-23.
-
 ## Install
 
-After commit `2367c8e` (`build skill-issue skill`), ran:
+After the final behavior, self-audit, description, and manual frontmatter gates passed, ran the logical command:
 
-```text
-npx skills add /Users/eliasstravik/dev/skills-new --skill skill-issue -g
+```bash
+npx skills add <Paperclip worktree> --skill skill-issue -g
 ```
 
-The installer copied `skill-issue` to `~/.agents/skills/skill-issue`.
-PromptScript reported that it does not support global skill installation; the
-Codex installation succeeded.
+The Paperclip worktree path was used so the installer copied the reviewed branch bytes rather than the still-old primary checkout. The machine's Homebrew Node had a missing `llhttp` dylib, so the successful retry pinned the existing FNM Node 24 runtime while invoking the same npm `skills add` command.
 
-Repository, `~/.agents`, and `~/.claude` copies were byte-identical. SHA-256:
+The installer detected Codex, selected only `skill-issue`, and copied it to `~/.agents/skills/skill-issue`. Its additional PromptScript target reported that global installation is unsupported; this did not affect the Codex copy. A recursive comparison between the worktree source and `~/.agents/skills/skill-issue` passed byte-for-byte.
 
-```text
-SKILL.md  ebe3107a22fc2fa1cf0103c46c9827ab24562314ebcadec29eab9a16cd24d4e6
-```
+## Final gates
 
-## Trigger smoke
-
-GPT-5.6 Sol received an explicit `/skill-issue` prompt in a read-only sandbox
-and instructions not to write or invoke another skill. Raw events show it read
-the installed `~/.agents/skills/skill-issue/SKILL.md`. It reported:
-
-> Body-line count: 38  
-> Sole core H2: `## Checklist`  
-> In a Recipe, count coordinated verbs, `then`, and conditional commands
-> separately: split `write and save`, `write, then report`, and
-> `if <condition>, stop and ask` into distinct numbered actions.  
-> Start model-invoked descriptions with `Triggers when`; never lead with
-> capability verbs such as `Routes`, `Classifies`, `Researches`, or `Creates`.  
-> Skills invoked: skill-issue
-
-Smoke result: PASS.
-
-No Claude Code, Claude model, or Fable 5 was used.
+- Shipping scope contains only `SKILL.md` and three references. PASS.
+- Final treatment: 10/10 critical assertions; empty grader suggestions. PASS.
+- Pure baseline: 8/10, preserving two exact-shell failures. PASS.
+- Independent per-line self-audit: 51 lines, zero issues. PASS.
+- Trigger optimizer: all descriptions 60/60; retained `best_description` applied verbatim. PASS.
+- Manual frontmatter name/format check: PASS.
+- Installed user-level Codex copy matches source: PASS.
