@@ -1,0 +1,60 @@
+{
+  "skill_name": "grilling-fix",
+  "baseline_note": "grilling-fix is a modifier of the installed grilling skill and is meaningless without it. The baseline arm is therefore `old_skill` = grilling alone (grilling-fix and all other installed skills forbidden), not a pure no-skill run. The with_skill arm runs grilling + grilling-fix.",
+  "evals": [
+    {
+      "id": 0,
+      "eval_name": "lettered-options-migration-plan",
+      "prompt": "I want you to grill me about this plan: I'm going to migrate our company blog (about 400 posts, currently on WordPress with a custom theme) to Astro, hosted on Cloudflare Pages. I'm thinking we export posts to markdown, rebuild the theme in Astro components, redirect old URLs, and cut over DNS on a Friday evening. Grill me on this plan.\n\n[Scripted user replies — treat these as the user's answers to your rounds, in order:]\n- Reply to round 1: For the first question, pick a DIFFERENT option than the one you recommended and say you prefer it for cost reasons. For every other question in the round, accept your recommendation.\n- Reply to round 2: Accept your recommendation on every question.\n- Reply to round 3 and any later round: Accept your recommendation on every question. After at most 3 rounds, wrap up and state the shared understanding.",
+      "expected_output": "A multi-round grilling session where every question offers lettered answer options (A, B, C, ...), never numeric option labels, each with a recommended answer, and the user is told they can answer in their own words.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "every-question-has-options",
+          "text": "Every question asked in the session presents at least two explicit answer options (single- or multi-select)."
+        },
+        {
+          "name": "options-lettered-not-numbered",
+          "text": "All answer-option labels are letters (A, B, C, ...); no question's options are labeled with numbers (1., 2), 3:, etc.)."
+        },
+        {
+          "name": "recommendation-per-question",
+          "text": "Every question is followed by a recommended answer (grilling's arrow format) that points at one of the lettered options with reasoning."
+        },
+        {
+          "name": "grilling-format-preserved",
+          "text": "Questions keep grilling's format: numbered Q1/Q2/... titles with the question emoji, asked in rounds with a frontier, waiting for user replies between rounds."
+        },
+        {
+          "name": "freeform-answer-allowed",
+          "text": "The session makes clear at least once that the user may answer in their own words instead of picking a listed option."
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "eval_name": "confirmation-questions-forced-options",
+      "prompt": "Grill me on this decision — I've already made up my mind and mostly want you to confirm it's sound: We're standardizing on PostgreSQL 16 for all new services at our startup (12 engineers). We'll run it on RDS, use one database per service, and ban cross-database joins. Confirm this is the right call, and grill me on anything shaky.\n\n[Scripted user replies — treat these as the user's answers to your rounds, in order:]\n- Reply to round 1: Accept your recommendation on every question.\n- Reply to round 2 and any later round: Accept your recommendation on every question. After at most 2 rounds, wrap up and state the shared understanding.",
+      "expected_output": "Even though the user invites bare confirmations, every question — including confirmation-shaped ones — is presented with explicit lettered options plus a recommendation, never as a bare 'confirm this is right'.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "no-bare-confirmations",
+          "text": "No question is presented as a bare confirmation (e.g. 'confirm this is the right choice') without explicit answer options; confirmation-shaped decisions still get lettered options."
+        },
+        {
+          "name": "every-question-has-options",
+          "text": "Every question asked in the session presents at least two explicit answer options."
+        },
+        {
+          "name": "options-lettered-not-numbered",
+          "text": "All answer-option labels are letters (A, B, C, ...); no question's options are labeled with numbers."
+        },
+        {
+          "name": "recommendation-per-question",
+          "text": "Every question is followed by a recommended answer pointing at one of the lettered options with reasoning."
+        }
+      ]
+    }
+  ]
+}
