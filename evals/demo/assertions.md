@@ -65,10 +65,11 @@ baseline failure. **(critical)** marks severe or contractual behavior.
   verification failure, the reply begins `Not ready`, omits every preview link,
   and reports the absolute path, executable restart command, concrete failure,
   next fix, and that QA omitted the unverified link.
-- **D17 (critical) — Invocation and composition remain explicit.** Shipping
-  frontmatter keeps the skill user-invoked; treatment runs read no sibling
-  skill; trigger evaluation does not turn ordinary UI, prototype, HTML,
-  browser, or serving requests into accidental demo creation.
+- **D17 (critical) — Invocation and composition are precise.** Shipping
+  frontmatter permits model invocation; implicit requests for a realistic
+  local try-it demo and explicit `/demo` requests trigger it; treatment runs
+  read no sibling skill; ordinary UI, prototype, HTML, browser, or serving
+  requests do not trigger accidental demo creation.
 
 ## Flow-specific behavior
 

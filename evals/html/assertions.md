@@ -46,9 +46,10 @@ baseline failure. **(critical)** marks severe or contractual behavior.
   verified after allowed recovery, the reply omits the link and returns the
   absolute entry-file path plus one concise serving-failure reason; it never
   reports an unverified or dead URL.
-- **H13 (critical) — Invocation remains explicit.** Shipping frontmatter keeps
-  the skill user-invoked, and trigger evaluation does not turn ordinary web,
-  interface, or HTML requests into accidental artifact creation.
+- **H13 (critical) — Invocation is precise.** Shipping frontmatter permits
+  model invocation; implicit requests for a durable self-contained local HTML
+  artifact and explicit `/html` requests trigger it, while ordinary web,
+  interface, or HTML requests do not trigger accidental artifact creation.
 
 ## Flow-specific behavior
 

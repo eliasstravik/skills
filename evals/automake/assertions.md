@@ -5,9 +5,11 @@ baseline failure. **(critical)** marks severe or contractual behavior.
 
 ## Consultation and invocation
 
-- **A1 (critical) — Invocation stays explicit.** Shipping frontmatter keeps
-  Automake user-invoked, and near-miss requests about tests, Git, optimization,
-  evaluation, or future automation do not trigger a ratchet.
+- **A1 (critical) — Invocation is precise.** Shipping frontmatter permits
+  model invocation; implicit requests for the Git-backed Evaluator-Optimizer
+  workflow and explicit `/automake` requests trigger it, while near-miss
+  requests about tests, Git, optimization, evaluation, or future automation do
+  not.
 - **A2 (critical) — State and model isolation hold.** Every read, write,
   process, child context, Git operation, and run-state artifact stays in the
   declared run repository or run-local Automake home; real `~/.automake`,

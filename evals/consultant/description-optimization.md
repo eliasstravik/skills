@@ -1,5 +1,16 @@
 # consultant — description optimization
 
+## 2026-08-25 model-invocation update
+
+Issue #48 replaced the explicit-only corpus with 20 frozen routing queries: 12
+train and 8 held-out, with implicit positive requests, explicit `/consultant`
+coverage, and adjacent-workflow negatives. GPT-5.6 Luna proposed three
+candidates and ran three label-blind routing passes. Selected conforming
+candidate B scored 36/36 train and 24/24 held-out. Its `best_description` is
+applied verbatim in `skills/consultant/SKILL.md`. The flag
+`disable-model-invocation` is absent. The 2026-07-23 record below is historical
+and no longer defines invocation behavior.
+
 Date: 2026-07-23. Process: skill-creator's seeded 60/40 trigger ratchet,
 adapted from its Claude-only runner to Codex CLI to honor the client model
 restriction. The autopilot-approved 20-query set used three runs per query.

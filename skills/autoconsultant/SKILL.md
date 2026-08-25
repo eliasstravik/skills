@@ -1,7 +1,6 @@
 ---
 name: autoconsultant
-description: Chains Consultant into an approved Automake setup and a copy-paste handoff for a fresh agent.
-disable-model-invocation: true
+description: "Autoconsultant owns the approval-gated workflow that takes an ambiguous repository change through a persistent Consultant consultation and adversarial plan review, then prepares separately approved, independent Optimizer and Evaluator instructions plus one copy-paste-safe handoff for a fresh agent. It triggers when a request asks to combine consultation or plan approval with Automake or an evaluator-optimizer setup, preserve plan references, resolve ratchet limits or success conditions, or transfer execution to a new context; explicit `/autoconsultant` also triggers it. It does not own Consultant-only planning, Automake execution, prompt drafting without invocation, plan review without setup, implementation, testing, TDD, Git preflight, or generic workflow explanation."
 ---
 
 # Autoconsultant

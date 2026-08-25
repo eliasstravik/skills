@@ -1,7 +1,6 @@
 ---
 name: voice-mode
-description: User-invoked spoken-response mode for live calls.
-disable-model-invocation: true
+description: "The voice-mode skill owns the conversation’s delivery and interaction behavior when the user needs to listen instead of look at a display. It triggers on explicit “/voice-mode” or “activate Voice Mode,” and on concrete hands-free context such as “I’m driving,” “I’m away from the screen,” “I’m wearing headphones,” or “keep every reply spoken,” especially when the user requests concise conclusions, verbal numbering, or spoken follow-ups. It remains active until explicit exit, speaks plain prose, and places visual or exact technical material elsewhere. It is not a text-to-speech or audio-file tool, a voice-over-script writer, a conversational-copy editor, an accessibility or VoiceOver fixer, a dictation or microphone setup guide, or a substitute for normal Markdown and visible checklists."
 ---
 
 # Voice Mode

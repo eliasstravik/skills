@@ -5,9 +5,11 @@ baseline failure. **(critical)** marks severe or contractual behavior.
 
 ## Invocation, state, and consultation
 
-- **A1 (critical) — Invocation stays explicit.** Shipping frontmatter keeps
-  Consultant user-invoked, and near-miss requests for ordinary planning,
-  implementation, review, or advice do not trigger the full consultation.
+- **A1 (critical) — Invocation is precise.** Shipping frontmatter permits
+  model invocation; implicit requests for the persistent, adversarially
+  reviewed consultation and explicit `/consultant` requests trigger it, while
+  near-miss requests for ordinary planning, implementation, review, or advice
+  do not.
 - **A2 (critical) — State and model isolation hold.** Every read, write,
   process, reviewer context, and artifact stays inside the declared territory
   and redirected Consultant home; real `~/.consultant`, unrelated

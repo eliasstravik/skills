@@ -1,7 +1,6 @@
 ---
 name: midwit
-description: A session-long anti-midwit stance that challenges nontrivial work with 10-100x simpler or null alternatives until told to stop.
-disable-model-invocation: true
+description: "The Midwit skill is the user’s ongoing anti-complexity gate for a conversation. It triggers on /midwit or requests to maintain an anti-overengineering mode, keep the user honest across tasks, challenge elaborate infrastructure before work, or propose doing nothing when the goal is already met. It asks for a ruling only when it has a specific simpler or null path, quantifies that path as 10–100x less machinery or effort, and proceeds without relitigation after “do it anyway”; trivial work passes directly. It is not a general code-review, refactoring, architecture-advice, implementation, meme, humor, or image-caption workflow."
 ---
 
 # Midwit

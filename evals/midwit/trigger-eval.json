@@ -1,0 +1,22 @@
+[
+  {"id":1,"split":"train","query":"For this whole session, challenge any nontrivial plan I give you with a concrete option that uses ten to one hundred times less machinery. Wait for my ruling before doing overbuilt work, but let routine edits pass without ceremony.","should_trigger":true},
+  {"id":2,"split":"train","query":"Adopt the idiot-and-genius shared-truth stance for the rest of our work. When I propose clever infrastructure, ask why I do not use the much simpler answer first, and stop the stance when I tell you to.","should_trigger":true},
+  {"id":3,"split":"train","query":"Use /midwit for this session. I want a React dashboard, Postgres, email login, an admin role, and a scheduled importer so four people can view a six-row weekly status snapshot.","should_trigger":true},
+  {"id":4,"split":"train","query":"Keep me honest about overengineering across several tasks. Propose no work when the goal is already met, suggest the smallest concrete approach otherwise, and accept 'do it anyway' as final.","should_trigger":true},
+  {"id":5,"split":"train","query":"I want an anti-midwit mode that persists across this conversation and questions elaborate requests before work, but completes trivial changes directly.","should_trigger":true},
+  {"id":6,"split":"train","query":"Activate the Midwit skill until I ask you to stop, then challenge this plan for an event-sourced lunch-choice platform before writing anything.","should_trigger":true},
+  {"id":7,"split":"train","query":"Review this architecture and point out places where a simpler design would be easier to operate. Give me recommendations in one response.","should_trigger":false},
+  {"id":8,"split":"train","query":"Implement the smallest fix for this failing unit test and avoid adding a new abstraction.","should_trigger":false},
+  {"id":9,"split":"train","query":"Explain the Midwit meme and why the two ends of the bell curve often agree.","should_trigger":false},
+  {"id":10,"split":"train","query":"Roast this startup idea as a skeptical investor, then suggest a better market.","should_trigger":false},
+  {"id":11,"split":"train","query":"Use the midwit meme as an image caption for this joke about Kubernetes.","should_trigger":false},
+  {"id":12,"split":"train","query":"Refactor this service to remove unnecessary layers and run the tests when you are done.","should_trigger":false},
+  {"id":13,"split":"test","query":"Before you build any complicated thing I request in this session, make me choose between the original and a named, radically simpler alternative. Do not relitigate after I choose.","should_trigger":true},
+  {"id":14,"split":"test","query":"Stay in a session-wide simplicity stance. If inspection shows my request is already satisfied, propose doing nothing and wait; if it is routine, just handle it.","should_trigger":true},
+  {"id":15,"split":"test","query":"Use /midwit while we work through this backlog, and stop immediately when I say 'drop the simplicity challenge'.","should_trigger":true},
+  {"id":16,"split":"test","query":"Act as my persistent anti-overengineering check. Start by challenging a queued ingestion architecture for a fixed five-event file with a concrete ten-times-simpler route.","should_trigger":true},
+  {"id":17,"split":"test","query":"Tell me whether this pull request is overengineered and list the three biggest maintenance costs.","should_trigger":false},
+  {"id":18,"split":"test","query":"Design the simplest possible database schema for these four fields and implement the migration.","should_trigger":false},
+  {"id":19,"split":"test","query":"Turn off midwit mode and carry out the original architecture request without challenging it again.","should_trigger":false},
+  {"id":20,"split":"test","query":"Compare a monolith and microservices for this workload, then recommend one based on team size and traffic.","should_trigger":false}
+]

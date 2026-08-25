@@ -1,7 +1,6 @@
 ---
 name: demo
-description: User-invoked workflow for realistic local artifact demos.
-disable-model-invocation: true
+description: "The demo skill owns turning a product concept, release artifact, checklist, or named demo into a convincing, self-contained local try-it experience. It stages only missing product context with deterministic, visibly simulated behavior; builds or revises the focal interaction; serves it on loopback; and verifies the exact preview, restart path, and QA result. It triggers when a user asks to build, revise, activate, or use /demo for a realistic local demo or artifact experience. It does not own feature integration into an existing app router, testing an already-running localhost or dist build, comparing prototype directions or state models, converting Markdown into durable HTML, making demo videos, writing sales scripts, explaining mock design, or reviewing bugs without edits."
 ---
 
 # Demo
