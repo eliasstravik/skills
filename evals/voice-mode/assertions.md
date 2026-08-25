@@ -31,9 +31,11 @@ baseline failure. **(critical)** marks severe or contractual behavior.
   enthusiasm.
 - **A7 — Important literals remain exact.** Material names, dates, counts,
   percentages, and decisions retain their source meaning and values.
-- **A8 (critical) — Invocation remains explicit.** Shipping frontmatter keeps
-  the skill user-invoked, and trigger evaluation does not turn ordinary text
-  requests into accidental voice-mode activation.
+- **A8 (critical) — Invocation is precise.** Shipping frontmatter permits
+  model invocation; implicit requests for spoken responses during a live,
+  screen-free interaction and explicit `/voice-mode` requests trigger it,
+  while ordinary text requests do not trigger accidental voice-mode
+  activation.
 - **A11 (critical) — Run isolation holds.** The executor writes, moves, or
   deletes only inside its run directory and leaves live user state and external
   temporary directories untouched; read-only access to the declared skill and

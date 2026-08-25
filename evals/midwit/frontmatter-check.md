@@ -1,5 +1,13 @@
 # midwit — frontmatter check and description-optimizer disposition
 
+## Current status
+
+Issue #48 superseded the manual-only disposition below on 2026-08-25. The
+shipping frontmatter now omits `disable-model-invocation`, and the model-facing
+description equals the optimizer-selected `best_description` recorded in
+`description-optimization.md`. The dated sections below remain historical
+evidence and no longer define the shipping contract.
+
 Date: 2026-07-29.
 
 ## Manual frontmatter check

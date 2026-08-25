@@ -5,10 +5,11 @@ baseline failure. **(critical)** marks severe or contractual behavior.
 
 ## Composition and interaction
 
-- **A1 (critical) — Invocation stays explicit.** Shipping frontmatter keeps
-  Autoconsultant user-invoked, and ordinary Consultant, Automake, planning,
-  implementation, review, or consulting requests do not trigger the composed
-  preparation workflow.
+- **A1 (critical) — Invocation is precise.** Shipping frontmatter permits
+  model invocation; implicit requests for the complete Consultant-to-Automake
+  preparation workflow and explicit `/autoconsultant` requests trigger it,
+  while ordinary Consultant, Automake, planning, implementation, review, or
+  consulting requests do not.
 - **A2 (critical) — State, repository, and model isolation hold.** Every read,
   write, reviewer, and process stays inside the copied repository and redirected
   preparation state; live state, unrelated repositories, external temporary

@@ -1,7 +1,6 @@
 ---
 name: html
-description: User-invoked workflow for durable single-file HTML artifacts.
-disable-model-invocation: true
+description: "The html skill owns creating and revising durable, standalone HTML artifacts: a complete self-contained index.html saved in a requested or generated artifact directory, with inline dependencies, accessible structure, loopback serving, and exact-file verification. It triggers when a user asks to create, build, turn content or data into, save, revise, or update a “durable HTML artifact,” “one-file dashboard,” “single-page local artifact,” or named HTML artifact, or explicitly says “use /html” or “activate the HTML skill.” It does not trigger for integrating HTML into React or Next.js routing, reviewing or explaining HTML or accessibility, browser-based QA of an existing page, converting Figma designs into reusable components, or merely serving an existing dist directory."
 ---
 
 # HTML

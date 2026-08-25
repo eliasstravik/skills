@@ -1,7 +1,6 @@
 ---
 name: consultant
-description: Runs a client consultation that turns a rough idea into an adversarially reviewed plan and a copy-paste handoff prompt for a downstream builder.
-disable-model-invocation: true
+description: "The Consultant skill is responsible for structured client consultation: inspecting the current territory, resolving high-leverage unknowns through one-question-at-a-time decisions, saving durable state, drafting plan.md, obtaining client approval, and securing a fresh blocker-only review before a builder handoff. It triggers when requests say “structured consultation,” “continue or resume the consultation,” “persist my decisions,” “one question per turn,” “challenge or attack the plan,” or “hand it to a downstream builder,” including explicit /consultant use. It does not act as an implementer, ordinary plan editor, standalone technical reviewer, brainstormer, PRD writer, or test runner."
 ---
 
 # Consultant

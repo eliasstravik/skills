@@ -1,7 +1,6 @@
 ---
 name: automake
-description: User-invoked workflow for a Git-backed Evaluator-Optimizer ratchet.
-disable-model-invocation: true
+description: "Automake owns a Git-backed ratchet for safely improving a repository through separate optimizer and evaluator roles: it establishes a baseline, proposes and checks candidates, obtains an independent comparison against the current committed state, keeps accepted changes, and restores rejected ones exactly. It triggers when the request is to prepare or execute this bounded improvement workflow, draft or approve its role instructions, set limits or stop conditions, protect local files, initialize the baseline, or invoke `/automake`. It does not trigger when “automake” refers to the GNU build system, when the task is merely a Makefile target or normal bug fix, when the user only wants code review or an explanation, or when the request is generic branch reset or deleted-file restoration."
 ---
 
 # Automake

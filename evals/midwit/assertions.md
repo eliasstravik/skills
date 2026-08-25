@@ -37,6 +37,10 @@ behavior whose failure breaks the approved interaction contract.
   the idiot and genius as opposite tails converging on the same simple truth,
   identifies the midwit middle as clever overcomplication, and says the goal is
   to find that shared truth rather than remain in “midwit mode.”
+- **A8 (critical) — Invocation is precise.** Shipping frontmatter permits
+  model invocation; implicit requests for a persistent anti-overengineering
+  stance and explicit `/midwit` requests trigger it, while one-off simplicity,
+  review, refactoring, architecture, implementation, or meme requests do not.
 
 A6 is promoted to critical because the approved core makes
 no-relitigation an explicit user-ruling contract. Baseline purity, transcript
@@ -53,6 +57,7 @@ than additional skill-behavior assertions.
 | 4 — persistence and “do it anyway” | A3, A4, A6 |
 | 5 — natural stop and later work | A5 |
 | 6 — shared-truth frame | A7 |
+| Shipping and trigger checks | A8 |
 
 ## Preserved-failure traceability
 
