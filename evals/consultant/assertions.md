@@ -30,12 +30,14 @@ baseline failure. **(critical)** marks severe or contractual behavior.
   Known unknowns, Unknown unknowns, Decisions, and Next step current, including
   the next question number when questioning continues.
 - **A6 (critical) — Every question uses the exact block grammar.** Each
-  user-facing discovery, taste, approval, blocker, or follow-up turn contains
-  exactly one direct-Markdown `Question <Q>` block and never invokes
-  `AskUserQuestion`; the question is clear and bold, necessary context sits
-  below it, question numbers increment across resumes, options restart at 1
-  and remain contiguous, option 1 ends `(Recommended)`, and the final numbered
-  option is explicit `Other`.
+  user-facing discovery, taste, approval, review, blocker, or follow-up turn
+  contains exactly one direct-Markdown `Question <Q>` block and never invokes
+  `AskUserQuestion` or another interactive question tool; the question is
+  complete, self-contained, and bold; a context and reasoning paragraph
+  follows even when brief; normally one through four written-out options
+  restart at 1 and remain contiguous; the substantive recommendation is first
+  and ends exactly with `(Recommended)`; and the final numbered option is
+  explicit `Other`.
 - **A7 — Questions resolve the highest-leverage gap.** The agent chooses the
   most material unresolved quadrant, offers concrete choices rather than a
   bare inline follow-up, uses reference artifacts when taste is hard to
@@ -51,8 +53,10 @@ baseline failure. **(critical)** marks severe or contractual behavior.
   References, Out of scope, and Risks, with client-accepted assumptions visible
   and every named reference resolvable from the consultation directory.
 - **A10 (critical) — Every review has the exact dedicated gate.** After the
-  client can inspect the current plan and before each dispatch, the next
-  Question asks `Ready to run the adversarial review?` with exactly:
+  client can inspect the current plan and before the initial dispatch or a
+  dispatch after substantive additions or a new client decision, the next
+  Question asks `Ready to run the adversarial review?`, includes the required
+  context and reasoning paragraph, and then shows exactly:
   `1. Approve and run the adversarial review now. (Recommended)`,
   `2. Add something first.`, and
   `3. Other — describe how you want to proceed.`
@@ -65,16 +69,25 @@ baseline failure. **(critical)** marks severe or contractual behavior.
   `plan.md` and complete references explicitly named by that plan—never
   `consultation.md`, hidden client context, prior reviewer rationale, or an
   unlisted reference.
-- **A13 (critical) — Review verdicts are controlled.** The reviewer returns
-  exactly APPROVED with no substantive problems or BLOCKERS with concrete
-  issues; no harness verdict is consumed before a valid gate and packet.
-- **A14 (critical) — Blockers re-enter consultation.** Blocker context is saved
-  before questioning, material gaps are resolved through complete question
-  blocks, `plan.md` is revised, and the review loop restarts at a new gate.
-- **A15 — Review termination stays client-controlled.** Review stops on
-  APPROVED, explicit client exit, or explicit acceptance of remaining issues;
-  after at most five rounds the client is shown what remains and chooses
-  whether to accept or exit.
+- **A13 (critical) — Review verdicts and blocker threshold are controlled.**
+  The reviewer returns APPROVED, optionally with non-blocking notes; REVISE
+  with concrete safety or correctness corrections resolvable from existing
+  facts and approved constraints; or BLOCKERS containing only unresolved
+  issues that prevent safe or correct implementation and genuinely require a
+  client decision. Optional improvements, minor preferences, implementation
+  details, and answerable questions never block; no harness verdict is
+  consumed before a valid initial gate or a REVISE-triggered automatic review,
+  and every verdict follows a valid isolated packet.
+- **A14 (critical) — True blockers re-enter consultation.** Blocker context is
+  saved before questioning, only the smallest client decision needed is asked
+  through a complete question block, `plan.md` is revised after resolution,
+  and a fresh review requires a new approval gate.
+- **A15 — Review termination follows verdict meaning.** Review stops on
+  APPROVED, explicit client exit, or explicit acceptance of remaining risks.
+  APPROVED notes are preserved and shown, then handoff follows without another
+  question, plan revision, or review round. REVISE corrections are applied
+  without changing client decisions and trigger a fresh isolated review
+  automatically, with no intervening user question or approval gate.
 - **A16 (critical) — The final handoff is safe and copyable.** Completion emits
   one Markdown-fenced handoff prompt, with no required content outside it,
   naming the real absolute `plan.md` path and using an outer fence that cannot
@@ -103,6 +116,15 @@ baseline failure. **(critical)** marks severe or contractual behavior.
   `archive-migration` byte-for-byte unchanged, asks no resume-choice question,
   saves the complete schema before Question 1, and creates no plan, review
   packet, handoff, or implementation in the incomplete sitting.
+- **N2 (critical) — APPROVED notes do not reopen review.** Quiet Hours runs one
+  valid isolated review whose APPROVED verdict contains several optional
+  notes, preserves and shows every note, leaves the plan unchanged, asks no
+  follow-up question, and proceeds directly to a safe handoff.
+- **N3 (critical) — Self-resolvable corrections re-review automatically.**
+  Timezone Digest runs one gated review whose REVISE correction follows from
+  existing timezone facts, corrects the plan without changing a client
+  decision, dispatches a fresh isolated review without Question 5 or another
+  gate, and hands off after APPROVED.
 
 ## Traceability — preserved failures to assertions
 
@@ -122,7 +144,9 @@ baseline failure. **(critical)** marks severe or contractual behavior.
 | Eval | Assertions |
 | --- | --- |
 | 1 — new consultation, blocker, approval, handoff | A2–A17, N1 |
-| 2 — named resume | A2–A17, R1 |
-| 3 — substantive addition at review gate | A2–A17, G1 |
+| 2 — named resume | A2–A10, A12–A13, A15–A17, R1 |
+| 3 — substantive addition at review gate | A2–A13, A15–A17, G1 |
 | 4 — fresh state despite existing consultation | A2–A8, A17, F1 |
+| 5 — approved with non-blocking notes | A2–A10, A12–A13, A15–A17, N2 |
+| 6 — automatic reviewer correction | A2–A10, A12–A13, A15–A17, N3 |
 | Harness, shipping, and trigger checks | A1, A2 |

@@ -1,5 +1,33 @@
 # autoconsultant — description optimization
 
+## 2026-08-25 issue #50 refresh
+
+Issue #50 reran the frozen 20-query corpus after updating Consultant's question
+and review contracts. The allowed-model substitute preserved skill-creator's
+12-query train, 8-query held-out, three-pass, label-blind contract. GPT-5.6
+Luna proposed two alternatives beside the current description and ran three
+independent routing passes. Every candidate scored 36/36 train and 24/24
+held-out. GPT-5.6 Terra independently scored the selected candidate 20/20.
+
+The stable tie-break retained candidate A. Its `best_description` is the
+current description, unchanged, and is applied verbatim in
+`skills/autoconsultant/SKILL.md`:
+
+> Autoconsultant owns the approval-gated workflow that takes an ambiguous
+> repository change through a persistent Consultant consultation and
+> adversarial plan review, then prepares separately approved, independent
+> Optimizer and Evaluator instructions plus one copy-paste-safe handoff for a
+> fresh agent. It triggers when a request asks to combine consultation or plan
+> approval with Automake or an evaluator-optimizer setup, preserve plan
+> references, resolve ratchet limits or success conditions, or transfer
+> execution to a new context; explicit `/autoconsultant` also triggers it. It
+> does not own Consultant-only planning, Automake execution, prompt drafting
+> without invocation, plan review without setup, implementation, testing, TDD,
+> Git preflight, or generic workflow explanation.
+
+No Claude Code, Claude model, or Fable model ran. This section supersedes the
+historical form and frontmatter checks below.
+
 ## 2026-08-25 model-invocation update
 
 Issue #48 replaced the explicit-only corpus with 20 frozen routing queries: 12

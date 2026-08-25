@@ -1,5 +1,33 @@
 # consultant — description optimization
 
+## 2026-08-25 issue #50 refresh
+
+Issue #50 reused the frozen 20-query corpus after replacing query 15's old
+numeric review limit with the client-decision blocker threshold. The allowed
+model substitute preserved skill-creator's 12-query train, 8-query held-out,
+three-pass, label-blind contract. GPT-5.6 Luna proposed two alternatives beside
+the current description and ran three independent routing passes. Every
+candidate scored 36/36 train and 24/24 held-out. GPT-5.6 Terra independently
+scored the selected candidate 20/20.
+
+The stable tie-break retained candidate A. Its `best_description` is the
+current description, unchanged, and is applied verbatim in
+`skills/consultant/SKILL.md`:
+
+> The Consultant skill is responsible for structured client consultation:
+> inspecting the current territory, resolving high-leverage unknowns through
+> one-question-at-a-time decisions, saving durable state, drafting plan.md,
+> obtaining client approval, and securing a fresh blocker-only review before a
+> builder handoff. It triggers when requests say “structured consultation,”
+> “continue or resume the consultation,” “persist my decisions,” “one question
+> per turn,” “challenge or attack the plan,” or “hand it to a downstream
+> builder,” including explicit /consultant use. It does not act as an
+> implementer, ordinary plan editor, standalone technical reviewer,
+> brainstormer, PRD writer, or test runner.
+
+No Claude Code, Claude model, or Fable model ran. This section supersedes the
+historical form and frontmatter checks below.
+
 ## 2026-08-25 model-invocation update
 
 Issue #48 replaced the explicit-only corpus with 20 frozen routing queries: 12

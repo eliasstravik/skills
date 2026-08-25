@@ -6,14 +6,14 @@
       "name": "fresh-full-chain-with-blocker",
       "fixture": "fixtures/fresh-chain",
       "prompt": "Use /autoconsultant to turn the rough Mica Queue aging-summary request in workspace/repo into an approved Consultant plan and a fully approved Automake setup. Use outputs/consultant-home and outputs/automake-home instead of live state. Stop at the fresh-agent handoff without running Automake or changing the repository.",
-      "expected_output": "One direct fresh consultation whose questions use bold direct-Markdown recommended-first blocks without AskUserQuestion, a separately gated blocker/revision/approval loop, complete independently approved Optimizer and Evaluator instructions, default Orchestrator values, and one safe handoff; repository and Automake home remain unchanged."
+      "expected_output": "One direct fresh consultation whose questions use complete bold direct-Markdown blocks with a required context and reasoning paragraph, written-out recommended-first options, and no interactive question tool; a separately gated true-blocker/revision/approval loop; complete independently approved Optimizer and Evaluator instructions; default Orchestrator values; and one safe handoff. Repository and Automake home remain unchanged."
     },
     {
       "id": 2,
       "name": "named-resume-custom-run-values",
       "fixture": "fixtures/named-resume",
       "prompt": "Use /autoconsultant to continue outputs/consultant-home/parcel-latency from its saved Question 9. Preserve its decisions/reference, finish review, then prepare Automake for workspace/repo with MAX_ITERATIONS=2, MAX_CONSECUTIVE_FAILURES=1, and SUCCESS_CONDITION='python3 -m unittest -q passes'. Stop at handoff.",
-      "expected_output": "The named state resumes without a sibling, bold direct-Markdown recommended-first question numbering continues through both phases without AskUserQuestion, custom run values are preserved, full artifacts are approved, and no run/preflight/repository mutation occurs."
+      "expected_output": "The named state resumes without a sibling; complete bold direct-Markdown questions with a required context and reasoning paragraph and written-out recommended-first options continue numbering through both phases without an interactive question tool; custom run values are preserved; full artifacts are approved; and no run/preflight/repository mutation occurs."
     },
     {
       "id": 3,

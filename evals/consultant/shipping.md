@@ -1,5 +1,22 @@
 # consultant — shipping record
 
+## 2026-08-25 issue #50 refresh
+
+Installed the revised skill globally from the issue worktree before handoff:
+
+```text
+npx skills add /Users/eliasstravik/.herdr/worktrees/skills/issue-50-refine-consultant-questions-and-stop-non --skill consultant -g -y
+```
+
+The installer copied `consultant` to `~/.agents/skills/consultant`. Its
+PromptScript warning remains expected because PromptScript does not support
+global skill installation. Repository, `~/.agents`, and `~/.claude` copies
+were byte-identical. SHA-256:
+
+```text
+SKILL.md  4295cbe065e9b05b3f2cf6bc04b067890cc60b0d7abda4e9f211c553e6aedde4
+```
+
 Date: 2026-07-23.
 
 ## Install

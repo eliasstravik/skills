@@ -13,7 +13,7 @@
   {"id":12,"split":"train","query":"Turn these meeting notes into a PRD with goals, user stories, acceptance criteria, and open questions.","should_trigger":false},
   {"id":13,"split":"test","query":"Resume the named access-review consultation, incorporate the new audit constraint into durable state, re-run the adversarial plan gate, and stop once the implementation handoff is approved.","should_trigger":true},
   {"id":14,"split":"test","query":"Take this ambiguous permissions workflow through discovery and planning. Use a reference artifact if the interaction taste is hard to verbalize, keep the question numbers stable across resumes, and return the reviewed builder prompt.","should_trigger":true},
-  {"id":15,"split":"test","query":"Use /consultant to finish this client consultation, allow at most five blocker-review rounds, and produce a safe copy-paste prompt for the implementation agent.","should_trigger":true},
+  {"id":15,"split":"test","query":"Use /consultant to finish this client consultation, reserve blocker reviews for issues that need my decision, and produce a safe copy-paste prompt for the implementation agent.","should_trigger":true},
   {"id":16,"split":"test","query":"Inspect the supplied repository facts, ask me only the highest-leverage unanswered product question each turn, save every decision, and hand off a plan that a fresh reviewer has approved.","should_trigger":true},
   {"id":17,"split":"test","query":"Use /automake to improve this onboarding flow with an independent evaluator and a three-iteration ratchet.","should_trigger":false},
   {"id":18,"split":"test","query":"Explain the four known and unknown quadrants and give me a filled example for a product discovery workshop.","should_trigger":false},
