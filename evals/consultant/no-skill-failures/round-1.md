@@ -74,7 +74,7 @@ whose plan path is absolute and safe. None of flows 1–3 provides that artifact
 - Mixed approval plus substantive information did not dispatch a reviewer.
 - Reviewers received only the complete plan and explicitly named references,
   never consultation state.
-- Blocker revision, the five-review ceiling behavior exercised by the flows,
+- Blocker revision and client-controlled review termination exercised by the flows,
   and review acceptance control were respected.
 - No product implementation was performed.
 - All executors used allowed GPT-5.6 Sol; no Claude or Fable model was invoked.

@@ -39,10 +39,11 @@ directories, credentials, live services, and production systems are off-limits.
 ## Interaction contract
 
 - Inspect supplied facts and territory before asking the client.
-- Ask exactly one complete question block per turn, with an incrementing
-  bold `Question <Q>`, necessary context below it, contiguous numbered options,
-  option 1 ending `(Recommended)`, and a final `Other` option; never invoke
-  `AskUserQuestion`.
+- Ask exactly one complete question block per turn, with an incrementing bold
+  `Question <Q>`, a context and reasoning paragraph even when brief, normally
+  one through four written-out contiguous numbered options, option 1 ending
+  exactly with `(Recommended)`, and a final `Other` option; never invoke
+  `AskUserQuestion` or another interactive question tool.
 - Update `consultation.md` before every next question and leave Brief, all four
   quadrants, Decisions, and Next step current at the end of each sitting.
 - Lead with concrete choices while leaving taste and final decisions to the
@@ -52,8 +53,19 @@ directories, credentials, live services, and production systems are off-limits.
   same response contains substantive additions.
 - Give each fresh reviewer only `plan.md` and its explicit references, never
   `consultation.md`.
-- Revise through blockers for at most five review rounds, then let the client
-  accept remaining issues or exit.
+- Reserve BLOCKERS for unresolved issues that prevent safe or correct
+  implementation and genuinely require a client decision. Resolve optional
+  improvements, minor preferences, implementation details, and answerable
+  questions without blocking.
+- Use REVISE for concrete plan corrections required for safe or correct
+  implementation that follow from existing facts and approved constraints.
+  Apply those corrections and automatically dispatch a fresh isolated review
+  without another user question or review gate.
+- Let APPROVED include optional non-blocking notes. Preserve and show those
+  notes, then hand off without another question, revision, or review.
+- After a true blocker, ask only the smallest decision question needed, revise
+  the plan, and obtain approval for a fresh review. End review on APPROVED,
+  explicit client exit, or explicit acceptance of remaining risks.
 - Never implement the plan; finish with one copyable fenced handoff whose
   absolute plan path and fence safety are correct.
 
@@ -75,6 +87,14 @@ directories, credentials, live services, and production systems are off-limits.
    does not explicitly request resume. Consultant creates exactly one new
    lowercase-hyphen directory, never asks which state to use, preserves the
    old directory byte-for-byte, and ends the sitting with a current next step.
+5. **Approved with non-blocking notes** — Resume a complete plan at its review
+   gate, approve one isolated review, and return several optional notes with an
+   APPROVED verdict. Consultant preserves and shows the notes, asks no further
+   question, leaves the plan unchanged, and proceeds directly to handoff.
+6. **Automatic reviewer correction** — Resume a complete plan at its review
+   gate and return a REVISE verdict whose correction follows from the plan's
+   own timezone facts. Consultant corrects the plan and automatically runs a
+   fresh isolated review without Question 5; APPROVED then reaches handoff.
 
 These flows cover persistence, new-versus-resume identity, exact question
 shape, pre-question saves, plan completeness, review gating and isolation,

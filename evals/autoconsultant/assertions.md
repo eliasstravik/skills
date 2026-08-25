@@ -26,14 +26,19 @@ baseline failure. **(critical)** marks severe or contractual behavior.
 - **A5 (critical) — One exact question sequence spans both skills.** Every
   discovery, review, blocker, role approval, revision, and value question uses
   the complete direct-Markdown Consultant `Question <Q>` block with a bold
-  question, necessary context below it, continuous session-wide numbering,
-  contiguous options, option 1 ending `(Recommended)`, and final `Other`;
-  `AskUserQuestion` is never invoked and no inherited bare or option-only
-  prompt is printed.
+  self-contained question, a context and reasoning paragraph even when brief,
+  continuous session-wide numbering, normally one through four written-out
+  contiguous options, the substantive recommendation first and ending exactly
+  with `(Recommended)`, and final `Other`; `AskUserQuestion` and other
+  interactive question tools are never invoked, and no inherited bare or
+  option-only prompt is printed.
 - **A6 (critical) — Consultant review remains gated and isolated.** Every
-  controlled verdict follows the exact Consultant review gate and a saved
-  packet containing only the complete plan plus references explicitly named by
-  it; substantive additions re-enter revision before a fresh gate.
+  initial verdict follows the exact Consultant review gate and a saved packet
+  containing only the complete plan plus references explicitly named by it;
+  REVISE corrections grounded in existing facts update the plan and trigger a
+  fresh isolated review automatically; substantive additions and true blockers
+  re-enter revision before a fresh gate after the client's decision; APPROVED
+  notes remain non-blocking and do not reopen review.
 - **A7 (critical) — The approved plan is the Automake source of truth.** The
   complete plan has Outcome, Context, Decisions, Approach, Constraints,
   References, Out of scope, and Risks; its explicit references are preserved,
@@ -68,7 +73,8 @@ baseline failure. **(critical)** marks severe or contractual behavior.
 
 - **A14 (critical) — Exactly one safe fenced payload is emitted.** All required
   handoff content is inside one Markdown code block whose outer fence is longer
-  than every consecutive backtick run in the complete body; no required
+  than every consecutive backtick run in the complete body; the opening and
+  closing fence lines contain exactly the same backtick count; no required
   content appears outside it.
 - **A15 (critical) — Paths and reference reads are explicit.** The handoff
   names the copied target repository and approved `plan.md` by their real

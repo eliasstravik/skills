@@ -6,7 +6,7 @@
       "id": 1,
       "name": "new-consultation-blocker-approval-handoff",
       "prompt": "Use /consultant to turn the rough Lantern Desk shift-handoff idea in __TERRITORY__ into an implementation-ready plan. Create fresh state under __CONSULTANT_HOME__; this is not a resume request. Inspect the territory before asking. Stop at the handoff and do not build anything.\n\nScripted user replies:\n1. The outgoing on-call engineer is primary; they need a useful handoff in under two minutes.\n2. Use a 12-hour window with unresolved incidents, current owner, last meaningful update, and next checkpoint; generated Markdown preview with one copy action.\n3. 1\n4. The stale-owner blocker should be resolved by flagging any incident whose owner has not acknowledged it during the 12-hour window; no paging or reassignment in v1.\n5. 1\n\nControlled reviewer verdicts after valid review dispatches:\n1. BLOCKERS — The plan does not define how a stale incident owner is detected without creating a paging or reassignment workflow.\n2. APPROVED — No substantive problems remain.",
-      "expected_output": "Fresh state; exact bold direct-Markdown questions with necessary context and recommended-first numbered options, no AskUserQuestion invocation, and complete saves; complete plan; first approved review produces the blocker; revision questioning and plan update precede a second gate; second review approves; one safely fenced absolute-path handoff; no implementation.",
+      "expected_output": "Fresh state; exact bold direct-Markdown questions with a context and reasoning paragraph even when brief, written-out recommended-first numbered options, no interactive question tool, and complete saves; complete plan; first approved review produces the true client-decision blocker; one smallest-decision question and plan update precede a second gate; second review approves; one safely fenced absolute-path handoff; no implementation.",
       "files": [
         "fixtures/new-review/territory/README.md",
         "fixtures/new-review/territory/constraints.md",
@@ -39,11 +39,31 @@
       "id": 4,
       "name": "fresh-state-despite-existing-consultation",
       "prompt": "Use /consultant to help plan the new approval-inbox idea described in __TERRITORY__. Use __CONSULTANT_HOME__ instead of ~/.consultant. I am not asking to resume or continue any existing consultation. Inspect the territory, create fresh state, ask the first highest-leverage question, and end this sitting there without building.\n\nScripted user replies:\nNone — end after the first complete question block.",
-      "expected_output": "Exactly one fresh lowercase-hyphen consultation directory is created without a resume question; the unrelated archive-migration state remains byte-identical; consultation.md is complete and saved before a bold direct-Markdown Question 1 with context and recommended-first numbered options; AskUserQuestion is not invoked; no plan, review, or implementation occurs.",
+      "expected_output": "Exactly one fresh lowercase-hyphen consultation directory is created without a resume question; the unrelated archive-migration state remains byte-identical; consultation.md is complete and saved before a bold direct-Markdown Question 1 with a context and reasoning paragraph and written-out recommended-first numbered options; no interactive question tool is invoked; no plan, review, or implementation occurs.",
       "files": [
         "fixtures/fresh-with-existing/consultant-home/archive-migration/consultation.md",
         "fixtures/fresh-with-existing/consultant-home/archive-migration/references/source-map.md",
         "fixtures/fresh-with-existing/territory/approval-inbox.md"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "approved-with-non-blocking-notes",
+      "prompt": "Use /consultant and explicitly continue __CONSULTANT_HOME__/quiet-hours from its saved review gate. The complete plan is ready. Keep state under __CONSULTANT_HOME__, run only the approved isolated review, and stop at handoff without implementing.\n\nScripted user replies:\n1. 1\n\nControlled reviewer verdict after the valid review dispatch:\nAPPROVED — Optional notes: consider showing the schedule timezone beside the setting; a future release could add a preview; the implementation may reuse the existing formatter if convenient. These are non-blocking and do not affect safe or correct implementation.",
+      "expected_output": "Question 4 uses the full direct-Markdown review gate with a mandatory context and reasoning paragraph; one isolated review returns APPROVED with three non-blocking notes; every note is preserved and shown; no Question 5, plan revision, or second review occurs; the existing plan remains byte-identical and handoff follows without implementation.",
+      "files": [
+        "fixtures/approved-with-notes/consultant-home/quiet-hours/consultation.md",
+        "fixtures/approved-with-notes/consultant-home/quiet-hours/plan.md"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "automatic-reviewer-correction",
+      "prompt": "Use /consultant and explicitly continue __CONSULTANT_HOME__/timezone-digest from its saved review gate. The complete plan is ready. Keep state under __CONSULTANT_HOME__, honor the controlled reviewer verdicts, and stop at handoff without implementing.\n\nScripted user replies:\n1. 1\n\nControlled reviewer verdicts after valid review dispatches:\n1. REVISE — The plan converts the quiet-hours schedule to one fixed UTC offset even though its Context and Decisions require the saved IANA timezone. Correct the Approach and Risks to evaluate each delivery in that IANA timezone so daylight-saving changes follow timezone rules. This correction follows entirely from approved plan facts and requires no client decision.\n2. APPROVED — No substantive problems remain.",
+      "expected_output": "Question 4 gates the initial isolated review; the REVISE correction is applied from existing approved facts without changing a client decision; the corrected plan is saved and a fresh isolated reviewer runs automatically; no Question 5 or second approval gate appears; the second review returns APPROVED and handoff follows without implementation.",
+      "files": [
+        "fixtures/automatic-revision/consultant-home/timezone-digest/consultation.md",
+        "fixtures/automatic-revision/consultant-home/timezone-digest/plan.md"
       ]
     }
   ]

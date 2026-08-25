@@ -46,9 +46,14 @@ unchanged.
 
 - Complete Consultant first, including explicit review gates, approved plan,
   references, durable saves, and no implementation.
+- Apply Consultant REVISE corrections from existing facts and automatically
+  dispatch a fresh isolated reviewer without another user question or gate;
+  restore the gate only after a new client decision.
 - Continue one incrementing `Question <Q>` sequence across both phases; every
-  question is clear and bold, puts necessary context below it, and has
-  contiguous options with option 1 ending `(Recommended)` and final `Other`.
+  question is complete and bold, puts a context and reasoning paragraph below
+  it even when brief, and has normally one through four written-out contiguous
+  options with the substantive recommendation first and ending exactly with
+  `(Recommended)`, plus final `Other`.
 - Preserve each Automake question or approval's meaning while wrapping it in
   the Consultant question shape; never print inherited bare or option-only
   prompts.
