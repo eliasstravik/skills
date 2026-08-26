@@ -1,5 +1,33 @@
 # consultant — description optimization
 
+## 2026-08-26 issue #52 refresh
+
+Issue #52 reran the frozen 20-query corpus after replacing the blocker-only
+review with a scored, bounded review loop. The allowed-model substitute kept
+skill-creator's 12-query train, 8-query held-out, three-pass, label-blind
+contract. GPT-5.6 Luna proposed two truthful replacements and compared them
+with the prior description. Candidate A scored 36/36 train and 24/24 held-out;
+candidate B scored 34/36 and 24/24; the prior description scored 35/36 and
+24/24 and was also ineligible because `blocker-only review` no longer
+described the shipping behavior. GPT-5.6 Terra independently scored candidate
+A 20/20.
+
+The optimizer's `best_description` is applied verbatim in
+`skills/consultant/SKILL.md`:
+
+> Use for persistent, one-question-at-a-time consultation on an ambiguous
+> repository change: inspect supplied territory, save decisions, produce an
+> approved plan, run a scored bounded adversarial review with explicit targets
+> and automatic-review limits, resolve or accept human-owned risks, and hand
+> off to a fresh builder without implementing. Trigger on explicit /consultant
+> or requests for durable consultation, plan approval, adversarial review, or
+> builder handoff; exclude ordinary plan editing, standalone review or
+> brainstorming, PRD writing, implementation, testing, and generic technical
+> advice.
+
+No Claude Code, Claude model, or Fable model ran. This section supersedes the
+earlier optimization records below.
+
 ## 2026-08-25 issue #50 refresh
 
 Issue #50 reused the frozen 20-query corpus after replacing query 15's old

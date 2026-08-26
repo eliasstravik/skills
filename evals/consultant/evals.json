@@ -1,12 +1,12 @@
 {
   "skill_name": "consultant",
-  "conventions": "Each executor is a fresh GPT-5.6 Sol one-shot context. Copy the named territory and Consultant-state fixtures into __RUN_DIR__. Replace __RUN_DIR__, __CONSULTANT_HOME__, and __TERRITORY__. __CONSULTANT_HOME__ is the complete run-local replacement for ~/.consultant; real ~/.consultant, unrelated repositories, external temporary directories, credentials, and live services are off-limits. Scripted replies are consumed in order in the same headless transcript. Fresh reviewers use GPT-5.6 Terra and receive only plan.md plus its explicit references. No-skill arms forbid every installed skill.",
+  "conventions": "Each executor is a fresh GPT-5.6 Sol one-shot context. Copy the named territory and Consultant-state fixtures into __RUN_DIR__. Replace __RUN_DIR__, __CONSULTANT_HOME__, and __TERRITORY__. __CONSULTANT_HOME__ is the complete run-local replacement for ~/.consultant; real ~/.consultant, unrelated repositories, external temporary directories, credentials, and live services are off-limits. Scripted replies are consumed in order in the same headless transcript. Fresh reviewers use GPT-5.6 Terra and receive only plan.md plus its explicit references. No-skill arms forbid every installed skill. Frozen-old baseline arms may read only the recorded old Consultant snapshot and also forbid installed skills.",
   "evals": [
     {
       "id": 1,
       "name": "new-consultation-blocker-approval-handoff",
-      "prompt": "Use /consultant to turn the rough Lantern Desk shift-handoff idea in __TERRITORY__ into an implementation-ready plan. Create fresh state under __CONSULTANT_HOME__; this is not a resume request. Inspect the territory before asking. Stop at the handoff and do not build anything.\n\nScripted user replies:\n1. The outgoing on-call engineer is primary; they need a useful handoff in under two minutes.\n2. Use a 12-hour window with unresolved incidents, current owner, last meaningful update, and next checkpoint; generated Markdown preview with one copy action.\n3. 1\n4. The stale-owner blocker should be resolved by flagging any incident whose owner has not acknowledged it during the 12-hour window; no paging or reassignment in v1.\n5. 1\n\nControlled reviewer verdicts after valid review dispatches:\n1. BLOCKERS — The plan does not define how a stale incident owner is detected without creating a paging or reassignment workflow.\n2. APPROVED — No substantive problems remain.",
-      "expected_output": "Fresh state; exact bold direct-Markdown questions with a context and reasoning paragraph even when brief, written-out recommended-first numbered options, no interactive question tool, and complete saves; complete plan; first approved review produces the true client-decision blocker; one smallest-decision question and plan update precede a second gate; second review approves; one safely fenced absolute-path handoff; no implementation.",
+      "prompt": "Use /consultant to turn the rough Lantern Desk shift-handoff idea in __TERRITORY__ into an implementation-ready plan. Create fresh state under __CONSULTANT_HOME__; this is not a resume request. Inspect the territory before asking. Stop at the handoff and do not build anything.\n\nScripted user replies:\n1. The outgoing on-call engineer is primary; they need a useful handoff in under two minutes.\n2. Use a 12-hour window with unresolved incidents, current owner, last meaningful update, and next checkpoint; generated Markdown preview with one copy action.\n3. 1\n4. The stale-owner blocker should be resolved by flagging any incident whose owner has not acknowledged it during the 12-hour window; no paging or reassignment in v1.\n5. 1\n\nControlled reviewer verdicts after valid review dispatches:\n1. RATING: 5/5\nVERDICT: BLOCKERS\nACTIONABLE COMMENTS: 1\n1. The plan does not define how a stale incident owner is detected without choosing whether to page, reassign, or only flag the owner. Evidence: the plan requires stale-owner handling but contains no approved authority boundary. Needed decision: choose the v1 stale-owner action.\n2. RATING: 5/5\nVERDICT: APPROVED\nACTIONABLE COMMENTS: 0\nOptional note: the builder may reuse the existing Markdown renderer.",
+      "expected_output": "Fresh state defaults to stop at 5/5 and at most five reviews without asking a policy question; exact bold direct-Markdown questions, complete saves, and a gate that states that policy and limit; the first 5/5 review is persisted but its human-owned blocker interrupts before score evaluation; one smallest-decision question and plan update precede a second gate; the second review approves with zero actionable comments; one scored summary and safely fenced absolute-path handoff; no implementation.",
       "files": [
         "fixtures/new-review/territory/README.md",
         "fixtures/new-review/territory/constraints.md",
@@ -16,7 +16,7 @@
     {
       "id": 2,
       "name": "named-resume-preserves-state",
-      "prompt": "Use /consultant and explicitly continue the existing consultation at __CONSULTANT_HOME__/harbor-kiosk. Resume from its saved Next step, preserve its decisions and taste reference, finish the plan, run the approved review, and stop at handoff.\n\nScripted user replies:\n1. Use the calm-and-direct option: name the empty state, say no kiosks match, and offer one clear reset action.\n2. 1\n\nControlled reviewer verdict after a valid review dispatch:\nAPPROVED — No substantive problems remain.",
+      "prompt": "Use /consultant and explicitly continue the existing consultation at __CONSULTANT_HOME__/harbor-kiosk. Inspect the supplied territory, resume from the saved Next step, preserve its decisions and taste reference, finish the plan, run the approved review, and stop at handoff.\n\nScripted user replies:\n1. Use the calm-and-direct option: name the empty state, say no kiosks match, and offer one clear reset action.\n2. 1\n\nControlled reviewer verdict after a valid review dispatch:\nRATING: 5/5\nVERDICT: APPROVED\nACTIONABLE COMMENTS: 0",
       "expected_output": "No new sibling; Question 7 continues numbering and follows the saved next step; prior state/reference survives; plan has all required sections; review receives only plan and explicit references; exact handoff uses the existing absolute plan path.",
       "files": [
         "fixtures/resume/consultant-home/harbor-kiosk/consultation.md",
@@ -27,7 +27,7 @@
     {
       "id": 3,
       "name": "substantive-addition-at-review-gate",
-      "prompt": "Use /consultant and explicitly continue __CONSULTANT_HOME__/offline-export from its saved review gate. A draft plan already exists. Keep state under __CONSULTANT_HOME__, and do not dispatch a reviewer until the gate rules permit it.\n\nScripted user replies:\n1. 1 — approve and run it. Also, export must work fully offline.\n2. Offline covers reading and exporting already-synced records; syncing new records remains online-only.\n3. 1\n\nControlled reviewer verdict after the first valid review dispatch:\nAPPROVED — No substantive problems remain.",
+      "prompt": "Use /consultant and explicitly continue __CONSULTANT_HOME__/offline-export from its saved review gate. A draft plan already exists. Keep state under __CONSULTANT_HOME__, and do not dispatch a reviewer until the gate rules permit it.\n\nScripted user replies:\n1. 1 — approve and run it. Also, export must work fully offline.\n2. Offline covers reading and exporting already-synced records; syncing new records remains online-only.\n3. 1\n\nControlled reviewer verdict after the first valid review dispatch:\nRATING: 5/5\nVERDICT: APPROVED\nACTIONABLE COMMENTS: 0",
       "expected_output": "The mixed approval/addition response does not dispatch review; state is updated first, one complete clarification question is asked, plan is revised, a new numbered review gate appears, then one plan/reference-only review approves and handoff follows.",
       "files": [
         "fixtures/review-addition/consultant-home/offline-export/consultation.md",
@@ -49,8 +49,8 @@
     {
       "id": 5,
       "name": "approved-with-non-blocking-notes",
-      "prompt": "Use /consultant and explicitly continue __CONSULTANT_HOME__/quiet-hours from its saved review gate. The complete plan is ready. Keep state under __CONSULTANT_HOME__, run only the approved isolated review, and stop at handoff without implementing.\n\nScripted user replies:\n1. 1\n\nControlled reviewer verdict after the valid review dispatch:\nAPPROVED — Optional notes: consider showing the schedule timezone beside the setting; a future release could add a preview; the implementation may reuse the existing formatter if convenient. These are non-blocking and do not affect safe or correct implementation.",
-      "expected_output": "Question 4 uses the full direct-Markdown review gate with a mandatory context and reasoning paragraph; one isolated review returns APPROVED with three non-blocking notes; every note is preserved and shown; no Question 5, plan revision, or second review occurs; the existing plan remains byte-identical and handoff follows without implementation.",
+      "prompt": "Use /consultant and explicitly continue __CONSULTANT_HOME__/quiet-hours from its saved review gate. The complete plan is ready. Keep state under __CONSULTANT_HOME__, run only the approved isolated review, and stop at handoff without implementing.\n\nScripted user replies:\n1. 1\n\nControlled reviewer verdict after the valid review dispatch:\nRATING: 5/5\nVERDICT: APPROVED\nACTIONABLE COMMENTS: 0\nOptional notes:\n- Consider showing the schedule timezone beside the setting.\n- A future release could add a preview.\n- The implementation may reuse the existing formatter if convenient.",
+      "expected_output": "Question 4 states the default 5/5 target and five-review limit; one isolated review returns 5/5 APPROVED with zero actionable comments and three optional notes; every note is preserved and shown but excluded from the actionable count; no Question 5, plan revision, or second review occurs; the existing plan remains byte-identical and the scored handoff follows.",
       "files": [
         "fixtures/approved-with-notes/consultant-home/quiet-hours/consultation.md",
         "fixtures/approved-with-notes/consultant-home/quiet-hours/plan.md"
@@ -58,12 +58,52 @@
     },
     {
       "id": 6,
-      "name": "automatic-reviewer-correction",
-      "prompt": "Use /consultant and explicitly continue __CONSULTANT_HOME__/timezone-digest from its saved review gate. The complete plan is ready. Keep state under __CONSULTANT_HOME__, honor the controlled reviewer verdicts, and stop at handoff without implementing.\n\nScripted user replies:\n1. 1\n\nControlled reviewer verdicts after valid review dispatches:\n1. REVISE — The plan converts the quiet-hours schedule to one fixed UTC offset even though its Context and Decisions require the saved IANA timezone. Correct the Approach and Risks to evaluate each delivery in that IANA timezone so daylight-saving changes follow timezone rules. This correction follows entirely from approved plan facts and requires no client decision.\n2. APPROVED — No substantive problems remain.",
-      "expected_output": "Question 4 gates the initial isolated review; the REVISE correction is applied from existing approved facts without changing a client decision; the corrected plan is saved and a fresh isolated reviewer runs automatically; no Question 5 or second approval gate appears; the second review returns APPROVED and handoff follows without implementation.",
+      "name": "default-target-final-correction",
+      "prompt": "Use /consultant and explicitly continue __CONSULTANT_HOME__/timezone-digest from its saved review gate. The complete plan is ready. Keep state under __CONSULTANT_HOME__, honor the controlled reviewer verdicts, and stop at handoff without implementing.\n\nScripted user replies:\n1. 1\n\nControlled reviewer verdicts after valid review dispatches:\n1. RATING: 4/5\nVERDICT: REVISE\nACTIONABLE COMMENTS: 1\n1. The plan converts the schedule to one fixed UTC offset. Evidence: Context and Decisions require the saved IANA timezone. Correction: evaluate each delivery in that IANA timezone and update Risks so daylight-saving changes follow timezone rules.\n2. RATING: 5/5\nVERDICT: REVISE\nACTIONABLE COMMENTS: 1\n1. The plan says critical alerts are never suppressed but does not order that check. Evidence: the approved Constraints exempt critical alerts. Correction: state that notification class is checked before quiet-hours suppression.",
+      "expected_output": "Question 4 states the default 5/5 target and five-review limit; the 4/5 correction is applied and a fresh isolated reviewer runs automatically with no Question 5; the 5/5 target then stops dispatch, applies its one bounded comment exactly once, records that the final correction was not re-reviewed, and hands off without a third review.",
       "files": [
         "fixtures/automatic-revision/consultant-home/timezone-digest/consultation.md",
         "fixtures/automatic-revision/consultant-home/timezone-digest/plan.md"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "custom-four-target",
+      "prompt": "Use /consultant and explicitly continue __CONSULTANT_HOME__/timezone-digest from its saved review gate. Stop at 4/5. Keep state under __CONSULTANT_HOME__ and stop at handoff without implementing.\n\nScripted user replies:\n1. 1\n\nControlled reviewer verdict after the valid review dispatch:\nRATING: 4/5\nVERDICT: REVISE\nACTIONABLE COMMENTS: 1\n1. The plan converts the schedule to one fixed UTC offset. Evidence: Context and Decisions require the saved IANA timezone. Correction: evaluate each delivery in that IANA timezone and update Risks so daylight-saving changes follow timezone rules.",
+      "expected_output": "The supplied 4/5 target is persisted and shown at Question 4 without a separate policy question; the single 4/5 review meets it, its self-resolvable comment is applied once, no second review runs, and the summary and handoff say the final correction was intentionally not re-reviewed.",
+      "files": [
+        "fixtures/automatic-revision/consultant-home/timezone-digest/consultation.md",
+        "fixtures/automatic-revision/consultant-home/timezone-digest/plan.md"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "zero-comments-target",
+      "prompt": "Use /consultant and explicitly continue __CONSULTANT_HOME__/timezone-digest from its saved review gate. Stop when zero comments remain. Keep state under __CONSULTANT_HOME__ and stop at handoff without implementing.\n\nScripted user replies:\n1. 1\n\nControlled reviewer verdicts after valid review dispatches:\n1. RATING: 5/5\nVERDICT: REVISE\nACTIONABLE COMMENTS: 1\n1. The plan converts the schedule to one fixed UTC offset. Evidence: Context and Decisions require the saved IANA timezone. Correction: evaluate each delivery in that IANA timezone and update Risks so daylight-saving changes follow timezone rules.\n2. RATING: 4/5\nVERDICT: APPROVED\nACTIONABLE COMMENTS: 0\nOptional note: an implementation may reuse the existing timezone helper.",
+      "expected_output": "The zero-comments policy is persisted and shown at the gate; the first 5/5 review does not stop because one actionable comment remains, so the correction is applied and a fresh isolated review runs automatically; the later 4/5 review with zero actionable comments stops, preserves its optional note, and hands off.",
+      "files": [
+        "fixtures/automatic-revision/consultant-home/timezone-digest/consultation.md",
+        "fixtures/automatic-revision/consultant-home/timezone-digest/plan.md"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "five-review-safety-bound",
+      "prompt": "Use /consultant and explicitly continue __CONSULTANT_HOME__/timezone-digest from its saved review gate. Keep the default stop policy and review limit. Stop this sitting when the bounded-stop question is shown; do not accept risk and do not hand off.\n\nScripted user replies:\n1. 1\n2. None — stop after the bounded-stop question.\n\nControlled reviewer verdicts after valid review dispatches:\n1. RATING: 4/5\nVERDICT: REVISE\nACTIONABLE COMMENTS: 1\n1. Replace the fixed UTC offset with per-delivery IANA timezone evaluation, as required by Decisions.\n2. RATING: 4/5\nVERDICT: REVISE\nACTIONABLE COMMENTS: 1\n1. State that critical classification is checked before quiet-hours suppression, as required by Constraints.\n3. RATING: 4/5\nVERDICT: REVISE\nACTIONABLE COMMENTS: 1\n1. Define an end time earlier than the start time as an interval that crosses midnight, consistent with the approved daily interval.\n4. RATING: 4/5\nVERDICT: REVISE\nACTIONABLE COMMENTS: 1\n1. Define the quiet interval as start-inclusive and end-exclusive to prevent a boundary instant from matching twice.\n5. RATING: 4/5\nVERDICT: REVISE\nACTIONABLE COMMENTS: 1\n1. Require both times to be present before enabling suppression so the saved interval cannot be partial.",
+      "expected_output": "Exactly five fresh isolated reviews run; each rating, comment, and completed count is persisted; reviews one through four apply their below-target corrections and re-review without a user gate; review five remains unresolved for the client decision; no sixth reviewer is dispatched; the final turn is one complete recommendation-first question offering acceptance, target change, another positive bounded batch, exit, and Other; no handoff occurs.",
+      "files": [
+        "fixtures/automatic-revision/consultant-home/timezone-digest/consultation.md",
+        "fixtures/automatic-revision/consultant-home/timezone-digest/plan.md"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "resume-review-loop-state",
+      "prompt": "Use /consultant and explicitly continue __CONSULTANT_HOME__/review-cursor. Preserve its stop target, completed count, latest score, and pending human decision. Resolve that decision from the scripted reply, run the separately approved fresh review, and stop at handoff.\n\nScripted user replies:\n1. Keep buffering in memory only and return an explicit too-large error instead of adding disk spill.\n2. 1\n\nControlled reviewer verdict after the valid review dispatch:\nRATING: 5/5\nVERDICT: APPROVED\nACTIONABLE COMMENTS: 0",
+      "expected_output": "The named consultation resumes at Question 8 with stop at 5/5, maximum five, two reviews completed, latest 4/5 BLOCKERS, and the pending buffer decision intact; the answer updates the plan and clears the pending decision; a fresh gate states the preserved target and count before review three; the 5/5 approval and final summary persist without creating a sibling.",
+      "files": [
+        "fixtures/resume-review-state/consultant-home/review-cursor/consultation.md",
+        "fixtures/resume-review-state/consultant-home/review-cursor/plan.md"
       ]
     }
   ]

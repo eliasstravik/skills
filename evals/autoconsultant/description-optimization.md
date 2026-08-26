@@ -1,5 +1,19 @@
 # autoconsultant — description optimization
 
+## 2026-08-26 issue #52 refresh
+
+Issue #52 reran the frozen 20-query corpus after composing Consultant's scored,
+bounded review state into Autoconsultant. The allowed-model substitute kept
+skill-creator's 12-query train, 8-query held-out, three-pass, label-blind
+contract. GPT-5.6 Luna compared the current description with two proposed
+alternatives; all three scored 36/36 train and 24/24 held-out. The stable
+tie-break retained the current description unchanged. GPT-5.6 Terra
+independently scored it 20/20.
+
+The retained text remains the verbatim `best_description` in
+`skills/autoconsultant/SKILL.md`. No Claude Code, Claude model, or Fable model
+ran. This section supersedes the earlier optimization records below.
+
 ## 2026-08-25 issue #50 refresh
 
 Issue #50 reran the frozen 20-query corpus after updating Consultant's question

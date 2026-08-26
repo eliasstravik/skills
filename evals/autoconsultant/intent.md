@@ -23,6 +23,12 @@ question block and one session-wide sequence. The
 Autoconsultant invocation never pre-authorizes Consultant review or Automake
 artifact approvals.
 
+Consultant's configured target, positive review bound, completed count, latest
+score, pending decision, stop reason, and final-correction status survive the
+composition. Human-owned decisions still interrupt before score evaluation.
+The handoff embeds the achieved score and review status together with
+byte-complete approved role bodies.
+
 ## Live-state surfaces
 
 - redirected `~/.consultant/<slug>/consultation.md`, `references/`, and
@@ -45,7 +51,7 @@ unchanged.
 ## Interaction contract
 
 - Complete Consultant first, including explicit review gates, approved plan,
-  references, durable saves, and no implementation.
+  references, scored bounded state, durable saves, and no implementation.
 - Apply Consultant REVISE corrections from existing facts and automatically
   dispatch a fresh isolated reviewer without another user question or gate;
   restore the gate only after a new client decision.
@@ -64,10 +70,12 @@ unchanged.
 - Resolve all Orchestrator values from supplied inputs or Automake defaults,
   but do not show or consume the Automake Run gate.
 - Emit exactly one safe fenced handoff containing absolute repo/plan paths,
-  full approved role artifacts, every resolved value, run-now/pre-approved
-  instructions, and the plan-preservation contract.
-- Stop after handoff without Git preflight, repository mutation, child launch,
-  ratchet state, or product implementation.
+  byte-complete approved role artifacts, Consultant's score/target/stop state,
+  every resolved value, run-now/pre-approved instructions, and the
+  plan-preservation contract.
+- Stop after handoff without any Git command, external scratch, Automake state
+  creation, repository mutation, child launch, ratchet state, or product
+  implementation.
 
 ## Proposed eval flows
 
@@ -92,8 +100,12 @@ unchanged.
    than every internal run, include all terminal fields exactly once, and
    prove no final Run question, Git action, Automake state, child process, or
    implementation occurred.
+5. **Custom review target composition** — Consultant stops at a supplied 4/5
+   target, applies its remaining correction without another review, and
+   transfers the exact review status and plan authority into the approved
+   default Automake setup.
 
-These flows cover composition order, review and artifact gates, global question
-numbering, role independence, default/custom Orchestrator values, complete
-handoff containment, dynamic fence safety, and the strict preparation-only
-boundary.
+These flows cover composition order, scored review and artifact gates, global
+question numbering, role independence, default/custom Orchestrator values,
+complete byte-preserving handoff containment, dynamic fence safety, and the
+strict preparation-only boundary.
