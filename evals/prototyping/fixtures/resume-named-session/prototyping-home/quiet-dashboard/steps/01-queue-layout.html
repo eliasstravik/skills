@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Queue layout comparison</title>
+  <style>
+    body { margin: 0; font: 16px/1.5 system-ui, sans-serif; color: #18202a; background: #f4f1e9; }
+    main { max-width: 60rem; margin: 0 auto; padding: 3rem 1.5rem 7rem; }
+    .panel { border: 1px solid #9ba3ad; border-radius: 1rem; padding: 1.5rem; background: white; }
+    nav { position: fixed; inset: auto 1rem 1rem; display: flex; justify-content: center; gap: .5rem; }
+    button { border: 1px solid #27313d; border-radius: 999px; padding: .7rem 1rem; background: white; }
+    button[data-recommended="true"]::after { content: " · recommended"; color: #126a54; }
+    button[data-chosen="true"] { outline: 3px solid #e9a23b; }
+  </style>
+</head>
+<body>
+  <main>
+    <p>Throwaway prototype</p>
+    <h1>Which queue layout should dispatch use?</h1>
+    <p>Compare scanning a dense table with keeping a request inspector open.</p>
+    <section class="panel" id="variant">Split queue with persistent inspector</section>
+  </main>
+  <nav aria-label="Variants">
+    <button type="button" data-key="1">1 · Dense table</button>
+    <button type="button" data-key="2" data-recommended="true" data-chosen="true">2 · Split queue</button>
+  </nav>
+</body>
+</html>

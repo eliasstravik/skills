@@ -1,0 +1,22 @@
+[
+  {"id":1,"split":"train","query":"Use /prototyping throughout this consultant session. Whenever a question presents visibly or behaviorally different choices, give me a local page where I can compare them before I answer.","should_trigger":true},
+  {"id":2,"split":"train","query":"Prototype three information architectures for this small team settings page so I can click through the alternatives and choose one. This is throwaway decision support, not app code.","should_trigger":true},
+  {"id":3,"split":"train","query":"Keep a single prototype URL growing as we work through this product workshop. Add each decision as another navigable step and remember which option I chose.","should_trigger":true},
+  {"id":4,"split":"train","query":"Resume the named quiet-dashboard prototyping session and add the next empty-state layout choice without touching sibling sessions.","should_trigger":true},
+  {"id":5,"split":"train","query":"For this grilling round, make throwaway comparisons for the queue layout and bulk-assignment behavior, but leave the naming question text-only.","should_trigger":true},
+  {"id":6,"split":"train","query":"I need to feel the difference between immediate undo, confirmation, and staged batch behavior before deciding. Build one disposable local interaction page for the comparison.","should_trigger":true},
+  {"id":7,"split":"train","query":"Turn these release notes into a durable self-contained HTML artifact, save it under my artifact home, and keep the verified local page available for later.","should_trigger":false},
+  {"id":8,"split":"train","query":"Build a polished product demo for tomorrow's sales call with a convincing narrative, seeded data, and a presentation-ready happy path.","should_trigger":false},
+  {"id":9,"split":"train","query":"Implement the selected settings-page direction in our Next.js app, wire it into the router, and add component tests.","should_trigger":false},
+  {"id":10,"split":"train","query":"Open the existing localhost app, click every navigation item, test keyboard behavior, and report bugs with screenshots.","should_trigger":false},
+  {"id":11,"split":"train","query":"Explain when teams should use prototypes versus wireframes. Give me a concise comparison and no files.","should_trigger":false},
+  {"id":12,"split":"train","query":"Create reusable Figma components for these three card layouts and publish them to our design-system library.","should_trigger":false},
+  {"id":13,"split":"test","query":"Use /prototyping for one step: compare a left rail, top tabs, and three columns for the dispatcher dashboard, recommend one, and give me the loopback link.","should_trigger":true},
+  {"id":14,"split":"test","query":"Stay in prototyping mode while the wayfinder tickets unfold. I want one paginated local session for every real visual or interaction decision, including text-only placeholders for the rest.","should_trigger":true},
+  {"id":15,"split":"test","query":"Sanity-check whether this state model feels right by making the three transition rules tangible on a throwaway interactive page before we choose one.","should_trigger":true},
+  {"id":16,"split":"test","query":"Show me three structurally different onboarding flows in a disposable page, let me switch among them, and stop before integrating the winner.","should_trigger":true},
+  {"id":17,"split":"test","query":"Make a durable dependency-free status dashboard from this CSV, store it as a named HTML artifact, and return its verified file path and URL.","should_trigger":false},
+  {"id":18,"split":"test","query":"Record a polished demo video of the existing checkout flow with narration and annotated callouts for the launch deck.","should_trigger":false},
+  {"id":19,"split":"test","query":"Fix the state-machine bug in src/checkout/reducer.ts and add regression tests for the invalid transition.","should_trigger":false},
+  {"id":20,"split":"test","query":"Generate a static PNG mockup of a futuristic analytics dashboard for the marketing site hero.","should_trigger":false}
+]

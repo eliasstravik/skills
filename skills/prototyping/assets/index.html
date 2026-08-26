@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="session-slug" content="__SESSION_SLUG__">
+  <title>Prototype session</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #18201f;
+      --muted: #67716e;
+      --paper: #f5f0e7;
+      --panel: #fffdf8;
+      --line: #d4cec2;
+      --accent: #1f6a58;
+      --accent-soft: #dcece6;
+      --chosen: #c56d28;
+      --chosen-soft: #f7e4d1;
+      --stub: #777064;
+      --shadow: 0 18px 50px rgb(44 50 47 / 12%);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { min-height: 100%; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font: 15px/1.45 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    button { font: inherit; }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      min-height: 76px;
+      padding: 1rem 1.4rem;
+      border-bottom: 1px solid var(--line);
+      background: rgb(245 240 231 / 92%);
+      backdrop-filter: blur(14px);
+    }
+
+    .identity { min-width: 0; }
+
+    .eyebrow {
+      margin: 0 0 .2rem;
+      color: var(--accent);
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      overflow: hidden;
+      font-family: ui-serif, Georgia, serif;
+      font-size: clamp(1.25rem, 2vw, 1.7rem);
+      font-weight: 650;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .live {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      flex: 0 0 auto;
+      color: var(--muted);
+      font-size: .8rem;
+    }
+
+    .live::before {
+      width: .55rem;
+      height: .55rem;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px var(--accent-soft);
+      content: "";
+    }
+
+    .workspace {
+      min-height: 0;
+      display: grid;
+      grid-template-columns: minmax(250px, 320px) minmax(0, 1fr);
+    }
+
+    .rail {
+      min-height: 0;
+      overflow: auto;
+      padding: 1rem;
+      border-right: 1px solid var(--line);
+      background: #eee8dd;
+    }
+
+    .rail-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin: .25rem .25rem .8rem;
+    }
+
+    .rail-head h2 {
+      margin: 0;
+      font-size: .82rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .count { color: var(--muted); font-variant-numeric: tabular-nums; }
+
+    .step-list {
+      display: grid;
+      gap: .65rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .step-button {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 2.2rem minmax(0, 1fr);
+      gap: .75rem;
+      padding: .85rem;
+      border: 1px solid transparent;
+      border-radius: .85rem;
+      color: inherit;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .step-button:hover { background: rgb(255 253 248 / 68%); }
+
+    .step-button[aria-current="step"] {
+      border-color: #bdb5a7;
+      background: var(--panel);
+      box-shadow: 0 8px 24px rgb(44 50 47 / 8%);
+    }
+
+    .step-number {
+      display: grid;
+      width: 2.2rem;
+      height: 2.2rem;
+      place-items: center;
+      border-radius: .65rem;
+      background: #ded7cb;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: .78rem;
+      font-weight: 800;
+    }
+
+    .step-button[aria-current="step"] .step-number {
+      color: white;
+      background: var(--accent);
+    }
+
+    .step-copy { min-width: 0; }
+
+    .step-label {
+      min-height: 1em;
+      margin-bottom: .16rem;
+      color: var(--muted);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .step-title {
+      display: -webkit-box;
+      overflow: hidden;
+      font-weight: 700;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+
+    .markers {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .35rem;
+      margin-top: .55rem;
+    }
+
+    .marker {
+      display: inline-flex;
+      align-items: center;
+      min-height: 1.35rem;
+      padding: .15rem .45rem;
+      border-radius: 999px;
+      color: var(--muted);
+      background: #e3ddd2;
+      font-size: .67rem;
+      font-weight: 750;
+    }
+
+    .marker.prototype { color: #155946; background: var(--accent-soft); }
+    .marker.chosen { color: #8f4919; background: var(--chosen-soft); }
+
+    .stage {
+      min-width: 0;
+      min-height: 0;
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      padding: 1rem;
+    }
+
+    .pager {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      min-height: 52px;
+      padding: 0 .1rem .8rem;
+    }
+
+    .pager button {
+      min-width: 6.5rem;
+      padding: .62rem .8rem;
+      border: 1px solid var(--line);
+      border-radius: .7rem;
+      color: var(--ink);
+      background: var(--panel);
+      cursor: pointer;
+    }
+
+    .pager button:disabled { opacity: .38; cursor: default; }
+
+    .position {
+      overflow: hidden;
+      color: var(--muted);
+      font-size: .78rem;
+      text-align: center;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .viewport {
+      min-height: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 1rem;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    iframe { width: 100%; height: 100%; min-height: 520px; border: 0; background: white; }
+
+    .stub,
+    .empty {
+      min-height: 100%;
+      display: grid;
+      place-content: center;
+      padding: clamp(2rem, 7vw, 6rem);
+    }
+
+    .stub-card,
+    .empty-card { max-width: 46rem; }
+
+    .stub-kind {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: .35rem .65rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--stub);
+      font-size: .74rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .stub h2,
+    .empty h2 {
+      margin: 0 0 .6rem;
+      font-family: ui-serif, Georgia, serif;
+      font-size: clamp(1.8rem, 4vw, 3.3rem);
+      line-height: 1.08;
+    }
+
+    .stub-label { color: var(--muted); font-weight: 700; }
+
+    .stub-options {
+      display: grid;
+      gap: .55rem;
+      margin: 1.5rem 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .stub-options li {
+      display: flex;
+      gap: .7rem;
+      padding: .75rem .9rem;
+      border-left: 3px solid var(--line);
+      background: #f7f3eb;
+    }
+
+    .stub-options strong { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+    .decision {
+      margin-top: 1.2rem;
+      padding: .9rem 1rem;
+      border-radius: .75rem;
+      color: #7d4219;
+      background: var(--chosen-soft);
+    }
+
+    .text-only { color: var(--muted); }
+
+    @media (max-width: 760px) {
+      .workspace { grid-template-columns: 1fr; grid-template-rows: auto minmax(70vh, 1fr); }
+      .rail { max-height: 38vh; border-right: 0; border-bottom: 1px solid var(--line); }
+      .step-list { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+      .stage { min-height: 70vh; }
+      .live span { display: none; }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .step-button, .pager button { transition: background-color 140ms ease, border-color 140ms ease; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="identity">
+        <p class="eyebrow">Throwaway prototypes</p>
+        <h1 id="session-name">__SESSION_SLUG__</h1>
+      </div>
+      <div class="live"><span>Watching the session manifest</span></div>
+    </header>
+
+    <div class="workspace">
+      <aside class="rail" aria-label="Session steps">
+        <div class="rail-head">
+          <h2>Session steps</h2>
+          <span class="count" id="step-count">0</span>
+        </div>
+        <ol class="step-list" id="step-list"></ol>
+      </aside>
+
+      <main class="stage">
+        <nav class="pager" aria-label="Step pagination">
+          <button type="button" id="previous-step">Previous</button>
+          <div class="position" id="position">Waiting for the first step</div>
+          <button type="button" id="next-step">Next</button>
+        </nav>
+        <section class="viewport" id="viewport" aria-live="polite"></section>
+      </main>
+    </div>
+  </div>
+
+  <script src="steps.js"></script>
+  <script>
+    (() => {
+      "use strict";
+
+      const list = document.getElementById("step-list");
+      const count = document.getElementById("step-count");
+      const viewport = document.getElementById("viewport");
+      const position = document.getElementById("position");
+      const previous = document.getElementById("previous-step");
+      const next = document.getElementById("next-step");
+      const configuredSlug = document.querySelector('meta[name="session-slug"]').content;
+      const pathParts = location.pathname.split("/").filter(Boolean);
+      const pathSlug = decodeURIComponent(pathParts.at(-2) || "prototype-session");
+      const unresolvedSlug = "__SESSION" + "_SLUG__";
+      const slug = configuredSlug === unresolvedSlug ? pathSlug : configuredSlug;
+
+      document.getElementById("session-name").textContent = slug;
+      document.title = `${slug} · prototype session`;
+
+      let steps = Array.isArray(window.STEPS) ? window.STEPS.slice() : [];
+      let currentN = null;
+      let manifestSignature = "";
+      let polling = false;
+      let frameState = null;
+
+      const optionLabel = (entry, key) => {
+        const option = Array.isArray(entry.options)
+          ? entry.options.find(item => String(item.key) === String(key))
+          : null;
+        return option ? `${option.key} · ${option.label}` : String(key);
+      };
+
+      const signature = items => JSON.stringify(items.map(item => [item.n, item.decision]));
+
+      const hashNumber = () => {
+        const value = location.hash.slice(1);
+        return /^\d+$/.test(value) ? Number(value) : null;
+      };
+
+      const indexForCurrent = () => steps.findIndex(item => item.n === currentN);
+
+      const frameSource = entry => {
+        if (entry.decision === null || typeof entry.decision === "undefined") return entry.file;
+        return `${entry.file}?decision=${encodeURIComponent(String(entry.decision))}`;
+      };
+
+      const marker = (text, className = "") => {
+        const span = document.createElement("span");
+        span.className = `marker ${className}`.trim();
+        span.textContent = text;
+        return span;
+      };
+
+      const renderList = () => {
+        list.replaceChildren();
+        count.textContent = String(steps.length);
+
+        for (const entry of steps) {
+          const item = document.createElement("li");
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "step-button";
+          button.dataset.step = String(entry.n);
+          if (entry.n === currentN) button.setAttribute("aria-current", "step");
+
+          const number = document.createElement("span");
+          number.className = "step-number";
+          number.textContent = String(entry.n).padStart(2, "0");
+
+          const copy = document.createElement("span");
+          copy.className = "step-copy";
+
+          const label = document.createElement("span");
+          label.className = "step-label";
+          label.textContent = entry.label || "Plain choice";
+
+          const title = document.createElement("span");
+          title.className = "step-title";
+          title.textContent = entry.title;
+
+          const markers = document.createElement("span");
+          markers.className = "markers";
+          markers.append(marker(entry.kind === "prototype" ? "Prototype" : "Text only", entry.kind));
+          if (entry.recommended !== null && typeof entry.recommended !== "undefined") {
+            markers.append(marker(`Recommended ${optionLabel(entry, entry.recommended)}`));
+          }
+          if (entry.decision !== null && typeof entry.decision !== "undefined") {
+            markers.append(marker(`Chosen ${optionLabel(entry, entry.decision)}`, "chosen"));
+          }
+
+          copy.append(label, title, markers);
+          button.append(number, copy);
+          button.addEventListener("click", () => selectStep(entry.n, true));
+          item.append(button);
+          list.append(item);
+        }
+      };
+
+      const showEmpty = () => {
+        frameState = null;
+        const wrap = document.createElement("div");
+        wrap.className = "empty";
+        const card = document.createElement("div");
+        card.className = "empty-card";
+        const label = document.createElement("span");
+        label.className = "stub-kind";
+        label.textContent = "Session ready";
+        const title = document.createElement("h2");
+        title.textContent = "Waiting for the first decision";
+        const body = document.createElement("p");
+        body.className = "text-only";
+        body.textContent = "This page updates when the host adds a step.";
+        card.append(label, title, body);
+        wrap.append(card);
+        viewport.replaceChildren(wrap);
+        position.textContent = "Waiting for the first step";
+        previous.disabled = true;
+        next.disabled = true;
+      };
+
+      const showStub = entry => {
+        frameState = null;
+        const wrap = document.createElement("div");
+        wrap.className = "stub";
+        const card = document.createElement("article");
+        card.className = "stub-card";
+
+        const kind = document.createElement("span");
+        kind.className = "stub-kind";
+        kind.textContent = "Text-only decision";
+
+        const label = document.createElement("p");
+        label.className = "stub-label";
+        label.textContent = entry.label || `Step ${entry.n}`;
+
+        const title = document.createElement("h2");
+        title.textContent = entry.title;
+
+        const options = document.createElement("ol");
+        options.className = "stub-options";
+        for (const option of Array.isArray(entry.options) ? entry.options : []) {
+          const row = document.createElement("li");
+          const key = document.createElement("strong");
+          key.textContent = option.key;
+          const text = document.createElement("span");
+          text.textContent = option.label;
+          row.append(key, text);
+          options.append(row);
+        }
+
+        const note = document.createElement("p");
+        note.className = "text-only";
+        note.textContent = "These options differ in words, not in something useful to see or click.";
+
+        card.append(kind, label, title);
+        if (options.children.length) card.append(options);
+        card.append(note);
+
+        if (entry.decision !== null && typeof entry.decision !== "undefined") {
+          const decision = document.createElement("p");
+          decision.className = "decision";
+          decision.textContent = `Chosen: ${optionLabel(entry, entry.decision)}`;
+          card.append(decision);
+        }
+
+        wrap.append(card);
+        viewport.replaceChildren(wrap);
+      };
+
+      const showPrototype = entry => {
+        const decision = entry.decision === null || typeof entry.decision === "undefined"
+          ? null
+          : String(entry.decision);
+
+        if (frameState && frameState.n === entry.n) {
+          if (frameState.decision !== decision) {
+            frameState.element.src = frameSource(entry);
+            frameState.decision = decision;
+          }
+          return;
+        }
+
+        const frame = document.createElement("iframe");
+        frame.title = `${entry.label ? `${entry.label}: ` : ""}${entry.title}`;
+        frame.src = frameSource(entry);
+        viewport.replaceChildren(frame);
+        frameState = { n: entry.n, decision, element: frame };
+      };
+
+      const renderCurrent = () => {
+        if (!steps.length) {
+          currentN = null;
+          showEmpty();
+          renderList();
+          return;
+        }
+
+        let index = indexForCurrent();
+        if (index < 0) {
+          const requested = hashNumber();
+          index = requested === null ? steps.length - 1 : steps.findIndex(item => item.n === requested);
+          if (index < 0) index = steps.length - 1;
+          currentN = steps[index].n;
+        }
+
+        const entry = steps[index];
+        if (entry.kind === "prototype" && entry.file) showPrototype(entry);
+        else showStub(entry);
+
+        position.textContent = `${entry.label || `Step ${entry.n}`} · ${index + 1} of ${steps.length}`;
+        previous.disabled = index === 0;
+        next.disabled = index === steps.length - 1;
+        renderList();
+      };
+
+      function selectStep(n, updateHash) {
+        if (!steps.some(item => item.n === n)) return;
+        currentN = n;
+        if (updateHash && location.hash !== `#${n}`) history.pushState(null, "", `#${n}`);
+        renderCurrent();
+      }
+
+      previous.addEventListener("click", () => {
+        const index = indexForCurrent();
+        if (index > 0) selectStep(steps[index - 1].n, true);
+      });
+
+      next.addEventListener("click", () => {
+        const index = indexForCurrent();
+        if (index >= 0 && index < steps.length - 1) selectStep(steps[index + 1].n, true);
+      });
+
+      addEventListener("hashchange", () => {
+        const requested = hashNumber();
+        if (requested !== null) selectStep(requested, false);
+      });
+
+      const poll = () => {
+        if (polling) return;
+        polling = true;
+        const script = document.createElement("script");
+        script.src = `steps.js?poll=${Date.now()}`;
+        script.onload = () => {
+          const incoming = Array.isArray(window.STEPS) ? window.STEPS.slice() : [];
+          const nextSignature = signature(incoming);
+          if (nextSignature !== manifestSignature) {
+            steps = incoming;
+            manifestSignature = nextSignature;
+            renderCurrent();
+          }
+          script.remove();
+          polling = false;
+        };
+        script.onerror = () => {
+          script.remove();
+          polling = false;
+        };
+        document.head.append(script);
+      };
+
+      manifestSignature = signature(steps);
+      renderCurrent();
+      setInterval(poll, 2000);
+    })();
+  </script>
+</body>
+</html>
