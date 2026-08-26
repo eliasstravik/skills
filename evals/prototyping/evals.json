@@ -1,0 +1,119 @@
+{
+  "skill_name": "prototyping",
+  "conventions": "Each executor is a fresh GPT-5.6 Sol one-shot context. Copy declared fixtures into __RUN_DIR__, then replace __RUN_DIR__, __PROTOTYPING_STATE_ROOT__, __CONSULTANT_STATE_ROOT__, and __OCCUPIED_PORT__. The prototyping root is always run-local; the Consultant root is run-local in cases 1 and 6 only. Real ~/.prototyping, real ~/.consultant, sibling runs, external temporary directories, credentials, live services, and unrelated processes are off-limits. Bind only to 127.0.0.1. Save every complete user-facing message verbatim in transcript.md. After the executor exits, verify the PID and exact URL from a separate Bash invocation, then stop run-owned servers only through scripts/serve.sh <session-dir> stop. No-skill arms use no_skill_prompt, forbid every installed skill, and must not invoke one. With-skill arms must not invoke the installed aihero prototype skill.",
+  "evals": [
+    {
+      "id": 1,
+      "name": "consultant-hosted-session",
+      "prompt": "Use /consultant with /prototyping for the fictional field-service decision in __RUN_DIR__/inputs/brief.md. Use __CONSULTANT_STATE_ROOT__ instead of ~/.consultant and __PROTOTYPING_STATE_ROOT__ instead of ~/.prototyping. Treat the scripted replies below as user messages arriving in order. Ask each supplied question exactly as written, one per turn, and end after recording the third answer. Put the single required Prototypes line immediately above each complete question block, never inside it.\n\nQuestion 1 block:\n---\n**Question 1: Which layout should the field-service dashboard use?**\n\nThe dispatcher must compare three crews and move between a crew overview and its open jobs. The layout choice changes the page's information hierarchy, so the options should be judged visually.\n\n1. Use a left rail for crews with the selected crew's jobs in a dense main table. (Recommended)\n2. Use a top tab per crew above a shared job board.\n3. Use three equal crew columns with jobs grouped inside each column.\n4. Other — describe another layout.\n---\n\nQuestion 2 block:\n---\n**Question 2: How should a dispatcher acknowledge an urgent job?**\n\nAcknowledgment must be quick, but an accidental click should not silently change ownership. The options differ in interaction behavior and should be tested against the same urgent-job scenario.\n\n1. Acknowledge immediately and offer ten seconds to undo. (Recommended)\n2. Open a confirmation dialog before acknowledgment.\n3. Stage acknowledgments in a tray until the dispatcher submits the batch.\n4. Other — describe another acknowledgment flow.\n---\n\nQuestion 3 block:\n---\n**Question 3: What should the dashboard be called?**\n\nThe remaining decision is the short product label shown in navigation. It changes wording only and does not need an interactive comparison.\n\n1. Call it Dispatch Board. (Recommended)\n2. Call it Crew Pulse.\n3. Call it Field Desk.\n4. Other — supply another name.\n---\n\nScripted user replies:\n1. 2\n2. Acknowledge immediately, but keep undo available for ten seconds.\n3. 1",
+      "no_skill_prompt": "Complete this isolated scripted decision session without invoking any installed skill. Read __RUN_DIR__/inputs/brief.md. Keep all session files under __PROTOTYPING_STATE_ROOT__ and all question-session state under __CONSULTANT_STATE_ROOT__. Serve the growing throwaway comparison page only on 127.0.0.1. Treat the scripted replies below as user messages arriving in order. Ask each supplied question exactly as written, one per turn, and end after recording the third answer. Before each question block, put one line linking to that question's step in the growing local page. Build an interactive page for choices that differ visually or behaviorally and a text-only entry for wording choices. Do not alter any byte of the supplied question blocks.\n\nQuestion 1 block:\n---\n**Question 1: Which layout should the field-service dashboard use?**\n\nThe dispatcher must compare three crews and move between a crew overview and its open jobs. The layout choice changes the page's information hierarchy, so the options should be judged visually.\n\n1. Use a left rail for crews with the selected crew's jobs in a dense main table. (Recommended)\n2. Use a top tab per crew above a shared job board.\n3. Use three equal crew columns with jobs grouped inside each column.\n4. Other — describe another layout.\n---\n\nQuestion 2 block:\n---\n**Question 2: How should a dispatcher acknowledge an urgent job?**\n\nAcknowledgment must be quick, but an accidental click should not silently change ownership. The options differ in interaction behavior and should be tested against the same urgent-job scenario.\n\n1. Acknowledge immediately and offer ten seconds to undo. (Recommended)\n2. Open a confirmation dialog before acknowledgment.\n3. Stage acknowledgments in a tray until the dispatcher submits the batch.\n4. Other — describe another acknowledgment flow.\n---\n\nQuestion 3 block:\n---\n**Question 3: What should the dashboard be called?**\n\nThe remaining decision is the short product label shown in navigation. It changes wording only and does not need an interactive comparison.\n\n1. Call it Dispatch Board. (Recommended)\n2. Call it Crew Pulse.\n3. Call it Field Desk.\n4. Other — supply another name.\n---\n\nScripted user replies:\n1. 2\n2. Acknowledge immediately, but keep undo available for ten seconds.\n3. 1",
+      "expected_output": "One fresh run-local hosted session with three entries numbered 1 to 3 and labelled Question 1 to Question 3; UI and logic pages for the first two questions; one stub for the naming question; exact numeric and free-text decisions; one Prototypes line above each byte-identical question block; a detached verified loopback server; no live-state writes or baseline skill invocation.",
+      "expectations": [
+        "Run state stays isolated and the transcript invokes no aihero prototype skill.",
+        "The session manifest has exactly three valid append-shaped entries with n 1..3 and labels Question 1..3.",
+        "The visible-or-behavioral gate produces a UI page, a logic page, and then a stub.",
+        "Decisions are exactly 2, the supplied free-text acknowledgment answer, and 1.",
+        "Each page has one selector per substantive option with correct recommended and chosen markers.",
+        "Exactly one Prototypes line precedes each byte-identical Consultant question block.",
+        "The recorded owned PID and exact loopback /index.html URL survive executor exit."
+      ],
+      "files": [
+        "fixtures/consultant-hosted-session/brief.md"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "resume-named-session",
+      "prompt": "Use /prototyping to resume the exact session at __PROTOTYPING_STATE_ROOT__/quiet-dashboard. Do not inspect or create a sibling session. Its two existing entries, recorded free port, stale foreign PID, and missing index.html are deliberate. Continue with the single plain-host step below, then record the scripted answer.\n\nStep label: empty\nQuestion: Which empty-state layout should the dashboard use when every crew is caught up?\nChoices:\nA. A centered completion message with one secondary link. (Recommended)\nB. A compact summary row that keeps the empty job table visible.\nC. A crew-by-crew status board with completion times.\n\nScripted user reply:\nB",
+      "no_skill_prompt": "Complete this request without invoking any installed skill. Resume the exact throwaway comparison session at __PROTOTYPING_STATE_ROOT__/quiet-dashboard. Do not inspect or create a sibling session. Its two existing entries, recorded free port, stale foreign PID, and missing index.html are deliberate. Restore its local shell, leave the foreign PID unsignalled, serve only on 127.0.0.1, append the single step below as entry 3, and record the scripted answer.\n\nStep label: empty\nQuestion: Which empty-state layout should the dashboard use when every crew is caught up?\nChoices:\nA. A centered completion message with one secondary link. (Recommended)\nB. A compact summary row that keeps the empty job table visible.\nC. A crew-by-crew status board with completion times.\n\nScripted user reply:\nB",
+      "expected_output": "The named quiet-dashboard session is resumed in place; stale foreign PID is never signalled; the current shell is copied; entry n=3 with an empty label and decision B is appended; its UI page exists; the recorded free port is reused when available or safely replaced; no sibling is inspected or created.",
+      "expectations": [
+        "The named quiet-dashboard is resumed in place and no sibling is created.",
+        "The unrelated sibling sentinel remains byte-for-byte unchanged and PID 1 is never signalled.",
+        "The current shell is copied and the two supplied manifest lines remain unchanged.",
+        "One valid plain-host n=3 UI entry with decision B is appended and its page exists.",
+        "The recorded port is reused when free or rewritten to the exact served port.",
+        "The recorded owned PID and exact loopback /index.html URL survive executor exit.",
+        "The transcript invokes no aihero prototype skill."
+      ],
+      "files": [
+        "fixtures/resume-named-session/prototyping-home/quiet-dashboard/steps.js",
+        "fixtures/resume-named-session/prototyping-home/quiet-dashboard/steps/01-queue-layout.html",
+        "fixtures/resume-named-session/prototyping-home/quiet-dashboard/server.port",
+        "fixtures/resume-named-session/prototyping-home/quiet-dashboard/server.pid",
+        "fixtures/resume-named-session/prototyping-home/unrelated-session/sentinel.txt"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "one-off-prototype",
+      "prompt": "Use /prototyping for this one-off request. Use __PROTOTYPING_STATE_ROOT__ instead of ~/.prototyping. Prototype what a small team's settings page should look like in three directions: a categorized left navigation with a detail pane, a single searchable settings list, and a task-oriented overview that links to focused editors. Recommend the categorized navigation. This is one plain-host step and there is no scripted reply.",
+      "no_skill_prompt": "Complete this one-off request without invoking any installed skill. Keep every file under __PROTOTYPING_STATE_ROOT__. Build a throwaway local comparison of three settings-page directions: a categorized left navigation with a detail pane, a single searchable settings list, and a task-oriented overview that links to focused editors. Recommend the categorized navigation. Serve it only on 127.0.0.1 and return the exact local page for this one step. There is no scripted reply.",
+      "expected_output": "One fresh run-local session with one plain-host prototype entry, three structurally different UI variants keyed A to C, A marked recommended, null decision, one hash URL, and a detached verified loopback server.",
+      "expectations": [
+        "Fresh work creates exactly one lowercase-hyphen session without inspecting siblings.",
+        "steps.js contains one valid plain-host prototype entry with n=1, keys A..C, A recommended, and null decision.",
+        "The step page has exactly three structurally different UI variants and one selector per option.",
+        "The page marks A recommended and marks no selector chosen.",
+        "The transcript reports exactly one Prototypes line ending in /index.html#1.",
+        "The recorded owned PID and exact loopback /index.html URL survive executor exit.",
+        "The transcript invokes no aihero prototype skill."
+      ],
+      "files": []
+    },
+    {
+      "id": 4,
+      "name": "grilling-round",
+      "prompt": "Use /grilling with /prototyping for this isolated queue-triage round. Use __PROTOTYPING_STATE_ROOT__ instead of ~/.prototyping. Render the complete round below byte-for-byte, with exactly one Prototypes line immediately above it listing the anchors for all three questions. Treat the scripted reply as the user's answer to the round, record all decisions, and end.\n\nRound:\n❓ **Q1** - **Which queue layout should the triage screen use?**: Compare these structures for twelve incoming requests.\n\nA. A dense sortable table with a detail drawer.\nB. A split queue and persistent request inspector.\nC. Three status columns with compact request cards.\n\n➡️ Recommended answer: B — the split view keeps scanning and detail together.\n\n❓ **Q2** - **How should bulk assignment behave?**: Compare these interaction rules against the same four selected requests.\n\nA. Assign immediately after the owner is picked.\nB. Preview the affected requests and confirm once.\nC. Add assignment changes to a staged batch that can mix other actions.\n\n➡️ Recommended answer: B — one preview catches selection mistakes without creating a batch workflow.\n\n❓ **Q3** - **What should the saved filter be called?**: Choose the wording shown beside the queue.\n\nA. My urgent queue.\nB. Needs my review.\nC. Priority watch.\n\n➡️ Recommended answer: A — it is short and names ownership.\n\nScripted user reply:\nQ1 B; Q2 B; Q3 A.",
+      "no_skill_prompt": "Complete this isolated scripted decision round without invoking any installed skill. Keep all generated files under __PROTOTYPING_STATE_ROOT__ and serve only on 127.0.0.1. Render the complete round below byte-for-byte. Put exactly one line immediately above it linking to all three numbered steps in one growing throwaway comparison page. Build an interactive page for the first visual choice and the second behavioral choice, and a text-only entry for the wording choice. Treat the scripted reply as the user's answer to the round, record all decisions, and end.\n\nRound:\n❓ **Q1** - **Which queue layout should the triage screen use?**: Compare these structures for twelve incoming requests.\n\nA. A dense sortable table with a detail drawer.\nB. A split queue and persistent request inspector.\nC. Three status columns with compact request cards.\n\n➡️ Recommended answer: B — the split view keeps scanning and detail together.\n\n❓ **Q2** - **How should bulk assignment behave?**: Compare these interaction rules against the same four selected requests.\n\nA. Assign immediately after the owner is picked.\nB. Preview the affected requests and confirm once.\nC. Add assignment changes to a staged batch that can mix other actions.\n\n➡️ Recommended answer: B — one preview catches selection mistakes without creating a batch workflow.\n\n❓ **Q3** - **What should the saved filter be called?**: Choose the wording shown beside the queue.\n\nA. My urgent queue.\nB. Needs my review.\nC. Priority watch.\n\n➡️ Recommended answer: A — it is short and names ownership.\n\nScripted user reply:\nQ1 B; Q2 B; Q3 A.",
+      "expected_output": "One fresh session with entries n=1..3 labelled Q1..Q3; a UI page, a logic page, and a stub by the visible-or-behavioral gate; decisions B, B, and A; one Prototypes line listing #1 #2 #3 above the byte-identical round; no separate line per question.",
+      "expectations": [
+        "The manifest has exactly three valid entries n=1..3 labelled Q1..Q3 with host grilling.",
+        "The gate produces UI, logic, and stub entries with decisions B, B, and A.",
+        "The UI and logic pages each have exactly one selector per option with correct recommended and chosen markers.",
+        "One Prototypes line listing #1 #2 #3 precedes the byte-identical round.",
+        "No per-question Prototypes line appears inside the round.",
+        "The recorded owned PID and exact loopback /index.html URL survive executor exit.",
+        "The transcript invokes no aihero prototype skill."
+      ],
+      "files": []
+    },
+    {
+      "id": 5,
+      "name": "occupied-port-recovery",
+      "prompt": "Use /prototyping to resume __PROTOTYPING_STATE_ROOT__/port-recovery. The recorded port __OCCUPIED_PORT__ is held by a run-local listener and server.pid is absent. Start or revive this session's detached loopback server without adding a step yet. Preserve the occupied listener. Return the activation-only Prototypes line with no hash.",
+      "no_skill_prompt": "Complete this request without invoking any installed skill. Resume the throwaway comparison session at __PROTOTYPING_STATE_ROOT__/port-recovery. Its recorded port __OCCUPIED_PORT__ is held by a run-local listener and server.pid is absent. Start a detached server bound only to 127.0.0.1, preserve the occupied listener, rewrite server.port to the port actually served, verify the exact index.html URL, and return one activation-only local-page line with no hash. Do not add a step.",
+      "expected_output": "The occupied run-local listener survives; a different free non-common loopback port is selected within the retry limit and written to server.port; the exact hash-free /index.html URL and recorded owned PID remain live after executor exit; no manifest entry is added.",
+      "expectations": [
+        "The occupied listener survives the executor and the session server uses a different free non-common port.",
+        "server.port is rewritten to the port in the reported exact /index.html URL.",
+        "steps.js remains the empty initialized manifest and no step file is added.",
+        "The activation response is exactly one hash-free Prototypes line.",
+        "serve.sh checks PID ownership before every signal and supports ownership-checked stop.",
+        "The recorded owned PID and exact loopback /index.html URL survive executor exit.",
+        "The transcript invokes no aihero prototype skill."
+      ],
+      "files": [
+        "fixtures/occupied-port-recovery/prototyping-home/port-recovery/steps.js",
+        "fixtures/occupied-port-recovery/prototyping-home/port-recovery/server.port"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "stop-command",
+      "prompt": "Use /consultant with /prototyping for this isolated notification-settings session. Use __CONSULTANT_STATE_ROOT__ instead of ~/.consultant and __PROTOTYPING_STATE_ROOT__ instead of ~/.prototyping. Ask the three supplied questions exactly as written, one per turn. Treat the scripted messages as arriving in order. After the second answer, process the separate stop request: leave the session files and server intact, report the current URL and exact ownership-checked stop command, and drop the prototyping stance. Then continue the host session with Question 3 and record its answer. Question 3 must have no Prototypes line and no manifest entry.\n\nQuestion 1 block:\n---\n**Question 1: Which notification settings layout should the account page use?**\n\nThe page must cover six channels without making the current state hard to scan. The layout options differ structurally and should be compared visually.\n\n1. Group settings by event in a table with one column per channel. (Recommended)\n2. Group settings by channel in stacked sections.\n3. Use a short summary page that opens one focused editor per event.\n4. Other — describe another layout.\n---\n\nQuestion 2 block:\n---\n**Question 2: How should muting a noisy notification behave?**\n\nThe client needs a quick temporary mute without losing the existing channel choices. The options differ in behavior and should be tried on the same notification.\n\n1. Open a duration picker, apply the mute immediately, and offer undo. (Recommended)\n2. Require a review dialog showing every affected channel before applying.\n3. Add the mute to a pending changes tray with the rest of the page edits.\n4. Other — describe another mute flow.\n---\n\nQuestion 3 block:\n---\n**Question 3: Which accent color should mark temporarily muted notifications?**\n\nThe interaction decisions are settled. This final visual preference belongs to the continuing host session after the prototyping stance has stopped.\n\n1. Use amber. (Recommended)\n2. Use violet.\n3. Use slate blue.\n4. Other — name another color.\n---\n\nScripted user messages:\n1. 2\n2. 1\n3. stop prototyping\n4. 3",
+      "no_skill_prompt": "Complete this isolated scripted decision session without invoking any installed skill. Keep all generated comparison files under __PROTOTYPING_STATE_ROOT__ and all question-session state under __CONSULTANT_STATE_ROOT__. Ask the three supplied questions exactly as written, one per turn. Treat the scripted messages as arriving in order. Before Questions 1 and 2, add one local-page line and record one interactive comparison entry. After the second answer, process the separate stop request: leave the files and detached loopback server intact, report the current URL and ownership-checked stop command, and stop maintaining the comparison page. Then continue with Question 3 and record its answer. Question 3 must have no local-page line and no manifest entry.\n\nQuestion 1 block:\n---\n**Question 1: Which notification settings layout should the account page use?**\n\nThe page must cover six channels without making the current state hard to scan. The layout options differ structurally and should be compared visually.\n\n1. Group settings by event in a table with one column per channel. (Recommended)\n2. Group settings by channel in stacked sections.\n3. Use a short summary page that opens one focused editor per event.\n4. Other — describe another layout.\n---\n\nQuestion 2 block:\n---\n**Question 2: How should muting a noisy notification behave?**\n\nThe client needs a quick temporary mute without losing the existing channel choices. The options differ in behavior and should be tried on the same notification.\n\n1. Open a duration picker, apply the mute immediately, and offer undo. (Recommended)\n2. Require a review dialog showing every affected channel before applying.\n3. Add the mute to a pending changes tray with the rest of the page edits.\n4. Other — describe another mute flow.\n---\n\nQuestion 3 block:\n---\n**Question 3: Which accent color should mark temporarily muted notifications?**\n\nThe interaction decisions are settled. This final visual preference belongs to the continuing host session after the comparison-page stance has stopped.\n\n1. Use amber. (Recommended)\n2. Use violet.\n3. Use slate blue.\n4. Other — name another color.\n---\n\nScripted user messages:\n1. 2\n2. 1\n3. stop maintaining the comparison page\n4. 3",
+      "expected_output": "Exactly two session entries labelled Question 1 and Question 2 with decisions 2 and 1; a UI page and logic page; Prototypes lines only above the first two byte-identical question blocks; a stop report containing the current URL and exact serve.sh stop command; intact files and live server; byte-identical Question 3 with no entry or Prototypes line.",
+      "expectations": [
+        "The manifest has exactly two entries labelled Question 1 and Question 2 with decisions 2 and 1.",
+        "The first entry has a UI page and the second has a logic page with correct selectors and markers.",
+        "Prototypes lines precede only the first two byte-identical question blocks.",
+        "The stop response reports the current URL and exact serve.sh session-dir stop command.",
+        "Question 3 remains byte-identical and creates no manifest entry or Prototypes line.",
+        "The files remain intact and the recorded owned PID and exact /index.html URL survive executor exit.",
+        "The transcript invokes no aihero prototype skill."
+      ],
+      "files": []
+    }
+  ]
+}
