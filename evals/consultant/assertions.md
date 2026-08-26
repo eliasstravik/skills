@@ -25,10 +25,14 @@ baseline failure. **(critical)** marks severe or contractual behavior.
   without searching for, asking about, reading, or modifying existing
   consultations; only an explicit named path or slug resumes state, and a
   resume creates no sibling consultation.
-- **A5 (critical) — Durable state stays complete.** At every sitting boundary,
-  `consultation.md` explicitly keeps Brief, Known knowns, Unknown knowns,
-  Known unknowns, Unknown unknowns, Decisions, and Next step current, including
-  the next question number when questioning continues.
+- **A5 (critical) — Durable state stays complete.** Before every question,
+  review dispatch, and sitting boundary, `consultation.md` explicitly keeps
+  Brief, Known knowns, Unknown knowns, Known unknowns, Unknown unknowns,
+  Decisions, Next step, stop policy, score target when applicable, maximum
+  automatic reviews, reviews completed, latest rating and verdict, unresolved
+  actionable comments, pending human decision, stop reason, and final comments
+  applied without another review current, including the next question number
+  when questioning continues.
 - **A6 (critical) — Every question uses the exact block grammar.** Each
   user-facing discovery, taste, approval, review, blocker, or follow-up turn
   contains exactly one direct-Markdown `Question <Q>` block and never invokes
@@ -56,7 +60,8 @@ baseline failure. **(critical)** marks severe or contractual behavior.
   client can inspect the current plan and before the initial dispatch or a
   dispatch after substantive additions or a new client decision, the next
   Question asks `Ready to run the adversarial review?`, includes the required
-  context and reasoning paragraph, and then shows exactly:
+  context and reasoning paragraph stating the active stop policy, automatic
+  review maximum, and completed count, and then shows exactly:
   `1. Approve and run the adversarial review now. (Recommended)`,
   `2. Add something first.`, and
   `3. Other — describe how you want to proceed.`
@@ -69,40 +74,58 @@ baseline failure. **(critical)** marks severe or contractual behavior.
   `plan.md` and complete references explicitly named by that plan—never
   `consultation.md`, hidden client context, prior reviewer rationale, or an
   unlisted reference.
-- **A13 (critical) — Review verdicts and blocker threshold are controlled.**
-  The reviewer returns APPROVED, optionally with non-blocking notes; REVISE
-  with concrete safety or correctness corrections resolvable from existing
-  facts and approved constraints; or BLOCKERS containing only unresolved
-  issues that prevent safe or correct implementation and genuinely require a
-  client decision. Optional improvements, minor preferences, implementation
-  details, and answerable questions never block; no harness verdict is
-  consumed before a valid initial gate or a REVISE-triggered automatic review,
-  and every verdict follows a valid isolated packet.
-- **A14 (critical) — True blockers re-enter consultation.** Blocker context is
-  saved before questioning, only the smallest client decision needed is asked
-  through a complete question block, `plan.md` is revised after resolution,
-  and a fresh review requires a new approval gate.
-- **A15 — Review termination follows verdict meaning.** Review stops on
-  APPROVED, explicit client exit, or explicit acceptance of remaining risks.
-  APPROVED notes are preserved and shown, then handoff follows without another
-  question, plan revision, or review round. REVISE corrections are applied
-  without changing client decisions and trigger a fresh isolated review
-  automatically, with no intervening user question or approval gate.
+- **A13 (critical) — Scored reviewer output is controlled.** Every valid review
+  returns `RATING: X/5`, `VERDICT: APPROVED | REVISE | BLOCKERS`,
+  `ACTIONABLE COMMENTS: N`, and exactly N enumerated findings with evidence and
+  a correction or needed decision. Ratings use the stable 1/5 through 5/5
+  anchors; optional informational notes are preserved but excluded from N;
+  APPROVED has no required correction, REVISE has only self-resolvable
+  corrections, and BLOCKERS has a client-owned decision.
+- **A14 (critical) — Human authority beats every score.** After every review,
+  the rating, verdict, findings, count, and iteration are saved before action.
+  Any product, taste, scope, authority, or accepted-risk decision interrupts
+  before target evaluation, even at 5/5 or zero comments. The smallest client
+  decision is asked through a complete question block with options to resolve,
+  accept risk, exit, or answer another way; resolution revises the plan and a
+  fresh review requires a new approval gate and available review capacity.
+- **A15 (critical) — Stop policies and final corrections are exact.** An
+  invocation-supplied score target from 1/5 through 5/5 or zero-comments target
+  is persisted without another discovery question; otherwise 5/5 is the
+  default. A score target is met at or above its rating and zero comments is met
+  only at zero actionable comments. APPROVED always stops. A met target applies
+  every remaining self-resolvable comment exactly once, never reviews that
+  correction pass, and records and shows what changed and that it was not
+  re-reviewed. An unmet target applies corrections and re-reviews automatically
+  with no user gate only while capacity remains.
 - **A16 (critical) — The final handoff is safe and copyable.** Completion emits
   one Markdown-fenced handoff prompt, with no required content outside it,
   naming the real absolute `plan.md` path and using an outer fence that cannot
-  be closed by any fence sequence in its body.
+  be closed by any fence sequence in its body. The preceding final summary and
+  the handoff state the achieved rating, configured target, stop reason, final
+  comments applied, and whether the correction pass was intentionally not
+  re-reviewed.
 - **A17 (critical) — Consultant never implements.** No product code, target
   configuration, deployment, or implementation artifact is changed; work stops
-  at an approved or explicitly accepted plan and handoff.
+  at a target-satisfying or explicitly accepted plan and handoff.
+- **A18 (critical) — The hard bound needs client authority.** The default is at
+  most five isolated reviews after initial approval, or the client's supplied
+  positive maximum. If the target remains unmet at the limit, no next reviewer
+  runs. One recommendation-first question offers accepting current risk,
+  changing the target, authorizing another positive bounded batch, exiting
+  without handoff, and Other. Only explicit authorization increases the maximum
+  and a changed limit appears at a fresh review gate before dispatch.
+- **A19 (critical) — Resume preserves review continuity.** A named resume keeps
+  its stop policy, maximum, completed count, latest rating and verdict,
+  unresolved comments, pending human decision, and stop reason without reset,
+  sibling creation, or an invented fresh review.
 
 ## Flow-specific behavior
 
-- **N1 (critical) — New consultation survives blocker revision.** Lantern Desk
-  creates one direct slug directory, resolves the supplied scope, obtains a
-  valid first dispatch, saves and resolves the stale-owner blocker without
-  paging/reassignment, obtains a separately gated approval, and hands off the
-  complete approved plan without implementation.
+- **N1 (critical) — A perfect score cannot bypass a blocker.** Lantern Desk
+  creates one direct slug directory, defaults to 5/5 and five reviews, obtains
+  a valid first dispatch, saves a 5/5 BLOCKERS result and resolves its
+  stale-owner decision without paging or reassignment, obtains a separately
+  gated 5/5 approval, and hands off without implementation.
 - **R1 (critical) — Named resume preserves continuity.** Harbor Kiosk resumes
   at Question 7, preserves all prior decisions and `references/tone-cards.md`,
   creates no sibling, completes all required plan sections, sends only
@@ -116,15 +139,28 @@ baseline failure. **(critical)** marks severe or contractual behavior.
   `archive-migration` byte-for-byte unchanged, asks no resume-choice question,
   saves the complete schema before Question 1, and creates no plan, review
   packet, handoff, or implementation in the incomplete sitting.
-- **N2 (critical) — APPROVED notes do not reopen review.** Quiet Hours runs one
-  valid isolated review whose APPROVED verdict contains several optional
-  notes, preserves and shows every note, leaves the plan unchanged, asks no
-  follow-up question, and proceeds directly to a safe handoff.
-- **N3 (critical) — Self-resolvable corrections re-review automatically.**
-  Timezone Digest runs one gated review whose REVISE correction follows from
-  existing timezone facts, corrects the plan without changing a client
-  decision, dispatches a fresh isolated review without Question 5 or another
-  gate, and hands off after APPROVED.
+- **N2 (critical) — APPROVED notes do not count or reopen review.** Quiet Hours
+  records 5/5 APPROVED with zero actionable comments, preserves and shows all
+  three optional notes without counting them, leaves the plan unchanged, asks
+  no follow-up question, and proceeds directly to a safe handoff.
+- **N3 (critical) — The default target gets one final correction pass.**
+  Timezone Digest applies a 4/5 correction and re-reviews automatically, then
+  stops on a 5/5 REVISE, applies that bounded comment once, and hands off
+  without a third review.
+- **N4 (critical) — A custom score target stops at its threshold.** A supplied
+  4/5 target appears at the gate; a 4/5 REVISE applies its one correction and
+  hands off without a second review.
+- **N5 (critical) — Zero comments is independent of score.** A 5/5 result with
+  one actionable comment continues, while the later 4/5 result with zero
+  actionable comments stops and preserves its optional note.
+- **N6 (critical) — Five below-target reviews stop.** Exactly five 4/5 reviews
+  run under the default 5/5 policy, no sixth reviewer runs, all completed state
+  is saved, and the sitting ends at the complete five-choice bounded-stop
+  question without handoff.
+- **N7 (critical) — Review state resumes in place.** Review Cursor resumes with
+  target 5/5, maximum five, count two, latest 4/5 BLOCKERS, and its pending
+  buffer decision; after resolution, the next gated review is number three and
+  the same state reaches handoff without a sibling.
 
 ## Traceability — preserved failures to assertions
 
@@ -134,7 +170,7 @@ baseline failure. **(critical)** marks severe or contractual behavior.
 | F1.2 durable state schema incomplete | A5, A8 |
 | F1.3 required plan sections missing | A9 |
 | F1.4 safe copyable handoff missing | A16 |
-| F2.1 review dispatched without a dedicated gate | A10, A11, A13, A14 |
+| F2.1 review dispatched without a dedicated gate | A10, A11, A13, A14, A18 |
 | F2.2 reviewer received a reference not named by plan | A9, A12 |
 | F2.3 executor wrote through external `/tmp` | A2 |
 | F3.1 fresh state lacked the direct slug boundary | A4 |
@@ -143,10 +179,14 @@ baseline failure. **(critical)** marks severe or contractual behavior.
 
 | Eval | Assertions |
 | --- | --- |
-| 1 — new consultation, blocker, approval, handoff | A2–A17, N1 |
-| 2 — named resume | A2–A10, A12–A13, A15–A17, R1 |
-| 3 — substantive addition at review gate | A2–A13, A15–A17, G1 |
+| 1 — new consultation, 5/5 blocker, approval, handoff | A2–A18, N1 |
+| 2 — named resume | A2–A10, A12–A17, A19, R1 |
+| 3 — substantive addition at review gate | A2–A17, G1 |
 | 4 — fresh state despite existing consultation | A2–A8, A17, F1 |
-| 5 — approved with non-blocking notes | A2–A10, A12–A13, A15–A17, N2 |
-| 6 — automatic reviewer correction | A2–A10, A12–A13, A15–A17, N3 |
+| 5 — approved with non-blocking notes | A2–A10, A12–A17, N2 |
+| 6 — default target and final correction | A2–A18, N3 |
+| 7 — custom 4/5 target | A2–A18, N4 |
+| 8 — zero-comments target | A2–A18, N5 |
+| 9 — five-review safety bound | A2–A15, A17–A18, N6 |
+| 10 — resumed review-loop state | A2–A19, N7 |
 | Harness, shipping, and trigger checks | A1, A2 |

@@ -1,33 +1,41 @@
 {
   "skill_name": "autoconsultant",
+  "conventions": "Each executor is a fresh GPT-5.6 Sol one-shot context. Copy only the named fixture into its run directory and use run-local outputs/consultant-home and outputs/automake-home; live state, unrelated repositories, external temporary directories, credentials, and services are off-limits. Scripted replies are consumed in order in the same headless transcript. Controlled reviews stand in for fresh GPT-5.6 Terra contexts and receive only plan.md plus its explicit references. Frozen-old baseline arms use only the recorded old Autoconsultant, Consultant, and Automake snapshot tree; installed skills are disabled for both arms.",
   "evals": [
     {
       "id": 1,
       "name": "fresh-full-chain-with-blocker",
       "fixture": "fixtures/fresh-chain",
-      "prompt": "Use /autoconsultant to turn the rough Mica Queue aging-summary request in workspace/repo into an approved Consultant plan and a fully approved Automake setup. Use outputs/consultant-home and outputs/automake-home instead of live state. Stop at the fresh-agent handoff without running Automake or changing the repository.",
-      "expected_output": "One direct fresh consultation whose questions use complete bold direct-Markdown blocks with a required context and reasoning paragraph, written-out recommended-first options, and no interactive question tool; a separately gated true-blocker/revision/approval loop; complete independently approved Optimizer and Evaluator instructions; default Orchestrator values; and one safe handoff. Repository and Automake home remain unchanged."
+      "prompt": "Use /autoconsultant to turn the rough Mica Queue aging-summary request in workspace/repo into an approved Consultant plan and a fully approved Automake setup. Use outputs/consultant-home and outputs/automake-home instead of live state. Stop at the fresh-agent handoff without running Automake or changing the repository.\n\nScripted user replies:\n1. Count open requests at least 30 minutes old, group aging counts by team, and include one invalid timestamp count without treating invalid rows as aging.\n2. 1\n3. Keep invalid rows out of team aging counts and expose one top-level invalid_timestamp_count; do not guess or repair timestamps.\n4. 1\n5. Approve the complete Optimizer instruction.\n6. Approve the complete Evaluator instruction.\n\nControlled reviewer verdicts after valid review dispatches:\n1. RATING: 5/5\nVERDICT: BLOCKERS\nACTIONABLE COMMENTS: 1\n1. The plan does not establish whether malformed created_at values count as aging, are dropped silently, or are reported. Evidence: the input contract permits raw timestamp strings and the approved output must remain operationally trustworthy. Needed decision: choose the invalid-timestamp behavior.\n2. RATING: 5/5\nVERDICT: APPROVED\nACTIONABLE COMMENTS: 0",
+      "expected_output": "One direct fresh consultation whose questions use complete bold direct-Markdown blocks; the default 5/5 target and five-review limit are persisted and shown; the 5/5 human-owned blocker interrupts before score evaluation and requires a separately gated second review; complete independently approved Optimizer and Evaluator instructions use default Orchestrator values; one safe handoff carries the scored Consultant summary. Repository and Automake home remain unchanged."
     },
     {
       "id": 2,
       "name": "named-resume-custom-run-values",
       "fixture": "fixtures/named-resume",
-      "prompt": "Use /autoconsultant to continue outputs/consultant-home/parcel-latency from its saved Question 9. Preserve its decisions/reference, finish review, then prepare Automake for workspace/repo with MAX_ITERATIONS=2, MAX_CONSECUTIVE_FAILURES=1, and SUCCESS_CONDITION='python3 -m unittest -q passes'. Stop at handoff.",
-      "expected_output": "The named state resumes without a sibling; complete bold direct-Markdown questions with a required context and reasoning paragraph and written-out recommended-first options continue numbering through both phases without an interactive question tool; custom run values are preserved; full artifacts are approved; and no run/preflight/repository mutation occurs."
+      "prompt": "Use /autoconsultant to continue outputs/consultant-home/parcel-latency from its saved Question 9. Preserve its decisions/reference, finish review, then prepare Automake for workspace/repo with MAX_ITERATIONS=2, MAX_CONSECUTIVE_FAILURES=1, and SUCCESS_CONDITION='python3 -m unittest -q passes'. Stop at handoff.\n\nScripted user replies:\n1. Classify 250 milliseconds and above as slow; 249 milliseconds remains normal.\n2. 1\n3. Approve the complete Optimizer instruction.\n4. Approve the complete Evaluator instruction.\n\nControlled reviewer verdict after the valid review dispatch:\nRATING: 5/5\nVERDICT: APPROVED\nACTIONABLE COMMENTS: 0",
+      "expected_output": "The named state resumes without a sibling; complete questions continue from Question 9 through both phases; the default scored review state is saved and a 5/5 approval hands off; exact 2/1/test-pass values and full approved artifacts survive transfer; no run, preflight, Automake state, or repository mutation occurs."
     },
     {
       "id": 3,
       "name": "artifact-revision-not-preauthorized",
       "fixture": "fixtures/artifact-revision",
-      "prompt": "Use /autoconsultant to continue outputs/consultant-home/beacon-reminder from its saved Consultant review gate, then prepare Automake for workspace/repo. The invocation does not pre-authorize any gate. Stop after the final handoff.",
-      "expected_output": "Consultant review is explicitly approved through the direct recommended-first format, the first complete Optimizer instruction is rejected and fully revised before approval, the Evaluator is separately approved, numbering is continuous, AskUserQuestion is never invoked, and Automake never runs."
+      "prompt": "Use /autoconsultant to continue outputs/consultant-home/beacon-reminder from its saved Consultant review gate, then prepare Automake for workspace/repo. The invocation does not pre-authorize any gate. Stop after the final handoff.\n\nScripted user replies:\n1. 1\n2. Revise the Optimizer instruction so the implementation stays dependency-free and changes only notifier.py and its tests.\n3. Approve the complete revised Optimizer instruction.\n4. Approve the complete Evaluator instruction.\n\nControlled reviewer verdict after the valid review dispatch:\nRATING: 5/5\nVERDICT: APPROVED\nACTIONABLE COMMENTS: 0",
+      "expected_output": "Consultant review is explicitly approved and records a 5/5 approval; the first complete Optimizer instruction is rejected and fully revised before approval; the Evaluator is separately approved; numbering is continuous; the final handoff carries the scored Consultant summary; Automake never runs."
     },
     {
       "id": 4,
       "name": "fence-safety-no-run-boundary",
       "fixture": "fixtures/fence-safety",
-      "prompt": "Use /autoconsultant to continue outputs/consultant-home/fenced-checks, preserve its explicit verification-fences reference in the Automake instructions, finish the approved setup for workspace/repo, and return the handoff. Do not execute anything.",
-      "expected_output": "The handoff contains full role artifacts and resolved values inside one dynamically safe outer fence longer than all internal backtick runs, with no Run gate, Git action, Automake state, child launch, or implementation."
+      "prompt": "Use /autoconsultant to continue outputs/consultant-home/fenced-checks, preserve its explicit verification-fences reference in the Automake instructions, finish the approved setup for workspace/repo, and return the handoff. Do not execute anything.\n\nScripted user replies:\n1. 1\n2. Approve the complete Optimizer instruction.\n3. Approve the complete Evaluator instruction.\n\nControlled reviewer verdict after the valid review dispatch:\nRATING: 5/5\nVERDICT: APPROVED\nACTIONABLE COMMENTS: 0",
+      "expected_output": "The scored Consultant review reaches 5/5; the handoff contains its target and stop reason plus full role artifacts and resolved values inside one dynamically safe outer fence longer than all internal backtick runs, with no Run gate, Git action, Automake state, child launch, or implementation."
+    },
+    {
+      "id": 5,
+      "name": "custom-target-final-correction-composition",
+      "fixture": "fixtures/artifact-revision",
+      "prompt": "Use /autoconsultant to continue outputs/consultant-home/beacon-reminder from its saved Consultant review gate, stop Consultant review at 4/5, then prepare the default Automake setup for workspace/repo. Consume these scripted replies in order and stop after the final handoff.\n\nScripted user replies:\n1. Approve and run the adversarial review now.\n2. Approve the complete Optimizer instruction.\n3. Approve the complete Evaluator instruction.\n\nControlled reviewer verdict after the valid review dispatch:\nRATING: 4/5\nVERDICT: REVISE\nACTIONABLE COMMENTS: 1\n1. The plan says only \"explicit status text\" although its named message contract fixes the exact strings. Evidence: references/message-contract.md requires \"Reminder due\" and \"Reminder not due\". Correction: name both required strings in Approach and preserve the ban on sent, delivered, and scheduled wording.",
+      "expected_output": "Consultant persists and shows the custom 4/5 target and five-review limit, runs one isolated 4/5 review, applies the self-resolvable comment once, and does not re-review the final correction; Autoconsultant then separately approves complete Optimizer and Evaluator instructions and emits one safe handoff containing the Consultant rating, target, stop reason, and unreviewed-correction status without running Automake."
     }
   ]
 }

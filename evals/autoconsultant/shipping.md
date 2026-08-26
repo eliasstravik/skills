@@ -1,5 +1,30 @@
 # autoconsultant — shipping record
 
+## 2026-08-26 issue #52 refresh
+
+After implementation commit `cebcea7`, installed the revised skill globally
+from the issue worktree:
+
+```text
+npx skills add /Users/eliasstravik/.herdr/worktrees/skills/issue-52-add-scored-bounded-adversarial-review-lo --skill autoconsultant -g -y
+```
+
+The installer copied `autoconsultant` to
+`~/.agents/skills/autoconsultant`. Its PromptScript warning remains expected
+because PromptScript does not support global skill installation. Repository,
+`~/.agents`, and `~/.claude` copies were byte-identical. SHA-256:
+
+```text
+SKILL.md  1a5a8e0e47924cf153e2a5adb1972a7297d4d3521550daabcd8069cf6f021126
+```
+
+`agentskills validate` is not installed, so the required manual frontmatter
+gate checked name and format only. `name: autoconsultant` matches its
+directory, the optimizer-owned description is one quoted string and matches
+the retained `best_description` verbatim, both frontmatter delimiters are
+present, and the required keys occur once. `quick_validate.py` also passed.
+PASS.
+
 ## 2026-08-25 issue #50 refresh
 
 Installed the revised skill globally from the issue worktree before handoff:

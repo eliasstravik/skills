@@ -22,7 +22,10 @@ baseline failure. **(critical)** marks severe or contractual behavior.
 - **A4 (critical) — Consultant identity and state remain correct.** A new
   request creates one direct fresh slug without searching existing state; an
   explicit resume touches only the named consultation; every sitting leaves
-  Brief, all four known/unknown quadrants, Decisions, and Next step current.
+  Brief, all four known/unknown quadrants, Decisions, Next step, stop policy,
+  review maximum and count, latest rating and verdict, unresolved comments,
+  pending human decision, stop reason, and final unreviewed corrections
+  current.
 - **A5 (critical) — One exact question sequence spans both skills.** Every
   discovery, review, blocker, role approval, revision, and value question uses
   the complete direct-Markdown Consultant `Question <Q>` block with a bold
@@ -35,10 +38,13 @@ baseline failure. **(critical)** marks severe or contractual behavior.
 - **A6 (critical) — Consultant review remains gated and isolated.** Every
   initial verdict follows the exact Consultant review gate and a saved packet
   containing only the complete plan plus references explicitly named by it;
-  REVISE corrections grounded in existing facts update the plan and trigger a
-  fresh isolated review automatically; substantive additions and true blockers
-  re-enter revision before a fresh gate after the client's decision; APPROVED
-  notes remain non-blocking and do not reopen review.
+  the gate states the active stop policy, review maximum, and completed count;
+  each reviewer returns an anchored rating, verdict, matching actionable count,
+  and evidenced findings. Human-owned decisions interrupt before score checks.
+  A met target applies self-resolvable comments once without another review; an
+  unmet target re-reviews only below the positive maximum; substantive additions
+  and resolved blockers require a fresh gate; APPROVED notes neither count nor
+  reopen review.
 - **A7 (critical) — The approved plan is the Automake source of truth.** The
   complete plan has Outcome, Context, Decisions, Approach, Constraints,
   References, Out of scope, and Risks; its explicit references are preserved,
@@ -91,6 +97,9 @@ baseline failure. **(critical)** marks severe or contractual behavior.
   explicitly required to preserve the approved plan's decisions, constraints,
   scope/out-of-scope boundary, risks, and explicit references while running the
   ratchet.
+- **A19 (critical) — Consultant review status survives transfer.** The final
+  handoff embeds Consultant's achieved rating, configured target, stop reason,
+  and whether its final correction pass was intentionally not re-reviewed.
 
 ## Flow-specific behavior
 
@@ -111,6 +120,11 @@ baseline failure. **(critical)** marks severe or contractual behavior.
   the exact four-backtick verification snippet inside the approved Optimizer
   and final handoff, chooses a strictly longer outer fence, and creates no
   Automake state or later Run gate.
+- **N2 (critical) — A scored target composes without reopening Consultant.**
+  Beacon Reminder shows and persists stop at 4/5, applies one 4/5 REVISE comment
+  exactly once without a second review, records the unreviewed final correction,
+  then approves both Automake roles and carries the scored summary into the
+  handoff without execution.
 
 ## Traceability — preserved failures to assertions
 
@@ -130,8 +144,9 @@ baseline failure. **(critical)** marks severe or contractual behavior.
 
 | Eval | Assertions |
 | --- | --- |
-| 1 — fresh full chain with blocker | A2–A18, N1 |
-| 2 — named resume and custom values | A2–A18, R1 |
-| 3 — artifact revision without pre-authorization | A2–A18, V1 |
-| 4 — fence safety and no-run boundary | A2–A18, F1 |
+| 1 — fresh full chain with blocker | A2–A19, N1 |
+| 2 — named resume and custom values | A2–A19, R1 |
+| 3 — artifact revision without pre-authorization | A2–A19, V1 |
+| 4 — fence safety and no-run boundary | A2–A19, F1 |
+| 5 — custom target and final correction | A2–A19, N2 |
 | Harness, shipping, and trigger checks | A1, A2 |
