@@ -12,7 +12,7 @@
       "session": "fresh",
       "prompt": "/autoproject",
       "replies": [],
-      "expected_output": "Prints a bullet list of inputs with defaults inline (project goal, only repo, thread_agent, 5 iterations, 3 rejections, no success condition) and waits; starts nothing and writes nothing.",
+      "expected_output": "Prints exactly three inputs, Brief, Rubric, Limits, each with a one-line description and default (project goal; beats the base on the goal, with proof; 5 iterations, 3 rejections, no success criterion), says run-now, and waits; starts nothing and writes nothing.",
       "files": [
         "fixtures/common",
         "fixtures/scenarios/bare-invocation"
@@ -20,7 +20,7 @@
       "assertions": [
         "No thread is started",
         "Project folder is unchanged",
-        "Response lists inputs with the defaults 5 iterations, 3 consecutive rejections, and no success condition",
+        "Response lists only Brief, Rubric, and Limits with the defaults 5 iterations, 3 rejections, and no success criterion",
         "Only TASKS.md and scratch/autoproject/<slug>.md changed in the project folder",
         "No hp thread restart, routine approve, or non-model --agent-arg"
       ]
