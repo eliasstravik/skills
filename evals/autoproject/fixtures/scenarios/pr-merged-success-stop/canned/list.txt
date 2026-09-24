@@ -1,5 +1,0 @@
-t-0003	Working	working	Update README badges
-t-0004	Resolved	resolved	autoproject faster-parse maker 1
-t-0005	Resolved	resolved	autoproject faster-parse reviewer 1
-t-0006	Resolved	resolved	autoproject faster-parse maker 2
-t-0007	Resolved	resolved	autoproject faster-parse reviewer 2

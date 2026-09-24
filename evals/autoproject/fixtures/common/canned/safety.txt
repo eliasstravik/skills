@@ -1,3 +1,0 @@
-start_threads = "propose"
-routine_commands = false
-thread_agent_args = []
