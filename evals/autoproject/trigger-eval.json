@@ -1,6 +1,6 @@
 [
   {
-    "query": "/autoproject",
+    "query": "autoproject time: in the tally herdr project, loop maker and reviewer threads on the parser until bench.py is under 400ms, default limits are fine",
     "should_trigger": true
   },
   {
