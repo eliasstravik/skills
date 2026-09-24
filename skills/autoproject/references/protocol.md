@@ -47,7 +47,7 @@ Roles: maker <thread_agent | kind [model]>, reviewer <thread_agent | kind [model
 <independent goal, BETTER rule, task-shaped evidence, complexity cost, how to judge the success condition>
 
 ## User guidance
-<steering for the next maker, one bullet each; mark a bullet `(sent to maker <n>)` once used>
+<one-time steering for the next maker, one bullet each; mark a bullet `(sent to maker <n>)` once used>
 
 ## Iterations
 <one line per finished iteration>
@@ -61,6 +61,11 @@ Iteration line, appended once the iteration's outcome is known:
 ```text
 <n> · <maker id> · <reviewer id | NONE> · <reviewed SHA | NONE> · <BETTER | NOT_BETTER> · <MERGED <landed sha> | FAILED | BLOCKED | NONE> · <reason> · <learnings, one line | NONE>
 ```
+
+- The verdict column is the reviewer's verdict (NOT_BETTER when there was no valid one). The landing column is what happened after it, so a candidate that was BETTER but then failed to land is `BETTER · FAILED`, and it still counts against the streak.
+- When herdr merged the pull request before the maker wrote a `LANDING:` line, write `MERGED <pull request URL>`.
+- An iteration cut short by the user's stop gets no line; `## Stop` names it and its threads.
+- User guidance meant for every later maker ("from now on …") is added to `## Maker brief`. One-time guidance goes under `## User guidance` and is marked sent once used.
 
 After maker 1 starts, run `hp thread show <project> <maker id>` once and copy its record's `origin` (empty means `Origin: no`) and `base` fields into the header. For a repo with an origin, the default branch is `base` without its `origin/` prefix. Every later landing reads these two header lines.
 

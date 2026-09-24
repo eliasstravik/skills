@@ -39,6 +39,12 @@ sys.stdout.write(text)
 PY
     ;;
   "thread start")
+    for arg in "$@"; do
+      if [ "$arg" = "--help" ] || [ "$arg" = "-h" ]; then
+        echo "Usage: hp thread start <SLUG> --title <TITLE> [--repo <PATH>] [--kind <KIND>] [--agent <KIND>] [--agent-arg <ARG>]... [--base <REF>] --task-file <PATH|->"
+        exit 0
+      fi
+    done
     n_file="$RUN/.shim-start-count"
     n=$(( $(cat "$n_file" 2>/dev/null || echo 0) + 1 ))
     echo "$n" > "$n_file"

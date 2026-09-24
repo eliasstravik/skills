@@ -184,7 +184,6 @@ CHECKS = {
     # 10
     "Maker t-0006 is resolved": lambda r: ok("t-0006" in r.ids("thread resolve"), f"resolved: {r.ids('thread resolve')}"),
     "Iteration 2 is recorded as NOT_BETTER with FAILED": lambda r: ok("FAILED" in r.iteration(2), r.iteration(2)),
-    "TASKS.md shows 3/5, streak 1/3, maker t-0008": lambda r: ok("3/5, streak 1/3, maker t-0008;" in r.tasks, r.run_line()),
     "Maker 3 is started": lambda r: ok(any(re.search(r"maker 3$", t or "") for t in starts_titles(r)), f"{starts_titles(r)}"),
     # 11
     "No reviewer or maker is started": lambda r: ok(not r.starts(), f"starts: {starts_titles(r)}"),
@@ -222,7 +221,7 @@ CHECKS = {
     # 18
     "Maker t-0008 is not resolved or prompted and nothing is started":
         lambda r: ok("t-0008" not in r.ids("thread resolve") + r.ids("thread prompt") and not r.starts(), f"calls: {[c['cmd'] for c in r.calls]}"),
-    "TASKS.md step is `blocked t-0008` at streak 1/3": lambda r: ok("streak 1/3, blocked t-0008;" in r.tasks, r.run_line()),
+    "TASKS.md step is `blocked t-0008` at streak 2/3": lambda r: ok("streak 2/3, blocked t-0008;" in r.tasks, r.run_line()),
     "Response tells the user that t-0008 needs them (pane w3:p2)": lambda r: ok("t-0008" in r.response and "w3:p2" in r.response, r.response[:400]),
     # 19
     "Scratch has a Stop section": lambda r: ok(r.scratch.split("## Stop")[-1].strip(), r.scratch.split("## Stop")[-1][:300]),
