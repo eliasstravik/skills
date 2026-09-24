@@ -1,0 +1,2 @@
+err thread t-0008 failed to start; `thread restart tally t-0008` retries: git worktree add: fatal: could not lock ref
+ok t-0009

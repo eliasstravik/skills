@@ -1,0 +1,1 @@
+err `tally` is paused; `thread start` is refused until it is active again
