@@ -74,6 +74,9 @@ def main():
                 session=SESSION[(e["session"], arm)], prompt=e["prompt"], replies=replies)
             (edir / arm / "prompt.txt").write_text(prompt)
             (edir / arm / "outputs").mkdir(exist_ok=True)
+            link = edir / arm / "run-1"  # aggregate_benchmark.py reads <arm>/run-*/grading.json
+            if not link.exists():
+                link.symlink_to(".")
     print(it)
 
 
