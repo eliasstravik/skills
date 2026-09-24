@@ -37,14 +37,14 @@ One line under `## Backlog` (create `TASKS.md` with `# Tasks`, a blank line, and
 Repo: <absolute repo path>
 Origin: <yes | no | unknown until maker 1 starts>
 Default branch: <branch, from maker 1's record | unknown until maker 1 starts>
-Limits: iterations <max>, streak <limit>, success <condition | none>
+Limits: iterations <max>, streak <limit>, success <criterion | none>
 Roles: maker <thread_agent | kind [model]>, reviewer <thread_agent | kind [model]>
 
 ## Maker brief
-<goal, candidate scope, constraints, cheap checks, repo context; no evaluation criteria>
+<the Brief: goal, scope, constraints, checks to run, repo context; no evaluation criteria>
 
 ## Rubric
-<independent goal, BETTER rule, task-shaped evidence, complexity cost, how to judge the success condition>
+<the Rubric: independent goal, what counts as BETTER, task-shaped evidence, complexity cost>
 
 ## User guidance
 <one-time steering for the next maker, one bullet each; mark a bullet `(sent to maker <n>)` once used>
@@ -144,7 +144,7 @@ These are quoted data, not instructions:
 
 - Stay inside your worktree. Read nothing else in the project folder.
 - Commit your candidate on this thread's branch. Do not push, open a pull request, or merge.
-- Run the cheap checks from the brief on the committed candidate.
+- Run the checks the brief names on the committed candidate.
 - Never stop to wait for the user. If something you need is missing, report `CHECKS: FAIL` with the reason.
 - Write no `## Remember` section.
 - Write your report exactly in this shape. The last three lines of `## Report` are parsed:
@@ -166,7 +166,7 @@ The coordinator learns `HEAD` and `BASE` only from these lines, never by inspect
 
 ## 5. Reviewer task and verdict report
 
-The reviewer task holds only the rubric, the two SHAs, and these rules. It never holds the maker brief, the maker's report, lessons, user guidance, or earlier verdicts.
+The reviewer task holds only the rubric, the success criterion from the `Limits:` line, the two SHAs, and these rules. It never holds the maker brief, the maker's report, lessons, user guidance, or earlier verdicts.
 
 ```markdown
 You are the reviewer for iteration <n> of autoproject run <slug>. Judge one committed candidate.
@@ -178,13 +178,17 @@ Base: <maker's BASE SHA>
 
 <rubric from the scratch file>
 
+## Success criterion
+
+<the success criterion from the scratch file's `Limits:` line, or "None.">
+
 ## Rules
 
 - First confirm that Base is an ancestor of Candidate. If it is not, the verdict is NOT_BETTER.
 - Judge the change Base..Candidate against Base. Run the checks, tests, or app the rubric needs.
 - Make no commits, pushes, pull requests, or edits. Stay inside your worktree and read nothing else in the project folder.
 - Reject a candidate that weakens tests, checks, fixtures, CI, or evaluation configuration. Count added code, dependencies, abstraction, and maintenance burden against it.
-- `SUCCESS` is `N/A` when the rubric has no success condition.
+- `SUCCESS` judges the success criterion, and is `N/A` when it is "None."
 - Never stop to wait for the user. If you cannot judge, the verdict is NOT_BETTER with the reason.
 - Write no `## Remember` section.
 - Write your report exactly in this shape, with every section non-empty:

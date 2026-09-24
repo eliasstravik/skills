@@ -104,9 +104,10 @@ CHECKS = {
     # 1
     "No thread is started": lambda r: ok(not r.starts(), f"starts: {starts_titles(r)}"),
     "Project folder is unchanged": lambda r: ok(not r.changed, f"changed: {r.changed}"),
-    "Response lists inputs with the defaults 5 iterations, 3 consecutive rejections, and no success condition":
-        lambda r: ok(re.search(r"\b5\b", r.response) and re.search(r"\b3\b", r.response) and re.search(r"success", r.response, re.I)
-                     and re.search(r"none|no success", r.response, re.I) and len(re.findall(r"^\s*[-*] ", r.response, re.M)) >= 8,
+    "Response lists only Brief, Rubric, and Limits with the defaults 5 iterations, 3 rejections, and no success criterion":
+        lambda r: ok(all(re.search(rf"^\s*[-*] \**{w}", r.response, re.M) for w in ("Brief", "Rubric", "Limits"))
+                     and len(re.findall(r"^\s*[-*] ", r.response, re.M)) == 3 and re.search(r"\b5\b", r.response) and re.search(r"\b3\b", r.response)
+                     and re.search(r"no success", r.response, re.I) and re.search(r"run-now", r.response, re.I),
                      r.response[:600]),
     # 2
     "Gate heading and the two exact options are shown":

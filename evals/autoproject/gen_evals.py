@@ -13,9 +13,9 @@ G = [
 
 evals = [
     (1, "bare-invocation", FRESH, "/autoproject", [],
-     "Prints a bullet list of inputs with defaults inline (project goal, only repo, thread_agent, 5 iterations, 3 rejections, no success condition) and waits; starts nothing and writes nothing.",
+     "Prints exactly three inputs, Brief, Rubric, Limits, each with a one-line description and default (project goal; beats the base on the goal, with proof; 5 iterations, 3 rejections, no success criterion), says run-now, and waits; starts nothing and writes nothing.",
      ["No thread is started", "Project folder is unchanged",
-      "Response lists inputs with the defaults 5 iterations, 3 consecutive rejections, and no success condition"]),
+      "Response lists only Brief, Rubric, and Limits with the defaults 5 iterations, 3 rejections, and no success criterion"]),
     (2, "setup-gate-go", FRESH,
      "/autoproject make tally parse big CSV exports faster without changing its output. Keep each candidate to one focused change in tally/parse.py, no new dependencies, and don't touch tests or bench.py; makers run `pytest -q`. Reviewer: BETTER only if the median of `python bench.py` improves by at least 10% over the base and `pytest -q` still passes. Defaults are fine for everything else.",
      ["1"],
