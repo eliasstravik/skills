@@ -9,3 +9,6 @@ skills/*-workspace/
 
 # generated eval run output (transcripts, gradings, benchmarks, viewer HTML)
 evals/*/runs/
+
+# python bytecode from eval helper scripts
+__pycache__/

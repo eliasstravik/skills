@@ -1,0 +1,1 @@
+git@github.com:acme/tally.git
