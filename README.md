@@ -1,6 +1,6 @@
 # skills
 
-**Nine focused workflows for developers who need more from their agents than a
+**Ten focused workflows for developers who need more from their agents than a
 one-line prompt.**
 
 Install one workflow from Elias Stravik's personal collection, then invoke it
@@ -36,6 +36,7 @@ or linked MP4 poster without simulated output.
 | [`demo`](skills/demo/SKILL.md) | Turn an artifact into a realistic, verified local demo. |
 | [`automake`](skills/automake/SKILL.md) | Run a Git-backed evaluator–optimizer ratchet. |
 | [`consultant`](skills/consultant/SKILL.md) | Turn a rough idea into an adversarially reviewed plan. |
+| [`consulting`](skills/consulting/SKILL.md) | Be interviewed one question at a time with a visual page per question, ending in a reviewed plan and builder handoff. Bundles Agentation (PolyForm Shield 1.0.0) and Inter (OFL). |
 | [`autoconsultant`](skills/autoconsultant/SKILL.md) | Carry an approved plan into an Automake setup and fresh-agent handoff. |
 | [`skill-issue`](skills/skill-issue/SKILL.md) | Shape a compact agent skill from checkable evidence. |
 | [`copywriting`](skills/copywriting/SKILL.md) | Draft truthful audience-facing copy from supplied evidence. |
