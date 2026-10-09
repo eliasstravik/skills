@@ -40,7 +40,7 @@ two seconds. Every change writes the whole file to `session.json.tmp` and rename
 | Key | Rule |
 | --- | --- |
 | `rev` | Integer, plus one on every write. |
-| `steps[].n` | 1, 2, 3… without gaps, in order; equals the chat `Question <n>`. One more than the highest `n` when the step is created. |
+| `steps[].n` | 1, 2, 3… without gaps, in order; equals the chat `Question <n> of about <m>`. One more than the highest `n` when the step is created. |
 | `kind` | `ui`, `logic`, `diagram`, `media` or `examples`. |
 | `file` | Must match `^steps/[0-9]+-[a-z0-9-]+\.html$`; the shell loads nothing else. |
 | `options` | One to four written options, keys `"1"`, `"2"`… equal to the chat option numbers. The trailing `Other` is never listed. |
