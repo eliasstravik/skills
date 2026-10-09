@@ -1,7 +1,7 @@
 # skills — repo conventions
 
-The personal library contains nine skills (autoconsultant, automake, consultant,
-copywriting, demo, html, midwit, skill-issue, voice-mode),
+The personal library contains ten skills (autoconsultant, automake, consultant,
+consulting, copywriting, demo, html, midwit, skill-issue, voice-mode),
 built on skill-creator (process authority: evals, baselines, viewer review,
 iteration, description optimization) and skill-issue (form authority: skills
 as SOPs—five types, nine sections, an admission gate, the bitter-lesson
