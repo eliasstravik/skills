@@ -46,12 +46,14 @@ use." So the following plan steps were **not done**:
 ## Shipping surface
 
 Exactly ten files under `skills/consulting/`: `SKILL.md`, `assets/index.html`,
-`assets/vendor/agentation.js`, `assets/vendor/LICENSES.txt`, `assets/fonts/InterVariable.woff2`,
+`assets/vendor/agentation.js`, `assets/vendor/LICENSES.txt`, `assets/fonts/InterVariable.woff2.b64`,
 `assets/fonts/INTER-LICENSE.txt`, `scripts/serve.sh`, `scripts/check-step.sh`,
 `references/page-contract.md`, `references/review-loop.md`.
 
 - `agentation.js` sha256 `7ae227c863b68e7daac28890ea28a589b5158e2804b3d361c9c41f8f1259f8af` — matches.
-- `InterVariable.woff2` sha256 `693b77d4f32ee9b8bfc995589b5fad5e99adf2832738661f5402f9978429a8e3` — matches.
+- `InterVariable.woff2.b64` is the font as base64 text, so the skill ships text files only; `serve.sh`
+  rebuilds `fonts/InterVariable.woff2` in the page directory. Decoded sha256
+  `693b77d4f32ee9b8bfc995589b5fad5e99adf2832738661f5402f9978429a8e3` — matches.
 
 ## Judgement calls
 

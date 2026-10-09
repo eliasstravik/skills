@@ -129,6 +129,26 @@ python3 -c 'pass' >/dev/null 2>&1 || {
   exit 1
 }
 
+# The font ships as base64 text (InterVariable.woff2.b64) so every file in this skill is text and
+# text-only skill hosts can carry it. Rebuild the binary the page loads beside its copy in page/.
+font_error=$(python3 -c 'import base64, sys
+from pathlib import Path
+fonts=Path(sys.argv[1])/"fonts"
+source=fonts/"InterVariable.woff2.b64"
+if not source.is_file():
+    sys.exit(0)
+try:
+    data=base64.b64decode(source.read_text(encoding="ascii"), validate=False)
+    target=fonts/"InterVariable.woff2"
+    if not target.is_file() or target.read_bytes() != data:
+        target.write_bytes(data)
+except (OSError, ValueError) as error:
+    print(error)
+    sys.exit(1)' "$DIR" 2>&1) || {
+  echo "Page unavailable: font could not be rebuilt from InterVariable.woff2.b64: $font_error" >&2
+  exit 1
+}
+
 manifest_error=$(python3 -c 'import json, re, sys
 from pathlib import Path
 path=Path(sys.argv[1])/"session.json"
