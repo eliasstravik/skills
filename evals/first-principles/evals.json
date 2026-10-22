@@ -1,0 +1,101 @@
+{
+  "skill_name": "first-principles",
+  "run_note": "Each run copies its fixture from evals/first-principles/fixtures/ into its own run directory and works only there; prompts name the fixture by that relative path. Both arms receive the identical user message, including the literal /first-principles; only the with_skill arm has the skill. Fixtures are never edited.",
+  "evals": [
+    {
+      "id": 0,
+      "eval_name": "legacy-config-compat",
+      "prompt": "/first-principles How should synctool load its configuration? The code is in ./legacy-config-tool/. What it needs to know: which bucket, how many parallel uploads, which files to skip, and whether this is a dry run. People run it on laptops and in CI. Answer in chat; don't edit any files.",
+      "expected_output": "One configuration design derived from what synctool needs, with no INI rc file, ST_ prefix or key aliases kept for compatibility, DECISIONS.md read as evidence only, then a plain list of where the design differs from today's loader, and no migration plan.",
+      "files": ["evals/first-principles/fixtures/legacy-config-tool"],
+      "assertions": [
+        {
+          "name": "one-answer",
+          "text": "The response commits to one recommended design. It does not present a menu of alternative designs to choose from, and its main answer is not a compatible compromise or a phased transition."
+        },
+        {
+          "name": "no-compat-reasoning",
+          "text": "Nothing in the recommended design is kept or justified because existing users' rc files, v1 CI scripts or old key names would otherwise break; the INI rc file, the ST_ prefix and the key aliases are each dropped or justified on their own merits."
+        },
+        {
+          "name": "decisions-not-binding",
+          "text": "DECISIONS.md is treated as evidence, not as binding: the response does not keep anything because DECISIONS.md says 'keep INI support forever' or 'do not rework it; extend it'."
+        },
+        {
+          "name": "differences-listed",
+          "text": "After presenting the answer, the response has an explicit, plainly worded list or section of where the answer differs from what exists today, with a reason for each difference."
+        },
+        {
+          "name": "no-migration-plan",
+          "text": "The response contains no migration plan, deprecation period, transition steps, compatibility shim or weighing of what the change would cost, since none was asked for."
+        },
+        {
+          "name": "fixture-untouched",
+          "text": "No file in the run's copy of the fixture was created, modified or deleted."
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "eval_name": "homegrown-queue-sunk-cost",
+      "prompt": "/first-principles We need background jobs for our transactional emails (receipts, password resets): about 2,000 a day, retried when the email provider fails, and never sent twice. Where we are is in ./email-jobs/PLAN.md. What should we do?",
+      "expected_output": "One design derived from the email goal (volume, retries, no double sends), with no part of pgq kept because of the six months spent or the March vote, any kept part justified on its merits, then a plain list of differences from today, and no migration plan.",
+      "files": ["evals/first-principles/fixtures/email-jobs"],
+      "assertions": [
+        {
+          "name": "one-answer",
+          "text": "The response commits to one recommended design. It does not present a menu of alternative designs to choose from, and its main answer is not a compromise that keeps pgq while patching it or a phased transition."
+        },
+        {
+          "name": "no-sunk-cost",
+          "text": "The response never uses the six months of work, the admin UI already built or the March vote as a reason to keep pgq or any part of it."
+        },
+        {
+          "name": "kept-parts-on-merits",
+          "text": "Any part of today's setup the response keeps (for example Postgres or a jobs table) is justified from the goal — about 2,000 emails a day, retry on provider failure, never sent twice — not from its already existing."
+        },
+        {
+          "name": "differences-listed",
+          "text": "After presenting the answer, the response has an explicit, plainly worded list or section of where the answer differs from what exists today, with a reason for each difference."
+        },
+        {
+          "name": "no-migration-plan",
+          "text": "The response contains no migration plan, cut-over or transition steps, or weighing of what the change would cost, since none was asked for."
+        },
+        {
+          "name": "fixture-untouched",
+          "text": "No file in the run's copy of the fixture was created, modified or deleted."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "eval_name": "unclear-goal-asks-first",
+      "prompt": "/first-principles redo ./nightly-report/nightly.py (answer in chat; don't edit files)\n\n[Scripted user replies — treat these as the user's answers, in order, and use one only after you have actually asked the user something:]\n- Reply 1: Only our finance lead reads it. Each morning they need yesterday's total order revenue and the number of refunds, and they read it on their phone. Nobody opens the CSV or the archive.\n- Any later reply: Go with your recommendation.",
+      "expected_output": "The agent first asks what the report is for instead of inferring the goal from today's script, then gives one design serving the stated goal (two numbers each morning, readable on a phone), dropping or justifying each part of nightly.py that does not serve it, followed by a plain list of differences.",
+      "files": ["evals/first-principles/fixtures/nightly-report"],
+      "assertions": [
+        {
+          "name": "asks-for-goal",
+          "text": "Before giving any design, the agent asks the user what the report is for (who reads it, what they need) instead of inferring the goal only from what nightly.py does today."
+        },
+        {
+          "name": "derived-from-stated-goal",
+          "text": "The final design serves the stated goal (the finance lead, yesterday's revenue and refund count, read on a phone) and drops, or justifies on its own merits, each part that does not serve it: the CSV attachment, the S3 archive, the top-50 products table, LEGACY_FORMAT and the second recipient."
+        },
+        {
+          "name": "one-answer",
+          "text": "The final response commits to one recommended design rather than a menu of alternatives or a phased transition."
+        },
+        {
+          "name": "differences-listed",
+          "text": "After presenting the answer, the response has an explicit, plainly worded list or section of where the answer differs from what exists today, with a reason for each difference."
+        },
+        {
+          "name": "fixture-untouched",
+          "text": "No file in the run's copy of the fixture was created, modified or deleted."
+        }
+      ]
+    }
+  ]
+}
