@@ -165,15 +165,14 @@ async function poll(){try{const r=await fetch('session.json',{cache:'no-store'})
   sig=g;build()}else if(mode==='plan')loadPlan()}catch(e){}}
 addEventListener('hashchange',()=>{if(!S)return;const a=location.hash.slice(1);if(a==='plan'){if(S.plan&&mode!=='plan')go('plan')}else{const s=byN(+a);if(s&&!(mode==='step'&&s===step))go(s)}});
 poll();setInterval(poll,2000);
-/* Agentation is the one place to comment and copy. Its Copy button always works here:
+/* Agentation is the one place to comment and copy. It starts collapsed; the client opens it. Once open, its Copy button always works here:
    with comments it copies the text for this view plus Agentation's own output; with none it copies an open question's answer alone. */
 {const s=document.createElement('script');s.src='vendor/agentation.js';s.onload=()=>{
  window.mountAgentation($('agn'),{copyToClipboard:false,useHashLocation:true,appName:'Consulting',onCopy:out=>{const x=head();if(x)put(x.t+'\n\n'+out,x.fb?'Feedback copied':'Answer copied')}});
  const wire=()=>{const host=document.querySelector('agentation-toolbar'),r=host&&host.shadowRoot;if(!r)return setTimeout(wire,200);
   const sh=new CSSStyleSheet();sh.replaceSync('button[aria-label="Copy feedback"]:disabled{pointer-events:none!important;opacity:1!important}');
   const keep=()=>{if(!r.adoptedStyleSheets.includes(sh))r.adoptedStyleSheets=[...r.adoptedStyleSheets,sh]};keep();setInterval(keep,1000);
-  r.addEventListener('click',e=>{const b=r.querySelector('button[aria-label="Copy feedback"]');if(!b||!b.disabled||!r.querySelector('button[aria-label="Exit"]'))return;const q=b.getBoundingClientRect();if(e.clientX>=q.left&&e.clientX<=q.right&&e.clientY>=q.top&&e.clientY<=q.bottom){e.stopPropagation();const x=head();if(!x)return;if(x.fb)toast('Add a comment first');else put(x.t,'Answer copied')}},true);
-  let tries=0;const openIt=()=>{if(r.querySelector('button[aria-label="Exit"]'))return;const t=r.querySelector('[class*="collapsed"]');if(t){const q=t.getBoundingClientRect(),o={bubbles:true,composed:true,clientX:q.left+q.width/2,clientY:q.top+q.height/2,button:0},g=r.elementFromPoint(o.clientX,o.clientY)||t;g.dispatchEvent(new MouseEvent('click',o))}if(++tries<20)setTimeout(openIt,300)};openIt()};wire()};document.body.append(s)}
+  r.addEventListener('click',e=>{const b=r.querySelector('button[aria-label="Copy feedback"]');if(!b||!b.disabled||!r.querySelector('button[aria-label="Exit"]'))return;const q=b.getBoundingClientRect();if(e.clientX>=q.left&&e.clientX<=q.right&&e.clientY>=q.top&&e.clientY<=q.bottom){e.stopPropagation();const x=head();if(!x)return;if(x.fb)toast('Add a comment first');else put(x.t,'Answer copied')}},true)};wire()};document.body.append(s)}
 })();</script>
 </body>
 </html>
