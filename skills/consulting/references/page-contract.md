@@ -58,7 +58,8 @@ two seconds. Every change writes the whole file to `session.json.tmp` and rename
 At most one step has a null `decision`, and a retired step never does. Every string is untrusted display
 text. `scripts/serve.sh` refuses a manifest that breaks these rules with exit 3 and `Manifest invalid:`.
 
-What the shell shows, so the agent never has to write it: with no steps, "Waiting for the first question.";
+What the shell shows, so the agent never has to write it: the Agentation toolbar, collapsed until the client
+opens it; with no steps, "Waiting for the first question.";
 the open step with the recommended option preselected; an answered step read-only; a question list behind
 the "Question n of about m" control; and, once `plan` is true and no step is open (or the client picks the
 `Plan` row, `#plan`), the plan view: `plan.md` rendered, `reviewStatus` under the headline, and below it
@@ -67,7 +68,9 @@ targets `page/steps/NN-slug.html` (optionally `#option=<key>`), `page/media/<fil
 
 ## What the client copies back
 
-The page has one copy control: Agentation's "Copy feedback" button. What it copies depends on the view.
+The page has one copy control: Agentation's "Copy feedback" button. Agentation starts collapsed on every page
+load; the client opens it to comment or copy, and closes it again to click inside a visual. What it copies
+depends on the view.
 
 Open step — an answer:
 
