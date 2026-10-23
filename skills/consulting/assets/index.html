@@ -64,12 +64,25 @@ footer{padding:12px 20px calc(20px + env(safe-area-inset-bottom));display:grid;j
 .tap{position:absolute;inset:0;width:100%;border:0;background:none;display:grid;place-items:end center;padding:16px}
 .tap span{background:var(--fill);color:var(--fg);border-radius:9px;padding:9px 14px;font-weight:500;box-shadow:0 0 0 1px var(--line2)}
 @media(max-width:639px){.where{min-height:44px}.nav .arr{min-width:44px;min-height:44px}.plan{padding:4px 20px 110px}}
+/* Narrow screens stack header, visual, options. From 1024px a left sidebar holds everything but the visual, which fills the rest;
+   the sidebar and the visual each scroll only when their own content overflows. */
+.side{display:contents}main{order:1}footer{order:2}
+@media(min-width:1024px){
+#app.split{display:grid;grid-template-columns:clamp(24rem,30vw,28rem) minmax(0,1fr);grid-template-rows:minmax(0,1fr)}
+.split .side{display:flex;flex-direction:column;gap:16px;min-height:0;overflow-y:auto;padding:24px;border-right:1px solid var(--line);scrollbar-width:thin;scrollbar-color:var(--line2) transparent}
+.split header,.split .head{display:contents}.split header{text-align:left}
+.split .nav{order:0;align-self:flex-start;margin:0 0 8px -6px}
+.split h1{order:1;font-size:1.5rem;line-height:1.3;max-width:none;text-wrap:pretty}
+.split footer{order:2;padding:0;display:block}.split .seg{width:100%}
+.split .sub{order:3;max-width:none;text-wrap:pretty}
+.split main{order:0;min-width:0}.split .plan{padding:40px 40px 96px}
+}
 </style>
 <body>
 <div id="app">
-<header><nav class="nav" id="nav" data-feedback-toolbar></nav><div class="head"><h1 id="q"></h1><p class="sub" id="sub" aria-live="polite"></p></div></header>
+<div class="side"><header><nav class="nav" id="nav" data-feedback-toolbar></nav><div class="head"><h1 id="q"></h1><p class="sub" id="sub" aria-live="polite"></p></div></header>
+<footer id="foot" data-feedback-toolbar hidden><div class="seg" id="seg" role="radiogroup" aria-label="Options"></div></footer></div>
 <main><iframe id="frame" title="Visual for this question" hidden></iframe><div class="plan" id="plan" hidden><div class="doc" id="doc"></div></div></main>
-<footer id="foot" data-feedback-toolbar hidden><div class="seg" id="seg" role="radiogroup" aria-label="Options"></div></footer>
 </div>
 <dialog id="list" aria-label="All questions" data-feedback-toolbar></dialog><div id="agn"></div>
 <script>(()=>{
@@ -91,7 +104,7 @@ function pill(text){return h('button',{cls:'where',type:'button','aria-haspopup'
 function build(){
  if(!S)return;const open=cur_(),last=S.steps[S.steps.length-1];
  mode=S.plan&&(view==='plan'||(view==null&&!open))?'plan':last?'step':'wait';
- frame.hidden=mode!=='step';$('plan').hidden=mode!=='plan';$('foot').hidden=mode!=='step';
+ $('app').classList.toggle('split',mode!=='wait');frame.hidden=mode!=='step';$('plan').hidden=mode!=='plan';$('foot').hidden=mode!=='step';
  if(mode==='wait'){$('nav').replaceChildren();$('q').textContent='Waiting for the first question.';$('sub').replaceChildren();$('seg').replaceChildren();return}
  if(mode==='plan'){$('nav').replaceChildren(arrow('Previous question',last,true),pill('Plan'),arrow('Next question',null));
   $('q').textContent='Plan';$('sub').replaceChildren(S.reviewStatus?String(S.reviewStatus):'');$('seg').replaceChildren();
