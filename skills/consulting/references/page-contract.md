@@ -63,7 +63,10 @@ opens it; with no steps, "Waiting for the first question.";
 the open step with the recommended option preselected; an answered step read-only; a question list behind
 the "Question n of about m" control; and, once `plan` is true and no step is open (or the client picks the
 `Plan` row, `#plan`), the plan view: `plan.md` rendered, `reviewStatus` under the headline, and below it
-every answered, non-retired step with its chosen visual. In `plan.md` a Markdown link is live only when it
+every answered, non-retired step with its chosen visual. From 1024px wide, a left sidebar holds the
+navigation, question, options and explanation, and the step page (or the plan) fills the rest of the window
+at full height; narrower screens stack them. The step page scrolls on its own when its content is taller
+than the frame. In `plan.md` a Markdown link is live only when it
 targets `page/steps/NN-slug.html` (optionally `#option=<key>`), `page/media/<file>` or an `http(s)` URL.
 
 ## What the client copies back
