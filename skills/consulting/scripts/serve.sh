@@ -186,7 +186,28 @@ for position, step in enumerate(steps, 1):
         if step.get("retired") is True:
             fail("step %d is retired without a decision" % position)
 if opened > 1:
-    fail("%d steps are open; at most one may have a null decision" % opened)' "$DIR" 2>&1)
+    fail("%d steps are open; at most one may have a null decision" % opened)
+live=re.compile(r"^(https://[^\s/?#]+|http://127\.0\.0\.1(:[0-9]+)?)([/?#][^\s]*)?$")
+def check_live(value, where):
+    if value is not None and not (isinstance(value, str) and live.match(value)):
+        fail("%s live must be null, an https:// URL or an http://127.0.0.1 URL: %r" % (where, value))
+for position, step in enumerate(steps, 1):
+    check_live(step.get("live"), "step %d" % position)
+check_live(data.get("live"), "top-level")
+pending=data.get("pending")
+if pending is not None:
+    if not isinstance(pending, dict):
+        fail("pending is not an object or null")
+    if pending.get("label") not in ("Review", "Review limit", "Final check"):
+        fail("pending label must be Review, Review limit or Final check: %r" % pending.get("label"))
+    options=pending.get("options")
+    if not isinstance(pending.get("question"), str) or not isinstance(options, list) or not options:
+        fail("pending needs a question and a non-empty options list")
+    keys=[option.get("key") if isinstance(option, dict) else None for option in options]
+    if pending.get("recommended") not in keys:
+        fail("pending recommended is not one of its option keys")
+    if opened:
+        fail("pending is set while a step is open")' "$DIR" 2>&1)
 manifest_status=$?
 if [ "$manifest_status" -ne 0 ]; then
   echo "Manifest invalid: $manifest_error" >&2

@@ -1,12 +1,13 @@
 #!/bin/sh
 
-# Static check of one step page. Exit 0 and no output on pass; exit 1 with one line per
-# failed rule otherwise. The rules are the "Static" list in references/page-contract.md.
+# Static check of one step page, or of page/prototype/index.html when no key is given. Exit 0 and
+# no output on pass; exit 1 with one line per failed rule otherwise. The rules are the "Static" list
+# in references/page-contract.md.
 
 set -u
 
-if [ "$#" -ne 2 ]; then
-  echo "Usage: check-step.sh <step-file> <recommended-key>" >&2
+if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]; then
+  echo "Usage: check-step.sh <step-file> <recommended-key> | check-step.sh <prototype-file>" >&2
   exit 2
 fi
 
@@ -18,7 +19,8 @@ fi
 exec python3 -c 'import re, sys
 from html.parser import HTMLParser
 
-path, key = sys.argv[1], sys.argv[2]
+path = sys.argv[1]
+key = sys.argv[2] if len(sys.argv) > 2 else None
 text = open(path, encoding="utf-8", errors="replace").read()
 MEDIA = ("png", "jpg", "jpeg", "gif", "webp", "avif", "mp4", "webm", "mp3", "wav", "ogg")
 MEDIA_TAGS = ("img", "video", "audio", "source")
@@ -117,16 +119,17 @@ for token in ("fetch(", "new XMLHttpRequest", "new WebSocket", "new EventSource"
         fail("network", "script text contains %s" % token)
 if re.search(r"^\s*import\s", script, re.M):
     fail("network", "script text has a line starting with import")
-expected = "data-recommended=\x22%s\x22" % key
-if page.root is None or page.root.get("data-recommended") != key or expected not in text:
-    fail("recommended", "the <html> tag must carry %s" % expected)
-if "document.documentElement.dataset.option" not in text:
-    fail("option", "the token document.documentElement.dataset.option is missing")
-if "hashchange" not in text:
-    fail("hashchange", "the token hashchange is missing")
+if key is not None:
+    expected = "data-recommended=\x22%s\x22" % key
+    if page.root is None or page.root.get("data-recommended") != key or expected not in text:
+        fail("recommended", "the <html> tag must carry %s" % expected)
+    if "document.documentElement.dataset.option" not in text:
+        fail("option", "the token document.documentElement.dataset.option is missing")
+    if "hashchange" not in text:
+        fail("hashchange", "the token hashchange is missing")
 if page.h1 and "window.top" not in text:
     fail("heading", "the page has an <h1> but no window.top test to hide it when embedded")
 
 if failed:
     print("\n".join(failed))
-    sys.exit(1)' "$1" "$2"
+    sys.exit(1)' "$@"

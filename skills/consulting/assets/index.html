@@ -3,8 +3,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Consulting</title>
-<style>@font-face{font-family:InterVariable;font-style:normal;font-weight:100 900;font-display:swap;src:url("fonts/InterVariable.woff2") format("woff2")}:root{color-scheme:light dark;--bg:#fff;--fg:#0a0a0a;--sub:#525252;--muted:#737373;--line:rgb(10 10 10/.08);--line2:rgb(10 10 10/.14);--fill:#f5f5f5;--accent:#c2410c}
-@media(prefers-color-scheme:dark){:root{--bg:#0a0a0a;--fg:#fafafa;--sub:#d4d4d4;--muted:#a3a3a3;--line:rgb(255 255 255/.09);--line2:rgb(255 255 255/.16);--fill:#1c1c1c;--accent:#fb923c}}
+<style>@font-face{font-family:InterVariable;font-style:normal;font-weight:100 900;font-display:swap;src:url("fonts/InterVariable.woff2") format("woff2")}:root{color-scheme:light dark;--bg:#fff;--fg:#0a0a0a;--sub:#525252;--muted:#737373;--line:rgb(10 10 10/.08);--line2:rgb(10 10 10/.14);--fill:#f5f5f5;--accent:#c2410c;--ok:#15803d}
+@media(prefers-color-scheme:dark){:root{--bg:#0a0a0a;--fg:#fafafa;--sub:#d4d4d4;--muted:#a3a3a3;--line:rgb(255 255 255/.09);--line2:rgb(255 255 255/.16);--fill:#1c1c1c;--accent:#fb923c;--ok:#4ade80}}
 *{box-sizing:border-box}[hidden]{display:none!important}html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.75 InterVariable,ui-sans-serif,system-ui,sans-serif;font-feature-settings:"cv02","cv03","cv04","cv11";-webkit-font-smoothing:antialiased}
 @media(min-width:640px){body{font-size:14px;line-height:1.7143}}
@@ -36,7 +36,9 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:rgb(
 h1{font-size:1.875rem;line-height:1.2;font-weight:600;letter-spacing:-.03em;margin:0;text-wrap:balance;max-width:28ch}
 .sub{margin:0;font-size:1rem;line-height:1.5;color:var(--muted);max-width:64ch;text-wrap:balance;min-height:1.5em}
 .sub b{color:var(--fg);font-weight:500}.sub i{font-style:normal;color:var(--accent);font-weight:500}
-main{flex:1;min-height:0;display:flex}main iframe{flex:1;width:100%;border:0;display:block}
+main{flex:1;min-height:0;display:flex;flex-direction:column}main>iframe{flex:1;width:100%;border:0;display:block}
+.cap{margin:0 auto;padding:8px 20px 0;font-size:.82rem;line-height:1.5;color:var(--muted);text-align:center;max-width:44ch;text-wrap:balance}
+.st{margin:0;font-size:.85rem;color:var(--muted);text-align:center}.hint{margin:0;font-size:.8rem;color:var(--muted);text-align:center}
 footer{padding:12px 20px calc(20px + env(safe-area-inset-bottom));display:grid;justify-items:center;gap:10px}
 .seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:2px;background:var(--fill);border-radius:12px;padding:3px;width:min(26rem,100%)}
 .seg button{border:0;background:none;border-radius:9px;padding:9px 12px;font-weight:500;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
@@ -47,7 +49,7 @@ footer{padding:12px 20px calc(20px + env(safe-area-inset-bottom));display:grid;j
 .seg.stack{grid-auto-flow:row}.seg.stack button{display:flex;gap:6px;text-align:left;white-space:normal;overflow-wrap:anywhere;text-wrap:pretty}
 .toast{position:fixed;left:50%;bottom:88px;transform:translateX(-50%);background:var(--fg);color:var(--bg);border-radius:999px;padding:7px 16px;font-weight:500;white-space:nowrap;z-index:5}
 @media(prefers-color-scheme:dark){.seg button[aria-checked=true]{box-shadow:0 0 0 1px var(--line2)}}
-@media(max-width:819px){footer{padding-bottom:calc(76px + env(safe-area-inset-bottom))}}
+@media(max-width:819px){footer{padding-bottom:calc(76px + env(safe-area-inset-bottom))}footer:has(~.st:not([hidden])){padding-bottom:12px}.st:not([hidden]){padding-bottom:calc(76px + env(safe-area-inset-bottom))}.st:has(~.hint:not([hidden])){padding-bottom:0}.hint:not([hidden]){padding-bottom:calc(76px + env(safe-area-inset-bottom))}}
 @media(max-width:639px){header{padding:14px 16px 8px;gap:10px}h1{font-size:1.5rem}.seg button{padding:11px 10px}}
 .sl.ret{opacity:.45}
 .plan{flex:1;min-width:0;overflow:auto;padding:8px 20px 96px;-webkit-overflow-scrolling:touch}
@@ -60,15 +62,14 @@ footer{padding:12px 20px calc(20px + env(safe-area-inset-bottom));display:grid;j
 .doc b{font-weight:600}.doc a{color:var(--fg);text-decoration:underline;text-underline-offset:3px}
 .tw{overflow-x:auto;margin:0 0 1em}.doc table{border-collapse:collapse;min-width:100%}
 .doc th,.doc td{text-align:left;vertical-align:top;padding:8px 16px 8px 0;border-bottom:1px solid var(--line)}.doc th{font-weight:600}
-.ans{border-top:1px solid var(--line);margin-top:40px;padding-top:8px}.ans .note{color:var(--muted)}
-.emb{position:relative;height:min(70dvh,520px);margin:12px 0 0}
-.emb iframe{width:100%;height:100%;border:0;display:block;pointer-events:none}.emb iframe.on{pointer-events:auto}
-.tap{position:absolute;inset:0;width:100%;border:0;background:none;display:grid;place-items:end center;padding:16px}
-.tap span{background:var(--fill);color:var(--fg);border-radius:9px;padding:9px 14px;font-weight:500;box-shadow:0 0 0 1px var(--line2)}
+.whole{display:grid;gap:10px;justify-items:center;margin:0 auto 32px}.whole .cap{padding:0}
+.badge{font-size:.8rem;font-weight:600;color:var(--accent)}.badge.frozen{color:var(--ok)}
+#proto{width:100%;height:min(80dvh,760px);border:0;display:block}
+.doc+.doc{border-top:1px solid var(--line);margin-top:32px;padding-top:8px}
 @media(max-width:639px){.where{min-height:44px}.nav .arr{min-width:44px;min-height:44px}.plan{padding:4px 20px 110px}}
 /* Narrow screens stack header, visual, options. From 1024px a left sidebar holds everything but the visual, which fills the rest;
    the sidebar and the visual each scroll only when their own content overflows. */
-.side{display:contents}main{order:1}footer{order:2}
+.side{display:contents}main{order:1}footer{order:2}.st{order:3;padding:0 20px}.hint{order:4;padding:0 20px 12px}
 @media(min-width:1024px){
 #app.split{display:grid;grid-template-columns:clamp(24rem,30vw,28rem) minmax(0,1fr);grid-template-rows:minmax(0,1fr)}
 .split .side{display:flex;flex-direction:column;gap:16px;min-height:0;overflow-y:auto;padding:24px;border-right:1px solid var(--line);scrollbar-width:thin;scrollbar-color:var(--line2) transparent}
@@ -77,15 +78,15 @@ footer{padding:12px 20px calc(20px + env(safe-area-inset-bottom));display:grid;j
 .split h1{order:1;font-size:1.5rem;line-height:1.3;max-width:none;text-wrap:pretty}
 .split footer{order:2;padding:0;display:block}.split .seg{width:100%;grid-auto-flow:row}
 .split .seg button{display:flex;gap:6px;text-align:left;white-space:normal;overflow-wrap:anywhere;text-wrap:pretty}
-.split .sub{order:3;max-width:none;text-wrap:pretty}
+.split .sub{order:3;max-width:none;text-wrap:pretty}.split .st{order:4;padding:0}.split .hint{order:5;padding:0}
 .split main{order:0;min-width:0}.split .plan{padding:40px 40px 96px}
 }
 </style>
 <body>
 <div id="app">
 <div class="side"><header><nav class="nav" id="nav" data-feedback-toolbar></nav><div class="head"><h1 id="q"></h1><p class="sub" id="sub" aria-live="polite"></p></div></header>
-<footer id="foot" data-feedback-toolbar hidden><div class="seg" id="seg" role="radiogroup" aria-label="Options"></div></footer></div>
-<main><iframe id="frame" title="Visual for this question" hidden></iframe><div class="plan" id="plan" hidden><div class="doc" id="doc"></div></div></main>
+<footer id="foot" data-feedback-toolbar hidden><div class="seg" id="seg" role="radiogroup" aria-label="Options"></div></footer><p class="st" id="st" hidden></p><p class="hint" id="hint" hidden>Answer in chat, or copy it from here, as with any question.</p></div>
+<main><p class="cap" id="cap" hidden></p><iframe id="frame" title="Prototype for this question" hidden></iframe><div class="plan" id="plan" hidden><div class="whole"><p class="cap" id="wcap" hidden></p><span class="badge" id="badge"></span><iframe id="proto" title="The whole prototype"></iframe></div><div class="doc" id="doc"></div><div class="doc" id="odoc" hidden></div></div></main>
 </div>
 <dialog id="list" aria-label="All questions" data-feedback-toolbar></dialog><div id="agn"></div>
 <script>(()=>{
@@ -95,42 +96,64 @@ function chevDown(){const c=chev();c.style.transform='rotate(90deg)';return c}
 const FILE=/^steps\/[0-9]+-[a-z0-9-]+\.html$/,STEPLINK=/^page\/(steps\/[0-9]+-[a-z0-9-]+\.html(?:#option=[A-Za-z0-9_-]+)?)$/,MEDIALINK=/^page\/(media\/[A-Za-z0-9._-]+\.(?:png|jpe?g|gif|webp|avif|mp4|webm|mp3|wav|ogg))$/i;
 const $=id=>document.getElementById(id),frame=$('frame');
 /* view: null follows the session (open question, else the plan, else the last question); a number or 'plan' is the client's own pick. */
-let S=null,raw='',sig='',view=null,mode='wait',sel={},step=null,ro=false,loaded='',planRaw=null,planKey='';
+let S=null,raw='',sig='',view=null,mode='wait',sel={},step=null,ro=false,loaded='',planRaw=null,openRaw=null,planKey='',pend=null,pendKey='',protoSrc='',protoRaw=null;
 const cur_=()=>S.steps.find(s=>s.decision==null&&!s.retired),byN=n=>S.steps.find(s=>s.n===n);
 const opt=(s,k)=>s.options.find(o=>o.key===k);
 const other=s=>String(s.decision).replace(/^Other\s*[\u2014\u2013-]\s*/,'');
 const shown=s=>{const o=opt(s,s.decision);return o?o.key+'. '+o.label:other(s)};
 const chosen=()=>ro?step.decision:sel[step.n];
+const whole=()=>!!(S.plan||S.pending||S.frozen);
+const liveOk=x=>{try{const u=new URL(String(x));return u.protocol==='https:'||(u.protocol==='http:'&&u.hostname==='127.0.0.1')}catch(e){return false}};
+const pendingOf=()=>{const p=S.pending;return p&&typeof p==='object'&&Array.isArray(p.options)&&p.options.length?p:null};
+function status(t){$('st').textContent=t?String(t):'';$('st').hidden=!t}
+function caption(el,t){el.textContent=t?String(t):'';el.hidden=!t}
+function explain(o,rec){return[h('b',{text:o.label}),' \u00b7 ',rec&&h('i',{text:'Recommended.'}),rec&&' ',o.tradeoff].filter(Boolean)}
 function go(s){view=s==='plan'?'plan':s===cur_()?null:s.n;build()}
 function arrow(label,to,left){return h('button',{cls:'arr',type:'button','aria-label':label,disabled:!to,onclick:()=>to&&go(to)},chev(left))}
 function pill(text){return h('button',{cls:'where',type:'button','aria-haspopup':'dialog','aria-label':text+'. Show all questions',onclick:openList},h('span',{text}),chevDown())}
 function build(){
  if(!S)return;const open=cur_(),last=S.steps[S.steps.length-1];
- mode=S.plan&&(view==='plan'||(view==null&&!open))?'plan':last?'step':'wait';
+ mode=whole()&&(view==='plan'||(view==null&&!open))?'plan':last?'step':'wait';
  $('app').classList.toggle('split',mode!=='wait');frame.hidden=mode!=='step';$('plan').hidden=mode!=='plan';$('foot').hidden=mode!=='step';
- if(mode==='wait'){$('nav').replaceChildren();$('q').textContent='Waiting for the first question.';$('sub').replaceChildren();$('seg').replaceChildren();return}
- if(mode==='plan'){$('nav').replaceChildren(arrow('Previous question',last,true),pill('Plan'),arrow('Next question',null));
-  $('q').textContent='Plan';$('sub').replaceChildren(S.reviewStatus?String(S.reviewStatus):'');$('seg').replaceChildren();
-  if(location.hash!=='#plan')history.replaceState(null,'','#plan');loadPlan();return}
+ if(mode==='wait'){$('nav').replaceChildren();$('q').textContent='Waiting for the first question.';$('sub').replaceChildren();$('seg').replaceChildren();status('');caption($('cap'),'');$('hint').hidden=true;return}
+ if(mode==='plan'){wholeView(last);return}
+ pend=null;$('hint').hidden=true;status('');
  step=byN(view)||open||last;ro=step.decision!=null||!!step.retired;if(sel[step.n]==null)sel[step.n]=step.recommended;
  const total=S.steps.length+(S.remaining>0?S.remaining:0),i=S.steps.indexOf(step);
- $('nav').replaceChildren(arrow('Previous question',S.steps[i-1],true),pill('Question '+step.n+' of about '+total),arrow('Next question',S.steps[i+1]||(S.plan?'plan':null)));
- $('q').textContent=step.question;
+ $('nav').replaceChildren(arrow('Previous question',S.steps[i-1],true),pill('Question '+step.n+' of about '+total),arrow('Next question',S.steps[i+1]||(whole()?'plan':null)));
+ $('q').textContent=step.question;caption($('cap'),step.caption);
  $('seg').replaceChildren(...step.options.map(o=>h('button',{type:'button',role:'radio','data-opt':o.key,disabled:ro,'aria-label':'Option '+o.key+', '+o.label,onclick:()=>{sel[step.n]=o.key;sync()}},h('span',{cls:'num',text:o.key+'.'}),' '+o.label)));
  sync();fit();if(String(step.n)!==location.hash.slice(1))history.replaceState(null,'','#'+step.n);
 }
+/* The whole-thing view: the pending review question (or the handoff) in the sidebar; caption, badge, the whole prototype, plan.md and open.md in the frame. */
+function wholeView(last){
+ const P=S.frozen?null:pendingOf(),k=P?JSON.stringify([P.label,P.question,P.options,P.recommended]):'';
+ if(k!==pendKey){pendKey=k;sel.p=P?P.recommended:null}pend=P;
+ $('foot').hidden=!P;$('hint').hidden=!P;caption($('cap'),'');
+ $('nav').replaceChildren(arrow('Previous question',last,true),pill(S.frozen?'Handoff':P?String(P.label):'Plan'),arrow('Next question',null));
+ $('q').textContent=S.frozen?'Handoff':P?String(P.question):'Plan';status(S.frozen?'':S.reviewStatus);
+ if(P){$('seg').replaceChildren(...P.options.map(o=>h('button',{type:'button',role:'radio','data-opt':o.key,'aria-label':'Option '+o.key+', '+o.label,onclick:()=>{sel.p=o.key;syncPending()}},h('span',{cls:'num',text:o.key+'.'}),' '+o.label)));syncPending();fit()}
+ else{$('seg').replaceChildren();$('sub').replaceChildren()}
+ caption($('wcap'),S.frozen?'Frozen. This prototype is the spec the builder must match.':P&&P.caption);
+ $('badge').textContent=S.frozen?'\u25cf Frozen \u00b7 the spec':'Whole thing';$('badge').classList.toggle('frozen',!!S.frozen);
+ const src=liveOk(S.live)?String(S.live):'prototype/index.html';if(src!==protoSrc){protoSrc=src;protoRaw=null;$('proto').src=src}
+ if(location.hash!=='#plan')history.replaceState(null,'','#plan');loadPlan()}
+function syncPending(){const o=opt(pend,sel.p)||opt(pend,pend.recommended)||pend.options[0];
+ document.querySelectorAll('#seg [data-opt]').forEach(b=>b.setAttribute('aria-checked',String(o&&o.key===b.dataset.opt)));
+ $('sub').replaceChildren(...(o?explain(o,o.key===pend.recommended):[]))}
 function fit(){const g=$('seg');g.classList.remove('stack');g.classList.toggle('stack',[...g.children].some(b=>b.scrollWidth>b.clientWidth))}
 function sync(){
  const picked=opt(step,chosen()),else_=ro&&!picked,o=picked||opt(step,step.recommended)||step.options[0];
  document.querySelectorAll('#seg [data-opt]').forEach(b=>b.setAttribute('aria-checked',String(!else_&&chosen()===b.dataset.opt)));
  if(else_)$('sub').replaceChildren('You chose something else: ',h('b',{text:other(step)}));
- else if(o)$('sub').replaceChildren(...[ro&&'You chose ',h('b',{text:o.key+'. '+o.label}),ro?'. ':' \u00b7 ',!ro&&o.key===step.recommended&&h('i',{text:'Recommended. '}),o.tradeoff].filter(Boolean));
+ else if(o)$('sub').replaceChildren(...(ro?['You chose ',h('b',{text:o.key+'. '+o.label}),'. ',o.tradeoff]:explain(o,o.key===step.recommended)));
  else $('sub').replaceChildren();
- if(FILE.test(step.file)){const url=step.file+(o?'#option='+encodeURIComponent(o.key):'');if(loaded===step.file){try{frame.contentWindow.location.replace(url)}catch(e){}}else{loaded=step.file;frame.src=url}}
+ if(!ro&&o&&liveOk(step.live)){const l=String(step.live),url=l+(l.includes('?')?'&':'?')+'variant='+encodeURIComponent(o.key);if(loaded!==url){loaded=url;frame.src=url}}
+ else if(FILE.test(step.file)){const url=step.file+(o?'#option='+encodeURIComponent(o.key):'');if(loaded===step.file){try{frame.contentWindow.location.replace(url)}catch(e){}}else{loaded=step.file;frame.src=url}}
  else{loaded='';frame.removeAttribute('src')}
 }
 function openList(){const list=$('list'),rows=h('div',{cls:'rows'});
- const fill=q=>{const m=S.steps.filter(s=>!q||(s.n+' '+s.question).toLowerCase().includes(q));if(S.plan&&(!q||'plan'.includes(q)))m.push('plan');
+ const fill=q=>{const m=S.steps.filter(s=>!q||(s.n+' '+s.question).toLowerCase().includes(q));if(whole()&&(!q||'plan'.includes(q)))m.push('plan');
   rows.replaceChildren(...m.map(s=>{if(s==='plan')return h('button',{cls:'sl'+(mode==='plan'?' cur':''),type:'button','aria-current':mode==='plan'?'step':null,onclick:()=>{list.close();go('plan')}},h('span',{cls:'n'}),h('span',{cls:'t',text:'Plan'}),h('span',{cls:'a'}));
    const on=mode==='step'&&s===step,o=opt(s,s.decision);return h('button',{cls:'sl'+(on?' cur':'')+(s.retired?' ret':''),type:'button','aria-current':on?'step':null,onclick:()=>{list.close();go(s)}},h('span',{cls:'n',text:s.n}),h('span',{cls:'t',text:s.question}),h('span',{cls:'a',text:s.retired?'No longer needed':s.decision==null?'Open':(o?o.label:other(s))}))}));
   if(!m.length)rows.append(h('p',{cls:'none',text:'No question matches.'}));else if(!q&&S.remaining>0)rows.append(h('p',{cls:'none',text:'About '+S.remaining+' more to come.'}));return m};
@@ -139,7 +162,7 @@ function openList(){const list=$('list'),rows=h('div',{cls:'rows'});
  fill('');list.replaceChildren(find,rows);list.showModal();requestAnimationFrame(()=>{const c=rows.querySelector('.cur');if(c)c.scrollIntoView({block:'center'})})}
 $('list').addEventListener('click',e=>{if(e.target===$('list'))$('list').close()});
 /* The plan view: plan.md drawn with DOM nodes only, then one block per answered question. */
-function link(label,target){let href=null,m;if((m=STEPLINK.exec(target))||(m=MEDIALINK.exec(target)))href=m[1];else{try{const u=new URL(target);if(u.protocol==='http:'||u.protocol==='https:')href=u.href}catch(e){}}
+function link(label,target){let href=null,m;if((m=STEPLINK.exec(target))||(m=MEDIALINK.exec(target))||(m=/^page\/(prototype\/index\.html)$/.exec(target)))href=m[1];else{try{const u=new URL(target);if(u.protocol==='http:'||u.protocol==='https:')href=u.href}catch(e){}}
  return href&&h('a',{href,target:'_blank',rel:'noopener noreferrer','data-feedback-toolbar':true,text:label})}
 function inline(t,into){const re=/`([^`]+)`|\*\*([^*]+)\*\*|\[([^\]]+)\]\(([^)\s]+)\)/g;let i=0,m;
  while((m=re.exec(t))){if(m.index>i)into.append(t.slice(i,m.index));if(m[1]!=null)into.append(h('code',{text:m[1]}));else if(m[2]!=null)into.append(inline(m[2],h('b')));else into.append(link(m[3],m[4])||m[0]);i=re.lastIndex}
@@ -161,15 +184,14 @@ function md(src){const out=document.createDocumentFragment(),L=src.replace(/\r\n
   if(lists.length&&!para.length&&/^\s+\S/.test(l)){const li=lists[lists.length-1].li;li.append(' ');inline(l.trim(),li);i++;continue}
   lists=[];para.push(l.trim());i++}
  flush();return out}
-function block(s){const o=opt(s,s.decision),b=h('section',{cls:'ans'},h('h3',{text:s.n+'. '+s.question}),h('p',null,o?'You chose ':'You chose something else: ',h('b',{text:shown(s)})),s.note&&h('p',{cls:'note',text:String(s.note)}));
- if(o&&FILE.test(s.file)){const f=h('iframe',{loading:'lazy',tabindex:'-1',title:'Visual for question '+s.n,src:s.file+'#option='+encodeURIComponent(o.key)}),t=h('button',{cls:'tap',type:'button','data-feedback-toolbar':true,onclick:()=>{t.remove();f.classList.add('on');f.removeAttribute('tabindex')}},h('span',{text:'Tap to interact'}));b.append(h('div',{cls:'emb'},f,t))}
- return b}
-async function loadPlan(){try{const r=await fetch('plan.md',{cache:'no-store'});if(!r.ok)throw 0;planRaw=await r.text()}catch(e){}
- if(planRaw==null||!S)return;const done=S.steps.filter(s=>s.decision!=null&&!s.retired),key=planRaw+'\u0000'+JSON.stringify(done);
- if(key===planKey)return;planKey=key;$('doc').replaceChildren(md(planRaw),...done.map(block))}
+async function text(u){try{const r=await fetch(u,{cache:'no-store'});if(r.ok)return await r.text()}catch(e){}return null}
+async function loadPlan(){const [p,o]=await Promise.all([text('plan.md'),text('open.md')]);if(p!=null)planRaw=p;if(o!=null)openRaw=o;
+ if(protoSrc==='prototype/index.html'){const t=await text('prototype/index.html');if(t!=null){if(protoRaw!=null&&t!==protoRaw)try{$('proto').contentWindow.location.reload()}catch(e){}protoRaw=t}}
+ if(!S)return;const key=(planRaw||'')+'\u0000'+(openRaw||'');if(key===planKey)return;planKey=key;
+ $('doc').replaceChildren(planRaw!=null?md(planRaw):'');$('odoc').hidden=openRaw==null;$('odoc').replaceChildren(openRaw!=null?md(openRaw):'')}
 /* What Agentation's copy button puts on the clipboard depends on what is on screen. */
 function detail(){try{const d=loaded===step.file&&frame.contentWindow.consultingDetail;if(typeof d==='string')return d.slice(0,500).replace(/\s+/g,' ').trim()}catch(e){}return''}
-function head(){if(mode==='plan')return{t:'Plan feedback',fb:true};if(mode!=='step')return null;
+function head(){if(mode==='plan'){const o=pend&&(opt(pend,sel.p)||opt(pend,pend.recommended)||pend.options[0]);return o?{t:'Question: '+pend.question+'\nAnswer: '+o.key+'. '+o.label,fb:false}:{t:'Plan feedback',fb:true}}if(mode!=='step')return null;
  if(ro)return{t:'Feedback on question '+step.n+': '+step.question+'\nRecorded answer: '+shown(step),fb:true};
  const o=opt(step,sel[step.n])||opt(step,step.recommended)||step.options[0];if(!o)return null;const d=detail();
  return{t:'Question '+step.n+': '+step.question+'\nAnswer: '+o.key+'. '+o.label+(d?'\nDetails: '+d:''),fb:false}}
@@ -177,10 +199,10 @@ function put(t,said){const done=()=>toast(said);if(navigator.clipboard&&navigato
 function legacy(t,done){const a=h('textarea');a.value=t;document.body.append(a);a.select();document.execCommand('copy');a.remove();done()}
 let tt;function toast(m){document.querySelectorAll('.toast').forEach(e=>e.remove());const e=h('div',{cls:'toast',role:'status',text:m});document.body.append(e);clearTimeout(tt);tt=setTimeout(()=>e.remove(),1600)}
 async function poll(){try{const r=await fetch('session.json',{cache:'no-store'});if(!r.ok)throw 0;const t=await r.text();if(t!==raw){const J=JSON.parse(t);if(!J||!Array.isArray(J.steps))throw 0;
-  J.steps=J.steps.filter(s=>s&&Array.isArray(s.options));const first=!S;raw=t;S=J;const o=cur_(),g=(o?o.n:'-')+'|'+!!S.plan+'|'+S.steps.length;
+  J.steps=J.steps.filter(s=>s&&Array.isArray(s.options));const first=!S;raw=t;S=J;const o=cur_(),P=pendingOf(),g=(o?o.n:'-')+'|'+!!S.plan+'|'+S.steps.length+'|'+(P?P.label+'|'+P.question:'-')+'|'+!!S.frozen;
   if(first){const a=location.hash.slice(1);if(a==='plan')view='plan';else if(byN(+a)&&byN(+a)!==o)view=+a}else if(g!==sig)view=null;
   sig=g;build()}else if(mode==='plan')loadPlan()}catch(e){}}
-addEventListener('hashchange',()=>{if(!S)return;const a=location.hash.slice(1);if(a==='plan'){if(S.plan&&mode!=='plan')go('plan')}else{const s=byN(+a);if(s&&!(mode==='step'&&s===step))go(s)}});
+addEventListener('hashchange',()=>{if(!S)return;const a=location.hash.slice(1);if(a==='plan'){if(whole()&&mode!=='plan')go('plan')}else{const s=byN(+a);if(s&&!(mode==='step'&&s===step))go(s)}});
 poll();setInterval(poll,2000);addEventListener('resize',fit);document.fonts.ready.then(fit);
 /* Agentation is the one place to comment and copy. It starts collapsed; the client opens it. Once open, its Copy button always works here:
    with comments it copies the text for this view plus Agentation's own output; with none it copies an open question's answer alone. */
