@@ -31,7 +31,7 @@ two seconds. Every change writes the whole file to `session.json.tmp` and rename
     "feedback": null,
     "retired": false
   }],
-  "remaining": 3,
+  "remaining": <open nodes after this step>,
   "plan": false,
   "reviewStatus": null
 }
@@ -51,7 +51,7 @@ two seconds. Every change writes the whole file to `session.json.tmp` and rename
 | `note` | What the client typed beyond the option, plus any `Details:` line; else `null`. |
 | `feedback` | The pasted answer from `## Page Feedback` on, verbatim; else `null`. |
 | `retired` | `true` when a later change made the question moot. The step keeps its number and last `decision`. |
-| `remaining` | Estimate of design-tree nodes still open after the current step. |
+| `remaining` | Integer: estimate of design-tree nodes still open after the current step. No cap and no target; the tree alone sets it. |
 | `plan` | `true` once `page/plan.md` exists. |
 | `reviewStatus` | `null`, or one display sentence such as `Review 2 of 5 · 4/5 REVISE · stop at 5/5`. |
 
