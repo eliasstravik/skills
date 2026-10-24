@@ -120,7 +120,8 @@ Findings at or above the bar must be dealt with:
 
 - `settle: client` becomes a new numbered discovery question: the prototype shows a gap where the finding
   is, and the step page offers the options there, captioned `Found by the review: the builder would have
-  had to guess this.` and what to try.
+  had to guess this.` and what to try. Findings one answer settles together share one question. The agent
+  never settles a client finding itself or re-marks it as its own, however obvious the answer looks.
 - `settle: agent` the agent fixes in the prototype, `plan.md` or `open.md`.
 
 Findings below the bar are optional: fix one only if it is quick and safe; each one left unfixed goes into
@@ -199,9 +200,10 @@ the thing?" again.
 
 After "That's it":
 
-1. Never write `page/prototype/` again. Add a footer `## Frozen prototype` to `open.md` listing each
-   prototype file and each media file it names with its sha256. For a scratch app, also commit `<slug>/app/`
-   and record the commit hash.
+1. Never write `page/prototype/` again. Add a footer `## Frozen prototype` to `open.md`: one fenced block
+   of `sha256sum` lines (`<sha256>  page/prototype/index.html`, then each media file it names), paths
+   relative to the consultation directory, so `sha256sum -c` verifies it there. For a scratch app, also
+   commit `<slug>/app/` and record the commit hash.
 2. Finalise `plan.md` and `open.md` and copy them into `page/`. Set `pending` to `null`, `frozen` to
    `true`, and bump `rev`.
 3. Send exactly this, with paths starting `~/` when under the home directory:

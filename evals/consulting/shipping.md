@@ -1,70 +1,68 @@
 # consulting — shipping record
 
-Date: 2026-10-09. Built from `~/.consultant/visual-interview-consultant/plan.md` under its handoff.
+Date: 2026-10-24. Rewritten under work-board task SKLS-7 from the handoff of consultation
+`consulting-zero-surprises` (SKLS-6): its `plan.md` and the session mock (`page/steps/08-new-session.html`,
+`09-page-during-chat-questions.html`; frozen, hashes verified against `references/frozen.sha256`). Where plan
+and mock disagree, the mock wins.
 
-## Client instruction that overrode the plan
+## Client instruction that overrode the process
 
-Mid-build the client wrote: "skip tests and evals completely, just get it live asap (use /skill-issue for
-skill writing)". Earlier, in the handoff: "build it in full, commit, push, sync and lmk when its ready for
-use." So the following plan steps were **not done**:
+Mid-build the client wrote: "skip evals btw". So the skill-creator loop was **not run**: no `evals.json`,
+assertions or fixtures, no with-skill / no-skill runs, no eval viewer review, and no trigger-eval
+description optimization. The description is a hand-written draft by the description canon, not an
+optimizer `best_description`; run the optimizer later and apply its result verbatim.
 
-- Step 2: no `evals.json`, `assertions.md`, fixtures or `trigger-eval.json`.
-- Step 5: no `check-shell.sh` and no sample-session fixture.
-- Step 8: no with-skill / no-skill eval runs, no eval viewer. There is no baseline evidence.
-- Step 9: no description optimization. The description is hand-written by the description canon, not an
-  optimizer `best_description`.
-- Step 12: no dogfood consultation; no phone test.
+## What was checked instead
 
-## Gates passed on the client's behalf
+- A full test session (`claude -p`, Opus 5.5, headless, scripted replies all "1", state root in the task's
+  temporary folder): "/consulting a small habit app for my phone". It ran destination line, six discovery
+  questions on one living prototype with visible gaps and captions, the review gate, two real review rounds
+  with fresh subagents (round 1: 17 findings; one became question 7), the final check and the fenced
+  handoff, with `open.md` and a frozen-file footer. Two skill gaps it exposed were fixed: the agent settled
+  three client-owned findings itself (now forbidden explicitly), and the frozen hashes were not
+  `sha256sum -c` checkable (now a fixed format).
+- A fresh reviewer compared that session and the skill with the mock stage by stage; its differences were
+  fixed.
+- The shell in a real browser (agent-browser) at 1280×800 and 390×844: open step with caption and
+  `<label> · Recommended. <tradeoff>`; review gate and final check in the sidebar with status line and
+  hint; whole-thing view with caption, `Whole thing` badge, prototype, `plan.md`, `open.md`; handoff with
+  `Handoff` and `● Frozen · the spec`; no horizontal scroll on a phone; Agentation copy of a pending
+  question gives `Question: Is this the thing?` / `Answer: 2. Change it`; an open `live` step loads
+  `?variant=<key>` and switches with the option.
+- `serve.sh` refuses `pending` while a step is open and a non-loopback `http://` `live`, accepts `https://`
+  and `http://127.0.0.1`. `check-step.sh` passes a prototype without a key and still fails a wrong key.
 
-- Eval prompt sign-off, eval viewer review: not applicable (no evals).
-- Plan view and waiting state: built strictly from the shell's existing tokens. **Not yet seen by the client.**
-- Pull request and merge: done by the builder, as the handoff instructed.
+## Where the mock overrode the plan
 
-## What was checked (smoke only, by hand)
+- Chat message: no context paragraph, no `---` rules, a bare `Other`, and no first-sitting comment-tool
+  sentence — the mock's question messages are exactly `Page:`, the bold question, the options.
+- The review gate message carries no `Page:` line; the final check does.
+- The handoff's last lines are `Consulting has ended. Page: <URL>` and `Stop the page: …`, with no reminder
+  to remove the private share; paths start `~/` under the home directory.
+- The page: a caption line above the prototype at every stage, the explanation without the option number,
+  `Handoff` and `● Frozen · the spec` after the freeze, a `Whole thing` badge and the hint "Answer in chat,
+  or copy it from here, as with any question." during pending questions (step 9). The sidebar shows the
+  mock's short labels (`Run it`, `Change`; `That's it`, `Change it`) and no `Other` row.
 
-- `sh -n` on both scripts. `serve.sh`: start, reuse, `Cache-Control: no-store` on JSON and not on the
-  bundle, stop, and exit 3 `Manifest invalid:` on a trailing comma.
-- `check-step.sh` passes the two approved sample pages and the skeleton in `page-contract.md`, and fails a
-  wrong recommended key.
-- In a real browser (agent-browser) against a throwaway session: the comment tool opens by default; an
-  option click works while it is open and changes only the iframe hash; a click on the disabled copy button
-  copies `Question n: … / Answer: k. label` and shows the toast; an `Other` decision shows "You chose
-  something else: …", marks no option and embeds nothing; injected HTML in a label and a decision renders
-  as text; the plan view renders headings, nested lists, a table, fenced code, allowed links only, the
-  review status and one covered embed per answered step; at 390×844 there is no horizontal scroll and the
-  pill, arrows and options are at least 44px high.
-- No word-boundary match for `innerHTML`, `insertAdjacentHTML`, `outerHTML`, `document.write`, `eval` or
-  `new Function` in `assets/index.html`.
+## Judgement calls (neither shown nor in the plan)
+
+- The whole-thing view drops today's per-step embeds: the prototype already holds every answer.
+- Captions live in the manifest (`steps[].caption`, `pending.caption`), not in the step page, so a
+  prototype snapshot holds only the thing itself.
+- `reviewStatus` says `round` for a count of 1.
+- A reopened step gets a fresh snapshot of the current prototype when it is asked again.
+- A change at the final check that needs a choice between options becomes a numbered question.
+- The round-cap question carries `Page: <URL>#plan` like the final check.
 
 ## Manual frontmatter check
 
 - `name: consulting` equals the directory, lowercase, under 64 characters. PASS.
-- `description`: one third-person string, positive and negative triggers, no XML, 906 characters. PASS.
-- Body: 103 lines, about 1,900 words, nine ordered sections. PASS.
+- `description`: one third-person string, positive and negative triggers, no XML, 943 characters. PASS.
+- Body: 99 lines, about 1,950 words, nine ordered sections. PASS.
 
 ## Shipping surface
 
-Exactly ten files under `skills/consulting/`: `SKILL.md`, `assets/index.html`,
-`assets/vendor/agentation.js`, `assets/vendor/LICENSES.txt`, `assets/fonts/InterVariable.woff2.b64`,
-`assets/fonts/INTER-LICENSE.txt`, `scripts/serve.sh`, `scripts/check-step.sh`,
-`references/page-contract.md`, `references/review-loop.md`.
-
-- `agentation.js` sha256 `7ae227c863b68e7daac28890ea28a589b5158e2804b3d361c9c41f8f1259f8af` — matches.
-- `InterVariable.woff2.b64` is the font as base64 text, so the skill ships text files only; `serve.sh`
-  rebuilds `fonts/InterVariable.woff2` in the page directory. Decoded sha256
-  `693b77d4f32ee9b8bfc995589b5fad5e99adf2832738661f5402f9978429a8e3` — matches.
-
-## Judgement calls
-
-- Plan headings render one level down (`#` → `h2`) so "Plan" stays the page's only `h1`; sizes are the
-  plan's 1.5 / 1.25 / 1rem.
-- From the last question the next arrow opens the plan, and from the plan the previous arrow opens the last
-  question.
-- A plan link that is not allowed is shown as its literal Markdown text; allowed links open in a new tab.
-- Copying comments on an answered question or the plan shows "Feedback copied"; an answer shows "Answer
-  copied".
-- `LICENSES.txt` adds one heading line above each unmodified licence text.
-- `check-step.sh` also rejects `formaction`, `data` and `xlink:href` targets outside the file.
-- The phone rule D11 is encoded as an exception: if the comment tool cannot be used on a device, the agent
-  builds nothing and the client types the number.
+`SKILL.md`, `assets/index.html`, `assets/vendor/agentation.js`, `assets/vendor/LICENSES.txt`,
+`assets/fonts/InterVariable.woff2.b64`, `assets/fonts/INTER-LICENSE.txt`, `scripts/serve.sh`,
+`scripts/check-step.sh`, `references/page-contract.md`, `references/review-and-handoff.md`.
+`references/review-loop.md` is deleted.
