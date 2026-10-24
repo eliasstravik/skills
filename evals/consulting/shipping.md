@@ -41,7 +41,8 @@ optimizer `best_description`; run the optimizer later and apply its result verba
   to remove the private share; paths start `~/` under the home directory.
 - The page: a caption line above the prototype at every stage, the explanation without the option number,
   `Handoff` and `● Frozen · the spec` after the freeze, a `Whole thing` badge and the hint "Answer in chat,
-  or copy it from here, as with any question." during pending questions (step 9). The sidebar shows the
+  or copy it from here, as with any question." during pending questions (step 9), and the dashed
+  "Reviewer is reading the handoff…" box at the gate and while a round runs (mock 08). The sidebar shows the
   mock's short labels (`Run it`, `Change`; `That's it`, `Change it`) and no `Other` row.
 
 ## Judgement calls (neither shown nor in the plan)
@@ -49,7 +50,6 @@ optimizer `best_description`; run the optimizer later and apply its result verba
 - The whole-thing view drops today's per-step embeds: the prototype already holds every answer.
 - Captions live in the manifest (`steps[].caption`, `pending.caption`), not in the step page, so a
   prototype snapshot holds only the thing itself.
-- `reviewStatus` says `round` for a count of 1.
 - A reopened step gets a fresh snapshot of the current prototype when it is asked again.
 - A change at the final check that needs a choice between options becomes a numbered question.
 - The round-cap question carries `Page: <URL>#plan` like the final check.

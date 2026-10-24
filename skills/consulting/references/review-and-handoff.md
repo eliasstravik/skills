@@ -16,8 +16,9 @@ see. It gives no score. The client sets the bar and the rounds, plays the final 
 word. Every question here is chat-only (`**Question: …**`, no number, no step) and sets `pending`, except a
 finding the client must settle, which becomes an ordinary numbered discovery question on the prototype.
 
-Save the review state in `consultation.md` (bar, round cap, rounds run, open findings with ids, stop
-reason) and the matching `reviewStatus` and `pending` in `session.json`, in one operation, before every
+Record the answers to the gate, the round-cap question and the final check under "Decided outside a step"
+with the client's words. Save the review state in `consultation.md` (bar, round cap, rounds run, open
+findings with ids, stop reason) and the matching `reviewStatus` and `pending` in `session.json`, in one operation, before every
 question and every dispatch.
 
 ## `plan.md` and `open.md`
@@ -48,8 +49,7 @@ prototype already shows.
 
 ## `reviewStatus`
 
-Exactly one of these strings (`<bar>` is `critical`, `major`, `minor` or `trivial`; `<n>` the round cap;
-`round` for a count of 1):
+Exactly one of these strings (`<bar>` is `critical`, `major`, `minor` or `trivial`; `<n>` the round cap):
 
 - `Not yet reviewed · must fix <bar>+ · up to <n> rounds`
 - `Round <r> of <n> running · must fix <bar>+`
@@ -128,8 +128,10 @@ Findings below the bar are optional: fix one only if it is quick and safe; each 
 `open.md` as `your call`.
 
 Set `reviewStatus` to `Round <r> of <n> · <k> open at <bar>+` while client questions are open. The first
-message after the round opens with one line naming every finding and what happened to it, then a blank
-line, for example:
+message after the round opens with one line, then a blank line. Per severity, in order: the count, the
+severity, and in brackets each finding's subject in a few words with what happens to it (`asked below`,
+`fixed`); below the bar, `below the bar, fixed because it was quick:` or `below the bar, left as "your
+call" in open.md:` and the subjects. For example:
 
 ```text
 Review round 1: 1 critical (empty day: the builder would guess). 1 minor, below the bar, fixed because it was quick: "habit" vs "routine" wording.
