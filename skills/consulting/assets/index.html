@@ -42,7 +42,9 @@ footer{padding:12px 20px calc(20px + env(safe-area-inset-bottom));display:grid;j
 .seg button{border:0;background:none;border-radius:9px;padding:9px 12px;font-weight:500;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
 .seg button[aria-checked=true]{background:var(--bg);color:var(--fg);box-shadow:0 0 0 1px var(--line2),0 1px 2px rgb(0 0 0/.08)}
 .seg button:disabled{cursor:default}
-.seg .num{font-variant-numeric:tabular-nums;opacity:.6;font-weight:400}
+.seg .num{font-variant-numeric:tabular-nums;opacity:.6;font-weight:400;flex:none}
+/* Options share one row; when a label would not fit, and always in the desktop sidebar, they stack one per line and wrap, never truncate. */
+.seg.stack{grid-auto-flow:row}.seg.stack button{display:flex;gap:6px;text-align:left;white-space:normal;overflow-wrap:anywhere;text-wrap:pretty}
 .toast{position:fixed;left:50%;bottom:88px;transform:translateX(-50%);background:var(--fg);color:var(--bg);border-radius:999px;padding:7px 16px;font-weight:500;white-space:nowrap;z-index:5}
 @media(prefers-color-scheme:dark){.seg button[aria-checked=true]{box-shadow:0 0 0 1px var(--line2)}}
 @media(max-width:819px){footer{padding-bottom:calc(76px + env(safe-area-inset-bottom))}}
@@ -71,9 +73,10 @@ footer{padding:12px 20px calc(20px + env(safe-area-inset-bottom));display:grid;j
 #app.split{display:grid;grid-template-columns:clamp(24rem,30vw,28rem) minmax(0,1fr);grid-template-rows:minmax(0,1fr)}
 .split .side{display:flex;flex-direction:column;gap:16px;min-height:0;overflow-y:auto;padding:24px;border-right:1px solid var(--line);scrollbar-width:thin;scrollbar-color:var(--line2) transparent}
 .split header,.split .head{display:contents}.split header{text-align:left}
-.split .nav{order:0;align-self:flex-start;margin:0 0 8px -6px}
+.split .nav{order:0;align-self:center;margin:0 0 8px}
 .split h1{order:1;font-size:1.5rem;line-height:1.3;max-width:none;text-wrap:pretty}
-.split footer{order:2;padding:0;display:block}.split .seg{width:100%}
+.split footer{order:2;padding:0;display:block}.split .seg{width:100%;grid-auto-flow:row}
+.split .seg button{display:flex;gap:6px;text-align:left;white-space:normal;overflow-wrap:anywhere;text-wrap:pretty}
 .split .sub{order:3;max-width:none;text-wrap:pretty}
 .split main{order:0;min-width:0}.split .plan{padding:40px 40px 96px}
 }
@@ -114,8 +117,9 @@ function build(){
  $('nav').replaceChildren(arrow('Previous question',S.steps[i-1],true),pill('Question '+step.n+' of about '+total),arrow('Next question',S.steps[i+1]||(S.plan?'plan':null)));
  $('q').textContent=step.question;
  $('seg').replaceChildren(...step.options.map(o=>h('button',{type:'button',role:'radio','data-opt':o.key,disabled:ro,'aria-label':'Option '+o.key+', '+o.label,onclick:()=>{sel[step.n]=o.key;sync()}},h('span',{cls:'num',text:o.key+'.'}),' '+o.label)));
- sync();if(String(step.n)!==location.hash.slice(1))history.replaceState(null,'','#'+step.n);
+ sync();fit();if(String(step.n)!==location.hash.slice(1))history.replaceState(null,'','#'+step.n);
 }
+function fit(){const g=$('seg');g.classList.remove('stack');g.classList.toggle('stack',[...g.children].some(b=>b.scrollWidth>b.clientWidth))}
 function sync(){
  const picked=opt(step,chosen()),else_=ro&&!picked,o=picked||opt(step,step.recommended)||step.options[0];
  document.querySelectorAll('#seg [data-opt]').forEach(b=>b.setAttribute('aria-checked',String(!else_&&chosen()===b.dataset.opt)));
@@ -177,7 +181,7 @@ async function poll(){try{const r=await fetch('session.json',{cache:'no-store'})
   if(first){const a=location.hash.slice(1);if(a==='plan')view='plan';else if(byN(+a)&&byN(+a)!==o)view=+a}else if(g!==sig)view=null;
   sig=g;build()}else if(mode==='plan')loadPlan()}catch(e){}}
 addEventListener('hashchange',()=>{if(!S)return;const a=location.hash.slice(1);if(a==='plan'){if(S.plan&&mode!=='plan')go('plan')}else{const s=byN(+a);if(s&&!(mode==='step'&&s===step))go(s)}});
-poll();setInterval(poll,2000);
+poll();setInterval(poll,2000);addEventListener('resize',fit);document.fonts.ready.then(fit);
 /* Agentation is the one place to comment and copy. It starts collapsed; the client opens it. Once open, its Copy button always works here:
    with comments it copies the text for this view plus Agentation's own output; with none it copies an open question's answer alone. */
 {const s=document.createElement('script');s.src='vendor/agentation.js';s.onload=()=>{
