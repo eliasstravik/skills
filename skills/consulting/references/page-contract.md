@@ -44,7 +44,7 @@ two seconds. Every change writes the whole file to `session.json.tmp` and rename
 | `kind` | `ui`, `logic`, `diagram`, `media` or `examples`. |
 | `file` | Must match `^steps/[0-9]+-[a-z0-9-]+\.html$`; the shell loads nothing else. |
 | `options` | One to four written options, keys `"1"`, `"2"`… equal to the chat option numbers. The trailing `Other` is never listed. |
-| `label` | Short, because all labels share one row on a 390px phone: at most 16 characters with two options, 9 with three, 5 with four. Prefer two or three options when names are long. |
+| `label` | Short, so all labels share one row on a 390px phone: at most 16 characters with two options, 9 with three, 5 with four. A longer label is shown in full (the options then stack one per line), never cut off. Prefer two or three options when names are long. |
 | `tradeoff` | One or two short sentences. The chat option reads `<label>. <tradeoff>`. |
 | `recommended` | Always one of the option keys. |
 | `decision` | `null` until answered; then an option key, or `Other — <the client's exact words>`. |
@@ -64,7 +64,7 @@ the open step with the recommended option preselected; an answered step read-onl
 the "Question n of about m" control; and, once `plan` is true and no step is open (or the client picks the
 `Plan` row, `#plan`), the plan view: `plan.md` rendered, `reviewStatus` under the headline, and below it
 every answered, non-retired step with its chosen visual. From 1024px wide, a left sidebar holds the
-navigation, question, options and explanation, and the step page (or the plan) fills the rest of the window
+navigation (centred), question, options (one full-width button per line) and explanation, and the step page (or the plan) fills the rest of the window
 at full height; narrower screens stack them. The step page scrolls on its own when its content is taller
 than the frame. In `plan.md` a Markdown link is live only when it
 targets `page/steps/NN-slug.html` (optionally `#option=<key>`), `page/media/<file>` or an `http(s)` URL.
