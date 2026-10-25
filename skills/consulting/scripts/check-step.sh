@@ -2,12 +2,12 @@
 
 # Static check of one step page, or of page/prototype/index.html when no key is given. Exit 0 and
 # no output on pass; exit 1 with one line per failed rule otherwise. The rules are the "Static" list
-# in references/page-contract.md.
+# in references/page-contract.md; a step's recommended key is always 1.
 
 set -u
 
 if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]; then
-  echo "Usage: check-step.sh <step-file> <recommended-key> | check-step.sh <prototype-file>" >&2
+  echo "Usage: check-step.sh <step-file> 1 | check-step.sh <prototype-file>" >&2
   exit 2
 fi
 
@@ -57,6 +57,13 @@ def check_css(css):
         fail("external", "CSS @import is not allowed")
     for match in re.finditer(r"url\(\s*([\x22\x27]?)(.*?)\1\s*\)", css, re.I | re.S):
         check_url(match.group(2), "css")
+    # One scroll: the page grows to its content, so nothing is sized to the window or scrolls vertically inside.
+    for match in re.finditer(r"(?<![\w.-])\d*\.?\d+(dvh|svh|lvh|vh)\b", css, re.I):
+        fail("scroll", "CSS length %s ties a height to the window; let it grow to its content" % match.group(0))
+    for match in re.finditer(r"(?<![\w-])overflow(-y|-block)?\s*:\s*([a-z-]+)(?:\s+([a-z-]+))?", css, re.I):
+        vertical = match.group(3) if match.group(1) is None and match.group(3) else match.group(2)
+        if vertical.lower() in ("auto", "scroll"):
+            fail("scroll", "%s makes an inner scroll area; let it grow to its content" % match.group(0).strip())
 
 class Page(HTMLParser):
     def __init__(self):
@@ -120,8 +127,10 @@ for token in ("fetch(", "new XMLHttpRequest", "new WebSocket", "new EventSource"
 if re.search(r"^\s*import\s", script, re.M):
     fail("network", "script text has a line starting with import")
 if key is not None:
-    expected = "data-recommended=\x22%s\x22" % key
-    if page.root is None or page.root.get("data-recommended") != key or expected not in text:
+    if key != "1":
+        fail("recommended", "the recommended option is always option 1, not %s" % key)
+    expected = "data-recommended=\x221\x22"
+    if page.root is None or page.root.get("data-recommended") != "1" or expected not in text:
         fail("recommended", "the <html> tag must carry %s" % expected)
     if "document.documentElement.dataset.option" not in text:
         fail("option", "the token document.documentElement.dataset.option is missing")

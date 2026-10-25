@@ -66,3 +66,32 @@ optimizer `best_description`; run the optimizer later and apply its result verba
 `assets/fonts/InterVariable.woff2.b64`, `assets/fonts/INTER-LICENSE.txt`, `scripts/serve.sh`,
 `scripts/check-step.sh`, `references/page-contract.md`, `references/review-and-handoff.md`.
 `references/review-loop.md` is deleted.
+
+## 2026-10-25 — page fixes from the HOME-14 consultation (SKLS-8)
+
+Scoped retrofit of seven changes the client asked for during the HOME-14 consultation (herdr orchestration
+GUI), which had been patched only into that consultation's page copy. No evals run; same basis as above.
+
+1. One page, one scroll: the shell's frames take their content's height, nothing scrolls inside, nothing is
+   pinned on narrow screens; the desktop sidebar sticks only while it fits the window. Prototypes may not
+   use window-height units or vertical `overflow: auto|scroll` (`check-step.sh` enforces it); device mocks
+   grow to their content. A live scratch app on another origin posts its own height
+   (`{consultingHeight}`, a fixed snippet in the contract) and its full-window layouts are made to grow, so
+   it scrolls with the page too.
+2. Options always stack one per line, right under the question.
+3. The step caption is gone from the shell and from the manifest contract.
+4. No visible gaps: undecided parts are left out; open nodes live only in the design tree.
+5. The recommended option is always option 1: `check-step.sh` takes key 1 only, `serve.sh` refuses an
+   open step or `pending` whose `recommended` is not `"1"` (answered steps keep their old key).
+6. Screens follow the /ui design guidelines, applied by hand in inline CSS.
+7. The reviewer brief carries the /midwit stance in its own words.
+
+Checked: `check-step.sh` on good and bad pages and on the HOME-14 prototype; `serve.sh` manifest refusals;
+the shell in agent-browser at 390×844, 768×1024 and 1280×800 with the HOME-14 page and a test consultation
+(frame grows and shrinks with the option, no element scrolls but the page, no horizontal scroll, options
+under the question, no caption, whole-thing view with a pending question, a cross-origin `live` app with
+the snippet sized to its document as a step and in the whole-thing view, growing and shrinking with it,
+with `scrollTo` inside the frame moving nothing, a sidebar taller than the window ending flush with its bottom).
+
+Manual frontmatter check: `name` and `description` unchanged. Body: 100 lines, about 2032 words, nine
+ordered sections. PASS.

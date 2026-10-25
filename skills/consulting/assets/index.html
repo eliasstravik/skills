@@ -11,8 +11,7 @@ body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.75 InterVariable,
 button,textarea,input{font:inherit;color:inherit;letter-spacing:inherit}button{cursor:pointer}
 :focus-visible{outline:2px solid var(--fg);outline-offset:2px}
 
-html,body{height:100%}body{overflow:hidden}
-#app{isolation:isolate;height:100dvh;display:flex;flex-direction:column}
+#app{isolation:isolate;min-height:100dvh;display:flex;flex-direction:column}
 header{padding:20px 20px 12px;display:grid;justify-items:center;gap:14px;text-align:center}
 .nav{display:flex;align-items:center;gap:4px}
 .nav .arr{width:28px;height:28px;border:0;background:none;border-radius:50%;display:grid;place-items:center;color:var(--muted);position:relative}
@@ -36,23 +35,23 @@ dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:rgb(
 h1{font-size:1.875rem;line-height:1.2;font-weight:600;letter-spacing:-.03em;margin:0;text-wrap:balance;max-width:28ch}
 .sub{margin:0;font-size:1rem;line-height:1.5;color:var(--muted);max-width:64ch;text-wrap:balance;min-height:1.5em}
 .sub b{color:var(--fg);font-weight:500}.sub i{font-style:normal;color:var(--accent);font-weight:500}
-main{flex:1;min-height:0;display:flex;flex-direction:column}main>iframe{flex:1;width:100%;border:0;display:block}
+/* One page, one scroll: nothing scrolls inside anything. Each prototype frame takes its content's height (see grow());
+   a live app on another origin reports its own height by postMessage, and 80dvh holds only until it does. */
+main{display:flex;flex-direction:column;padding-bottom:calc(88px + env(safe-area-inset-bottom))}main>iframe{width:100%;height:80dvh;border:0;display:block}
 .cap{margin:0 auto;padding:8px 20px 0;font-size:.82rem;line-height:1.5;color:var(--muted);text-align:center;max-width:44ch;text-wrap:balance}
 .st{margin:0;font-size:.85rem;color:var(--muted);text-align:center}.hint{margin:0;font-size:.8rem;color:var(--muted);text-align:center}
-footer{padding:12px 20px calc(20px + env(safe-area-inset-bottom));display:grid;justify-items:center;gap:10px}
-.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:2px;background:var(--fill);border-radius:12px;padding:3px;width:min(26rem,100%)}
-.seg button{border:0;background:none;border-radius:9px;padding:9px 12px;font-weight:500;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+footer{padding:4px 20px 12px;display:grid;justify-items:center;gap:10px}
+/* Options sit right under the question, one per line, labels wrapped, never cut off. */
+.seg{display:grid;gap:2px;background:var(--fill);border-radius:12px;padding:3px;width:min(32rem,100%)}
+.seg button{display:flex;gap:6px;border:0;background:none;border-radius:9px;padding:9px 12px;font-weight:500;color:var(--muted);text-align:left;white-space:normal;overflow-wrap:anywhere;text-wrap:pretty;min-width:0}
 .seg button[aria-checked=true]{background:var(--bg);color:var(--fg);box-shadow:0 0 0 1px var(--line2),0 1px 2px rgb(0 0 0/.08)}
 .seg button:disabled{cursor:default}
 .seg .num{font-variant-numeric:tabular-nums;opacity:.6;font-weight:400;flex:none}
-/* Options share one row; when a label would not fit, and always in the desktop sidebar, they stack one per line and wrap, never truncate. */
-.seg.stack{grid-auto-flow:row}.seg.stack button{display:flex;gap:6px;text-align:left;white-space:normal;overflow-wrap:anywhere;text-wrap:pretty}
 .toast{position:fixed;left:50%;bottom:88px;transform:translateX(-50%);background:var(--fg);color:var(--bg);border-radius:999px;padding:7px 16px;font-weight:500;white-space:nowrap;z-index:5}
 @media(prefers-color-scheme:dark){.seg button[aria-checked=true]{box-shadow:0 0 0 1px var(--line2)}}
-@media(max-width:819px){footer{padding-bottom:calc(76px + env(safe-area-inset-bottom))}footer:has(~.st:not([hidden])){padding-bottom:12px}.st:not([hidden]){padding-bottom:calc(76px + env(safe-area-inset-bottom))}.st:has(~.hint:not([hidden])){padding-bottom:0}.hint:not([hidden]){padding-bottom:calc(76px + env(safe-area-inset-bottom))}}
 @media(max-width:639px){header{padding:14px 16px 8px;gap:10px}h1{font-size:1.5rem}.seg button{padding:11px 10px}}
 .sl.ret{opacity:.45}
-.plan{flex:1;min-width:0;overflow:auto;padding:8px 20px 96px;-webkit-overflow-scrolling:touch}
+.plan{min-width:0;padding:8px 20px 0}
 .doc{max-width:44rem;margin:0 auto;overflow-wrap:break-word}
 .doc h2,.doc h3,.doc h4{font-weight:600;letter-spacing:-.03em;line-height:1.3;margin:1.6em 0 .4em;text-wrap:balance}
 .doc h2{font-size:1.5rem}.doc h3{font-size:1.25rem}.doc h4{font-size:1rem}
@@ -64,29 +63,29 @@ footer{padding:12px 20px calc(20px + env(safe-area-inset-bottom));display:grid;j
 .doc th,.doc td{text-align:left;vertical-align:top;padding:8px 16px 8px 0;border-bottom:1px solid var(--line)}.doc th{font-weight:600}
 .whole{display:grid;gap:10px;justify-items:center;margin:0 auto 32px}.whole .cap{padding:0}
 .badge{font-size:.8rem;font-weight:600;color:var(--accent)}.found{border:1.5px dashed var(--accent);border-radius:10px;padding:8px 10px;color:var(--accent);font-size:.8rem;text-align:center;width:min(22rem,100%)}.badge.frozen{color:var(--ok)}
-#proto{width:100%;height:min(80dvh,760px);border:0;display:block}
+#proto{width:100%;height:80dvh;border:0;display:block}
 .doc+.doc{border-top:1px solid var(--line);margin-top:32px;padding-top:8px}
-@media(max-width:639px){.where{min-height:44px}.nav .arr{min-width:44px;min-height:44px}.plan{padding:4px 20px 110px}}
-/* Narrow screens stack header, visual, options. From 1024px a left sidebar holds everything but the visual, which fills the rest;
-   the sidebar and the visual each scroll only when their own content overflows. */
-.side{display:contents}main{order:1}footer{order:2}.st{order:3;padding:0 20px}.hint{order:4;padding:0 20px 12px}
+@media(max-width:639px){.where{min-height:44px}.nav .arr{min-width:44px;min-height:44px}.plan{padding:4px 20px 0}}
+/* Narrow screens stack header, options, status, then the visual, and the whole page scrolls; nothing is pinned.
+   From 1024px a left sidebar holds everything but the visual. The sidebar stays in view while it fits the window;
+   a taller one scrolls with the page until its end shows (its top is set in place()). */
+.side{display:contents}.st{padding:0 20px}.hint{padding:0 20px 12px}
 @media(min-width:1024px){
-#app.split{display:grid;grid-template-columns:clamp(24rem,30vw,28rem) minmax(0,1fr);grid-template-rows:minmax(0,1fr)}
-.split .side{display:flex;flex-direction:column;gap:16px;min-height:0;overflow-y:auto;padding:24px;border-right:1px solid var(--line);scrollbar-width:thin;scrollbar-color:var(--line2) transparent}
+#app.split{display:grid;grid-template-columns:clamp(24rem,30vw,28rem) minmax(0,1fr);align-items:start}
+.split .side{display:flex;flex-direction:column;gap:16px;padding:24px;position:sticky;top:0}
 .split header,.split .head{display:contents}.split header{text-align:left}
 .split .nav{order:0;align-self:center;margin:0 0 8px}
 .split h1{order:1;font-size:1.5rem;line-height:1.3;max-width:none;text-wrap:pretty}
-.split footer{order:2;padding:0;display:block}.split .seg{width:100%;grid-auto-flow:row}
-.split .seg button{display:flex;gap:6px;text-align:left;white-space:normal;overflow-wrap:anywhere;text-wrap:pretty}
+.split footer{order:2;padding:0;display:block}.split .seg{width:100%}
 .split .sub{order:3;max-width:none;text-wrap:pretty}.split .st{order:4;padding:0}.split .hint{order:5;padding:0}
-.split main{order:0;min-width:0}.split .plan{padding:40px 40px 96px}
+.split main{min-width:0;min-height:100dvh;border-left:1px solid var(--line)}.split .plan{padding:40px 40px 0}
 }
 </style>
 <body>
 <div id="app">
 <div class="side"><header><nav class="nav" id="nav" data-feedback-toolbar></nav><div class="head"><h1 id="q"></h1><p class="sub" id="sub" aria-live="polite"></p></div></header>
 <footer id="foot" data-feedback-toolbar hidden><div class="seg" id="seg" role="radiogroup" aria-label="Options"></div></footer><p class="st" id="st" hidden></p><p class="hint" id="hint" hidden>Answer in chat, or copy it from here, as with any question.</p></div>
-<main><p class="cap" id="cap" hidden></p><iframe id="frame" title="Prototype for this question" hidden></iframe><div class="plan" id="plan" hidden><div class="whole"><p class="cap" id="wcap" hidden></p><span class="badge" id="badge"></span><div class="found" id="rev" hidden>Reviewer is reading the handoff…</div><iframe id="proto" title="The whole prototype"></iframe></div><div class="doc" id="doc"></div><div class="doc" id="odoc" hidden></div></div></main>
+<main><iframe id="frame" title="Prototype for this question" hidden></iframe><div class="plan" id="plan" hidden><div class="whole"><p class="cap" id="wcap" hidden></p><span class="badge" id="badge"></span><div class="found" id="rev" hidden>Reviewer is reading the handoff…</div><iframe id="proto" title="The whole prototype"></iframe></div><div class="doc" id="doc"></div><div class="doc" id="odoc" hidden></div></div></main>
 </div>
 <dialog id="list" aria-label="All questions" data-feedback-toolbar></dialog><div id="agn"></div>
 <script>(()=>{
@@ -115,34 +114,41 @@ function build(){
  if(!S)return;const open=cur_(),last=S.steps[S.steps.length-1];
  mode=whole()&&(view==='plan'||(view==null&&!open))?'plan':last?'step':'wait';
  $('app').classList.toggle('split',mode!=='wait');frame.hidden=mode!=='step';$('plan').hidden=mode!=='plan';$('foot').hidden=mode!=='step';
- if(mode==='wait'){$('nav').replaceChildren();$('q').textContent='Waiting for the first question.';$('sub').replaceChildren();$('seg').replaceChildren();status('');caption($('cap'),'');$('hint').hidden=true;return}
+ if(mode==='wait'){$('nav').replaceChildren();$('q').textContent='Waiting for the first question.';$('sub').replaceChildren();$('seg').replaceChildren();status('');$('hint').hidden=true;return}
  if(mode==='plan'){wholeView(last);return}
  pend=null;$('hint').hidden=true;status('');
  step=byN(view)||open||last;ro=step.decision!=null||!!step.retired;if(sel[step.n]==null)sel[step.n]=step.recommended;
  const total=S.steps.length+(S.remaining>0?S.remaining:0),i=S.steps.indexOf(step);
  $('nav').replaceChildren(arrow('Previous question',S.steps[i-1],true),pill('Question '+step.n+' of about '+total),arrow('Next question',S.steps[i+1]||(whole()?'plan':null)));
- $('q').textContent=step.question;caption($('cap'),step.caption);
+ $('q').textContent=step.question;
  $('seg').replaceChildren(...step.options.map(o=>h('button',{type:'button',role:'radio','data-opt':o.key,disabled:ro,'aria-label':'Option '+o.key+', '+o.label,onclick:()=>{sel[step.n]=o.key;sync()}},h('span',{cls:'num',text:o.key+'.'}),' '+o.label)));
- sync();fit();if(String(step.n)!==location.hash.slice(1))history.replaceState(null,'','#'+step.n);
+ sync();place();if(String(step.n)!==location.hash.slice(1))history.replaceState(null,'','#'+step.n);
 }
 /* The whole-thing view: the pending review question (or the handoff) in the sidebar; caption, badge, the whole prototype, plan.md and open.md in the frame. */
 function wholeView(last){
  const P=S.frozen?null:pendingOf(),k=P?JSON.stringify([P.label,P.question,P.options,P.recommended]):'';
  if(k!==pendKey){pendKey=k;sel.p=P?P.recommended:null}pend=P;
- $('foot').hidden=!P;$('hint').hidden=!P;caption($('cap'),'');
+ $('foot').hidden=!P;$('hint').hidden=!P;
  $('nav').replaceChildren(arrow('Previous question',last,true),pill(S.frozen?'Handoff':P?String(P.label):'Plan'),arrow('Next question',null));
  $('q').textContent=S.frozen?'Handoff':P?String(P.question):'Plan';status(S.frozen?'':S.reviewStatus);
- if(P){$('seg').replaceChildren(...P.options.map(o=>h('button',{type:'button',role:'radio','data-opt':o.key,'aria-label':'Option '+o.key+', '+o.label,onclick:()=>{sel.p=o.key;syncPending()}},h('span',{cls:'num',text:o.key+'.'}),' '+o.label)));syncPending();fit()}
+ if(P){$('seg').replaceChildren(...P.options.map(o=>h('button',{type:'button',role:'radio','data-opt':o.key,'aria-label':'Option '+o.key+', '+o.label,onclick:()=>{sel.p=o.key;syncPending()}},h('span',{cls:'num',text:o.key+'.'}),' '+o.label)));syncPending()}
  else{$('seg').replaceChildren();$('sub').replaceChildren()}
  caption($('wcap'),S.frozen?'Frozen. This prototype is the spec the builder must match.':P&&P.caption);
  $('rev').hidden=!!S.frozen||!((P&&P.label==='Review')||/running/.test(String(S.reviewStatus||'')));
  $('badge').textContent=S.frozen?'\u25cf Frozen \u00b7 the spec':'Whole thing';$('badge').classList.toggle('frozen',!!S.frozen);
  const src=liveOk(S.live)?String(S.live):'prototype/index.html';if(src!==protoSrc){protoSrc=src;protoRaw=null;$('proto').src=src}
- if(location.hash!=='#plan')history.replaceState(null,'','#plan');loadPlan()}
+ if(location.hash!=='#plan')history.replaceState(null,'','#plan');loadPlan();place()}
 function syncPending(){const o=opt(pend,sel.p)||opt(pend,pend.recommended)||pend.options[0];
  document.querySelectorAll('#seg [data-opt]').forEach(b=>b.setAttribute('aria-checked',String(o&&o.key===b.dataset.opt)));
  $('sub').replaceChildren(...(o?explain(o,o.key===pend.recommended):[]))}
-function fit(){const g=$('seg');g.classList.remove('stack');g.classList.toggle('stack',[...g.children].some(b=>b.scrollWidth>b.clientWidth))}
+/* The page is the only thing that scrolls: each prototype frame takes its content's height, the desktop sidebar sticks only as far as it fits. */
+const told=new WeakMap();
+function grow(f){let d=null,px=0;try{d=f.contentDocument}catch(e){}
+ if(d){if(!d.documentElement||!d.body)return;px=Math.ceil(Math.max(d.documentElement.getBoundingClientRect().height,d.body.scrollHeight))}else px=told.get(f)||0;
+ if(px){if(Math.abs(f.offsetHeight-px)>=1)f.style.height=px+'px'}else f.style.height=''}
+/* A live app cannot be measured from here, so it posts {consultingHeight: <px>} (page-contract.md); only the frames' own windows are heard. */
+addEventListener('message',e=>{const v=e.data&&e.data.consultingHeight;if(typeof v!=='number'||!(v>=1))return;for(const f of [frame,$('proto')])if(e.source===f.contentWindow){told.set(f,Math.min(Math.ceil(v),100000));grow(f)}});
+function place(){const s=document.querySelector('.side');s.style.top=Math.min(0,innerHeight-s.offsetHeight)+'px';grow(frame);grow($('proto'))}
 function sync(){
  const picked=opt(step,chosen()),else_=ro&&!picked,o=picked||opt(step,step.recommended)||step.options[0];
  document.querySelectorAll('#seg [data-opt]').forEach(b=>b.setAttribute('aria-checked',String(!else_&&chosen()===b.dataset.opt)));
@@ -204,7 +210,7 @@ async function poll(){try{const r=await fetch('session.json',{cache:'no-store'})
   if(first){const a=location.hash.slice(1);if(a==='plan')view='plan';else if(byN(+a)&&byN(+a)!==o)view=+a}else if(g!==sig)view=null;
   sig=g;build()}else if(mode==='plan')loadPlan()}catch(e){}}
 addEventListener('hashchange',()=>{if(!S)return;const a=location.hash.slice(1);if(a==='plan'){if(whole()&&mode!=='plan')go('plan')}else{const s=byN(+a);if(s&&!(mode==='step'&&s===step))go(s)}});
-poll();setInterval(poll,2000);addEventListener('resize',fit);document.fonts.ready.then(fit);
+poll();setInterval(poll,2000);setInterval(place,400);addEventListener('resize',place);frame.addEventListener('load',place);$('proto').addEventListener('load',place);
 /* Agentation is the one place to comment and copy. It starts collapsed; the client opens it. Once open, its Copy button always works here:
    with comments it copies the text for this view plus Agentation's own output; with none it copies an open question's answer alone. */
 {const s=document.createElement('script');s.src='vendor/agentation.js';s.onload=()=>{
