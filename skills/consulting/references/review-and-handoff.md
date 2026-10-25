@@ -93,7 +93,8 @@ scratch app, the screenshots of every screen it shows from `page/media/`. From r
 findings with their ids and what was done about each. Nothing else: never `consultation.md`,
 `session.json`, the chat, or the agent's own reasoning.
 
-Give a fresh agent the packet (or its path) and this brief, and nothing more:
+Give a fresh agent the packet (or its path) and this brief, and nothing more. The brief carries the /midwit
+stance in its own words, since the reviewer may not have that skill:
 
 ```text
 You are reviewing a handoff before a builder gets it. The prototype is the spec; plan.md covers only what
@@ -105,6 +106,14 @@ claim in the plan the prototype does not back; minor — correct but unclear wor
 probably not go wrong; trivial — a note.
 Each finding quotes, in proof, the place in the prototype or plan that leaves the gap. settle is "client"
 for taste, scope or product calls and "agent" for wording or consistency. Give no score.
+Take the /midwit stance too. In the bell-curve meme the idiot and the genius at either end agree on the
+simple truth while the midwit in the middle adds clever complexity; look for that simple truth. For every
+part, ask whether it is needed at all, whether it could be 10-100x simpler, or whether it could be avoided
+entirely, and challenge it as an outsider who knows nothing of the subject would: "Why don't you just
+<alternative>?" Challenge only when you hold a concrete simpler or null alternative, say how much machinery
+or effort it saves (10-100x), and leave routine parts alone. Each challenge is a finding whose subject is
+"Why don't you just <alternative>?", with settle "client", severity major when the alternative removes or
+replaces a whole part and minor otherwise.
 <from round 2: Earlier findings are listed with their ids. Check each is fixed. Add a new finding only if
 it is critical.>
 Reply with JSON only: {"meets": bool, "text": "...", "findings": [{"id", "severity", "subject", "where",
@@ -118,9 +127,9 @@ is true when no finding at or above the bar is left.
 
 Findings at or above the bar must be dealt with:
 
-- `settle: client` becomes a new numbered discovery question: the prototype shows a gap where the finding
-  is, and the step page offers the options there, captioned `Found by the review: the builder would have
-  had to guess this.` and what to try. Findings one answer settles together share one question. The agent
+- `settle: client` becomes a new numbered discovery question: the step page shows the part where the
+  finding is, outlined, and offers the options there. A "Why don't you just" finding offers the alternative
+  as option 1 and the part as it is as option 2. Findings one answer settles together share one question. The agent
   never settles a client finding itself or re-marks it as its own, however obvious the answer looks.
 - `settle: agent` the agent fixes in the prototype, `plan.md` or `open.md`.
 

@@ -183,6 +183,8 @@ for position, step in enumerate(steps, 1):
         fail("step %d file does not match steps/NN-slug.html: %r" % (position, step["file"]))
     if step.get("decision") is None:
         opened+=1
+        if step["recommended"] != "1":
+            fail("step %d recommended must be \x221\x22: the recommended option is always option 1" % position)
         if step.get("retired") is True:
             fail("step %d is retired without a decision" % position)
 if opened > 1:
@@ -204,8 +206,8 @@ if pending is not None:
     if not isinstance(pending.get("question"), str) or not isinstance(options, list) or not options:
         fail("pending needs a question and a non-empty options list")
     keys=[option.get("key") if isinstance(option, dict) else None for option in options]
-    if pending.get("recommended") not in keys:
-        fail("pending recommended is not one of its option keys")
+    if pending.get("recommended") != "1" or "1" not in keys:
+        fail("pending recommended must be \x221\x22, one of its option keys")
     if opened:
         fail("pending is set while a step is open")' "$DIR" 2>&1)
 manifest_status=$?
