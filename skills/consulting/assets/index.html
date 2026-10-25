@@ -36,7 +36,7 @@ h1{font-size:1.875rem;line-height:1.2;font-weight:600;letter-spacing:-.03em;marg
 .sub{margin:0;font-size:1rem;line-height:1.5;color:var(--muted);max-width:64ch;text-wrap:balance;min-height:1.5em}
 .sub b{color:var(--fg);font-weight:500}.sub i{font-style:normal;color:var(--accent);font-weight:500}
 /* One page, one scroll: nothing scrolls inside anything. Each prototype frame takes its content's height (see grow());
-   a live app on another origin cannot be measured and keeps 80dvh. */
+   a live app on another origin reports its own height by postMessage, and 80dvh holds only until it does. */
 main{display:flex;flex-direction:column;padding-bottom:calc(88px + env(safe-area-inset-bottom))}main>iframe{width:100%;height:80dvh;border:0;display:block}
 .cap{margin:0 auto;padding:8px 20px 0;font-size:.82rem;line-height:1.5;color:var(--muted);text-align:center;max-width:44ch;text-wrap:balance}
 .st{margin:0;font-size:.85rem;color:var(--muted);text-align:center}.hint{margin:0;font-size:.8rem;color:var(--muted);text-align:center}
@@ -142,7 +142,12 @@ function syncPending(){const o=opt(pend,sel.p)||opt(pend,pend.recommended)||pend
  document.querySelectorAll('#seg [data-opt]').forEach(b=>b.setAttribute('aria-checked',String(o&&o.key===b.dataset.opt)));
  $('sub').replaceChildren(...(o?explain(o,o.key===pend.recommended):[]))}
 /* The page is the only thing that scrolls: each prototype frame takes its content's height, the desktop sidebar sticks only as far as it fits. */
-function grow(f){try{const d=f.contentDocument,r=d&&d.documentElement;if(!r){f.style.height='';return}if(!d.body)return;const px=Math.ceil(Math.max(r.getBoundingClientRect().height,d.body.scrollHeight));if(px&&Math.abs(f.offsetHeight-px)>=1)f.style.height=px+'px'}catch(e){}}
+const told=new WeakMap();
+function grow(f){let d=null,px=0;try{d=f.contentDocument}catch(e){}
+ if(d){if(!d.documentElement||!d.body)return;px=Math.ceil(Math.max(d.documentElement.getBoundingClientRect().height,d.body.scrollHeight))}else px=told.get(f)||0;
+ if(px){if(Math.abs(f.offsetHeight-px)>=1)f.style.height=px+'px'}else f.style.height=''}
+/* A live app cannot be measured from here, so it posts {consultingHeight: <px>} (page-contract.md); only the frames' own windows are heard. */
+addEventListener('message',e=>{const v=e.data&&e.data.consultingHeight;if(typeof v!=='number'||!(v>=1))return;for(const f of [frame,$('proto')])if(e.source===f.contentWindow){told.set(f,Math.min(Math.ceil(v),100000));grow(f)}});
 function place(){const s=document.querySelector('.side');s.style.top=Math.min(0,innerHeight-s.offsetHeight)+'px';grow(frame);grow($('proto'))}
 function sync(){
  const picked=opt(step,chosen()),else_=ro&&!picked,o=picked||opt(step,step.recommended)||step.options[0];

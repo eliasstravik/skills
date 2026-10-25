@@ -96,6 +96,15 @@ When the thing is a change to an existing app:
   a bare loopback port, because the client is on another device.
 - `page/prototype/README.md` names the clone's path, its run command and its shared URL.
 - Each question's variants are switched in the app by `?variant=<key>`, read once by the app's code.
+- One scroll holds here too. The page cannot measure an app on another origin, so the clone reports its own
+  height: add this script to every page of the clone, and change its full-window layouts (a `100vh` shell,
+  panes that scroll inside) so they grow to their content.
+
+  ```html
+  <script>/* consulting: tell the consulting page this page's height, so the page grows the frame to it */
+  (function(){function send(){var r=document.documentElement,b=document.body;parent.postMessage({consultingHeight:Math.ceil(Math.max(r.getBoundingClientRect().height,b?b.scrollHeight:0))},'*')}
+  addEventListener('load',send);new ResizeObserver(send).observe(document.documentElement);setInterval(send,1000)})();</script>
+  ```
 - At every question, take a screenshot of each variant into `page/media/` (`NN-<slug>-<key>.png`). The step
   `file` is a snapshot page showing those screenshots, one per option by `#option=<key>`, so a closed step
   still shows what was chosen after the app has changed or stopped. The step carries
@@ -173,8 +182,8 @@ The agent never writes any of this; it only writes the manifest and the files.
   the recommended one preselected) and the explanation (`<label> · Recommended. <tradeoff>`); the frame
   fills the rest. Narrower screens stack them: the question, the options right under it, then the frame.
 - **One scroll.** The page is the only thing that scrolls; nothing is pinned on narrow screens. Each frame
-  takes its content's full height; a `live` app on another origin cannot be measured and gets 80% of the
-  window. The desktop sidebar stays in view while it fits the window and otherwise scrolls with the page.
+  takes its content's full height; a `live` app on another origin takes the height it reports
+  ([above](#scratch-app-prototype)), with 80% of the window only until it does. The desktop sidebar stays in view while it fits the window and otherwise scrolls with the page.
 - **A step:** the step page (or, while open, `live` with `?variant=<key>`), with no caption; picking an
   option switches the frame to that option. An answered step is read-only: "You chose <key>. <label>".
 - **The whole-thing view** (`#plan`, and whenever no step is open and `plan`, `pending` or `frozen` is
@@ -302,6 +311,8 @@ Rendered, only when the agent has a browser automation tool, at 390×844, 768×1
 - the document's `scrollWidth` does not exceed its `clientWidth`;
 - no element other than the root scrolls vertically (`scrollHeight` above `clientHeight` with `overflow-y`
   `auto` or `scroll`);
+- with a `live` app, in the shell: the frame's height equals the app document's height, and scrolling inside
+  the frame moves nothing;
 - every `[data-control]` box is at least 44×44;
 - with no hash the root's `data-option` equals `data-recommended`;
 - for every key, setting `#option=<key>` makes the root's `data-option` equal that key without a reload.
