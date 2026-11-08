@@ -132,12 +132,14 @@ Same contract, in the chat. Confirm it with the CLI's question tool. Optionally 
 **Replace the intent-blind review. Keep a narrow, intent-bound check.**
 
 For dropping today's review:
+
 - "A reviewer that's asked to find problems will always find *something*. If you fix every finding, you end up with extra…" ([Claude Code best practices](https://code.claude.com/docs/en/best-practices)).
 - Lauren's [interrogate](https://github.com/cursor/plugins/blob/main/harness/pstack/claude-code/skills/interrogate/SKILL.md) restates intent first and keeps only findings proven by a command: "No findings is a valid result."
 - Matt's [code-review](https://github.com/mattpocock/skills/blob/main/skills/engineering/code-review/SKILL.md) keeps "Spec" findings apart from "Standards" ones: "Reporting them separately stops one axis from masking the other."
 - Anthropic: an evaluator is worth its cost mainly when the task is at "the edge of what the generator could do well solo" ([harness design](https://www.anthropic.com/engineering/harness-design-long-running-apps)).
 
 For keeping *some* independent check:
+
 - "Agents reliably skew positive when grading their own work" ([harness design](https://www.anthropic.com/engineering/harness-design-long-running-apps)). LLMs "struggle to self-correct their responses without external feedback" ([Huang et al., ICLR 2024](https://arxiv.org/abs/2310.01798)).
 - Claude Code's `/goal` deliberately has "completion… decided by a fresh model rather than the one doing the work" ([docs](https://code.claude.com/docs/en/goal)).
 - Codex Goals: a goal "should not be marked complete because the model believes it is probably done" ([cookbook](https://developers.openai.com/cookbook/examples/codex/using_goals_in_codex)).
@@ -163,6 +165,7 @@ For keeping *some* independent check:
 **Name (proposal):** `done-contract`. In skill-issue's terms it's an Artifact SOP: it owns one output's required contents and acceptance criteria, so it gets a bare-noun name.
 
 **Admission (skill-issue litmus).** "Write acceptance criteria" on its own is generic best practice and would be rejected. The skill earns its place only through survivor lines:
+
 - **Authority:** the person confirms; the agent may not weaken a check.
 - **Quality bar:** what counts as proof, and what doesn't.
 - **House format:** the contract shape and when to skip the card.
@@ -173,6 +176,7 @@ Everything else gets cut.
 **Trigger.** Start of any non-trivial task, `/done`, or "what does done look like". In Shepherdr: the Assistant when writing a brief, and the worker at start. Not for trivial edits, pure Q&A, or tasks that already carry an approved contract.
 
 **Steps.**
+
 1. Restate the goal in one sentence: the end state the person will see.
 2. Look up everything you can: the repo, its test commands, how to run it, the secrets list, the browser.
 3. Draft three to seven checks, each with its proof. Prefer the real surface and a proof that would fail if the work were wrong.
