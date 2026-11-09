@@ -117,8 +117,9 @@ When the thing is a change to an existing app:
 
 `page/session.json` is one strict-JSON file (no comments, no trailing commas). The shell fetches it every
 two seconds. Every change writes the whole file to `session.json.tmp` and renames it over `session.json`.
+In this example the `<…>` value is a placeholder; the real file holds an integer there.
 
-```json
+```
 {
   "slug": "habit-app",
   "title": "Habit app",
@@ -137,7 +138,7 @@ two seconds. Every change writes the whole file to `session.json.tmp` and rename
     "feedback": null,
     "retired": false
   }],
-  "remaining": 1,
+  "remaining": <open design-tree nodes after this step>,
   "plan": false,
   "reviewStatus": null,
   "pending": null,
@@ -161,7 +162,7 @@ two seconds. Every change writes the whole file to `session.json.tmp` and rename
 | `note` | What the client typed beyond the option, plus any `Details:` line; else `null`. |
 | `feedback` | The pasted answer from `## Page Feedback` on, verbatim; else `null`. |
 | `retired` | `true` when a later change made the question moot. The step keeps its number and last `decision`. |
-| `remaining` | Integer: open design-tree nodes after the current step. |
+| `remaining` | Integer: open design-tree nodes after the current step. No cap and no target; the tree alone sets it. |
 | `plan` | `true` once `page/plan.md` and `page/open.md` exist. |
 | `reviewStatus` | `null`, or one of the exact strings in [review](review-and-handoff.md#reviewstatus). |
 | `pending` | `null`, or the review gate, round-cap question or final check while it waits: `{"label", "question", "options", "recommended", "caption"}`, with `label` one of `Review`, `Review limit`, `Final check`, and `options` shaped like step options and `recommended` `"1"`. Never set while a step is open. |

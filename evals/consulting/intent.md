@@ -17,5 +17,5 @@ SKLS-7. The first version (2026-10-09) came from `~/.consultant/visual-interview
   handoff, using the supplied territory and durable state, to produce a frozen prototype that is the
   builder's spec, a plan of only what it cannot show, and a list of what is left open, while never
   implementing, never editing the client's project and never asking for a lookup-able fact."
-- The description canon's non-overlap rule is knowingly waived against `consultant` (client decision 10 of
+- The description canon's non-overlap rule is knowingly waived against `consultant` (a client decision in
   the first version: `consulting` is the long-term owner; `consultant` is retired later).

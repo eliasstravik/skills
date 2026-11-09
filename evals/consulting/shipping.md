@@ -15,9 +15,9 @@ optimizer `best_description`; run the optimizer later and apply its result verba
 ## What was checked instead
 
 - A full test session (`claude -p`, Opus 5.5, headless, scripted replies all "1", state root in the task's
-  temporary folder): "/consulting a small habit app for my phone". It ran destination line, six discovery
+  temporary folder): "/consulting a small habit app for my phone". It ran destination line, its discovery
   questions on one living prototype with visible gaps and captions, the review gate, two real review rounds
-  with fresh subagents (round 1: 17 findings; one became question 7), the final check and the fenced
+  with fresh subagents (round 1: 17 findings; one became a new question), the final check and the fenced
   handoff, with `open.md` and a frozen-file footer. Two skill gaps it exposed were fixed: the agent settled
   three client-owned findings itself (now forbidden explicitly), and the frozen hashes were not
   `sha256sum -c` checkable (now a fixed format).
