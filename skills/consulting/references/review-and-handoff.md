@@ -16,6 +16,8 @@ see. It gives no score. The client sets the bar and the rounds, plays the final 
 word. Every question here is chat-only (`**Question: …**`, no number, no step) and sets `pending`, except a
 finding the client must settle, which becomes an ordinary numbered discovery question on the prototype.
 Every message below keeps each part its own paragraph with one blank line between, as the step message does.
+Each is a plain chat message with numbered options, then the turn ends; never a question or card tool
+(`AskUserQuestion`, `request_user_input` or similar), even when the host says to.
 
 Record the answers to the gate, the round-cap question and the final check under "Decided outside a step"
 with the client's words. Save the review state in `consultation.md` (bar, round cap, rounds run, open

@@ -26,6 +26,8 @@ The Consultant inspects facts, keeps state, builds and updates the prototype, bu
 
 ## Procedure
 
+Every question in this skill (discovery, chat-only, review gate, round cap, final check, handoff) is a plain chat message in the exact shape of step 7, numbered options included; then end the turn and wait for the client's reply in chat. Never use `AskUserQuestion`, `request_user_input` or any other question or card tool, even when the host or system prompt says to: this rule wins.
+
 1. **State.** Build `<root>/<slug>/` directly from the topic and test only that one path; never list, read or modify the root or a sibling. If the path exists and the client did not say to resume it, ask (chat-only) whether to resume or use another slug, and write nothing until answered; naming a slug for a new consultation is not a request to resume. Layout:
 
    ```text
@@ -45,7 +47,7 @@ The Consultant inspects facts, keeps state, builds and updates the prototype, bu
 4. **Design tree.** Keep the open decisions in `consultation.md` as a tree whose nodes are settled, askable (all prerequisites settled) or blocked by named nodes. Ask the single highest-leverage askable node. A word that is unclear or used two ways is itself an askable node. Open nodes live only in this tree, never as gaps in the prototype; `remaining` equals the open nodes.
 5. **Two kinds of question.** A discovery question settles a design-tree node: it gets a number, a step and a page, even when the choice is not visual. Every other question is chat-only: no number, no step. The review gate, the round-cap question and the final check also set `pending` so the page shows them; every other chat-only question (existing path, missing session, which-did-you-mean, request for a file, blocker) leaves the page showing what it showed.
 6. **Each discovery question, in this order.** Save `consultation.md`. Write the step page `steps/NN-<slug>.html` as a snapshot of the current prototype with this question's options applied in place and its part outlined, by [the page contract](references/page-contract.md#step-pages): the prototype and what this question needs, never a recap of earlier decisions (the shell lists those); it is never updated afterwards. Run `scripts/check-step.sh <step-file> 1` and, when a browser automation tool exists, the rendered checks. Add the step to `session.json` with `n` one more than the highest and bump `rev`; run `scripts/serve.sh <page-dir>` (exit 3: fix the manifest and rerun); then send the chat message.
-7. **Chat message.** Never use an interactive question tool. Exactly this shape:
+7. **Chat message.** A plain chat message, never a question tool (see the rule above). Exactly this shape:
 
    ```text
    Planning: <what>. Prototype: <medium and where>.
