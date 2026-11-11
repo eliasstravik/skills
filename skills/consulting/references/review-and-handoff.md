@@ -15,6 +15,7 @@ The review finds every guess a builder would have to make, so the build holds no
 see. It gives no score. The client sets the bar and the rounds, plays the final prototype, and has the last
 word. Every question here is chat-only (`**Question: …**`, no number, no step) and sets `pending`, except a
 finding the client must settle, which becomes an ordinary numbered discovery question on the prototype.
+Every message below keeps each part its own paragraph with one blank line between, as the step message does.
 
 Record the answers to the gate, the round-cap question and the final check under "Decided outside a step"
 with the client's words. Save the review state in `consultation.md` (bar, round cap, rounds run, open
@@ -74,6 +75,7 @@ Then send exactly:
 
 ```text
 **Question: Ready for the review?**
+
 I suggest: must fix major and worse, up to 3 rounds.
 
 1. Run it like that. (Recommended)
@@ -160,6 +162,7 @@ below with short labels) and ask:
 Review round <r>: <k> open at <bar> or worse: <subjects>.
 
 Page: <URL>#plan
+
 **Question: The review limit is reached. What now?**
 
 1. Answer them. They become questions, and one more round runs. (Recommended)
@@ -193,7 +196,9 @@ Then send exactly (after a risk acceptance, the first line names the accepted fi
 Review round <r>: nothing at <bar> or worse left.
 
 Page: <URL>#plan
+
 **Question: Is this the thing?**
+
 Play the whole prototype.
 
 1. That's it. Freeze it and write the handoff. (Recommended)
@@ -221,6 +226,7 @@ After "That's it":
 
 ````text
 All decided and frozen.
+
 ```text
 Build <thing> so it matches the prototype exactly. Where plan and prototype disagree, the prototype wins.
 
@@ -234,12 +240,14 @@ Done means: a reviewer opens the build and the prototype side by side, goes thro
 
 Review: passed after <r> rounds at must fix <bar>+.
 ```
+
 Consulting has ended. Page: <URL>
+
 Stop the page: <skill-dir>/scripts/serve.sh <page-dir> stop
 ````
 
 - For a scratch app the Spec line reads `(frozen; open the run command in its README.md, commit <hash>)`,
-  and a last line `Stop the app: <command>` follows.
+  and a last paragraph `Stop the app: <command>` follows.
 - After a risk acceptance the Review line reads
   `Review: risk accepted after <r> rounds with <k> open findings, listed in open.md.`
 
