@@ -191,7 +191,7 @@ The agent never writes any of this; it only writes the manifest and the files.
 - **One scroll.** The page is the only thing that scrolls; nothing is pinned on narrow screens. Each frame
   takes its content's full height; a `live` app on another origin takes the height it reports
   ([above](#scratch-app-prototype)), with 80% of the window only until it does. The desktop sidebar stays in view while it fits the window and otherwise scrolls with the page.
-- **Decisions so far:** once a step is answered, a drawer under the options (desktop: at the end of the
+- **Decisions so far:** once a step is answered, a drawer below everything about the question: under the prototype on narrow screens (desktop: at the end of the
   sidebar), closed by default, headed "Decisions so far" with the count. Open, it lists every answered,
   unretired step in order: its number, question and the chosen option's label or the client's own words;
   a row opens that step. It is built from `session.json` alone; the agent never writes a summary of
