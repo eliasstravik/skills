@@ -45,6 +45,11 @@ needs; nothing else. An undecided part is left out, never drawn as a gap or plac
 cannot work without it, the plainest stand-in does the job for now (a tap that ticks), unlabelled. The open
 parts are tracked only as open nodes of the design tree in `consultation.md`.
 
+**The thing, never a recap.** The prototype and every step page show the thing itself, not a record of
+the interview: no "so far" list, settings table or summary of earlier answers, and no tool calls, config or
+code the client would not meet in the thing (those belong in `plan.md`). Earlier answers appear only built
+into the thing. The shell's "Decisions so far" drawer is the one place that lists them.
+
 **Look.** Screens follow the /ui skill's design guidelines: fetch `uidotsh://ui/design-guidelines` and the
 guideline files for what is being built before the skeleton, and keep to them in every later screen. The
 prototype loads nothing external, so their rules are applied by hand in inline CSS and icons are inline SVG.
@@ -77,7 +82,8 @@ question is asked, with exactly two changes.
   was left out of the prototype until now. The outlined part is visible as the page opens: when it lives
   behind a tap (a sheet, a menu, a settings screen), the step page opens with it shown.
 
-Earlier answers are built in; parts of later questions are not shown. The step page is never updated
+Earlier answers are built in; parts of later questions are not shown. Nothing else is added: a step page
+holds the prototype and what this question needs, never a list of earlier decisions. The step page is never updated
 afterwards, so an earlier step reopened from the page shows what the client saw then. After the answer the
 agent writes the chosen variant (or the client's mix) into `page/prototype/index.html`, without outline,
 before the next question.
@@ -185,6 +191,11 @@ The agent never writes any of this; it only writes the manifest and the files.
 - **One scroll.** The page is the only thing that scrolls; nothing is pinned on narrow screens. Each frame
   takes its content's full height; a `live` app on another origin takes the height it reports
   ([above](#scratch-app-prototype)), with 80% of the window only until it does. The desktop sidebar stays in view while it fits the window and otherwise scrolls with the page.
+- **Decisions so far:** once a step is answered, a drawer under the options (desktop: at the end of the
+  sidebar), closed by default, headed "Decisions so far" with the count. Open, it lists every answered,
+  unretired step in order: its number, question and the chosen option's label or the client's own words;
+  a row opens that step. It is built from `session.json` alone; the agent never writes a summary of
+  decisions anywhere on the page.
 - **A step:** the step page (or, while open, `live` with `?variant=<key>`), with no caption; picking an
   option switches the frame to that option. An answered step is read-only: "You chose <key>. <label>".
 - **The whole-thing view** (`#plan`, and whenever no step is open and `plan`, `pending` or `frozen` is
