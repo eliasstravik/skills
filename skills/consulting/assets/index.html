@@ -37,7 +37,7 @@ h1{font-size:1.875rem;line-height:1.2;font-weight:600;letter-spacing:-.03em;marg
 .sub b{color:var(--fg);font-weight:500}.sub i{font-style:normal;color:var(--accent);font-weight:500}
 /* One page, one scroll: nothing scrolls inside anything. Each prototype frame takes its content's height (see grow());
    a live app on another origin reports its own height by postMessage, and 80dvh holds only until it does. */
-main{display:flex;flex-direction:column;padding-bottom:calc(88px + env(safe-area-inset-bottom))}main>iframe{width:100%;height:80dvh;border:0;display:block}
+#app{padding-bottom:calc(72px + env(safe-area-inset-bottom))}main{display:flex;flex-direction:column;padding-bottom:16px}main>iframe{width:100%;height:80dvh;border:0;display:block}
 .cap{margin:0 auto;padding:8px 20px 0;font-size:.82rem;line-height:1.5;color:var(--muted);text-align:center;max-width:44ch;text-wrap:balance}
 .st{margin:0;font-size:.85rem;color:var(--muted);text-align:center}.hint{margin:0;font-size:.8rem;color:var(--muted);text-align:center}
 footer{padding:4px 20px 12px;display:grid;justify-items:center;gap:10px}
@@ -52,7 +52,8 @@ footer{padding:4px 20px 12px;display:grid;justify-items:center;gap:10px}
 @media(max-width:639px){header{padding:14px 16px 8px;gap:10px}h1{font-size:1.5rem}.seg button{padding:11px 10px}}
 .sl.ret{opacity:.45}
 /* Decisions so far: one closed drawer, built from session.json; the question stays the focus. */
-.sofar{width:min(32rem,calc(100% - 40px));margin:0 auto 16px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+/* Phone: after the prototype, so everything about the question comes first. */
+.sofar{order:1;width:min(32rem,calc(100% - 40px));margin:0 auto 16px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .sofar summary{list-style:none;display:flex;align-items:center;gap:8px;min-height:44px;padding:0 4px;cursor:pointer;color:var(--sub);font-weight:500;border-radius:8px}
 .sofar summary::-webkit-details-marker{display:none}.sofar summary:hover{color:var(--fg)}
 .sofar summary .cnt{color:var(--muted);font-weight:400;font-variant-numeric:tabular-nums}
@@ -91,7 +92,7 @@ footer{padding:4px 20px 12px;display:grid;justify-items:center;gap:10px}
 .split footer{order:2;padding:0;display:block}.split .seg{width:100%}
 .split .sub{order:3;max-width:none;text-wrap:pretty}.split .st{order:4;padding:0}.split .hint{order:5;padding:0}
 .split .sofar{order:6;width:100%;margin:0}
-.split main{min-width:0;min-height:100dvh;border-left:1px solid var(--line)}.split .plan{padding:40px 40px 0}
+#app.split{padding-bottom:0}.split main{padding-bottom:calc(88px + env(safe-area-inset-bottom));min-width:0;min-height:100dvh;border-left:1px solid var(--line)}.split .plan{padding:40px 40px 0}
 }
 </style>
 <body>
