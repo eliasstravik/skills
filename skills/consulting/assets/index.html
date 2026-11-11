@@ -51,6 +51,18 @@ footer{padding:4px 20px 12px;display:grid;justify-items:center;gap:10px}
 @media(prefers-color-scheme:dark){.seg button[aria-checked=true]{box-shadow:0 0 0 1px var(--line2)}}
 @media(max-width:639px){header{padding:14px 16px 8px;gap:10px}h1{font-size:1.5rem}.seg button{padding:11px 10px}}
 .sl.ret{opacity:.45}
+/* Decisions so far: one closed drawer, built from session.json; the question stays the focus. */
+.sofar{width:min(32rem,calc(100% - 40px));margin:0 auto 16px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.sofar summary{list-style:none;display:flex;align-items:center;gap:8px;min-height:44px;padding:0 4px;cursor:pointer;color:var(--sub);font-weight:500;border-radius:8px}
+.sofar summary::-webkit-details-marker{display:none}.sofar summary:hover{color:var(--fg)}
+.sofar summary .cnt{color:var(--muted);font-weight:400;font-variant-numeric:tabular-nums}
+.sofar summary svg{margin-left:auto;color:var(--muted);transform:rotate(90deg)}.sofar[open] summary svg{transform:rotate(-90deg)}
+.sofar ol{list-style:none;margin:0;padding:0 0 8px;display:grid;gap:2px}
+.sofar li button{display:grid;grid-template-columns:2rem minmax(0,1fr);gap:0 8px;width:100%;text-align:left;border:0;background:none;border-radius:8px;padding:8px 4px;line-height:1.5}
+.sofar li button:hover{background:var(--fill)}
+.sofar .n{color:var(--muted);font-variant-numeric:tabular-nums;grid-row:span 2}
+.sofar .q{color:var(--fg);font-weight:500;text-wrap:pretty}.sofar .a{color:var(--muted);text-wrap:pretty;overflow-wrap:anywhere}
+.sofar li button[aria-current] .q{color:var(--accent)}
 .plan{min-width:0;padding:8px 20px 0}
 .doc{max-width:44rem;margin:0 auto;overflow-wrap:break-word}
 .doc h2,.doc h3,.doc h4{font-weight:600;letter-spacing:-.03em;line-height:1.3;margin:1.6em 0 .4em;text-wrap:balance}
@@ -78,13 +90,14 @@ footer{padding:4px 20px 12px;display:grid;justify-items:center;gap:10px}
 .split h1{order:1;font-size:1.5rem;line-height:1.3;max-width:none;text-wrap:pretty}
 .split footer{order:2;padding:0;display:block}.split .seg{width:100%}
 .split .sub{order:3;max-width:none;text-wrap:pretty}.split .st{order:4;padding:0}.split .hint{order:5;padding:0}
+.split .sofar{order:6;width:100%;margin:0}
 .split main{min-width:0;min-height:100dvh;border-left:1px solid var(--line)}.split .plan{padding:40px 40px 0}
 }
 </style>
 <body>
 <div id="app">
 <div class="side"><header><nav class="nav" id="nav" data-feedback-toolbar></nav><div class="head"><h1 id="q"></h1><p class="sub" id="sub" aria-live="polite"></p></div></header>
-<footer id="foot" data-feedback-toolbar hidden><div class="seg" id="seg" role="radiogroup" aria-label="Options"></div></footer><p class="st" id="st" hidden></p><p class="hint" id="hint" hidden>Answer in chat, or copy it from here, as with any question.</p></div>
+<footer id="foot" data-feedback-toolbar hidden><div class="seg" id="seg" role="radiogroup" aria-label="Options"></div></footer><p class="st" id="st" hidden></p><p class="hint" id="hint" hidden>Answer in chat, or copy it from here, as with any question.</p><details class="sofar" id="sofar" data-feedback-toolbar hidden><summary><span>Decisions so far</span><span class="cnt" id="sfn"></span></summary><ol id="sfl" role="list"></ol></details></div>
 <main><iframe id="frame" title="Prototype for this question" hidden></iframe><div class="plan" id="plan" hidden><div class="whole"><p class="cap" id="wcap" hidden></p><span class="badge" id="badge"></span><div class="found" id="rev" hidden>Reviewer is reading the handoff…</div><iframe id="proto" title="The whole prototype"></iframe></div><div class="doc" id="doc"></div><div class="doc" id="odoc" hidden></div></div></main>
 </div>
 <dialog id="list" aria-label="All questions" data-feedback-toolbar></dialog><div id="agn"></div>
@@ -114,15 +127,15 @@ function build(){
  if(!S)return;const open=cur_(),last=S.steps[S.steps.length-1];
  mode=whole()&&(view==='plan'||(view==null&&!open))?'plan':last?'step':'wait';
  $('app').classList.toggle('split',mode!=='wait');frame.hidden=mode!=='step';$('plan').hidden=mode!=='plan';$('foot').hidden=mode!=='step';
- if(mode==='wait'){$('nav').replaceChildren();$('q').textContent='Waiting for the first question.';$('sub').replaceChildren();$('seg').replaceChildren();status('');$('hint').hidden=true;return}
- if(mode==='plan'){wholeView(last);return}
+ if(mode==='wait'){$('sofar').hidden=true;$('nav').replaceChildren();$('q').textContent='Waiting for the first question.';$('sub').replaceChildren();$('seg').replaceChildren();status('');$('hint').hidden=true;return}
+ if(mode==='plan'){wholeView(last);decided();return}
  pend=null;$('hint').hidden=true;status('');
  step=byN(view)||open||last;ro=step.decision!=null||!!step.retired;if(sel[step.n]==null)sel[step.n]=step.recommended;
  const total=S.steps.length+(S.remaining>0?S.remaining:0),i=S.steps.indexOf(step);
  $('nav').replaceChildren(arrow('Previous question',S.steps[i-1],true),pill('Question '+step.n+' of about '+total),arrow('Next question',S.steps[i+1]||(whole()?'plan':null)));
  $('q').textContent=step.question;
  $('seg').replaceChildren(...step.options.map(o=>h('button',{type:'button',role:'radio','data-opt':o.key,disabled:ro,'aria-label':'Option '+o.key+', '+o.label,onclick:()=>{sel[step.n]=o.key;sync()}},h('span',{cls:'num',text:o.key+'.'}),' '+o.label)));
- sync();place();if(String(step.n)!==location.hash.slice(1))history.replaceState(null,'','#'+step.n);
+ decided();sync();place();if(String(step.n)!==location.hash.slice(1))history.replaceState(null,'','#'+step.n);
 }
 /* The whole-thing view: the pending review question (or the handoff) in the sidebar; caption, badge, the whole prototype, plan.md and open.md in the frame. */
 function wholeView(last){
@@ -159,6 +172,10 @@ function sync(){
  else if(FILE.test(step.file)){const url=step.file+(o?'#option='+encodeURIComponent(o.key):'');if(loaded===step.file){try{frame.contentWindow.location.replace(url)}catch(e){}}else{loaded=step.file;frame.src=url}}
  else{loaded='';frame.removeAttribute('src')}
 }
+/* Every answered, still-live step in plain words (question, then the chosen label or the client's own words); a row opens that step. */
+function decided(){const d=S.steps.filter(s=>s.decision!=null&&!s.retired),box=$('sofar');box.hidden=!d.length;$('sfn').textContent=d.length||'';
+ const sm=box.querySelector('summary');if(!sm.querySelector('svg'))sm.append(chev());
+ $('sfl').replaceChildren(...d.map(s=>{const o=opt(s,s.decision),on=mode==='step'&&s===step;return h('li',null,h('button',{type:'button','aria-current':on?'step':null,onclick:()=>go(s)},h('span',{cls:'n',text:s.n}),h('span',{cls:'q',text:s.question}),h('span',{cls:'a',text:o?o.label:other(s)})))}))}
 function openList(){const list=$('list'),rows=h('div',{cls:'rows'});
  const fill=q=>{const m=S.steps.filter(s=>!q||(s.n+' '+s.question).toLowerCase().includes(q));if(whole()&&(!q||'plan'.includes(q)))m.push('plan');
   rows.replaceChildren(...m.map(s=>{if(s==='plan')return h('button',{cls:'sl'+(mode==='plan'?' cur':''),type:'button','aria-current':mode==='plan'?'step':null,onclick:()=>{list.close();go('plan')}},h('span',{cls:'n'}),h('span',{cls:'t',text:'Plan'}),h('span',{cls:'a'}));

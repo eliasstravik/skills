@@ -95,3 +95,19 @@ with `scrollTo` inside the frame moving nothing, a sidebar taller than the windo
 
 Manual frontmatter check: `name` and `description` unchanged. Body: 100 lines, about 2032 words, nine
 ordered sections. PASS.
+
+## 2026-11-11 — one question per page (SKIL-3)
+
+Client report: on a Tella video consultation, step 14's page carried a long "Tella settings so far" table
+with raw tool calls under the prototype, so it was unclear what belonged to the question. Changes:
+
+- `page-contract.md` ("The thing, never a recap", Step pages) and `SKILL.md` (step 6, Outputs, QC): the
+  prototype and step pages show only the thing and this question's part; no running list of decisions, no
+  tool-call or config code the client would not meet.
+- The shell (`assets/index.html`) adds a "Decisions so far" drawer, closed by default, built from
+  `session.json` (number, question, chosen label or the client's words; a row opens the step). Mobile: under
+  the options; desktop: end of the sidebar.
+- Checked in a real browser at 1280×800 and 390×844 on a 13-decision fixture: closed and open drawer, row
+  opens the step, `Other` answers show the client's words, no horizontal scroll. `check-step.sh` passes the
+  fixture step. Evals still not run (no `evals.json`, per the client's earlier "skip evals").
+- `autoconsultant` does not reuse this page; nothing to change there.

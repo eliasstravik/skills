@@ -44,7 +44,7 @@ The Consultant inspects facts, keeps state, builds and updates the prototype, bu
 3. **Destination first.** Before question 1, settle what is being planned and the form the client will meet it in; that fixes the prototype's medium and where it lives, by [the prototype rules](references/page-contract.md#the-living-prototype). Ask it as question 1 only when the request leaves it unclear. Then build the skeleton of the whole thing in `page/prototype/` by the /ui design guidelines, showing only what is decided: an undecided part is left out, never drawn as a gap.
 4. **Design tree.** Keep the open decisions in `consultation.md` as a tree whose nodes are settled, askable (all prerequisites settled) or blocked by named nodes. Ask the single highest-leverage askable node. A word that is unclear or used two ways is itself an askable node. Open nodes live only in this tree, never as gaps in the prototype; `remaining` equals the open nodes.
 5. **Two kinds of question.** A discovery question settles a design-tree node: it gets a number, a step and a page, even when the choice is not visual. Every other question is chat-only: no number, no step. The review gate, the round-cap question and the final check also set `pending` so the page shows them; every other chat-only question (existing path, missing session, which-did-you-mean, request for a file, blocker) leaves the page showing what it showed.
-6. **Each discovery question, in this order.** Save `consultation.md`. Write the step page `steps/NN-<slug>.html` as a snapshot of the current prototype with this question's options applied in place and its part outlined, by [the page contract](references/page-contract.md#step-pages); it is never updated afterwards. Run `scripts/check-step.sh <step-file> 1` and, when a browser automation tool exists, the rendered checks. Add the step to `session.json` with `n` one more than the highest and bump `rev`; run `scripts/serve.sh <page-dir>` (exit 3: fix the manifest and rerun); then send the chat message.
+6. **Each discovery question, in this order.** Save `consultation.md`. Write the step page `steps/NN-<slug>.html` as a snapshot of the current prototype with this question's options applied in place and its part outlined, by [the page contract](references/page-contract.md#step-pages): the prototype and what this question needs, never a recap of earlier decisions (the shell lists those); it is never updated afterwards. Run `scripts/check-step.sh <step-file> 1` and, when a browser automation tool exists, the rendered checks. Add the step to `session.json` with `n` one more than the highest and bump `rev`; run `scripts/serve.sh <page-dir>` (exit 3: fix the manifest and rerun); then send the chat message.
 7. **Chat message.** Never use an interactive question tool. Exactly this shape:
 
    ```text
@@ -74,7 +74,7 @@ The Consultant inspects facts, keeps state, builds and updates the prototype, bu
 ## Outputs
 
 - `consultation.md`, `plan.md`, `open.md`, optional `references/` and `app/`, and `page/` with the prototype and one step page per discovery question, under the resolved consultation directory.
-- One served page that shows the open question on the prototype, every earlier step, and the whole-thing view with the pending question and review status.
+- One served page that shows the open question on the prototype, every earlier step, a closed "Decisions so far" drawer built from `session.json`, and the whole-thing view with the pending question and review status.
 - After "That's it": a frozen prototype, a final `plan.md` and `open.md`, and one fenced builder handoff; after a client exit, preserved state and no handoff. No change to the client's project.
 
 ## Exceptions
@@ -92,7 +92,7 @@ The Consultant inspects facts, keeps state, builds and updates the prototype, bu
 ## QC
 
 - `consultation.md` and `session.json` were saved before every question, dispatch and sitting end.
-- `page/prototype/` held every answer before the next question was sent and showed no undecided part; it and every step page grow to their content, with no inner scroll area.
+- `page/prototype/` held every answer before the next question was sent and showed no undecided part; it and every step page grow to their content, with no inner scroll area, and hold no "so far" list, summary of earlier answers or tool-call code.
 - Every step has exactly one snapshot page that passed `check-step.sh`; at most one step is open; step numbers run 1, 2, 3… and match the chat; chat-only questions added no step; manifest option keys match the chat options; the recommended option is option 1; no option is in the first person.
 - `serve.sh` accepted the manifest; the URL answers on `127.0.0.1` only; no public tunnel or non-loopback listener was opened by this skill.
 - `page/plan.md` and `page/open.md` are byte-identical to `plan.md` and `open.md`; `reviewStatus` is one of the review's exact strings.
