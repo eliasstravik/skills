@@ -80,7 +80,9 @@ question is asked, with exactly two changes.
   playable.
 - **This question's part is outlined** with class `now` (an accent outline), shown in place even though it
   was left out of the prototype until now. The outlined part is visible as the page opens: when it lives
-  behind a tap (a sheet, a menu, a settings screen), the step page opens with it shown.
+  behind a tap (a sheet, a menu, a settings screen), the step page opens with it shown. Everything this
+  question's options change sits inside a `now` element: the shell shows only the `now` parts at first
+  ([below](#what-the-shell-shows)), so a change outside them would not be seen.
 
 Earlier answers are built in; parts of later questions are not shown. Nothing else is added: a step page
 holds the prototype and what this question needs, never a list of earlier decisions. The step page is never updated
@@ -197,7 +199,11 @@ The agent never writes any of this; it only writes the manifest and the files.
   a row opens that step. It is built from `session.json` alone; the agent never writes a summary of
   decisions anywhere on the page.
 - **A step:** the step page (or, while open, `live` with `?variant=<key>`), with no caption; picking an
-  option switches the frame to that option. An answered step is read-only: "You chose <key>. <label>".
+  option switches the frame to that option. **Only the question's part shows:** in the frame the shell
+  hides everything but the `now` elements and the ancestors that hold them, then shows a divider "The
+  whole thing", closed by default on every step, phone and desktop alike. Tapping it opens the full step
+  page below, at the same option, with the part outlined in place. A step page with no `now` element, and
+  a `live` app, show whole with no divider. An answered step is read-only: "You chose <key>. <label>".
 - **The whole-thing view** (`#plan`, and whenever no step is open and `plan`, `pending` or `frozen` is
   set): in the frame, the pending question's caption, a badge, the current whole prototype
   (`prototype/index.html`, or the top-level `live`), then `plan.md` and `open.md` rendered. The badge reads `Whole thing`, or

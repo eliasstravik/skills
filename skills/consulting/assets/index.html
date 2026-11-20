@@ -76,7 +76,13 @@ footer{padding:4px 20px 12px;display:grid;justify-items:center;gap:10px}
 .doc th,.doc td{text-align:left;vertical-align:top;padding:8px 16px 8px 0;border-bottom:1px solid var(--line)}.doc th{font-weight:600}
 .whole{display:grid;gap:10px;justify-items:center;margin:0 auto 32px}.whole .cap{padding:0}
 .badge{font-size:.8rem;font-weight:600;color:var(--accent)}.found{border:1.5px dashed var(--accent);border-radius:10px;padding:8px 10px;color:var(--accent);font-size:.8rem;text-align:center;width:min(22rem,100%)}.badge.frozen{color:var(--ok)}
-#proto{width:100%;height:80dvh;border:0;display:block}
+#proto,#rest{width:100%;height:80dvh;border:0;display:block}
+/* A step shows only its outlined part (.now); the rest of the prototype waits behind one divider, closed by default. */
+#frame.veil{visibility:hidden}
+.restbar{display:flex;align-items:center;gap:12px;width:calc(100% - 40px);max-width:44rem;margin:24px auto 8px;color:var(--muted)}
+.restbar::before,.restbar::after{content:"";flex:1;border-top:1px solid var(--line2)}
+.restbar button{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid var(--line2);border-radius:999px;background:var(--bg);color:var(--sub);font-weight:500;white-space:nowrap}
+.restbar button:hover{color:var(--fg)}.restbar svg{transform:rotate(90deg)}.restbar button[aria-expanded=true] svg{transform:rotate(-90deg)}
 .doc+.doc{border-top:1px solid var(--line);margin-top:32px;padding-top:8px}
 @media(max-width:639px){.where{min-height:44px}.nav .arr{min-width:44px;min-height:44px}.plan{padding:4px 20px 0}}
 /* Narrow screens stack header, options, status, then the visual, and the whole page scrolls; nothing is pinned.
@@ -99,7 +105,7 @@ footer{padding:4px 20px 12px;display:grid;justify-items:center;gap:10px}
 <div id="app">
 <div class="side"><header><nav class="nav" id="nav" data-feedback-toolbar></nav><div class="head"><h1 id="q"></h1><p class="sub" id="sub" aria-live="polite"></p></div></header>
 <footer id="foot" data-feedback-toolbar hidden><div class="seg" id="seg" role="radiogroup" aria-label="Options"></div></footer><p class="st" id="st" hidden></p><p class="hint" id="hint" hidden>Answer in chat, or copy it from here, as with any question.</p><details class="sofar" id="sofar" data-feedback-toolbar hidden><summary><span>Decisions so far</span><span class="cnt" id="sfn"></span></summary><ol id="sfl" role="list"></ol></details></div>
-<main><iframe id="frame" title="Prototype for this question" hidden></iframe><div class="plan" id="plan" hidden><div class="whole"><p class="cap" id="wcap" hidden></p><span class="badge" id="badge"></span><div class="found" id="rev" hidden>Reviewer is reading the handoff…</div><iframe id="proto" title="The whole prototype"></iframe></div><div class="doc" id="doc"></div><div class="doc" id="odoc" hidden></div></div></main>
+<main><iframe id="frame" title="This question's part of the prototype" hidden></iframe><div class="restbar" id="restbar" data-feedback-toolbar hidden><button type="button" id="restbtn" aria-expanded="false" aria-controls="rest"><span>The whole thing</span></button></div><iframe id="rest" title="The whole prototype at this question" hidden></iframe><div class="plan" id="plan" hidden><div class="whole"><p class="cap" id="wcap" hidden></p><span class="badge" id="badge"></span><div class="found" id="rev" hidden>Reviewer is reading the handoff…</div><iframe id="proto" title="The whole prototype"></iframe></div><div class="doc" id="doc"></div><div class="doc" id="odoc" hidden></div></div></main>
 </div>
 <dialog id="list" aria-label="All questions" data-feedback-toolbar></dialog><div id="agn"></div>
 <script>(()=>{
@@ -109,6 +115,7 @@ function chevDown(){const c=chev();c.style.transform='rotate(90deg)';return c}
 const FILE=/^steps\/[0-9]+-[a-z0-9-]+\.html$/,STEPLINK=/^page\/(steps\/[0-9]+-[a-z0-9-]+\.html(?:#option=[A-Za-z0-9_-]+)?)$/,MEDIALINK=/^page\/(media\/[A-Za-z0-9._-]+\.(?:png|jpe?g|gif|webp|avif|mp4|webm|mp3|wav|ogg))$/i;
 const $=id=>document.getElementById(id),frame=$('frame');
 /* view: null follows the session (open question, else the plan, else the last question); a number or 'plan' is the client's own pick. */
+let restOpen=false,restUrl='',restLoaded='',restStep=null,veilT;
 let S=null,raw='',sig='',view=null,mode='wait',sel={},step=null,ro=false,loaded='',planRaw=null,openRaw=null,planKey='',pend=null,pendKey='',protoSrc='',protoRaw=null;
 const cur_=()=>S.steps.find(s=>s.decision==null&&!s.retired),byN=n=>S.steps.find(s=>s.n===n);
 const opt=(s,k)=>s.options.find(o=>o.key===k);
@@ -131,7 +138,7 @@ function build(){
  if(mode==='wait'){$('sofar').hidden=true;$('nav').replaceChildren();$('q').textContent='Waiting for the first question.';$('sub').replaceChildren();$('seg').replaceChildren();status('');$('hint').hidden=true;return}
  if(mode==='plan'){wholeView(last);decided();return}
  pend=null;$('hint').hidden=true;status('');
- step=byN(view)||open||last;ro=step.decision!=null||!!step.retired;if(sel[step.n]==null)sel[step.n]=step.recommended;
+ step=byN(view)||open||last;ro=step.decision!=null||!!step.retired;if(restStep!==step.n){restStep=step.n;openRest(false)}if(sel[step.n]==null)sel[step.n]=step.recommended;
  const total=S.steps.length+(S.remaining>0?S.remaining:0),i=S.steps.indexOf(step);
  $('nav').replaceChildren(arrow('Previous question',S.steps[i-1],true),pill('Question '+step.n+' of about '+total),arrow('Next question',S.steps[i+1]||(whole()?'plan':null)));
  $('q').textContent=step.question;
@@ -162,16 +169,31 @@ function grow(f){let d=null,px=0;try{d=f.contentDocument}catch(e){}
  if(px){if(Math.abs(f.offsetHeight-px)>=1)f.style.height=px+'px'}else f.style.height=''}
 /* A live app cannot be measured from here, so it posts {consultingHeight: <px>} (page-contract.md); only the frames' own windows are heard. */
 addEventListener('message',e=>{const v=e.data&&e.data.consultingHeight;if(typeof v!=='number'||!(v>=1))return;for(const f of [frame,$('proto')])if(e.source===f.contentWindow){told.set(f,Math.min(Math.ceil(v),100000));grow(f)}});
-function place(){const s=document.querySelector('.side');s.style.top=Math.min(0,innerHeight-s.offsetHeight)+'px';grow(frame);grow($('proto'))}
+function place(){const s=document.querySelector('.side');s.style.top=Math.min(0,innerHeight-s.offsetHeight)+'px';restUi(focusNow());grow(frame);grow($('proto'));grow($('rest'))}
+/* In the step frame, hide everything but the .now parts and the ancestors that hold them; returns how many parts were hidden.
+   Done here, not in the step page, so every session's old step pages get it too. Pages with no .now (or a live app) show whole. */
+function focusNow(){if(mode!=='step'||!step||loaded!==step.file)return 0;let d=null;try{d=frame.contentDocument}catch(e){}if(!d||!d.body||!d.head)return 0;
+ if(!d.getElementById('consulting-focus')){const st=d.createElement('style');st.id='consulting-focus';st.textContent='[data-consulting-rest]{display:none!important}';d.head.append(st)}
+ const R=d.documentElement,B=d.body,nows=[...B.querySelectorAll('.now')],keep=new Set(),hide=new Set();
+ for(const n of nows)for(let e=n;e&&e!==R;e=e.parentElement)keep.add(e);
+ for(const a of keep)if(!a.closest('.now'))for(const c of a.children)if(!keep.has(c)&&!/^(SCRIPT|STYLE|TEMPLATE|LINK|META)$/.test(c.tagName))hide.add(c);
+ for(const e of B.querySelectorAll('[data-consulting-rest]'))if(!hide.has(e))e.removeAttribute('data-consulting-rest');
+ for(const e of hide)if(!e.hasAttribute('data-consulting-rest'))e.setAttribute('data-consulting-rest','');return hide.size}
+function restUi(n){const has=mode==='step'&&n>0;$('restbar').hidden=!has;const show=has&&restOpen;$('rest').hidden=!show;if(show)loadRest()}
+function openRest(on){restOpen=on;$('restbtn').setAttribute('aria-expanded',String(on));restUi(focusNow())}
+function loadRest(){if(!restUrl)return;const f=restUrl.split('#')[0];if(restLoaded===f){try{if($('rest').contentWindow.location.href.split('#')[1]!==restUrl.split('#')[1])$('rest').contentWindow.location.replace(restUrl)}catch(e){}}else{restLoaded=f;$('rest').src=restUrl}}
+$('restbtn').append(chev());$('restbtn').addEventListener('click',()=>openRest(!restOpen));
+function veil(){frame.classList.add('veil');clearTimeout(veilT);veilT=setTimeout(unveil,4000)}
+function unveil(){clearTimeout(veilT);place();frame.classList.remove('veil')}
 function sync(){
  const picked=opt(step,chosen()),else_=ro&&!picked,o=picked||opt(step,step.recommended)||step.options[0];
  document.querySelectorAll('#seg [data-opt]').forEach(b=>b.setAttribute('aria-checked',String(!else_&&chosen()===b.dataset.opt)));
  if(else_)$('sub').replaceChildren('You chose something else: ',h('b',{text:other(step)}));
  else if(o)$('sub').replaceChildren(...(ro?['You chose ',h('b',{text:o.key+'. '+o.label}),'. ',o.tradeoff]:explain(o,o.key===step.recommended)));
  else $('sub').replaceChildren();
- if(!ro&&o&&liveOk(step.live)){const l=String(step.live),url=l+(l.includes('?')?'&':'?')+'variant='+encodeURIComponent(o.key);if(loaded!==url){loaded=url;frame.src=url}}
- else if(FILE.test(step.file)){const url=step.file+(o?'#option='+encodeURIComponent(o.key):'');if(loaded===step.file){try{frame.contentWindow.location.replace(url)}catch(e){}}else{loaded=step.file;frame.src=url}}
- else{loaded='';frame.removeAttribute('src')}
+ if(!ro&&o&&liveOk(step.live)){const l=String(step.live),url=l+(l.includes('?')?'&':'?')+'variant='+encodeURIComponent(o.key);restUrl='';if(loaded!==url){loaded=url;frame.src=url}}
+ else if(FILE.test(step.file)){const url=step.file+(o?'#option='+encodeURIComponent(o.key):'');if(loaded===step.file){try{frame.contentWindow.location.replace(url)}catch(e){}}else{loaded=step.file;veil();frame.src=url}restUrl=url;if(restOpen)loadRest()}
+ else{loaded='';restUrl='';frame.removeAttribute('src')}
 }
 /* Every answered, still-live step in plain words (question, then the chosen label or the client's own words); a row opens that step. */
 function decided(){const d=S.steps.filter(s=>s.decision!=null&&!s.retired),box=$('sofar');box.hidden=!d.length;$('sfn').textContent=d.length||'';
@@ -228,7 +250,7 @@ async function poll(){try{const r=await fetch('session.json',{cache:'no-store'})
   if(first){const a=location.hash.slice(1);if(a==='plan')view='plan';else if(byN(+a)&&byN(+a)!==o)view=+a}else if(g!==sig)view=null;
   sig=g;build()}else if(mode==='plan')loadPlan()}catch(e){}}
 addEventListener('hashchange',()=>{if(!S)return;const a=location.hash.slice(1);if(a==='plan'){if(whole()&&mode!=='plan')go('plan')}else{const s=byN(+a);if(s&&!(mode==='step'&&s===step))go(s)}});
-poll();setInterval(poll,2000);setInterval(place,400);addEventListener('resize',place);frame.addEventListener('load',place);$('proto').addEventListener('load',place);
+poll();setInterval(poll,2000);setInterval(place,400);addEventListener('resize',place);frame.addEventListener('load',unveil);$('proto').addEventListener('load',place);$('rest').addEventListener('load',place);
 /* Agentation is the one place to comment and copy. It starts collapsed; the client opens it. Once open, its Copy button always works here:
    with comments it copies the text for this view plus Agentation's own output; with none it copies an open question's answer alone. */
 {const s=document.createElement('script');s.src='vendor/agentation.js';s.onload=()=>{
