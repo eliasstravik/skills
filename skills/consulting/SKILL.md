@@ -77,7 +77,7 @@ Every question in this skill (discovery, chat-only, review gate, round cap, fina
 ## Outputs
 
 - `consultation.md`, `plan.md`, `open.md`, optional `references/` and `app/`, and `page/` with the prototype and one step page per discovery question, under the resolved consultation directory.
-- One served page that shows the open question on the prototype, every earlier step, a closed "Decisions so far" drawer built from `session.json`, and the whole-thing view with the pending question and review status.
+- One served page that shows the open question's part of the prototype (the rest behind a closed "The whole thing" divider), every earlier step, a closed "Decisions so far" drawer built from `session.json`, and the whole-thing view with the pending question and review status.
 - After "That's it": a frozen prototype, a final `plan.md` and `open.md`, and one fenced builder handoff; after a client exit, preserved state and no handoff. No change to the client's project.
 
 ## Exceptions

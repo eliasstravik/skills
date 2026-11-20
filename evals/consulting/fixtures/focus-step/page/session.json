@@ -1,0 +1,4 @@
+{"slug":"focus-step","title":"Focus step","rev":3,"steps":[
+{"n":1,"question":"Where does the list start?","kind":"ui","file":"steps/01-list-start.html","live":null,"options":[{"key":"1","label":"Today","tradeoff":"Opens on today."},{"key":"2","label":"This week","tradeoff":"Opens on the week."}],"recommended":"1","decision":"1","note":null,"feedback":null,"retired":false},
+{"n":2,"question":"What does the save button say?","kind":"examples","file":"steps/02-save-label.html","live":null,"options":[{"key":"1","label":"Save","tradeoff":"Short and plain."},{"key":"2","label":"Keep it","tradeoff":"Friendlier; less usual."}],"recommended":"1","decision":null,"note":null,"feedback":null,"retired":false}],
+"remaining":1,"plan":false,"reviewStatus":null,"pending":null,"live":null,"frozen":false}

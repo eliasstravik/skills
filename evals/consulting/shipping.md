@@ -111,3 +111,24 @@ with raw tool calls under the prototype, so it was unclear what belonged to the 
   opens the step, `Other` answers show the client's words, no horizontal scroll. `check-step.sh` passes the
   fixture step. Evals still not run (no `evals.json`, per the client's earlier "skip evals").
 - `autoconsultant` does not reuse this page; nothing to change there.
+
+## 2026-11-20 — a step shows only its question's part (SKIL-6)
+
+Client report: on a step, scrolling below the outlined part showed the whole prototype (every other
+section). Wish: the main view shows only the question's part; the rest behind a clear divider, closed by
+default, same on phone and desktop. "Decisions so far" unchanged.
+
+- The shell (`assets/index.html`), not the step pages, does it, so old sessions get it too: in the step
+  frame it hides everything but the `.now` elements and the ancestors that hold them, then shows a "The
+  whole thing" divider, closed on every step. Opening it loads the full step page below at the same
+  option. No `.now`, or a `live` app: the page shows whole, no divider. The frame is veiled until the part
+  is isolated, so the full page never flashes.
+- `page-contract.md` (Step pages, What the shell shows) and `SKILL.md` (Outputs) describe it.
+- New eval case `focus-step`: fixture `fixtures/focus-step/` (an open step 2 whose `.now` is one of four
+  sections, an answered step 1) and `focus-step.check.js`, run in the shell after copying `assets/` into
+  the fixture copy. PASS at 390×844, 768×1024 and 1280×800; on the old shell the frame showed all four
+  sections and had no divider.
+- Also checked on a copy of a real 24-step session (agent-webcam): steps with one and with four `.now`
+  parts, option switching in both frames, divider reset on a new step, Agentation copy giving
+  `Question 24: …` / `Answer: 2. On, brightness only`, no horizontal scroll at phone width.
+  `check-step.sh` passes the fixture pages. Evals still not run as skill-creator runs (per "skip evals").

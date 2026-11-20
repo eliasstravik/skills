@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en" data-recommended="1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Focus step</title>
+<style>body{margin:0;font:16px/1.6 system-ui,sans-serif;display:grid;justify-items:center;padding:24px 20px;gap:24px}
+.now{outline:2px solid #c2410c;outline-offset:3px;border-radius:12px}
+section{width:min(32rem,100%);border:1px solid #ddd;border-radius:12px;padding:16px}
+button{min-height:44px;min-width:44px}</style>
+<body>
+<section id="header"><h2>Header</h2><p>Decided earlier: the title bar.</p></section>
+<section id="list"><h2>List</h2><p>Starts on today.</p></section>
+
+<section id="footer"><h2>Footer</h2><p>Decided earlier: the footer.</p></section>
+<script>
+const K=["1","2"];
+function cur(){const k=new URLSearchParams(location.hash.slice(1)).get('option');return K.includes(k)?k:document.documentElement.dataset.recommended}
+function apply(){const k=cur();document.documentElement.dataset.option=k;document.querySelectorAll('[data-for]').forEach(e=>e.toggleAttribute('hidden',!e.dataset.for.split(' ').includes(k)));if(window.onOption)onOption(k)}
+addEventListener('hashchange',apply);
+apply();
+</script>
+</body>
+</html>
