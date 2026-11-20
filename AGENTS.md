@@ -98,3 +98,5 @@ npx skills add /Users/eliasstravik/dev/skills --skill <name> -g
 
 `-g`/`--global` = user-level install; without it the CLI installs
 project-level.
+
+- serve.sh cannot detect its own server inside Claude Code's sandbox (ps sees nothing); serve test copies with `python3 -m http.server --bind 127.0.0.1` instead. (from SKIL-6)
